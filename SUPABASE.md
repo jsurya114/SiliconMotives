@@ -17,8 +17,9 @@ kept to run the one-time data migration; it no longer serves the site.
 
 ## 2. Create the database schema
 
-Either paste `supabase/migrations/20261004120000_initial_schema.sql` into
-**SQL Editor → New query** and run it, or with the CLI:
+Either run every file in `supabase/migrations/` **in filename order** in
+**SQL Editor → New query** (currently `20261004120000_initial_schema.sql`, then
+`20261004130000_harden_privileges.sql`), or with the CLI:
 
 ```sh
 npx supabase login
