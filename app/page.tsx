@@ -13,12 +13,15 @@ import { getPortfolio, getTestimonials } from "./lib/api";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Contact from "./components/Contact";
-import { siteUrl } from "./lib/site";
+import { getCanonicalUrl } from "./lib/canonical";
+import { faqSchema, jsonLd } from "./lib/schema";
+import { faqs } from "./components/FAQ";
 export const revalidate = 60;
 
-export const metadata: Metadata = {
-  alternates: siteUrl ? { canonical: siteUrl } : undefined,
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const url = await getCanonicalUrl();
+  return { alternates: url ? { canonical: url } : undefined };
+}
 const principles = [
   "ENGINEERING OVER OVERHEAD",
   "PEOPLE OVER POSTCODES",
@@ -33,6 +36,14 @@ export default async function Home() {
   ]);
   return (
     <div className="silicon-site">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: jsonLd(
+            faqSchema(faqs.map(({ q, short, a }) => ({ q, a: `${short} ${a}` }))),
+          ),
+        }}
+      />
       <Navbar />
       <ScrollReveal />
       <main id="main-content">
@@ -50,9 +61,9 @@ export default async function Home() {
           <div className="shell hero-content">
             <div className="hero-topline mono">
               <span>
-                <i className="status-dot" /> ENGINEERING VALUE, NOT OVERHEAD
+                <i className="status-dot" /> WEB DESIGN &amp; WEB APP DEVELOPMENT · KOCHI
               </span>
-              <span>BASED IN KERALA · WORKING WORLDWIDE</span>
+              <span>KERALA, INDIA · WORKING WORLDWIDE</span>
             </div>
             <div className="hero-grid">
               <div className="hero-copy">
@@ -69,10 +80,11 @@ export default async function Home() {
                 </h1>
                 <p>
                   Your budget should build software, not office buildings.
-                  SiliconMotives is a remote-first engineering team based in
-                  Kerala, India, working with clients worldwide. Every part of
-                  your investment goes into skilled engineers, modern technology,
-                  and software built to last.
+                  SiliconMotives is a remote-first web design and web app
+                  development team based in Kochi, Kerala, working with clients
+                  across India and worldwide. Every part of your investment goes
+                  into skilled engineers, modern technology, and software built
+                  to last.
                 </p>
                 <div className="hero-actions">
                   <a className="button button-primary" href="#contact">
@@ -124,7 +136,7 @@ export default async function Home() {
           <div>
             <span className="eyebrow">06 / OUR MOTIVE</span>
             <h2>
-              Rooted in Kerala.
+              Rooted in Kochi.
               <br />
               <span className="muted">Working worldwide.</span>
             </h2>
@@ -133,7 +145,7 @@ export default async function Home() {
               <div>
                 <span className="mono">OUR BASE, NOT OUR BOUNDARY</span>
                 <strong>
-                  Kerala, India <span>↗</span>
+                  Kochi, Kerala, India <span>↗</span>
                 </strong>
                 <span className="location-note">
                   <i className="status-dot" /> Serving clients around the

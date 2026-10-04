@@ -1,5 +1,5 @@
 import { ArrowUpRight, Plus } from "lucide-react";
-const faqs = [
+export const faqs = [
   {
     topic: "Getting started",
     q: "We have an idea, but no detailed plan. Is that okay?",

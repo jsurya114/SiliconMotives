@@ -137,7 +137,7 @@ export default function Services() {
     <section id="services" className="section shell">
       <div className="section-heading">
         <div>
-          <span className="eyebrow">01 / WHAT WE DO</span>
+          <span className="eyebrow">01 / WEB DESIGN &amp; DEVELOPMENT</span>
           <h2>
             Software built for your business.
             <br />

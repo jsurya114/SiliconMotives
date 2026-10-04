@@ -1,6 +1,7 @@
 import { ArrowUp, ArrowUpRight } from "lucide-react";
 import Brand from "./Brand";
 import LocalTime from "./LocalTime";
+import { landingPages } from "../lib/landing";
 const columns = [
   {
     title: "Services",
@@ -21,6 +22,10 @@ const columns = [
       ["Who we are", "/#about"],
       ["Engineering notes", "/blog"],
     ],
+  },
+  {
+    title: "Kochi · Kerala · India",
+    links: landingPages.map((p) => [p.metaTitle.replace(/ Company/, ""), `/${p.slug}`]),
   },
   {
     title: "Get in touch",
@@ -48,7 +53,7 @@ export default function Footer() {
           </a>
           <div className="footer-clock">
             <span className="status-dot" aria-hidden="true" />
-            <span className="mono">KERALA, INDIA</span>
+            <span className="mono">KOCHI, KERALA</span>
             <span className="footer-time">
               <LocalTime /> <span className="mono">IST</span>
             </span>

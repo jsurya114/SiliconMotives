@@ -1,63 +1,80 @@
-import type { Metadata } from "next";
-import { siteUrl, siteDescription } from "./lib/site";
+import type { Metadata, Viewport } from "next";
+import {
+  siteDescription,
+  siteKeywords,
+  siteName,
+  siteTitle,
+} from "./lib/site";
+import { getCanonicalUrl } from "./lib/canonical";
+import { jsonLd, organizationSchema, websiteSchema } from "./lib/schema";
 import "./globals.css";
-export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl || "http://localhost:3000"),
-  title: {
-    default: "SiliconMotives | Remote Software Engineering, Kerala to Worldwide",
-    template: "%s | SiliconMotives",
-  },
-  description: siteDescription,
-  applicationName: "SiliconMotives",
-  authors: [{ name: "Jasil M" }, { name: "Jayasoorya S" }],
-  creator: "SiliconMotives",
-  icons: { icon: "/icon.svg", apple: "/icon.svg" },
-  openGraph: {
-    type: "website",
-    locale: "en_IN",
-    siteName: "SiliconMotives",
-    title: "SiliconMotives — World-class software. Zero overhead.",
-    description: siteDescription,
-    ...(siteUrl ? { url: siteUrl } : {}),
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "SiliconMotives — Engineering value, not overhead",
-    description: siteDescription,
-  },
-  robots: { index: !!siteUrl, follow: true },
-  verification: { google: process.env.GOOGLE_SITE_VERIFICATION },
+
+export const viewport: Viewport = {
+  themeColor: "#111111",
+  colorScheme: "dark",
 };
-const organization = {
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  name: "SiliconMotives",
-  description: siteDescription,
-  ...(siteUrl
-    ? {
-        url: siteUrl,
-        "@id": `${siteUrl}/#organization`,
-        logo: `${siteUrl}/icon.svg`,
-      }
-    : {}),
-  founder: [
-    { "@type": "Person", name: "Jasil M", jobTitle: "Founder" },
-    { "@type": "Person", name: "Jayasoorya S", jobTitle: "Co-founder" },
-  ],
-  areaServed: "Worldwide",
-  address: {
-    "@type": "PostalAddress",
-    addressRegion: "Kerala",
-    addressCountry: "IN",
-  },
-};
-export default function RootLayout({
+
+export async function generateMetadata(): Promise<Metadata> {
+  const url = await getCanonicalUrl();
+  return {
+    metadataBase: new URL(url || "http://localhost:3000"),
+    title: { default: siteTitle, template: `%s | ${siteName}` },
+    description: siteDescription,
+    keywords: siteKeywords,
+    applicationName: siteName,
+    authors: [{ name: "Jasil M" }, { name: "Jayasoorya S" }],
+    creator: siteName,
+    publisher: siteName,
+    category: "technology",
+    icons: { icon: "/icon.svg", apple: "/icon.svg" },
+    manifest: "/manifest.webmanifest",
+    formatDetection: { telephone: false, email: false, address: false },
+    openGraph: {
+      type: "website",
+      locale: "en_IN",
+      siteName,
+      title: `${siteName} — World-class software. Zero overhead.`,
+      description: siteDescription,
+      ...(url ? { url } : {}),
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${siteName} — Web design & web app development, Kochi`,
+      description: siteDescription,
+    },
+    robots: url
+      ? {
+          index: true,
+          follow: true,
+          googleBot: {
+            index: true,
+            follow: true,
+            "max-image-preview": "large",
+            "max-snippet": -1,
+            "max-video-preview": -1,
+          },
+        }
+      : { index: false, follow: true },
+    verification: {
+      google: process.env.GOOGLE_SITE_VERIFICATION,
+      other: process.env.BING_SITE_VERIFICATION
+        ? { "msvalidate.01": process.env.BING_SITE_VERIFICATION }
+        : undefined,
+    },
+  };
+}
+
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const url = await getCanonicalUrl();
+  const schemas = url
+    ? [organizationSchema(url), websiteSchema(url)]
+    : [organizationSchema(undefined)];
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en-IN" suppressHydrationWarning>
       <head>
         <script
           dangerouslySetInnerHTML={{
@@ -73,7 +90,7 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify(organization).replace(/</g, "\\u003c"),
+            __html: jsonLd(schemas),
           }}
         />
         {children}
