@@ -1,12 +1,13 @@
 import type { MetadataRoute } from "next";
-import { siteUrl } from "./lib/site";
-export default function robots(): MetadataRoute.Robots {
+import { getCanonicalUrl } from "./lib/canonical";
+export default async function robots(): Promise<MetadataRoute.Robots> {
+  const baseUrl = await getCanonicalUrl();
   return {
     rules: {
       userAgent: "*",
       allow: "/",
       disallow: ["/admin/", "/api/", "/testimonial", "/submit-testimonial"],
     },
-    ...(siteUrl ? { sitemap: `${siteUrl}/sitemap.xml` } : {}),
+    sitemap: `${baseUrl}/sitemap.xml`,
   };
 }

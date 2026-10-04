@@ -74,7 +74,10 @@ export default function Portfolio({
   const preview = !data?.length;
   const projects = preview ? archive : data;
   const [active, setActive] = useState(0);
-  const current = projects[active] ?? projects[0];
+  // Collapsed: 6 projects on desktop, 3 on mobile (extras hidden via CSS).
+  const [expanded, setExpanded] = useState(false);
+  const visible = expanded ? projects : projects.slice(0, 6);
+  const current = visible[active] ?? visible[0];
   const currentLink = safeProjectLink(current.link);
   const count = String(projects.length).padStart(2, "0");
   return (
@@ -96,14 +99,16 @@ export default function Portfolio({
           </p>
         </div>
         <div className="work-layout">
+          <div className="work-index">
           <ol className="work-index-list">
-            {projects.map((project, i) => {
+            {visible.map((project, i) => {
               const link = safeProjectLink(project.link);
               const isActive = i === active;
+              const mobileExtra = !expanded && i >= 3;
               return (
                 <li
                   key={project._id}
-                  className={`work-row${isActive ? " is-active" : ""}`}
+                  className={`work-row${isActive ? " is-active" : ""}${mobileExtra ? " is-mobile-extra" : ""}`}
                   onMouseEnter={() => setActive(i)}
                   data-reveal
                 >
@@ -144,6 +149,21 @@ export default function Portfolio({
               );
             })}
           </ol>
+          {projects.length > 3 && (
+            <button
+              type="button"
+              className={`work-more${projects.length <= 6 ? " is-mobile-only" : ""}`}
+              aria-expanded={expanded}
+              onClick={() => {
+                if (expanded && active >= 6) setActive(0);
+                setExpanded(!expanded);
+              }}
+            >
+              {expanded ? "Show fewer projects" : "View more projects"}
+              <span aria-hidden="true">{expanded ? "−" : "+"}</span>
+            </button>
+          )}
+          </div>
           <div
             id="work-preview"
             className="work-preview"
@@ -151,7 +171,7 @@ export default function Portfolio({
             data-reveal
           >
             <div className="work-preview-frame">
-              {projects.map((project, i) => (
+              {visible.map((project, i) => (
                 <div
                   key={project._id}
                   className={`work-preview-image${i === active ? " is-active" : ""}`}

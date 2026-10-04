@@ -2085,6 +2085,42 @@ section[id] {
 .work-row-image {
   position: relative;
 }
+.work-more {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 56px;
+  margin-top: 20px;
+  padding: 0 20px;
+  background: transparent;
+  border: 1px solid #c6c6c6;
+  border-radius: 999px;
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+.work-more > span {
+  font-size: 20px;
+  font-weight: 400;
+}
+.work-more:hover {
+  background: var(--ink);
+  color: #fff;
+}
+.work-more.is-mobile-only {
+  display: none;
+}
+@media (max-width: 900px) {
+  .work-row.is-mobile-extra {
+    display: none;
+  }
+  .work-more.is-mobile-only {
+    display: flex;
+  }
+}
 .work-preview {
   position: sticky;
   top: 120px;
