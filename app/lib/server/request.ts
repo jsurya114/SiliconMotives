@@ -1,15 +1,33 @@
 import { createHash } from "crypto";
 
 /**
- * Client IP for rate limiting. Prefer headers set by the hosting proxy, which
- * clients cannot forge; only fall back to the LAST X-Forwarded-For entry (the
- * one appended by the nearest proxy). The first entry is client-controlled.
+ * Client IP for rate limiting. A forwarding header is trusted only when we
+ * know a proxy we control sets it; otherwise clients could spoof it per
+ * request and bypass the limit.
+ *  - TRUSTED_IP_HEADER (e.g. "cf-connecting-ip" behind Cloudflare) wins.
+ *  - On Vercel (VERCEL=1), the platform overwrites x-real-ip and
+ *    x-forwarded-for with the real client IP.
+ *  - Otherwise only the last X-Forwarded-For hop (appended by the nearest
+ *    proxy) is used; earlier entries are client-controlled.
  */
 export function clientIp(request: Request) {
   const h = request.headers;
-  const trusted = h.get("x-vercel-forwarded-for") || h.get("x-real-ip");
-  if (trusted) return trusted.split(",")[0].trim();
-  const chain = h.get("x-forwarded-for")?.split(",").map((s) => s.trim()).filter(Boolean);
+  const first = (value: string | null) => value?.split(",")[0]?.trim() || null;
+
+  const configured = process.env.TRUSTED_IP_HEADER?.trim().toLowerCase();
+  if (configured) {
+    const ip = first(h.get(configured));
+    if (ip) return ip;
+  }
+  if (process.env.VERCEL) {
+    const ip = first(h.get("x-real-ip")) || first(h.get("x-forwarded-for"));
+    if (ip) return ip;
+  }
+  const chain = h
+    .get("x-forwarded-for")
+    ?.split(",")
+    .map((s) => s.trim())
+    .filter(Boolean);
   return chain?.length ? chain[chain.length - 1] : "unknown";
 }
 
