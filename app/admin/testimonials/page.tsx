@@ -1,21 +1,14 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { getToken } from "@/app/lib/auth";
+import {
+  deleteTestimonial,
+  listTestimonials,
+  setTestimonialStatus,
+  type TestimonialItem as Testimonial,
+} from "../lib/data";
 import { Loader2, Trash2, CheckCircle } from "lucide-react";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5001";
-
-interface Testimonial {
-  _id: string;
-  name: string;
-  role: string;
-  quote: string;
-  rating: number;
-  initials: string;
-  status: string;
-  createdAt: string;
-}
 
 export default function TestimonialsEditor() {
   const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
@@ -23,13 +16,7 @@ export default function TestimonialsEditor() {
 
   const fetchTestimonials = async () => {
     try {
-      const token = getToken();
-      // Fetch all for admin (approved and unapproved)
-      const res = await fetch(`${API_URL}/api/testimonials/all`, {
-        headers: { Authorization: `Bearer ${token}` }
-      });
-      const data = await res.json();
-      setTestimonials(data.data || []);
+      setTestimonials(await listTestimonials());
     } catch (err) {
       console.error("Failed to fetch testimonials", err);
     } finally {
@@ -44,18 +31,8 @@ export default function TestimonialsEditor() {
   const toggleStatus = async (id: string, currentStatus: string) => {
     try {
       const newStatus = currentStatus === "approved" ? "pending" : "approved";
-      const token = getToken();
-      const res = await fetch(`${API_URL}/api/testimonials/${id}/status`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({ status: newStatus }),
-      });
-      if (res.ok) {
-        setTestimonials(testimonials.map(t => t._id === id ? { ...t, status: newStatus } : t));
-      }
+      await setTestimonialStatus(id, newStatus);
+      setTestimonials(testimonials.map(t => t._id === id ? { ...t, status: newStatus } : t));
     } catch (err) {
       console.error(err);
       alert("Failed to update status");
@@ -65,11 +42,7 @@ export default function TestimonialsEditor() {
   const handleDelete = async (id: string) => {
     if (!window.confirm("Delete this testimonial forever?")) return;
     try {
-      const token = getToken();
-      await fetch(`${API_URL}/api/testimonials/${id}`, {
-        method: "DELETE",
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      await deleteTestimonial(id);
       setTestimonials(testimonials.filter(t => t._id !== id));
     } catch (err) {
       console.error(err);

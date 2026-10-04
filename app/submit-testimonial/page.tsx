@@ -4,8 +4,6 @@ import { useState, FormEvent } from "react";
 import { Star, Loader2, CheckCircle, Quote } from "lucide-react";
 import Link from "next/link";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5001";
-
 export default function SubmitTestimonial() {
   const [formData, setFormData] = useState({
     name: "",
@@ -25,7 +23,7 @@ export default function SubmitTestimonial() {
     setError("");
 
     try {
-      const res = await fetch(`${API_URL}/api/testimonials/submit`, {
+      const res = await fetch("/api/testimonials", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),

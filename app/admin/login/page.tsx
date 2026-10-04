@@ -2,9 +2,7 @@
 
 import { useState, FormEvent } from "react";
 import { useRouter } from "next/navigation";
-import { setToken } from "@/app/lib/auth";
-
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5001";
+import { signIn } from "../lib/data";
 
 export default function AdminLogin() {
   const router = useRouter();
@@ -19,23 +17,9 @@ export default function AdminLogin() {
     setError("");
 
     try {
-      const res = await fetch(`${API_URL}/api/auth/login`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
-      });
-
-      const data = await res.json();
-
-      if (!res.ok || !data.success) {
-        throw new Error(data.message || "Invalid credentials");
-      }
-
-      // Store token
-      setToken(data.token);
-      
-      // Redirect to admin dashboard
-      router.push("/admin");
+      await signIn(email, password);
+      router.replace("/admin");
+      router.refresh();
     } catch (err) {
       setError((err as Error).message);
     } finally {

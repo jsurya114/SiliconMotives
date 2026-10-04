@@ -1,21 +1,15 @@
 "use client";
 
 import { useState, useEffect, FormEvent } from "react";
-import { getToken } from "@/app/lib/auth";
+import {
+  deletePortfolio,
+  listPortfolio,
+  savePortfolio,
+  type PortfolioItem,
+} from "../lib/data";
 import ImageUploader from "../components/ImageUploader";
 import { Loader2, Plus, Edit2, Trash2, X, Save } from "lucide-react";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5001";
-
-interface PortfolioItem {
-  _id: string;
-  title: string;
-  category: string;
-  clientName?: string;
-  image: string;
-  link: string;
-  description: string;
-}
 
 export default function PortfolioEditor() {
   const [portfolio, setPortfolio] = useState<PortfolioItem[]>([]);
@@ -38,9 +32,7 @@ export default function PortfolioEditor() {
 
   const fetchPortfolio = async () => {
     try {
-      const res = await fetch(`${API_URL}/api/portfolio`);
-      const data = await res.json();
-      setPortfolio(data.data || []);
+      setPortfolio(await listPortfolio());
     } catch (err) {
       console.error("Failed to fetch portfolio", err);
     } finally {
@@ -83,11 +75,7 @@ export default function PortfolioEditor() {
       return;
 
     try {
-      const token = getToken();
-      await fetch(`${API_URL}/api/portfolio/${id}`, {
-        method: "DELETE",
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      await deletePortfolio(id);
       setPortfolio(portfolio.filter((s) => s._id !== id));
     } catch (err) {
       console.error(err);
@@ -101,28 +89,7 @@ export default function PortfolioEditor() {
     setError("");
 
     try {
-      const token = getToken();
-      const url = editingId
-        ? `${API_URL}/api/portfolio/${editingId}`
-        : `${API_URL}/api/portfolio`;
-
-      const method = editingId ? "PUT" : "POST";
-
-      const res = await fetch(url, {
-        method,
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify(formData),
-      });
-
-      const data = await res.json();
-      if (!res.ok) {
-        const errorMsg = data.errors ? data.errors.join(", ") : data.message;
-        throw new Error(errorMsg || "Failed to save item");
-      }
-
+      await savePortfolio(editingId, formData);
       await fetchPortfolio();
       setIsModalOpen(false);
     } catch (err) {

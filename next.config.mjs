@@ -1,4 +1,8 @@
 /** @type {import('next').NextConfig} */
+const supabaseHost = process.env.NEXT_PUBLIC_SUPABASE_URL
+  ? new URL(process.env.NEXT_PUBLIC_SUPABASE_URL).hostname
+  : "*.supabase.co";
+
 const nextConfig = {
   async headers() {
     return [
@@ -10,16 +14,19 @@ const nextConfig = {
   },
   images: {
     remotePatterns: [
+      // Supabase Storage (public "media" bucket)
+      {
+        protocol: "https",
+        hostname: supabaseHost,
+        pathname: "/storage/v1/object/public/**",
+      },
+      // Images uploaded before the Supabase migration remain on Cloudinary
       {
         protocol: "https",
         hostname: "res.cloudinary.com",
         pathname: "/*/image/upload/**",
       },
     ],
-  },
-  env: {
-    NEXT_PUBLIC_API_URL:
-      process.env.NEXT_PUBLIC_API_URL || "http://localhost:5001",
   },
 };
 

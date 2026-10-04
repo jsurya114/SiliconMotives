@@ -1,21 +1,14 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { getToken } from "@/app/lib/auth";
+import {
+  deleteSubmission,
+  listSubmissions,
+  setSubmissionRead,
+  type SubmissionItem as Submission,
+} from "../lib/data";
 import { Loader2, Trash2, MailOpen, Mail } from "lucide-react";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5001";
-
-interface Submission {
-  _id: string;
-  name: string;
-  email: string;
-  phone: string;
-  subject: string;
-  message: string;
-  isRead: boolean;
-  createdAt: string;
-}
 
 export default function SubmissionsPage() {
   const [submissions, setSubmissions] = useState<Submission[]>([]);
@@ -23,12 +16,7 @@ export default function SubmissionsPage() {
 
   const fetchSubmissions = async () => {
     try {
-      const token = getToken();
-      const res = await fetch(`${API_URL}/api/contact`, {
-        headers: { Authorization: `Bearer ${token}` }
-      });
-      const data = await res.json();
-      setSubmissions(data.data || []);
+      setSubmissions(await listSubmissions());
     } catch (err) {
       console.error("Failed to fetch submissions", err);
     } finally {
@@ -42,18 +30,8 @@ export default function SubmissionsPage() {
 
   const toggleRead = async (id: string, currentStatus: boolean) => {
     try {
-      const token = getToken();
-      const res = await fetch(`${API_URL}/api/contact/${id}/read`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({ isRead: !currentStatus }),
-      });
-      if (res.ok) {
-        setSubmissions(submissions.map(s => s._id === id ? { ...s, isRead: !currentStatus } : s));
-      }
+      await setSubmissionRead(id, !currentStatus);
+      setSubmissions(submissions.map(s => s._id === id ? { ...s, isRead: !currentStatus } : s));
     } catch (err) {
       console.error(err);
     }
@@ -62,11 +40,7 @@ export default function SubmissionsPage() {
   const handleDelete = async (id: string) => {
     if (!window.confirm("Delete this submission permanently?")) return;
     try {
-      const token = getToken();
-      await fetch(`${API_URL}/api/contact/${id}`, {
-        method: "DELETE",
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      await deleteSubmission(id);
       setSubmissions(submissions.filter(s => s._id !== id));
     } catch (err) {
       console.error(err);
@@ -109,7 +83,7 @@ export default function SubmissionsPage() {
                       {sub.phone && <a href={`tel:${sub.phone}`} className="hover:text-coral transition-colors">{sub.phone}</a>}
                     </div>
                     <div className="bg-white border border-gray-100 rounded-lg p-4">
-                      <h4 className="text-sm font-semibold text-navy mb-2">{sub.subject || "No Subject"}</h4>
+                      <h4 className="text-sm font-semibold text-navy mb-2">{sub.service ? `Service: ${sub.service}` : "No service selected"}</h4>
                       <p className="text-sm text-gray-700 whitespace-pre-wrap">{sub.message}</p>
                     </div>
                   </div>

@@ -2,9 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Users, FileText, Briefcase, Mail } from "lucide-react";
-import { getToken } from "@/app/lib/auth";
-
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5001";
+import { getDashboardStats } from "./lib/data";
 
 export default function AdminDashboard() {
   const [stats, setStats] = useState({
@@ -18,29 +16,7 @@ export default function AdminDashboard() {
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const token = getToken();
-        if (!token) return;
-
-        const headers = { Authorization: `Bearer ${token}` };
-
-        const [resServices, resPortfolio, resTestimonials, resContacts] = await Promise.all([
-          fetch(`${API_URL}/api/services`, { headers }),
-          fetch(`${API_URL}/api/portfolio`, { headers }),
-          fetch(`${API_URL}/api/testimonials`, { headers }),
-          fetch(`${API_URL}/api/contact?isRead=false&limit=1`, { headers }), // Just get total count
-        ]);
-
-        const services = await resServices.json();
-        const portfolio = await resPortfolio.json();
-        const testimonials = await resTestimonials.json();
-        const contacts = await resContacts.json();
-
-        setStats({
-          services: services.data?.length || 0,
-          portfolio: portfolio.data?.length || 0,
-          testimonials: testimonials.data?.length || 0,
-          unreadContacts: contacts.pagination?.total || 0,
-        });
+        setStats(await getDashboardStats());
       } catch (error) {
         console.error("Failed to fetch dashboard stats", error);
       } finally {

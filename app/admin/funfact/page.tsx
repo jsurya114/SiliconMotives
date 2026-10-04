@@ -1,10 +1,8 @@
 "use client";
 
 import { useState, useEffect, FormEvent } from "react";
-import { getToken } from "@/app/lib/auth";
+import { getContent, updateContent } from "../lib/data";
 import { Save, Loader2, CheckCircle, Plus, Trash2 } from "lucide-react";
-
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5001";
 
 export default function FunFactEditor() {
   const [formData, setFormData] = useState({
@@ -21,8 +19,7 @@ export default function FunFactEditor() {
   useEffect(() => {
     const fetchContent = async () => {
       try {
-        const res = await fetch(`${API_URL}/api/content/funFact`);
-        const data = await res.json();
+        const data = { data: await getContent<typeof formData>("funFact") };
         
         if (data.data) {
           setFormData({
@@ -48,21 +45,7 @@ export default function FunFactEditor() {
     setSuccess(false);
 
     try {
-      const token = getToken();
-      const res = await fetch(`${API_URL}/api/content/funFact`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify(formData),
-      });
-
-      const data = await res.json();
-
-      if (!res.ok) {
-        throw new Error(data.message || "Failed to update content");
-      }
+      await updateContent("funFact", formData);
 
       setSuccess(true);
       setTimeout(() => setSuccess(false), 3000);

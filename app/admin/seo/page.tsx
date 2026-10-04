@@ -1,10 +1,8 @@
 "use client";
 
 import { useState, useEffect, FormEvent } from "react";
-import { getToken } from "@/app/lib/auth";
+import { getSeo, updateSeo } from "../lib/data";
 import { Save, Loader2, CheckCircle } from "lucide-react";
-
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5001";
 
 export default function SEOEditor() {
   const [formData, setFormData] = useState({
@@ -25,12 +23,7 @@ export default function SEOEditor() {
   useEffect(() => {
     const fetchContent = async () => {
       try {
-        const res = await fetch(`${API_URL}/api/seo`);
-        const data = await res.json();
-        
-        if (data.data) {
-          setFormData(data.data);
-        }
+        setFormData(await getSeo());
       } catch (err) {
         console.error("Failed to fetch seo content", err);
       } finally {
@@ -48,21 +41,7 @@ export default function SEOEditor() {
     setSuccess(false);
 
     try {
-      const token = getToken();
-      const res = await fetch(`${API_URL}/api/seo`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify(formData),
-      });
-
-      const data = await res.json();
-
-      if (!res.ok) {
-        throw new Error(data.message || "Failed to update content");
-      }
+      await updateSeo(formData);
 
       setSuccess(true);
       setTimeout(() => setSuccess(false), 3000);

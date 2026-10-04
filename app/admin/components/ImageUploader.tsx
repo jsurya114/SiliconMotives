@@ -3,11 +3,9 @@
 import { useState, useRef, useCallback } from "react";
 import Image from "next/image";
 import { UploadCloud, X, Loader2, Check } from "lucide-react";
-import { getToken } from "@/app/lib/auth";
+import { uploadImage } from "../lib/data";
 import Cropper from "react-easy-crop";
 import getCroppedImg from "../utils/cropImage";
-
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5001";
 
 interface ImageUploaderProps {
   value: string | null;
@@ -45,7 +43,7 @@ export default function ImageUploader({
     if (!file) return;
 
     if (!file.type.startsWith("image/")) {
-      setError("Please select an image file (JPG, PNG, WebP).");
+      setError("Please select an image file (JPG, PNG, WebP, AVIF).");
       return;
     }
     if (file.size > 5 * 1024 * 1024) {
@@ -73,28 +71,8 @@ export default function ImageUploader({
     setLoading(true);
     setError("");
 
-    const formData = new FormData();
-    formData.append("image", file);
-
     try {
-      const token = getToken();
-      if (!token) throw new Error("Authentication required");
-
-      const res = await fetch(`${API_URL}/api/upload`, {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        body: formData,
-      });
-
-      const data = await res.json();
-
-      if (!res.ok) {
-        throw new Error(data.message || "Failed to upload image");
-      }
-
-      onChange(data.data.url);
+      onChange(await uploadImage(file));
     } catch (err) {
       setError((err as Error).message);
     } finally {
@@ -237,7 +215,7 @@ export default function ImageUploader({
                 type="file"
                 ref={fileInputRef}
                 onChange={handleFileChange}
-                accept="image/jpeg, image/png, image/webp, image/svg+xml"
+                accept="image/jpeg, image/png, image/webp, image/avif"
                 className="hidden"
               />
               {loading ? (
@@ -251,7 +229,7 @@ export default function ImageUploader({
                     <UploadCloud size={24} />
                   </div>
                   <p className="text-sm font-medium text-navy mb-1">Click to upload image</p>
-                  <p className="text-xs text-gray-500">SVG, PNG, JPG, or WebP (Max 5MB)</p>
+                  <p className="text-xs text-gray-500">PNG, JPG, WebP, or AVIF (Max 5MB)</p>
                 </>
               )}
             </div>

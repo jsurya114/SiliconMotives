@@ -13,7 +13,7 @@ import {
   Mail,
   Users
 } from "lucide-react";
-import { removeToken } from "@/app/lib/auth";
+import { signOut } from "../lib/data";
 
 const MENU_ITEMS = [
   { label: "Dashboard", href: "/admin", icon: LayoutDashboard },
@@ -33,10 +33,10 @@ export default function Sidebar() {
   const pathname = usePathname();
   const router = useRouter();
 
-  const handleLogout = () => {
-    removeToken();
-    // In a real app, also call API logout endpoint
-    router.push("/admin/login");
+  const handleLogout = async () => {
+    await signOut();
+    router.replace("/admin/login");
+    router.refresh();
   };
 
   return (

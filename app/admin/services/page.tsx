@@ -2,13 +2,16 @@
 
 import { useState, useEffect, FormEvent } from "react";
 import ImageUploader from "../components/ImageUploader";
-import { getToken } from "@/app/lib/auth";
+import {
+  deleteService,
+  listServices,
+  saveService,
+  type ServiceItem as Service,
+} from "../lib/data";
 import { 
   Loader2, Plus, Edit2, Trash2, X, Save,
   Monitor, Smartphone, Code, Paintbrush, Globe, Server, Database, Search, Zap, Layout
 } from "lucide-react";
-
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5001";
 
 // Map of available icons for the user to choose from
 const ICON_MAP: Record<string, React.ElementType> = {
@@ -23,15 +26,6 @@ const ICON_MAP: Record<string, React.ElementType> = {
   Zap,
   Layout
 };
-
-interface Service {
-  _id: string;
-  title: string;
-  description: string;
-  icon: string;
-  image: string | null;
-  features: string[];
-}
 
 export default function ServicesEditor() {
   const [services, setServices] = useState<Service[]>([]);
@@ -53,9 +47,7 @@ export default function ServicesEditor() {
 
   const fetchServices = async () => {
     try {
-      const res = await fetch(`${API_URL}/api/services`);
-      const data = await res.json();
-      setServices(data.data || []);
+      setServices(await listServices());
     } catch (err) {
       console.error("Failed to fetch services", err);
     } finally {
@@ -89,11 +81,7 @@ export default function ServicesEditor() {
     if (!window.confirm("Are you sure you want to delete this service?")) return;
     
     try {
-      const token = getToken();
-      await fetch(`${API_URL}/api/services/${id}`, {
-        method: "DELETE",
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      await deleteService(id);
       setServices(services.filter(s => s._id !== id));
     } catch (err) {
       console.error(err);
@@ -107,25 +95,7 @@ export default function ServicesEditor() {
     setError("");
 
     try {
-      const token = getToken();
-      const url = editingId 
-        ? `${API_URL}/api/services/${editingId}` 
-        : `${API_URL}/api/services`;
-        
-      const method = editingId ? "PUT" : "POST";
-
-      const res = await fetch(url, {
-        method,
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify(formData),
-      });
-
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.message || "Failed to save service");
-
+      await saveService(editingId, formData);
       await fetchServices();
       setIsModalOpen(false);
     } catch (err) {

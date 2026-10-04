@@ -2,7 +2,7 @@
 
 Remote-first engineering company based in Kerala, India. Jasil M is the Founder; Jayasoorya S is the Co-founder.
 
-Next.js 14 public website with an Express/MongoDB CMS. Services cover CRM/ERP, e-commerce and Shopify, WordPress, static websites, custom applications, and AWS hosting/deployment.
+Next.js 14 website with a Supabase-backed CMS. Services cover CRM/ERP, e-commerce and Shopify, WordPress, static websites, custom applications, and AWS hosting/deployment.
 
 ## Run locally
 
@@ -11,11 +11,11 @@ npm install
 npm run dev
 ```
 
-Start the existing backend separately from `server/` with its database configuration. Set `API_URL` (server-side) or `NEXT_PUBLIC_API_URL` to its origin, without `/api`.
+The backend is Supabase (database, admin login, image storage). Copy `.env.example` to `.env.local` and follow [SUPABASE.md](./SUPABASE.md) to create the project, schema, and first admin.
 
 ## Content
 
-- Portfolio and approved testimonials are fetched from the existing CMS.
+- Portfolio and approved testimonials are fetched from Supabase.
 - Add an optional **Client / company name** in the portfolio editor to include a client in the client section. Company names in approved testimonial roles (e.g. `Founder, Example Company`) are also used.
 - When the API is unavailable, bundled portfolio images appear as labeled design previews. Client endorsements and client names are never fabricated.
 - The service list, technologies, founder story, and other homepage copy are maintained in the page/components.
