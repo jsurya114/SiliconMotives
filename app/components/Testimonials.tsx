@@ -1,67 +1,7 @@
 "use client";
-
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination, Autoplay } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/pagination";
-
-const DEFAULT_TESTIMONIALS = [
-  {
-    _id: "default-1",
-    name: "Rahul Krishnan",
-    role: "CEO, HomesKerala Realty",
-    quote: "DevAxis completely transformed our online presence. Our lead generation has increased by 300% since the new website launched. Their understanding of what Kochi businesses need is unmatched.",
-    rating: 5,
-    initials: "RK",
-  },
-  {
-    _id: "default-2",
-    name: "Sneha George",
-    role: "Founder, StyleVault",
-    quote: "From the first call to launch day, the DevAxis team was incredible. Our e-commerce store is beautiful, fast, and our customers love the shopping experience. Revenue is up 150%.",
-    rating: 5,
-    initials: "SG",
-  },
-  {
-    _id: "default-3",
-    name: "Dr. Anil Kumar",
-    role: "Director, CareFirst Clinic",
-    quote: "We needed a professional healthcare website with online booking, and DevAxis delivered beyond expectations. Patient appointments through the website have doubled in just 3 months.",
-    rating: 5,
-    initials: "AK",
-  },
-  {
-    _id: "default-4",
-    name: "Arun Thomas",
-    role: "Marketing Head, TechFlow",
-    quote: "The SEO strategies implemented by DevAxis put us on the first page of Google within a few months. Their team is highly responsive and delivers measurable results.",
-    rating: 5,
-    initials: "AT",
-  }
-];
-
-const BG_COLORS = ["bg-navy", "bg-coral", "bg-navy-mid", "bg-teal-600"];
-
-function StarRating({ rating }: { rating: number }) {
-  return (
-    <div className="flex gap-0.5" aria-label={`${rating} out of 5 stars`}>
-      {Array.from({ length: 5 }).map((_, i) => (
-        <svg
-          key={i}
-          width="16"
-          height="16"
-          viewBox="0 0 24 24"
-          fill={i < rating ? "#E8553A" : "#E8E8E5"}
-          aria-hidden="true"
-        >
-          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-        </svg>
-      ))}
-    </div>
-  );
-}
-
-interface TestimonialData {
+import { useState } from "react";
+import { ArrowLeft, ArrowRight, ArrowUpRight, Quote, Star } from "lucide-react";
+export interface TestimonialData {
   _id: string;
   name: string;
   role: string;
@@ -69,119 +9,162 @@ interface TestimonialData {
   rating: number;
   initials: string;
 }
-
-interface TestimonialsProps {
+const pad = (n: number) => String(n).padStart(2, "0");
+const stars = (rating: number) => Math.min(5, Math.max(1, Math.round(rating)));
+export default function Testimonials({
+  data,
+}: {
   data?: TestimonialData[] | null;
-}
-
-export default function Testimonials({ data }: TestimonialsProps) {
-  const testimonials = data?.length ? data : DEFAULT_TESTIMONIALS;
-
+}) {
+  const reviews = data ?? [];
+  const [active, setActive] = useState(0);
+  const current = reviews[active];
+  const average =
+    reviews.reduce((sum, r) => sum + stars(r.rating), 0) /
+    Math.max(reviews.length, 1);
+  const go = (step: number) =>
+    setActive((i) => (i + step + reviews.length) % reviews.length);
   return (
-    <section id="testimonials" className="py-16 sm:py-20 lg:py-24 bg-white overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section header */}
-        <div className="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
-          <span className="inline-block px-3 py-1 bg-coral/10 text-coral text-xs sm:text-sm font-semibold rounded-full tracking-wide uppercase mb-3">
-            Testimonials
-          </span>
-          <h2
-            className="font-heading font-bold text-navy"
-            style={{
-              fontSize: "clamp(1.5rem, 3vw + 0.5rem, 2.5rem)",
-            }}
-          >
-            What Our Clients Say
-          </h2>
-          <p className="mt-3 text-gray-500 text-sm sm:text-base max-w-lg mx-auto">
-            Don&apos;t just take our word for it — hear from businesses in Kochi
-            and Kerala who trust DevAxis.
+    <section id="testimonials" className="section testimonial-section">
+      <div className="shell">
+        <div className="section-heading">
+          <div>
+            <span className="eyebrow">05 / CLIENT STORIES</span>
+            <h2>
+              What our clients
+              <br />
+              say about us.
+            </h2>
+          </div>
+          <p>
+            The experience of working together matters as much as the software
+            we deliver.
           </p>
         </div>
-
-        {/* Testimonials carousel */}
-        <Swiper
-          modules={[Pagination, Autoplay]}
-          spaceBetween={20}
-          slidesPerView={1.2}
-          centeredSlides={true}
-          loop={true}
-          breakpoints={{
-            640: { slidesPerView: 1.5, centeredSlides: true, spaceBetween: 24 },
-            768: { slidesPerView: 2, centeredSlides: false, spaceBetween: 28 },
-            1024: { slidesPerView: 3, centeredSlides: false, spaceBetween: 28 },
-          }}
-          pagination={{ clickable: true, dynamicBullets: true }}
-          autoplay={{ delay: 5000, disableOnInteraction: false }}
-          className="pb-16 w-full"
-        >
-          {testimonials.map((testimonial, i) => (
-            <SwiperSlide key={testimonial._id} className="h-auto">
-              <div className="bg-warm-gray50 rounded-xl p-6 sm:p-7 border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col h-full">
-                {/* Quote icon */}
-                <svg
-                  width="32"
-                  height="32"
-                  viewBox="0 0 24 24"
-                  fill="#E8553A"
-                  className="opacity-20 mb-4"
-                  aria-hidden="true"
-                >
-                  <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10H14.017zM0 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151C7.546 6.068 5.983 8.789 5.983 11h4v10H0z" />
-                </svg>
-
-                {/* Stars */}
-                <StarRating rating={testimonial.rating} />
-
-                {/* Quote */}
-                <blockquote className="mt-4 text-sm sm:text-base text-gray-600 leading-relaxed flex-1">
-                  &ldquo;{testimonial.quote}&rdquo;
-                </blockquote>
-
-                {/* Author */}
-                <div className="mt-6 flex items-center gap-3 pt-5 border-t border-gray-200">
+        {current ? (
+          <>
+            <div className="voice-layout">
+              <figure className="voice-feature" aria-live="polite">
+                <div className="voice-feature-top">
+                  <Quote size={36} strokeWidth={1} aria-hidden="true" />
                   <div
-                    className={`w-11 h-11 rounded-full ${BG_COLORS[i % BG_COLORS.length]} flex items-center justify-center text-white font-heading font-bold text-sm flex-shrink-0`}
+                    className="voice-stars"
+                    role="img"
+                    aria-label={`${stars(current.rating)} out of 5 stars`}
                   >
-                    {testimonial.initials}
-                  </div>
-                  <div>
-                    <p className="font-heading font-semibold text-navy text-sm">
-                      {testimonial.name}
-                    </p>
-                    <p className="text-xs text-gray-500">{testimonial.role}</p>
+                    {Array.from({ length: 5 }).map((_, i) => (
+                      <Star
+                        key={i}
+                        size={14}
+                        aria-hidden="true"
+                        fill={i < stars(current.rating) ? "currentColor" : "none"}
+                      />
+                    ))}
                   </div>
                 </div>
-              </div>
-            </SwiperSlide>
-          ))}
-        </Swiper>
-
-        {/* Google review badge */}
-        <div className="mt-10 sm:mt-14 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
-          <div className="flex items-center gap-2">
-            <div className="flex gap-0.5">
-              {[...Array(5)].map((_, i) => (
-                <svg
-                  key={i}
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                  fill="#E8553A"
-                  aria-hidden="true"
-                >
-                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-                </svg>
-              ))}
+                <blockquote key={current._id}>“{current.quote}”</blockquote>
+                <figcaption>
+                  <span className="voice-avatar">
+                    {current.initials || current.name.charAt(0)}
+                  </span>
+                  <div>
+                    <strong>{current.name}</strong>
+                    <span>{current.role}</span>
+                  </div>
+                  {reviews.length > 1 && (
+                    <div className="voice-controls">
+                      <span className="mono">
+                        {pad(active + 1)} / {pad(reviews.length)}
+                      </span>
+                      <button
+                        type="button"
+                        onClick={() => go(-1)}
+                        aria-label="Previous review"
+                      >
+                        <ArrowLeft size={18} />
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => go(1)}
+                        aria-label="Next review"
+                      >
+                        <ArrowRight size={18} />
+                      </button>
+                    </div>
+                  )}
+                </figcaption>
+              </figure>
+              {reviews.length > 1 && (
+                <ul className="voice-list" aria-label="All client reviews">
+                  {reviews.map((item, i) => (
+                    <li key={item._id}>
+                      <button
+                        type="button"
+                        className={i === active ? "is-active" : undefined}
+                        aria-pressed={i === active}
+                        onClick={() => setActive(i)}
+                      >
+                        <span className="voice-avatar">
+                          {item.initials || item.name.charAt(0)}
+                        </span>
+                        <span className="voice-list-text">
+                          <strong>{item.name}</strong>
+                          <span>{item.role}</span>
+                        </span>
+                        <span className="mono">{pad(i + 1)}</span>
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              )}
             </div>
-            <span className="font-heading font-bold text-navy text-lg">
-              4.9/5
-            </span>
+            <div className="voice-summary">
+              <div>
+                <strong>{average.toFixed(1)}</strong>
+                <span className="mono">AVERAGE RATING / 5</span>
+              </div>
+              <div>
+                <strong>{pad(reviews.length)}</strong>
+                <span className="mono">
+                  {reviews.length === 1 ? "CLIENT REVIEW" : "CLIENT REVIEWS"}
+                </span>
+              </div>
+              <a className="button button-outline" href="/submit-testimonial">
+                Share your experience <ArrowUpRight size={18} />
+              </a>
+            </div>
+          </>
+        ) : (
+          <div className="voice-empty" data-reveal>
+            <div className="voice-empty-copy">
+              <Quote size={44} strokeWidth={1} aria-hidden="true" />
+              <h3>Our first client stories are on their way.</h3>
+              <p>
+                Every review here comes from someone we’ve worked with, shared
+                in their own words. Have we built something together? We’d love
+                to hear how it went.
+              </p>
+              <a className="button button-primary" href="/submit-testimonial">
+                Share your experience <ArrowUpRight size={18} />
+              </a>
+            </div>
+            <ol className="voice-steps">
+              {[
+                ["Share your experience", "A few words about working with us, and a rating."],
+                ["We review it", "Every submission is read by our team before anything is published."],
+                ["Published with permission", "Your story appears here, in your own words."],
+              ].map(([title, text], i) => (
+                <li key={title}>
+                  <span className="mono">{pad(i + 1)}</span>
+                  <div>
+                    <strong>{title}</strong>
+                    <p>{text}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
           </div>
-          <p className="text-sm text-gray-500">
-            Rated on Google Reviews • 25+ Reviews
-          </p>
-        </div>
+        )}
       </div>
     </section>
   );

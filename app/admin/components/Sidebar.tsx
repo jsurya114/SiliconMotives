@@ -51,7 +51,7 @@ export default function Sidebar() {
             </svg>
           </span>
           <span className="font-heading font-bold text-lg tracking-tight">
-            Dev<span className="text-coral">Axis</span>
+            Silicon<span className="text-coral">Motives</span>
           </span>
         </Link>
       </div>

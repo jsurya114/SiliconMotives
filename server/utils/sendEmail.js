@@ -15,7 +15,7 @@ const sendEmail = async (options) => {
   }
 
   const mailOptions = {
-    from: `"DevAxis" <${process.env.SMTP_USER}>`,
+    from: `"SiliconMotives" <${process.env.SMTP_USER}>`,
     to: options.to,
     subject: options.subject,
     html: options.html,

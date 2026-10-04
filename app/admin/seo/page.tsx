@@ -103,7 +103,7 @@ export default function SEOEditor() {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-navy mb-1.5">Title Template (e.g. %s | DevAxis)</label>
+            <label className="block text-sm font-medium text-navy mb-1.5">Title Template (e.g. %s | SiliconMotives)</label>
             <input
               required
               type="text"

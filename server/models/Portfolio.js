@@ -8,6 +8,7 @@ const portfolioSchema = new mongoose.Schema(
       trim: true,
       maxlength: 150,
     },
+    clientName: { type: String, trim: true, maxlength: 150, default: "" },
     category: {
       type: String,
       required: [true, "Category is required"],
@@ -46,7 +47,7 @@ const portfolioSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
-  }
+  },
 );
 
 portfolioSchema.index({ order: 1, createdAt: 1 });

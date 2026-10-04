@@ -7,15 +7,15 @@ const seoSettingsSchema = new mongoose.Schema(
   {
     titleTemplate: {
       type: String,
-      default: "%s | DevAxis",
+      default: "%s | SiliconMotives",
     },
     defaultTitle: {
       type: String,
-      default: "DevAxis Technology",
+      default: "SiliconMotives Technology",
     },
     defaultDescription: {
       type: String,
-      default: "DevAxis is a leading web design company in Kochi, Kerala.",
+      default: "SiliconMotives is a remote-first engineering company in Kerala, building CRM, ERP, e-commerce, and websites with cloud deployment.",
     },
     defaultKeywords: {
       type: String,
@@ -23,7 +23,7 @@ const seoSettingsSchema = new mongoose.Schema(
     },
     siteName: {
       type: String,
-      default: "DevAxis Technology",
+      default: "SiliconMotives Technology",
     },
     canonicalUrl: {
       type: String,
@@ -35,7 +35,7 @@ const seoSettingsSchema = new mongoose.Schema(
     },
     ogImage: {
       type: String,
-      default: "/images/devaxis-logo.png",
+      default: "/opengraph-image",
     },
   },
   {

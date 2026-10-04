@@ -30,7 +30,7 @@ const uploadToCloudinary = (fileBuffer, options = {}) => {
   return new Promise((resolve, reject) => {
     const stream = cloudinary.uploader.upload_stream(
       {
-        folder: "devaxis",
+        folder: "siliconmotives",
         resource_type: "image",
         quality: "auto:good",
         format: "webp",

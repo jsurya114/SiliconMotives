@@ -1,179 +1,211 @@
+"use client";
+import { useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
-
-const DEFAULT_PROJECTS = [
-  {
-    _id: "default-1",
-    title: "StyleVault E-Commerce",
-    category: "E-Commerce",
-    description: "A premium fashion e-commerce platform with seamless checkout, inventory management, and mobile-first design.",
-    image: null as string | null,
-    alt: "E-commerce web design portfolio Kochi — StyleVault online fashion store",
-  },
-  {
-    _id: "default-2",
-    title: "Kerala Pearl Restaurant",
-    category: "Web Design",
-    description: "A luxurious restaurant website with online reservations, menu showcase, and Kerala cuisine storytelling.",
-    image: null,
-    alt: "Restaurant website design Kochi — Kerala Pearl dining experience",
-  },
-  {
-    _id: "default-3",
-    title: "HomesKerala Realty",
-    category: "Web Development",
-    description: "A full-featured real estate platform with property listings, map integration, and lead capture for Kerala properties.",
-    image: null,
-    alt: "Real estate web development Kochi — HomesKerala property listings",
-  },
-  {
-    _id: "default-4",
-    title: "EliteFit Gym",
-    category: "Web Design",
-    description: "A bold, high-energy fitness website with membership management, workout plans, and trainer profiles.",
-    image: null,
-    alt: "Fitness website design portfolio Kochi — EliteFit gym platform",
-  },
-  {
-    _id: "default-5",
-    title: "CareFirst Clinic",
-    category: "Web Development",
-    description: "A professional healthcare portal with appointment booking, doctor profiles, and patient resources.",
-    image: null,
-    alt: "Healthcare web design Kochi — CareFirst clinic appointment system",
-  },
-  {
-    _id: "default-6",
-    title: "Explore Kerala Travel",
-    category: "SEO & Web Design",
-    description: "A travel agency website with tour packages, booking engine, and SEO-optimized content driving organic traffic.",
-    image: null,
-    alt: "Travel agency website design Kerala — Explore Kerala tour packages",
-  },
-];
-
-// Default images map (used when image field is null)
-const DEFAULT_IMAGES: Record<string, string> = {
-  "StyleVault E-Commerce": "/images/portfolio-ecommerce.png",
-  "Kerala Pearl Restaurant": "/images/portfolio-restaurant.png",
-  "HomesKerala Realty": "/images/portfolio-realestate.png",
-  "EliteFit Gym": "/images/portfolio-fitness.png",
-  "CareFirst Clinic": "/images/portfolio-healthcare.png",
-  "Explore Kerala Travel": "/images/portfolio-travel.png",
-};
-
-interface PortfolioProject {
+import { ArrowUpRight } from "lucide-react";
+export interface PortfolioProject {
   _id: string;
   title: string;
   category: string;
   description: string;
   image: string | null;
   alt?: string;
-  order?: number;
+  link?: string;
+  clientName?: string;
 }
-
-interface PortfolioProps {
+const archive: PortfolioProject[] = [
+  {
+    _id: "archive-1",
+    title: "StyleVault",
+    category: "E-commerce",
+    description: "A fashion storefront with a product-led shopping experience.",
+    image: "/images/portfolio-ecommerce.png",
+  },
+  {
+    _id: "archive-2",
+    title: "Kerala Pearl",
+    category: "Hospitality website",
+    description: "A considered digital experience for a Kerala restaurant.",
+    image: "/images/portfolio-restaurant.png",
+  },
+  {
+    _id: "archive-3",
+    title: "HomesKerala",
+    category: "Property platform",
+    description: "A property discovery experience built around clear listings.",
+    image: "/images/portfolio-realestate.png",
+  },
+  {
+    _id: "archive-4",
+    title: "EliteFit",
+    category: "Fitness website",
+    description: "A bold, accessible website concept for a fitness brand.",
+    image: "/images/portfolio-fitness.png",
+  },
+  {
+    _id: "archive-5",
+    title: "CareFirst",
+    category: "Healthcare website",
+    description:
+      "A clear interface for services, practitioners, and appointments.",
+    image: "/images/portfolio-healthcare.png",
+  },
+  {
+    _id: "archive-6",
+    title: "Explore Kerala",
+    category: "Travel website",
+    description: "A visual destination and tour discovery experience.",
+    image: "/images/portfolio-travel.png",
+  },
+];
+export function safeProjectLink(value?: string) {
+  if (!value) return null;
+  try {
+    const url = new URL(value);
+    return ["http:", "https:"].includes(url.protocol) ? url.href : null;
+  } catch {
+    return null;
+  }
+}
+export default function Portfolio({
+  data,
+}: {
   data?: PortfolioProject[] | null;
-}
-
-export default function Portfolio({ data }: PortfolioProps) {
-  const projects = data?.length ? data : DEFAULT_PROJECTS;
-
+}) {
+  const preview = !data?.length;
+  const projects = preview ? archive : data;
+  const [active, setActive] = useState(0);
+  const current = projects[active] ?? projects[0];
+  const currentLink = safeProjectLink(current.link);
+  const count = String(projects.length).padStart(2, "0");
   return (
-    <section id="portfolio" className="py-16 sm:py-20 lg:py-24 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section header */}
-        <div className="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
-          <span className="inline-block px-3 py-1 bg-coral/10 text-coral text-xs sm:text-sm font-semibold rounded-full tracking-wide uppercase mb-3">
-            Our Work
-          </span>
-          <h2
-            className="font-heading font-bold text-navy"
-            style={{
-              fontSize: "clamp(1.5rem, 3vw + 0.5rem, 2.5rem)",
-            }}
-          >
-            Projects We&apos;re Proud Of
-          </h2>
-          <p className="mt-3 text-gray-500 text-sm sm:text-base max-w-lg mx-auto">
-            A selection of websites and digital products we&apos;ve built for
-            businesses across Kochi and Kerala.
+    <section id="portfolio" className="section work-section">
+      <div className="shell">
+        <div className="section-heading">
+          <div>
+            <span className="eyebrow">02 / SELECTED WORK</span>
+            <h2>
+              Ideas made tangible.
+              <br />
+              Work made to matter.
+            </h2>
+          </div>
+          <p>
+            {preview
+              ? "A look through our existing design archive. These previews show the visual direction of each concept; published client case studies will follow."
+              : "A selection of websites, platforms, and digital experiences from our portfolio."}
           </p>
         </div>
-
-        {/* Portfolio grid — 1 col mobile → 2 col tablet → 3 col desktop */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-7">
-          {projects.map((project) => {
-            const imgSrc =
-              project.image ||
-              DEFAULT_IMAGES[project.title] ||
-              "/images/portfolio-ecommerce.png";
-
-            return (
-              <div
-                key={project._id}
-                className="group bg-white rounded-xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300"
-              >
-                {/* Image */}
-                <div className="relative aspect-[4/3] overflow-hidden bg-gray-100">
-                  <Image
-                    src={imgSrc}
-                    alt={project.alt || project.title}
-                    fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-500"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    loading="lazy"
-                  />
-                  {/* Category badge */}
-                  <span className="absolute top-3 left-3 px-3 py-1 bg-navy text-white text-xs font-medium rounded-full">
-                    {project.category}
-                  </span>
-                </div>
-
-                {/* Content */}
-                <div className="p-5 sm:p-6">
-                  <h3 className="font-heading font-bold text-navy text-base sm:text-lg mb-2">
-                    {project.title}
-                  </h3>
-                  <p className="text-sm text-gray-500 leading-relaxed mb-4">
-                    {project.description}
-                  </p>
-                  <Link
-                    href="#contact"
-                    className="inline-flex items-center gap-1 text-sm font-semibold text-coral hover:text-coral-hover transition-colors duration-200 min-h-[44px]"
+        <div className="work-layout">
+          <ol className="work-index-list">
+            {projects.map((project, i) => {
+              const link = safeProjectLink(project.link);
+              const isActive = i === active;
+              return (
+                <li
+                  key={project._id}
+                  className={`work-row${isActive ? " is-active" : ""}`}
+                  onMouseEnter={() => setActive(i)}
+                  data-reveal
+                >
+                  <button
+                    type="button"
+                    className="work-row-trigger"
+                    onClick={() => setActive(i)}
+                    onFocus={() => setActive(i)}
+                    aria-pressed={isActive}
+                    aria-controls="work-preview"
                   >
-                    View Case Study
-                    <svg
-                      width="16"
-                      height="16"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      aria-hidden="true"
+                    <span className="work-row-number mono">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <span className="work-row-title">{project.title}</span>
+                    <span className="work-row-category mono">
+                      {project.category}
+                    </span>
+                  </button>
+                  {link && (
+                    <a
+                      className="work-row-link"
+                      href={link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`Visit ${project.title}`}
                     >
-                      <line x1="5" y1="12" x2="19" y2="12" />
-                      <polyline points="12 5 19 12 12 19" />
-                    </svg>
-                  </Link>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-
-        {/* CTA */}
-        <div className="text-center mt-10 sm:mt-14">
-          <Link
-            href="#contact"
-            className="inline-flex items-center justify-center px-7 py-3.5 bg-navy hover:bg-navy-light text-white font-semibold rounded-lg transition-colors duration-200 text-sm sm:text-base min-h-[48px] shadow-md"
+                      <ArrowUpRight size={20} />
+                    </a>
+                  )}
+                  <div className="work-row-media">
+                    <div className="work-row-image">
+                      <ProjectImage project={project} sizes="(max-width: 900px) 100vw, 1px" />
+                    </div>
+                    <p>{project.description}</p>
+                  </div>
+                </li>
+              );
+            })}
+          </ol>
+          <div
+            id="work-preview"
+            className="work-preview"
+            aria-live="polite"
+            data-reveal
           >
-            Start Your Project With Us
-          </Link>
+            <div className="work-preview-frame">
+              {projects.map((project, i) => (
+                <div
+                  key={project._id}
+                  className={`work-preview-image${i === active ? " is-active" : ""}`}
+                  aria-hidden={i !== active}
+                >
+                  <ProjectImage project={project} sizes="(max-width: 899px) 100vw, 55vw" />
+                </div>
+              ))}
+              <span className="work-preview-tag mono">
+                {String(active + 1).padStart(2, "0")} / {count}
+                {preview ? " · DESIGN PREVIEW" : ""}
+              </span>
+            </div>
+            <div className="work-preview-caption">
+              <div>
+                <span className="mono">{current.category}</span>
+                <p>{current.description}</p>
+              </div>
+              {currentLink && (
+                <a
+                  href={currentLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-link"
+                >
+                  Visit project <ArrowUpRight size={16} />
+                </a>
+              )}
+            </div>
+          </div>
         </div>
       </div>
     </section>
+  );
+}
+function ProjectImage({
+  project,
+  sizes,
+}: {
+  project: PortfolioProject;
+  sizes: string;
+}) {
+  return project.image ? (
+    <Image
+      src={project.image}
+      alt={project.alt || `${project.title} website preview`}
+      fill
+      sizes={sizes}
+      className="object-cover"
+      unoptimized={!project.image.startsWith("/")}
+    />
+  ) : (
+    <div className="project-placeholder">
+      <span>{project.title}</span>
+    </div>
   );
 }

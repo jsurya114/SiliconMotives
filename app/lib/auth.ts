@@ -1,6 +1,6 @@
 import Cookies from "js-cookie";
 
-export const TOKEN_KEY = "devaxis_admin_token";
+export const TOKEN_KEY = "siliconmotives_admin_token";
 
 export function getToken() {
   return Cookies.get(TOKEN_KEY);

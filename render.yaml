@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: devaxis-server
+    name: siliconmotives-server
     env: node
     rootDir: server
     buildCommand: npm install

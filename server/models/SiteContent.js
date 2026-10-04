@@ -34,25 +34,20 @@ const siteContentSchema = new mongoose.Schema(
             label: { type: String, required: true },
           },
         ],
-        default: [
-          { number: "250", label: "Projects Completed" },
-          { number: "300", label: "Happy Clients" },
-          { number: "50", label: "Innovations" },
-          { number: "30", label: "Team Members" },
-        ],
+        default: [],
       },
     },
 
     // ── About Section ──
     about: {
       eyebrow: { type: String, default: "About Us" },
-      headline: { type: String, default: "Born in Kochi, Built for the Web" },
+      headline: { type: String, default: "Rooted in Kerala. Not limited by it." },
       paragraphs: {
         type: [String],
         default: [
-          'DevAxis was founded in 2019 by Arjun Menon and Priya Nair — two designers and developers who believed that businesses in Kerala deserved world-class digital experiences.',
-          "What started as a two-person studio overlooking the Kochi backwaters has grown into a team of passionate creatives, engineers, and strategists. We've since helped 50+ businesses — from Marine Drive startups to established brands across Kerala — build websites that don't just look beautiful, but drive real results.",
-          "Our philosophy is simple: great design is invisible. When a website works so well that users don't even think about the interface — that's when we know we've done our job.",
+          "SiliconMotives is a remote-first engineering company based in Kerala, India, led by Jasil M, Founder, and Jayasoorya S, Co-founder.",
+          "We build CRM and ERP systems, e-commerce stores, Shopify and WordPress websites, and custom web applications, from development to cloud deployment.",
+          "Our lean, remote-first model keeps our focus on people, engineering quality, clear communication, and accountability.",
         ],
       },
       founders: {
@@ -65,14 +60,14 @@ const siteContentSchema = new mongoose.Schema(
         ],
         default: [
           {
-            name: "Arjun Menon",
-            title: "Co-Founder & Creative Director",
-            initials: "AM",
+            name: "Jasil M",
+            title: "Founder",
+            initials: "JM",
           },
           {
-            name: "Priya Nair",
-            title: "Co-Founder & Tech Lead",
-            initials: "PN",
+            name: "Jayasoorya S",
+            title: "Co-founder",
+            initials: "JS",
           },
         ],
       },
@@ -83,29 +78,24 @@ const siteContentSchema = new mongoose.Schema(
             label: { type: String, required: true },
           },
         ],
-        default: [
-          { value: "50+", label: "Projects Completed" },
-          { value: "40+", label: "Happy Clients" },
-          { value: "5+", label: "Years in Business" },
-          { value: "4.9★", label: "Google Rating" },
-        ],
+        default: [],
       },
     },
 
     // ── Contact Info ──
     contactInfo: {
-      phone: { type: String, default: "+91 98765 43210" },
-      email: { type: String, default: "hello@devaxis.in" },
-      whatsappNumber: { type: String, default: "919876543210" },
+      phone: { type: String, default: "" },
+      email: { type: String, default: "" },
+      whatsappNumber: { type: String, default: "" },
       whatsappMessage: {
         type: String,
         default:
-          "Hi DevAxis, I'm interested in your web design services.",
+          "Hi SiliconMotives, I'm interested in your web design services.",
       },
       address: {
-        line1: { type: String, default: "2nd Floor, Skyline Tower," },
-        line2: { type: String, default: "Marine Drive, Kochi," },
-        line3: { type: String, default: "Kerala 682031, India" },
+        line1: { type: String, default: "Remote-first team" },
+        line2: { type: String, default: "Kerala" },
+        line3: { type: String, default: "India" },
       },
       businessHours: {
         weekday: { type: String, default: "Mon–Fri 9am–6pm" },
@@ -118,24 +108,24 @@ const siteContentSchema = new mongoose.Schema(
       tagline: {
         type: String,
         default:
-          "Crafting exceptional digital experiences for businesses in Kochi, Kerala and beyond since 2019.",
+          "Remote-first engineering. Based in Kerala. Built for everywhere.",
       },
       socialLinks: {
         facebook: {
           type: String,
-          default: "https://www.facebook.com/devaxis",
+          default: "",
         },
         instagram: {
           type: String,
-          default: "https://www.instagram.com/devaxis",
+          default: "",
         },
         linkedin: {
           type: String,
-          default: "https://www.linkedin.com/company/devaxis",
+          default: "",
         },
         twitter: {
           type: String,
-          default: "https://twitter.com/devaxis",
+          default: "",
         },
       },
     },

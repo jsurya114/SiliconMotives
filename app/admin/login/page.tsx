@@ -73,7 +73,7 @@ export default function AdminLogin() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="appearance-none block w-full px-4 py-3 border border-gray-200 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-coral focus:border-coral sm:text-sm bg-warm-gray50"
-                  placeholder="admin@devaxis.in"
+                  placeholder="Your admin email"
                 />
               </div>
             </div>

@@ -1,7 +1,7 @@
 {
-  "name": "devaxis-server",
+  "name": "siliconmotives-server",
   "version": "1.0.0",
-  "description": "DevAxis.Tech — Express.js backend API server",
+  "description": "SiliconMotives.Tech — Express.js backend API server",
   "main": "index.js",
   "scripts": {
     "dev": "nodemon index.js",

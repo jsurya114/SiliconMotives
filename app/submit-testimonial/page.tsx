@@ -75,7 +75,7 @@ export default function SubmitTestimonial() {
             Share Your Experience
           </h1>
           <p className="text-gray-500 text-lg">
-            Thank you for working with DevAxis! Please share a few words about your experience with our team.
+            Thank you for working with SiliconMotives! Please share a few words about your experience with our team.
           </p>
         </div>
 

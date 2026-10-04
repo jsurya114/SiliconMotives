@@ -1,213 +1,206 @@
-"use client";
-
-import Image from "next/image";
-import Link from "next/link";
-
-const DEFAULT_SERVICES = [
+import {
+  ArrowUpRight,
+  Cloud,
+  FileCode2,
+  Layers3,
+  Workflow,
+} from "lucide-react";
+const featured = [
   {
-    _id: "default-1",
-    title: "Web Design",
-    href: "#contact",
-    image: null as string | null,
-    alt: "Web design service — laptop showing modern website mockup designed by DevAxis Kochi",
+    title: "Custom web applications",
+    text: "Platforms, portals, dashboards, and SaaS products shaped around how your business actually works, not around a template.",
+    includes: [
+      "Product design & UX",
+      "APIs & business logic",
+      "Admin dashboards & roles",
+      "Integrations & automation",
+    ],
+    stack: ["React", "Next.js", "Node.js", "PostgreSQL"],
+    visual: "app",
   },
   {
-    _id: "default-2",
-    title: "Web Development",
-    href: "#contact",
-    image: null,
-    alt: "Web development service — code editor showing React components by DevAxis",
+    title: "Custom e-commerce platforms",
+    text: "Storefronts built from the ground up when off-the-shelf won’t fit: your catalogue, your checkout, your rules.",
+    includes: [
+      "Custom storefront & checkout",
+      "Payments & order management",
+      "Inventory & catalogue tools",
+      "Store admin & reporting",
+    ],
+    stack: ["Next.js", "Node.js", "PostgreSQL", "AWS"],
+    visual: "store",
+  },
+] as const;
+const services = [
+  {
+    icon: Workflow,
+    title: "CRM & ERP systems",
+    text: "Leads, customers, operations, and reporting in one connected workflow.",
+    tags: "CRM / ERP / AUTOMATION",
   },
   {
-    _id: "default-3",
-    title: "E-commerce Builds",
-    href: "#contact",
-    image: null,
-    alt: "E-commerce development — mobile shopping app designed by DevAxis Kochi",
+    icon: Layers3,
+    title: "Shopify & WordPress",
+    text: "Shopify stores, WordPress sites, and WooCommerce, set up for your team to run.",
+    tags: "SHOPIFY / WORDPRESS / WOO",
   },
   {
-    _id: "default-4",
-    title: "SEO & Growth",
-    href: "#contact",
-    image: null,
-    alt: "SEO and growth services — analytics dashboard showing website traffic growth",
+    icon: FileCode2,
+    title: "Business websites",
+    text: "Fast company sites and landing pages with clear content and solid SEO foundations.",
+    tags: "LANDING PAGES / SEO",
+  },
+  {
+    icon: Cloud,
+    title: "Cloud & deployment",
+    text: "AWS hosting, CI/CD, and ongoing maintenance to go live and stay dependable.",
+    tags: "AWS / CI/CD / SUPPORT",
   },
 ];
-
-// Default images map (used when image field is null)
-const DEFAULT_IMAGES: Record<string, string> = {
-  "Web Design": "/images/service-webdesign.png",
-  "Web Development": "/images/service-webdev.png",
-  "E-commerce Builds": "/images/service-ecommerce.png",
-  "SEO & Growth": "/images/service-seo.png",
-};
-
-interface ServiceData {
-  _id: string;
-  title: string;
-  href?: string;
-  image: string | null;
-  alt?: string;
-  description?: string;
-  order?: number;
-}
-
-interface ServicesProps {
-  data?: ServiceData[] | null;
-}
-
-export default function Services({ data }: ServicesProps) {
-  const services = data?.length ? data : DEFAULT_SERVICES;
-
+function AppVisual() {
   return (
-    <section
-      id="services"
-      className="relative pt-16 pb-16 px-5 sm:pt-20 sm:pb-20 lg:pt-28 lg:pb-28 lg:px-10 overflow-hidden"
-      style={{ backgroundColor: "#101828" }}
-    >
-      <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
-          {/* ─── Left column: text content ─── */}
-          <div className="lg:col-span-5 lg:sticky lg:top-32 flex flex-col items-start pr-8">
-            {/* Eyebrow */}
-            <span
-              className="text-xs sm:text-sm font-medium uppercase tracking-[0.2em]"
-              style={{ color: "#98A2B3" }}
-            >
-              What We Offer
-            </span>
-
-            {/* Headline and Decorative dot container */}
-            <div className="mt-4 relative w-full flex items-center justify-between">
-              <h2
-                className="font-serif font-bold text-white leading-[1.1] max-w-[280px] sm:max-w-sm"
-                style={{
-                  fontSize: "clamp(2rem, 3.5vw + 0.5rem, 3.25rem)",
-                }}
-              >
-                Services we help you launch&nbsp;with
-              </h2>
-
-              {/* Decorative coral dot accent (positioned to the right of headline) */}
-              <div
-                className="hidden sm:flex flex-shrink-0 ml-4 w-12 h-12 rounded-full border border-[#E85D4C]/30 items-center justify-center"
-                aria-hidden="true"
-              >
-                <span
-                  className="w-3 h-3 rounded-full"
-                  style={{ backgroundColor: "#E85D4C" }}
-                />
-              </div>
-            </div>
-
-            {/* See All Services link */}
-            <Link
-              href="#contact"
-              className="group mt-8 sm:mt-12 inline-flex items-center gap-2 text-white font-medium text-base sm:text-lg hover:underline decoration-2 underline-offset-4 transition-all duration-200 min-h-[44px]"
-              style={
-                {
-                  textDecorationColor: "transparent",
-                  "--hover-decoration": "#E85D4C",
-                } as React.CSSProperties
-              }
-              onMouseEnter={(e) => {
-                (e.currentTarget.style.textDecorationColor as string) =
-                  "#E85D4C";
-              }}
-              onMouseLeave={(e) => {
-                (e.currentTarget.style.textDecorationColor as string) =
-                  "transparent";
-              }}
-            >
-              See All Services
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="transition-transform duration-200 group-hover:translate-x-1"
-                aria-hidden="true"
-              >
-                <line x1="5" y1="12" x2="19" y2="12" />
-                <polyline points="12 5 19 12 12 19" />
-              </svg>
-            </Link>
-          </div>
-
-          {/* ─── Right column: asymmetric masonry cards (4 columns) ─── */}
-          {/* Mobile: 2-col staggered. Desktop: 4-col staggered. */}
-          <div className="lg:col-span-7 grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-5 items-start mt-10 lg:mt-0">
-            {services.map((service, index) => {
-              // Alternating stagger: down, top, down, top
-              const isDown = index % 2 === 0;
-              const imgSrc =
-                service.image ||
-                DEFAULT_IMAGES[service.title] ||
-                "/images/service-webdesign.png";
-
-              return (
-                <div
-                  key={service._id}
-                  className={`${isDown ? "mt-0 md:mt-24" : "mt-0"}`}
-                >
-                  <Link
-                    href={service.href || "#contact"}
-                    aria-label={`View ${service.title} services`}
-                    className="group relative block rounded-2xl overflow-hidden transition-all duration-300 hover:scale-[1.05] focus-visible:ring-2 focus-visible:ring-offset-2"
-                    style={
-                      {
-                        "--tw-ring-color": "#E85D4C",
-                        "--tw-ring-offset-color": "#101828",
-                      } as React.CSSProperties
-                    }
-                  >
-                    {/* Taller aspect ratio on mobile so images are larger, square on desktop */}
-                    <div className="relative w-full aspect-[3/4] sm:aspect-square">
-                      <Image
-                        src={imgSrc}
-                        alt={service.alt || service.title}
-                        fill
-                        className="object-cover transition-transform duration-500 group-hover:scale-110"
-                        sizes="(max-width: 768px) 50vw, 25vw"
-                        loading="lazy"
-                      />
-                      {/* Dark scrim overlay for text legibility */}
-                      <div
-                        className="absolute inset-0"
-                        style={{
-                          background:
-                            "linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.2) 60%, transparent 100%)",
-                        }}
-                        aria-hidden="true"
-                      />
-                      {/* Coral dot marker — top-left */}
-                      <span
-                        className="absolute top-4 left-4 w-2 h-2 rounded-full"
-                        style={{ backgroundColor: "#E85D4C" }}
-                        aria-hidden="true"
-                      />
-                      {/* Coral border on hover */}
-                      <div
-                        className="absolute inset-0 rounded-2xl border-2 border-transparent group-hover:border-[#E85D4C] transition-colors duration-300 pointer-events-none"
-                        aria-hidden="true"
-                      />
-                      {/* Title — bottom-left */}
-                      <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-5">
-                        <h3 className="font-bold text-white text-base sm:text-lg leading-tight group-hover:text-[#E85D4C] transition-colors duration-200">
-                          {service.title}
-                        </h3>
-                      </div>
-                    </div>
-                  </Link>
-                </div>
-              );
-            })}
-          </div>
+    <svg viewBox="0 0 320 200" aria-hidden="true" className="svc-visual">
+      <rect x="0.5" y="0.5" width="319" height="199" rx="6" className="svc-frame" />
+      <line x1="0" y1="22" x2="320" y2="22" />
+      <circle cx="12" cy="11" r="2.5" className="svc-fill" />
+      <circle cx="21" cy="11" r="2.5" className="svc-fill" />
+      <circle cx="30" cy="11" r="2.5" className="svc-fill" />
+      <line x1="64" y1="22" x2="64" y2="200" />
+      <rect x="12" y="34" width="40" height="5" rx="2" className="svc-fill" />
+      <rect x="12" y="48" width="30" height="5" rx="2" className="svc-dim" />
+      <rect x="12" y="62" width="34" height="5" rx="2" className="svc-dim" />
+      <rect x="12" y="76" width="26" height="5" rx="2" className="svc-dim" />
+      <rect x="78" y="34" width="68" height="36" rx="3" />
+      <rect x="156" y="34" width="68" height="36" rx="3" />
+      <rect x="234" y="34" width="72" height="36" rx="3" />
+      <rect x="86" y="44" width="22" height="4" rx="2" className="svc-dim" />
+      <rect x="86" y="54" width="36" height="7" rx="2" className="svc-fill" />
+      <rect x="164" y="44" width="22" height="4" rx="2" className="svc-dim" />
+      <rect x="164" y="54" width="30" height="7" rx="2" className="svc-fill" />
+      <rect x="242" y="44" width="22" height="4" rx="2" className="svc-dim" />
+      <rect x="242" y="54" width="40" height="7" rx="2" className="svc-fill" />
+      <rect x="78" y="80" width="228" height="106" rx="3" />
+      <g className="svc-bars">
+        {[46, 62, 38, 74, 56, 84, 66, 92, 70, 80].map((h, i) => (
+          <rect
+            key={i}
+            x={94 + i * 21}
+            y={176 - h}
+            width="11"
+            height={h}
+            className={i === 7 ? "svc-fill" : "svc-dim"}
+          />
+        ))}
+      </g>
+    </svg>
+  );
+}
+function StoreVisual() {
+  return (
+    <svg viewBox="0 0 320 200" aria-hidden="true" className="svc-visual">
+      <rect x="0.5" y="0.5" width="319" height="199" rx="6" className="svc-frame" />
+      <line x1="0" y1="22" x2="320" y2="22" />
+      <rect x="12" y="8" width="34" height="6" rx="2" className="svc-fill" />
+      <rect x="128" y="9" width="20" height="4" rx="2" className="svc-dim" />
+      <rect x="156" y="9" width="20" height="4" rx="2" className="svc-dim" />
+      <rect x="184" y="9" width="20" height="4" rx="2" className="svc-dim" />
+      <rect x="294" y="6" width="14" height="10" rx="2" />
+      {[0, 1, 2].map((i) => (
+        <g key={i}>
+          <rect x={12 + i * 66} y="34" width="56" height="64" rx="3" />
+          <rect x={12 + i * 66} y="106" width="40" height="4" rx="2" className="svc-dim" />
+          <rect x={12 + i * 66} y="116" width="22" height="5" rx="2" className="svc-fill" />
+          <rect x={12 + i * 66} y="128" width="56" height="14" rx="3" />
+        </g>
+      ))}
+      {[0, 1, 2].map((i) => (
+        <rect key={i} x={12 + i * 66} y="152" width="56" height="36" rx="3" className="svc-ghost" />
+      ))}
+      <rect x="214" y="34" width="94" height="154" rx="3" />
+      <rect x="224" y="44" width="40" height="5" rx="2" className="svc-fill" />
+      {[0, 1, 2].map((i) => (
+        <g key={i}>
+          <rect x="224" y={60 + i * 24} width="16" height="16" rx="2" className="svc-dim" />
+          <rect x="246" y={63 + i * 24} width="34" height="4" rx="2" className="svc-dim" />
+          <rect x="246" y={70 + i * 24} width="20" height="4" rx="2" className="svc-dim" />
+        </g>
+      ))}
+      <line x1="224" y1="140" x2="298" y2="140" />
+      <rect x="224" y="148" width="26" height="4" rx="2" className="svc-dim" />
+      <rect x="276" y="147" width="22" height="6" rx="2" className="svc-fill" />
+      <rect x="224" y="164" width="74" height="16" rx="3" className="svc-fill" />
+    </svg>
+  );
+}
+export default function Services() {
+  return (
+    <section id="services" className="section shell">
+      <div className="section-heading">
+        <div>
+          <span className="eyebrow">01 / WHAT WE DO</span>
+          <h2>
+            Software built for your business.
+            <br />
+            By the people you talk to.
+          </h2>
         </div>
+        <p>
+          One accountable team designs, builds, and deploys your software, with
+          no hand-offs and no layers between you and the engineers.
+        </p>
+      </div>
+      <div className="svc-featured">
+        {featured.map((item, i) => (
+          <article className="svc-feature" key={item.title} data-reveal>
+            <div className="svc-feature-copy">
+              <span className="svc-kicker mono">
+                0{i + 1} / {i === 0 ? "FLAGSHIP" : "CUSTOM BUILD"}
+              </span>
+              <h3>{item.title}</h3>
+              <p>{item.text}</p>
+              <ul className="svc-includes">
+                {item.includes.map((x) => (
+                  <li key={x}>{x}</li>
+                ))}
+              </ul>
+            </div>
+            <div className="svc-visual-wrap">
+              {item.visual === "app" ? <AppVisual /> : <StoreVisual />}
+            </div>
+            <div className="svc-feature-foot">
+              <span className="svc-stack mono">
+                BUILT WITH {item.stack.join(" · ").toUpperCase()}
+              </span>
+              <a
+                href="#contact"
+                className="svc-cta"
+                aria-label={`Discuss ${item.title.toLowerCase()}`}
+              >
+                Discuss a project <ArrowUpRight size={16} />
+              </a>
+            </div>
+          </article>
+        ))}
+      </div>
+      <div className="svc-grid">
+        {services.map((service, i) => (
+          <article className="svc-card" key={service.title} data-reveal>
+            <div className="svc-card-top">
+              <service.icon size={24} strokeWidth={1.4} />
+              <span className="mono">0{i + 3}</span>
+            </div>
+            <h3>{service.title}</h3>
+            <p>{service.text}</p>
+            <span className="svc-card-tags mono">{service.tags}</span>
+            <a
+              href="#contact"
+              aria-label={`Discuss ${service.title.toLowerCase()}`}
+              className="svc-card-link"
+            >
+              <ArrowUpRight size={20} />
+            </a>
+          </article>
+        ))}
       </div>
     </section>
   );

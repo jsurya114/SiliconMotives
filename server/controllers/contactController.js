@@ -30,7 +30,7 @@ exports.submitContact = async (req, res, next) => {
     // Send email notification (non-blocking — don't fail the request if email fails)
     sendEmail({
       to: process.env.ADMIN_EMAIL,
-      subject: `New Contact from ${name} — DevAxis.in`,
+      subject: `New Contact from ${name} — SiliconMotives.in`,
       html: `
         <h2>New Contact Form Submission</h2>
         <p><strong>Name:</strong> ${name}</p>

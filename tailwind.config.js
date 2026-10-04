@@ -7,13 +7,13 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        navy: { DEFAULT: '#0A1628', light: '#132038', mid: '#1A2A45' },
-        coral: { DEFAULT: '#E8553A', hover: '#D14A32' },
-        warm: { white: '#FAFAF8', gray50: '#F5F5F3', gray100: '#E8E8E5' },
+        navy: { DEFAULT: '#151515', light: '#1f1f1f', mid: '#292929' },
+        coral: { DEFAULT: '#727272', hover: '#656565' },
+        warm: { white: '#fafafa', gray50: '#f5f5f5', gray100: '#e8e8e8' },
       },
       fontFamily: {
-        sans: ['Inter', 'sans-serif'],
-        heading: ['Outfit', 'sans-serif'],
+        sans: ['Arial', 'Helvetica', 'sans-serif'],
+        heading: ['Arial', 'Helvetica', 'sans-serif'],
       },
     },
   },

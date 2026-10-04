@@ -6,15 +6,22 @@
  * render with their default hardcoded values.
  */
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5001";
+const API_URL =
+  process.env.API_URL ||
+  process.env.NEXT_PUBLIC_API_URL ||
+  "http://localhost:5001";
 
 /**
  * Generic fetch wrapper with error handling and caching.
  * Returns null on failure so components can fall back to defaults.
  */
-async function fetchAPI<T>(endpoint: string, revalidate = 60): Promise<T | null> {
+async function fetchAPI<T>(
+  endpoint: string,
+  revalidate = 60,
+): Promise<T | null> {
   try {
     const res = await fetch(`${API_URL}/api${endpoint}`, {
+      signal: AbortSignal.timeout(4000),
       next: { revalidate }, // ISR — revalidate every 60s by default
     });
 
@@ -104,6 +111,7 @@ export async function getPortfolio() {
       description: string;
       image: string | null;
       link: string;
+      clientName?: string;
       alt: string;
       order: number;
     }[]
