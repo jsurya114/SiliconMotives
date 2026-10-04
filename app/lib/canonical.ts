@@ -1,4 +1,4 @@
-import { getSeoSettings } from "./api";
+import { getSeoSettings } from "./content";
 import { siteUrl } from "./site";
 
 /** Canonical origin: SITE_URL env first, then the CMS SEO canonical URL. */

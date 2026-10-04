@@ -6,7 +6,7 @@ import ScrollReveal from "../components/ScrollReveal";
 import { getCanonicalUrl } from "../lib/canonical";
 import { breadcrumbSchema, faqSchema, jsonLd } from "../lib/schema";
 import { partnerAudiences, partnerPrinciples, partnerScope } from "../lib/partners";
-import { caseStudy } from "../lib/company";
+import { getCaseStudies } from "../lib/content";
 
 const title = "White-label Engineering Partner for Agencies";
 const description =
@@ -56,7 +56,10 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function AgencyPartnersPage() {
-  const url = await getCanonicalUrl();
+  const [url, [caseStudy]] = await Promise.all([
+    getCanonicalUrl(),
+    getCaseStudies({ featuredOnly: true, limit: 1 }),
+  ]);
   const schemas = [
     faqSchema(faqs),
     ...(url
@@ -96,7 +99,7 @@ export default async function AgencyPartnersPage() {
               <a className="button button-primary" href="/#contact">
                 Discuss a pilot project <ArrowUpRight size={18} />
               </a>
-              <a className="text-link" href="/#case-study">
+              <a className="text-link" href="/case-studies">
                 See a production case study <ArrowUpRight size={17} />
               </a>
             </div>
@@ -157,10 +160,16 @@ export default async function AgencyPartnersPage() {
               <span className="eyebrow">03 / HOW IT WORKS</span>
               <h2>Start small. Grow if it works.</h2>
             </div>
-            <p>
-              Our proof so far: we help develop and operate a production
-              e-commerce platform with {caseStudy.users} users on AWS.
-            </p>
+            {caseStudy && (
+              <p>
+                Our proof so far:{" "}
+                <a href={`/case-studies/${caseStudy.slug}`}>
+                  {caseStudy.title}, {caseStudy.headline.charAt(0).toLowerCase()}
+                  {caseStudy.headline.slice(1)}
+                </a>
+                .
+              </p>
+            )}
           </div>
           <ol className="partner-steps">
             {howItWorks.map((step, i) => (

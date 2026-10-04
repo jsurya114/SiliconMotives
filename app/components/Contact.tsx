@@ -1,7 +1,11 @@
 "use client";
 import { useState, type FormEvent } from "react";
-import { ArrowUpRight, CheckCircle2 } from "lucide-react";
-export default function Contact() {
+import { ArrowUpRight, CalendarDays, CheckCircle2, Mail } from "lucide-react";
+export default function Contact({
+  contact,
+}: {
+  contact?: { email: string; bookingUrl: string };
+}) {
   const [status, setStatus] = useState<
     "idle" | "sending" | "success" | "error"
   >("idle");
@@ -28,7 +32,7 @@ export default function Contact() {
     <section id="contact" className="contact-section">
       <div className="shell contact-grid">
         <div>
-          <span className="eyebrow">07 / START A PROJECT</span>
+          <span className="eyebrow">08 / START A PROJECT</span>
           <h2>
             Something
             <br />
@@ -42,6 +46,20 @@ export default function Contact() {
             <span className="status-dot" /> Prefer to start small? Ask about a
             pilot project.
           </div>
+          {(contact?.email || contact?.bookingUrl) && (
+            <div className="contact-direct">
+              {contact.bookingUrl && (
+                <a href={contact.bookingUrl} target="_blank" rel="noopener noreferrer">
+                  <CalendarDays size={16} aria-hidden="true" /> Book a call
+                </a>
+              )}
+              {contact.email && (
+                <a href={`mailto:${contact.email}`}>
+                  <Mail size={16} aria-hidden="true" /> {contact.email}
+                </a>
+              )}
+            </div>
+          )}
         </div>
         <form onSubmit={submit} className="contact-form">
           <div className="form-row">

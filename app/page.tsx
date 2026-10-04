@@ -2,21 +2,30 @@ import type { Metadata } from "next";
 import { ArrowUpRight, ArrowRight } from "lucide-react";
 import Image from "next/image";
 import ScrollReveal from "./components/ScrollReveal";
-import Portfolio from "./components/Portfolio";
-import Testimonials from "./components/Testimonials";
 import Capabilities from "./components/Capabilities";
 import CaseStudy from "./components/CaseStudy";
-import Approach from "./components/Approach";
+import SelectedProjects from "./components/SelectedProjects";
+import ClientLogos from "./components/ClientLogos";
+import Testimonials from "./components/Testimonials";
 import Partners from "./components/Partners";
+import RemoteFirst from "./components/RemoteFirst";
 import Team from "./components/Team";
-import FAQ, { faqs } from "./components/FAQ";
+import FAQ from "./components/FAQ";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Contact from "./components/Contact";
-import { getPortfolio, getTestimonials } from "./lib/api";
+import {
+  getCaseStudies,
+  getClients,
+  getFaqs,
+  getHomeSettings,
+  getProjects,
+  getServices,
+  getTeam,
+  getTestimonials,
+} from "./lib/content";
 import { getCanonicalUrl } from "./lib/canonical";
 import { faqSchema, jsonLd } from "./lib/schema";
-import { proof } from "./lib/company";
 
 export const revalidate = 60;
 
@@ -26,20 +35,33 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Home() {
-  const [portfolio, testimonials] = await Promise.all([
-    getPortfolio(),
-    getTestimonials(),
-  ]);
+  const [settings, services, [caseStudy], projects, clients, testimonials, team, faqs] =
+    await Promise.all([
+      getHomeSettings(),
+      getServices(),
+      getCaseStudies({ featuredOnly: true, limit: 1 }),
+      getProjects({ featuredOnly: true, limit: 5 }),
+      getClients({ featuredOnly: true }),
+      getTestimonials({ limit: 3 }),
+      getTeam(),
+      getFaqs({ homeOnly: true }),
+    ]);
+  // Don't repeat the featured case study's project in "Selected projects".
+  const selected = projects.filter((p) => p.slug !== caseStudy?.projectSlug).slice(0, 4);
+  const { hero, proof } = settings;
+
   return (
     <div className="silicon-site">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: jsonLd(
-            faqSchema(faqs.map(({ q, short, a }) => ({ q, a: `${short} ${a}` }))),
-          ),
-        }}
-      />
+      {faqs.length > 0 && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: jsonLd(
+              faqSchema(faqs.map((f) => ({ q: f.question, a: `${f.shortAnswer} ${f.answer}`.trim() }))),
+            ),
+          }}
+        />
+      )}
       <Navbar />
       <ScrollReveal />
       <main id="main-content">
@@ -57,8 +79,7 @@ export default async function Home() {
           <div className="shell hero-content">
             <div className="hero-topline mono">
               <span>
-                <i className="status-dot" /> CUSTOM SOFTWARE · CLOUD
-                INFRASTRUCTURE · DEVOPS
+                <i className="status-dot" /> {hero.eyebrow.toUpperCase()}
               </span>
               <span>KERALA, INDIA</span>
             </div>
@@ -66,30 +87,29 @@ export default async function Home() {
               <div className="hero-copy">
                 <h1>
                   <span className="hero-line">
-                    <span>Software built to scale.</span>
+                    <span>{hero.line1}</span>
                   </span>
-                  <span className="hero-line is-muted">
-                    <span>Infrastructure built to last.</span>
-                  </span>
+                  {hero.line2 && (
+                    <span className="hero-line is-muted">
+                      <span>{hero.line2}</span>
+                    </span>
+                  )}
                 </h1>
-                <p>
-                  SiliconMotives designs, builds and operates production software
-                  and AWS infrastructure for growing businesses and technology
-                  teams. One focused engineering team, from architecture to
-                  day-to-day operations.
-                </p>
+                <p>{hero.intro}</p>
                 <div className="hero-actions">
                   <a className="button button-primary" href="#contact">
-                    Start a project <ArrowUpRight size={18} />
+                    {hero.primaryCtaLabel} <ArrowUpRight size={18} />
                   </a>
-                  <a className="text-link" href="#case-study">
-                    See a production case study <ArrowRight size={17} />
-                  </a>
+                  {caseStudy && (
+                    <a className="text-link" href="#case-study">
+                      {hero.secondaryCtaLabel} <ArrowRight size={17} />
+                    </a>
+                  )}
                 </div>
               </div>
             </div>
             <div className="hero-bottom">
-              <span>Based in Kerala, India · now open to U.S. &amp; international teams</span>
+              <span>{hero.bottomLine}</span>
               <a href="#capabilities" className="mono">
                 EXPLORE CAPABILITIES <span>↓</span>
               </a>
@@ -97,26 +117,29 @@ export default async function Home() {
           </div>
         </section>
 
-        <section className="proof-strip" aria-label="At a glance">
-          <dl className="shell proof-grid">
-            {proof.map((item) => (
-              <div key={item.label}>
-                <dt>{item.label}</dt>
-                <dd>{item.value}</dd>
-              </div>
-            ))}
-          </dl>
-        </section>
+        {proof.length > 0 && (
+          <section className="proof-strip" aria-label="At a glance">
+            <dl className="shell proof-grid">
+              {proof.map((item) => (
+                <div key={item.label}>
+                  <dt>{item.label}</dt>
+                  <dd>{item.value}</dd>
+                </div>
+              ))}
+            </dl>
+          </section>
+        )}
 
-        <Capabilities />
-        <CaseStudy />
-        <Portfolio data={portfolio} />
-        <Testimonials data={testimonials} />
-        <Approach />
+        <Capabilities services={services} />
+        <CaseStudy data={caseStudy} />
+        <SelectedProjects projects={selected} />
+        <ClientLogos clients={clients} />
+        <Testimonials items={testimonials} />
         <Partners />
-        <Team />
-        <FAQ />
-        <Contact />
+        <RemoteFirst />
+        <Team members={team} />
+        <FAQ faqs={faqs} />
+        <Contact contact={settings.contact} />
       </main>
       <Footer />
     </div>

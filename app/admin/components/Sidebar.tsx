@@ -2,31 +2,44 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { 
-  LayoutDashboard, 
-  Image as ImageIcon, 
-  Briefcase, 
-  MessageSquare, 
-  FileText, 
-  Settings,
+import {
+  BriefcaseBusiness,
+  Building2,
+  FileText,
+  HelpCircle,
+  Layers,
+  LayoutDashboard,
   LogOut,
   Mail,
-  Users
+  MessageSquareQuote,
+  Search,
+  Settings,
+  Users,
 } from "lucide-react";
 import { signOut } from "../lib/data";
 
-const MENU_ITEMS = [
-  { label: "Dashboard", href: "/admin", icon: LayoutDashboard },
-  { label: "Hero Content", href: "/admin/hero", icon: ImageIcon },
-  { label: "Fun Fact", href: "/admin/funfact", icon: Users },
-  { label: "Services", href: "/admin/services", icon: Briefcase },
-  { label: "Portfolio", href: "/admin/portfolio", icon: ImageIcon },
-  { label: "About Us", href: "/admin/about", icon: FileText },
-  { label: "Testimonials", href: "/admin/testimonials", icon: MessageSquare },
-  { label: "Contact Info", href: "/admin/contact-info", icon: Mail },
-  { label: "Submissions", href: "/admin/submissions", icon: Mail },
-  { label: "Footer", href: "/admin/footer", icon: Settings },
-  { label: "SEO Settings", href: "/admin/seo", icon: Settings },
+const MENU = [
+  { heading: null, items: [{ label: "Dashboard", href: "/admin", icon: LayoutDashboard }] },
+  {
+    heading: "Content",
+    items: [
+      { label: "Projects", href: "/admin/projects", icon: BriefcaseBusiness },
+      { label: "Case studies", href: "/admin/case-studies", icon: FileText },
+      { label: "Clients", href: "/admin/clients", icon: Building2 },
+      { label: "Testimonials", href: "/admin/testimonials", icon: MessageSquareQuote },
+      { label: "Team", href: "/admin/team", icon: Users },
+      { label: "Capabilities", href: "/admin/services", icon: Layers },
+      { label: "FAQs", href: "/admin/faqs", icon: HelpCircle },
+    ],
+  },
+  {
+    heading: "Site",
+    items: [
+      { label: "Site settings", href: "/admin/settings", icon: Settings },
+      { label: "SEO", href: "/admin/seo", icon: Search },
+    ],
+  },
+  { heading: "Inbox", items: [{ label: "Enquiries", href: "/admin/submissions", icon: Mail }] },
 ];
 
 export default function Sidebar() {
@@ -44,10 +57,10 @@ export default function Sidebar() {
       {/* Brand */}
       <div className="h-16 flex items-center px-6 border-b border-white/10">
         <Link href="/" className="flex items-center gap-2">
-          <span className="w-8 h-8 rounded-lg bg-coral flex items-center justify-center flex-shrink-0">
-            <svg width="18" height="18" viewBox="0 0 32 32" fill="none">
-              <path d="M4 6h6c5.523 0 10 4.477 10 10s-4.477 10-10 10H4V6z" stroke="white" strokeWidth="2.5" fill="none" />
-              <path d="M18 26l6-16 6 16M20.5 20h7" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+          <span className="w-8 h-8 rounded-lg bg-navy-light flex items-center justify-center flex-shrink-0">
+            <svg width="18" height="18" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+              <path d="M6 8h20l-7 8H6l7 8h13" stroke="white" strokeWidth="3" strokeLinejoin="round" />
+              <path d="m6 8 7 8m6 0 7 8" stroke="white" strokeWidth="3" />
             </svg>
           </span>
           <span className="font-heading font-bold text-lg tracking-tight">
@@ -58,25 +71,31 @@ export default function Sidebar() {
 
       {/* Navigation */}
       <nav className="flex-1 overflow-y-auto py-4 px-3 space-y-1">
-        {MENU_ITEMS.map((item) => {
-          const isActive = pathname === item.href;
-          const Icon = item.icon;
-          
-          return (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
-                isActive 
-                  ? "bg-coral text-white" 
-                  : "text-gray-400 hover:bg-white/5 hover:text-white"
-              }`}
-            >
-              <Icon size={18} />
-              {item.label}
-            </Link>
-          );
-        })}
+        {MENU.map((group) => (
+          <div key={group.heading ?? "main"} className="pb-3">
+            {group.heading && (
+              <p className="px-3 pt-3 pb-1 text-[10px] uppercase tracking-widest text-gray-500">{group.heading}</p>
+            )}
+            {group.items.map((item) => {
+              const isActive =
+                item.href === "/admin" ? pathname === "/admin" : pathname.startsWith(item.href);
+              const Icon = item.icon;
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  aria-current={isActive ? "page" : undefined}
+                  className={`flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                    isActive ? "bg-white/10 text-white" : "text-gray-400 hover:bg-white/5 hover:text-white"
+                  }`}
+                >
+                  <Icon size={17} />
+                  {item.label}
+                </Link>
+              );
+            })}
+          </div>
+        ))}
       </nav>
 
       {/* Logout */}

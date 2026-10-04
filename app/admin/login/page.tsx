@@ -31,10 +31,10 @@ export default function AdminLogin() {
     <div className="min-h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-8 bg-warm-white">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <div className="flex justify-center mb-6">
-          <span className="w-12 h-12 rounded-lg bg-coral flex items-center justify-center">
-            <svg width="24" height="24" viewBox="0 0 32 32" fill="none">
-              <path d="M4 6h6c5.523 0 10 4.477 10 10s-4.477 10-10 10H4V6z" stroke="white" strokeWidth="2.5" fill="none" />
-              <path d="M18 26l6-16 6 16M20.5 20h7" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+          <span className="w-12 h-12 rounded-lg bg-navy-light flex items-center justify-center">
+            <svg width="24" height="24" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+              <path d="M6 8h20l-7 8H6l7 8h13" stroke="white" strokeWidth="3" strokeLinejoin="round" />
+              <path d="m6 8 7 8m6 0 7 8" stroke="white" strokeWidth="3" />
             </svg>
           </span>
         </div>

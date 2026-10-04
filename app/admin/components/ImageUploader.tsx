@@ -13,6 +13,10 @@ interface ImageUploaderProps {
   label?: string;
   recommendedSize?: string;
   disableCrop?: boolean;
+  /** Crop aspect ratio (default 4:3). */
+  aspect?: number;
+  /** Storage folder, e.g. "projects" or "logos". */
+  folder?: string;
 }
 
 export default function ImageUploader({
@@ -21,6 +25,8 @@ export default function ImageUploader({
   label = "Upload Image",
   recommendedSize,
   disableCrop = false,
+  aspect = 4 / 3,
+  folder = "uploads",
 }: ImageUploaderProps) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -72,7 +78,7 @@ export default function ImageUploader({
     setError("");
 
     try {
-      onChange(await uploadImage(file));
+      onChange(await uploadImage(file, folder));
     } catch (err) {
       setError((err as Error).message);
     } finally {
@@ -139,7 +145,7 @@ export default function ImageUploader({
                 image={imageSrc}
                 crop={crop}
                 zoom={zoom}
-                aspect={4 / 3}
+                aspect={aspect}
                 onCropChange={setCrop}
                 onCropComplete={onCropComplete}
                 onZoomChange={setZoom}

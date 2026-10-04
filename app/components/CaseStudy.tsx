@@ -1,100 +1,50 @@
-import { ArrowUpRight } from "lucide-react";
-import { caseStudy } from "../lib/company";
+import { ArrowRight } from "lucide-react";
+import ArchitectureDiagram from "./ArchitectureDiagram";
+import type { CaseStudy as CaseStudyData } from "../lib/content";
 
-/** Request path through the platform, top to bottom. */
-const flow = [
-  { tier: "USERS", name: "Customers", detail: "Web & mobile browsers" },
-  { tier: "DNS", name: "Route 53", detail: "Domains & routing" },
-  { tier: "EDGE", name: "CloudFront", detail: "CDN & edge caching" },
-  { tier: "APPLICATION", name: "EC2", detail: "Application & API servers" },
-];
-const data = [
-  { tier: "DATABASE", name: "RDS", detail: "Managed relational database" },
-  { tier: "STORAGE", name: "S3", detail: "Media & static assets" },
-];
-
-export default function CaseStudy() {
-  const label = caseStudy.clientName || caseStudy.title;
+/** Featured technical case study on the homepage. */
+export default function CaseStudy({ data }: { data: CaseStudyData | undefined }) {
+  if (!data) return null;
   return (
     <section id="case-study" className="case-section">
       <div className="section shell case-grid">
         <div className="case-copy">
           <span className="eyebrow">02 / CASE STUDY</span>
           <h2>
-            {caseStudy.clientName ? `${caseStudy.clientName}.` : "A production e-commerce platform."}
-            <br />
-            <span className="muted">Built and operated by us.</span>
+            {data.clientName ?? data.title}
+            {data.headline && (
+              <>
+                <br />
+                <span className="muted">{data.headline}</span>
+              </>
+            )}
           </h2>
-          <dl className="case-stats">
-            <div>
-              <dt className="mono">USERS</dt>
-              <dd>{caseStudy.users}</dd>
-            </div>
-            <div>
-              <dt className="mono">INFRASTRUCTURE</dt>
-              <dd>AWS</dd>
-            </div>
-            <div>
-              <dt className="mono">ENGAGEMENT</dt>
-              <dd>Ongoing</dd>
-            </div>
-          </dl>
-          <p>{caseStudy.summary}</p>
-          <span className="mono case-role-label">OUR ROLE</span>
-          <ul className="case-role">
-            {caseStudy.role.map((r) => (
-              <li key={r}>{r}</li>
-            ))}
-          </ul>
-          {caseStudy.url && (
-            <a
-              className="text-link"
-              href={caseStudy.url}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Visit {label} <ArrowUpRight size={16} />
-            </a>
+          {data.summary && <p>{data.summary}</p>}
+          {data.responsibilities.length > 0 && (
+            <>
+              <span className="mono case-role-label">WHAT WE OWN</span>
+              <ul className="case-role">
+                {data.responsibilities.map((r) => (
+                  <li key={r}>{r}</li>
+                ))}
+              </ul>
+            </>
           )}
+          {data.metrics.length > 0 && (
+            <dl className="case-stats">
+              {data.metrics.map((m) => (
+                <div key={m.label}>
+                  <dt className="mono">{m.label.toUpperCase()}</dt>
+                  <dd>{m.value}</dd>
+                </div>
+              ))}
+            </dl>
+          )}
+          <a className="text-link case-more" href={`/case-studies/${data.slug}`}>
+            Read the full case study <ArrowRight size={16} />
+          </a>
         </div>
-
-        <figure className="arch" data-reveal>
-          <figcaption className="arch-caption mono">
-            PRODUCTION ARCHITECTURE · AWS
-          </figcaption>
-          <ol className="arch-flow" aria-label="Request path">
-            {flow.map((node, i) => (
-              <li className="arch-node" key={node.name} style={{ "--i": i } as React.CSSProperties}>
-                <span className="mono">{node.tier}</span>
-                <strong>{node.name}</strong>
-                <em>{node.detail}</em>
-              </li>
-            ))}
-          </ol>
-          <ul className="arch-data" aria-label="Data layer">
-            {data.map((node, i) => (
-              <li
-                className="arch-node"
-                key={node.name}
-                style={{ "--i": flow.length + i } as React.CSSProperties}
-              >
-                <span className="mono">{node.tier}</span>
-                <strong>{node.name}</strong>
-                <em>{node.detail}</em>
-              </li>
-            ))}
-          </ul>
-          <div className="arch-ops">
-            <div>
-              <span className="mono">DELIVERY</span>
-              <p>CI/CD pipeline → automated deployments</p>
-            </div>
-            <div>
-              <span className="mono">OPERATIONS</span>
-              <p>Monitoring · backups · maintenance</p>
-            </div>
-          </div>
-        </figure>
+        <ArchitectureDiagram nodes={data.architecture} />
       </div>
     </section>
   );

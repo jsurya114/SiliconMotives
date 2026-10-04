@@ -9,6 +9,7 @@
  * (change it after first login). Without it, admins are sent an invite email.
  *
  * Safe to re-run: tables that already contain rows are skipped.
+ * Old services and portfolio items are imported as UNPUBLISHED drafts for review.
  */
 require("dotenv").config({ path: require("path").resolve(__dirname, "../.env") });
 const mongoose = require("mongoose");
@@ -115,35 +116,51 @@ async function main() {
   }
 
   // ── Collections ─────────────────────────────────────────────────────
+  // Old agency services are superseded by the capability pillars: import as
+  // unpublished drafts so nothing reappears on the site without review.
   const services = (await all("services")).map((s) => ({
     title: str(s.title, 100),
     description: str(s.description, 500),
     image: s.image || null,
-    icon: s.icon || "Monitor",
+    icon: s.icon || "Code2",
     features: Array.isArray(s.features) ? s.features.map(String) : [],
     alt: str(s.alt, 200),
     href: s.href || "#contact",
-    sort_order: Number(s.order) || 0,
-    is_active: s.isActive !== false,
+    sort_order: 100 + (Number(s.order) || 0),
+    published: false,
     created_at: iso(s.createdAt),
   }));
   await insertRows("services", validRows("services", services, (r) => r.title));
 
-  const portfolio = (await all("portfolios")).map((p) => ({
-    title: str(p.title, 150),
-    client_name: str(p.clientName, 150),
-    category: str(p.category, 100),
-    description: str(p.description, 500),
-    image: p.image || null,
-    link: str(p.link, 2000),
-    alt: str(p.alt, 200),
-    sort_order: Number(p.order) || 0,
-    is_active: p.isActive !== false,
-    created_at: iso(p.createdAt),
-  }));
+  // Old portfolio items become UNPUBLISHED draft projects. Review each one in
+  // /admin/projects: publish real client work, delete template/demo entries.
+  const slugs = new Set();
+  const projects = (await all("portfolios")).map((p, i) => {
+    const base =
+      str(p.title, 60)
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-+|-+$/g, "") || "project";
+    let slug = base;
+    for (let n = 2; slugs.has(slug); n++) slug = `${base}-${n}`;
+    slugs.add(slug);
+    return {
+      slug,
+      title: str(p.title, 150),
+      client_name: str(p.clientName, 150),
+      category: str(p.category, 100),
+      summary: str(p.description, 500),
+      cover_image: p.image || null,
+      url: /^https?:\/\//i.test(p.link || "") ? str(p.link, 2000) : "",
+      alt: str(p.alt, 200),
+      sort_order: 100 + (Number(p.order) || i),
+      published: false,
+      created_at: iso(p.createdAt),
+    };
+  });
   await insertRows(
-    "portfolio",
-    validRows("portfolio", portfolio, (r) => r.title && r.category),
+    "projects",
+    validRows("projects", projects, (r) => r.title && r.category),
   );
 
   const testimonials = (await all("testimonials")).map((t) => ({

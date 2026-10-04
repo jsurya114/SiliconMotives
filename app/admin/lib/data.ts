@@ -1,20 +1,40 @@
 "use client";
 /**
- * Admin data layer: replaces the old Express REST endpoints with Supabase
- * calls. Row-level security enforces that only admin users can write.
- * Functions return camelCase shapes (with `_id`) the admin pages already use,
- * and throw an Error with a readable message on failure.
+ * Admin data layer over Supabase. Row-level security enforces that only
+ * admins can write; these helpers just keep the admin pages simple.
  */
+import type { SupabaseClient } from "@supabase/supabase-js";
 import { getBrowserClient } from "@/app/lib/supabase/browser";
-import type { Json } from "@/app/lib/supabase/database.types";
 
 const db = () => getBrowserClient();
+/** Untyped handle for the generic collection helpers (tables chosen at runtime). */
+const anyDb = () => getBrowserClient() as unknown as SupabaseClient;
 
-function unwrap<R extends { data: unknown; error: { message: string } | null }>(
+export type Row = Record<string, unknown> & { id: string };
+
+function check<R extends { data: unknown; error: { message: string } | null }>(
   result: R,
 ): NonNullable<R["data"]> {
-  if (result.error) throw new Error(result.error.message);
+  if (result.error) throw new Error(friendlyError(result.error.message));
   return result.data as NonNullable<R["data"]>;
+}
+
+/** Turn common Postgres errors into messages an editor can act on. */
+function friendlyError(message: string) {
+  if (message.includes("duplicate key") && message.includes("slug"))
+    return "That URL slug is already used. Choose a different slug.";
+  if (message.includes("slug_format") || message.includes("is_slug"))
+    return "Slugs may only contain lowercase letters, numbers and single hyphens.";
+  if (message.includes("is_http_url") || message.includes("_url_format") || message.includes("website_check"))
+    return "Links must start with http:// or https://.";
+  if (message.includes("architecture_check"))
+    return "Architecture: every component needs a type and a label (max 80 characters).";
+  if (message.includes("metrics_check"))
+    return "Metrics: each metric needs a value (max 30 characters) and a label.";
+  if (message.includes("projects_dates")) return "The end date can’t be before the start date.";
+  if (message.includes("row-level security") || message.includes("permission denied"))
+    return "Your account doesn’t have permission to do that.";
+  return message;
 }
 
 // ── Auth ────────────────────────────────────────────────────────────────
@@ -32,34 +52,88 @@ export async function signOut() {
   await db().auth.signOut();
 }
 
-// ── Site content sections ───────────────────────────────────────────────
-const SECTION_COLUMNS = {
-  hero: "hero",
-  funFact: "fun_fact",
-  about: "about",
-  contactInfo: "contact_info",
-  footer: "footer",
-} as const;
-export type Section = keyof typeof SECTION_COLUMNS;
-
-export async function getContent<T = Record<string, unknown>>(section: Section): Promise<T> {
-  const column = SECTION_COLUMNS[section];
-  const row = unwrap(
-    await db().from("site_content").select(column).eq("id", 1).single(),
-  ) as Record<string, unknown>;
-  return row[column] as T;
+/** Ask the server to refresh cached public pages (admin-only endpoint). */
+export async function refreshSite() {
+  await fetch("/api/revalidate", { method: "POST" }).catch(() => undefined);
 }
 
-export async function updateContent(section: Section, value: unknown) {
-  const column = SECTION_COLUMNS[section];
-  unwrap(
-    await db()
-      .from("site_content")
-      .update({ [column]: value } as Partial<Record<(typeof SECTION_COLUMNS)[Section], Json>>)
-      .eq("id", 1)
-      .select("id")
-      .single(),
+// ── Generic collections ─────────────────────────────────────────────────
+export type CollectionTable =
+  | "projects"
+  | "case_studies"
+  | "clients"
+  | "testimonials"
+  | "team_members"
+  | "services"
+  | "faqs";
+
+export async function listRows(table: CollectionTable, columns: string): Promise<Row[]> {
+  return check(
+    await anyDb()
+      .from(table)
+      .select(columns)
+      .order("sort_order")
+      .order("created_at", { ascending: false }),
+  ) as unknown as Row[];
+}
+
+export async function saveRow(table: CollectionTable, id: string | null, values: Record<string, unknown>) {
+  const result = id
+    ? await anyDb().from(table).update(values).eq("id", id).select("id").single()
+    : await anyDb().from(table).insert(values).select("id").single();
+  const saved = check(result) as { id: string };
+  await refreshSite();
+  return saved;
+}
+
+async function writeRow(table: CollectionTable, id: string, values: Record<string, unknown>) {
+  check(await anyDb().from(table).update(values).eq("id", id).select("id").single());
+}
+
+export async function updateRow(table: CollectionTable, id: string, values: Record<string, unknown>) {
+  await writeRow(table, id, values);
+  await refreshSite();
+}
+
+export async function deleteRow(table: CollectionTable, id: string) {
+  check(await anyDb().from(table).delete().eq("id", id));
+  await refreshSite();
+}
+
+/** Rewrite sort_order 0..n for the given ids, in order. */
+export async function reorder(table: CollectionTable, ids: string[]) {
+  await Promise.all(ids.map((id, i) => writeRow(table, id, { sort_order: i })));
+  await refreshSite();
+}
+
+/** Options for relation fields (e.g. link a case study to a project). */
+export async function listOptions(table: "projects" | "clients") {
+  const rows = check(
+    await anyDb()
+      .from(table)
+      .select(table === "projects" ? "id, title" : "id, name")
+      .order("sort_order"),
+  ) as { id: string; title?: string; name?: string }[];
+  return rows.map((r) => ({ value: r.id, label: r.title ?? r.name ?? r.id }));
+}
+
+/** Distinct values already used in a text column (e.g. project categories). */
+export async function distinctValues(table: CollectionTable, column: string) {
+  const rows = check(await anyDb().from(table).select(column)) as unknown as Record<string, unknown>[];
+  return Array.from(new Set(rows.map((r) => String(r[column] ?? "")).filter(Boolean))).sort();
+}
+
+// ── Homepage settings (site_content.home) ───────────────────────────────
+export async function getHomeSettings(): Promise<Record<string, unknown>> {
+  const row = check(await db().from("site_content").select("home").eq("id", 1).single());
+  return (row.home ?? {}) as Record<string, unknown>;
+}
+
+export async function updateHomeSettings(home: Record<string, unknown>) {
+  check(
+    await anyDb().from("site_content").update({ home }).eq("id", 1).select("id").single(),
   );
+  await refreshSite();
 }
 
 // ── SEO ─────────────────────────────────────────────────────────────────
@@ -74,7 +148,7 @@ export interface SeoForm {
 }
 
 export async function getSeo(): Promise<SeoForm> {
-  const r = unwrap(await db().from("seo_settings").select("*").eq("id", 1).single());
+  const r = check(await db().from("seo_settings").select("*").eq("id", 1).single());
   return {
     titleTemplate: r.title_template,
     defaultTitle: r.default_title,
@@ -87,7 +161,7 @@ export async function getSeo(): Promise<SeoForm> {
 }
 
 export async function updateSeo(f: SeoForm) {
-  unwrap(
+  check(
     await db()
       .from("seo_settings")
       .update({
@@ -103,130 +177,7 @@ export async function updateSeo(f: SeoForm) {
       .select("id")
       .single(),
   );
-}
-
-// ── Services ────────────────────────────────────────────────────────────
-export interface ServiceItem {
-  _id: string;
-  title: string;
-  description: string;
-  icon: string;
-  image: string | null;
-  features: string[];
-}
-export type ServiceInput = Omit<ServiceItem, "_id">;
-
-export async function listServices(): Promise<ServiceItem[]> {
-  const rows = unwrap(
-    await db()
-      .from("services")
-      .select("id, title, description, icon, image, features")
-      .order("sort_order")
-      .order("created_at"),
-  );
-  return rows.map(({ id, ...r }) => ({ _id: id, ...r }));
-}
-
-export async function saveService(id: string | null, input: ServiceInput) {
-  const row = { ...input, image: input.image || null };
-  unwrap(
-    id
-      ? await db().from("services").update(row).eq("id", id).select("id").single()
-      : await db().from("services").insert(row).select("id").single(),
-  );
-}
-
-export async function deleteService(id: string) {
-  unwrap(await db().from("services").delete().eq("id", id));
-}
-
-// ── Portfolio ───────────────────────────────────────────────────────────
-export interface PortfolioItem {
-  _id: string;
-  title: string;
-  category: string;
-  clientName?: string;
-  image: string;
-  link: string;
-  description: string;
-}
-export type PortfolioInput = Omit<PortfolioItem, "_id">;
-
-export async function listPortfolio(): Promise<PortfolioItem[]> {
-  const rows = unwrap(
-    await db()
-      .from("portfolio")
-      .select("id, title, category, client_name, image, link, description")
-      .order("sort_order")
-      .order("created_at"),
-  );
-  return rows.map((r) => ({
-    _id: r.id,
-    title: r.title,
-    category: r.category,
-    clientName: r.client_name,
-    image: r.image ?? "",
-    link: r.link,
-    description: r.description,
-  }));
-}
-
-export async function savePortfolio(id: string | null, f: PortfolioInput) {
-  const row = {
-    title: f.title,
-    category: f.category,
-    client_name: f.clientName ?? "",
-    image: f.image || null,
-    link: f.link,
-    description: f.description,
-  };
-  unwrap(
-    id
-      ? await db().from("portfolio").update(row).eq("id", id).select("id").single()
-      : await db().from("portfolio").insert(row).select("id").single(),
-  );
-}
-
-export async function deletePortfolio(id: string) {
-  unwrap(await db().from("portfolio").delete().eq("id", id));
-}
-
-// ── Testimonials ────────────────────────────────────────────────────────
-export type TestimonialStatus = "pending" | "approved" | "rejected";
-export interface TestimonialItem {
-  _id: string;
-  name: string;
-  role: string;
-  quote: string;
-  rating: number;
-  initials: string;
-  status: TestimonialStatus;
-  createdAt: string;
-}
-
-export async function listTestimonials(): Promise<TestimonialItem[]> {
-  const rows = unwrap(
-    await db()
-      .from("testimonials")
-      .select("id, name, role, quote, rating, initials, status, created_at")
-      .order("created_at", { ascending: false }),
-  );
-  return rows.map(({ id, created_at, ...r }) => ({ _id: id, createdAt: created_at, ...r }));
-}
-
-export async function setTestimonialStatus(id: string, status: TestimonialStatus) {
-  unwrap(
-    await db()
-      .from("testimonials")
-      .update({ status, reviewed_at: status === "pending" ? null : new Date().toISOString() })
-      .eq("id", id)
-      .select("id")
-      .single(),
-  );
-}
-
-export async function deleteTestimonial(id: string) {
-  unwrap(await db().from("testimonials").delete().eq("id", id));
+  await refreshSite();
 }
 
 // ── Contact submissions ─────────────────────────────────────────────────
@@ -242,7 +193,7 @@ export interface SubmissionItem {
 }
 
 export async function listSubmissions(): Promise<SubmissionItem[]> {
-  const rows = unwrap(
+  const rows = check(
     await db()
       .from("contact_submissions")
       .select("id, name, email, phone, service, message, is_read, created_at")
@@ -262,7 +213,7 @@ export async function listSubmissions(): Promise<SubmissionItem[]> {
 }
 
 export async function setSubmissionRead(id: string, isRead: boolean) {
-  unwrap(
+  check(
     await db()
       .from("contact_submissions")
       .update({ is_read: isRead })
@@ -273,7 +224,7 @@ export async function setSubmissionRead(id: string, isRead: boolean) {
 }
 
 export async function deleteSubmission(id: string) {
-  unwrap(await db().from("contact_submissions").delete().eq("id", id));
+  check(await db().from("contact_submissions").delete().eq("id", id));
 }
 
 // ── Dashboard ───────────────────────────────────────────────────────────
@@ -283,16 +234,43 @@ export async function getDashboardStats() {
     if (error) throw new Error(error.message);
     return count ?? 0;
   };
-  const [services, portfolio, testimonials, unreadContacts] = await Promise.all([
-    db().from("services").select("id", head).then(total),
-    db().from("portfolio").select("id", head).then(total),
-    db().from("testimonials").select("id", head).then(total),
+  const [projects, caseStudies, pendingTestimonials, unreadContacts] = await Promise.all([
+    db().from("projects").select("id", head).then(total),
+    db().from("case_studies").select("id", head).then(total),
+    db().from("testimonials").select("id", head).eq("status", "pending").then(total),
     db().from("contact_submissions").select("id", head).eq("is_read", false).then(total),
   ]);
-  return { services, portfolio, testimonials, unreadContacts };
+  return { projects, caseStudies, pendingTestimonials, unreadContacts };
 }
 
 // ── Media uploads (Supabase Storage) ────────────────────────────────────
+const MAX_DIMENSION = 2400;
+const ALLOWED = ["image/jpeg", "image/png", "image/webp", "image/avif"];
+
+/**
+ * Downscale oversized images in the browser before upload so editors can't
+ * accidentally publish multi-megabyte originals. Output is WebP (keeps alpha).
+ */
+async function prepareImage(file: File | Blob): Promise<Blob> {
+  if (!ALLOWED.includes(file.type)) {
+    throw new Error("Only JPG, PNG, WebP and AVIF images are allowed");
+  }
+  const bitmap = await createImageBitmap(file);
+  const scale = Math.min(1, MAX_DIMENSION / Math.max(bitmap.width, bitmap.height));
+  if (scale === 1 && file.size <= 1.5 * 1024 * 1024) {
+    bitmap.close();
+    return file;
+  }
+  const canvas = document.createElement("canvas");
+  canvas.width = Math.round(bitmap.width * scale);
+  canvas.height = Math.round(bitmap.height * scale);
+  canvas.getContext("2d")!.drawImage(bitmap, 0, 0, canvas.width, canvas.height);
+  bitmap.close();
+  return new Promise((resolve, reject) =>
+    canvas.toBlob((b) => (b ? resolve(b) : reject(new Error("Could not process image"))), "image/webp", 0.86),
+  );
+}
+
 const EXTENSIONS: Record<string, string> = {
   "image/jpeg": "jpg",
   "image/png": "png",
@@ -300,14 +278,14 @@ const EXTENSIONS: Record<string, string> = {
   "image/avif": "avif",
 };
 
-export async function uploadImage(file: File | Blob): Promise<string> {
-  const ext = EXTENSIONS[file.type];
-  if (!ext) throw new Error("Only JPG, PNG, WebP, and AVIF images are allowed");
-  if (file.size > 5 * 1024 * 1024) throw new Error("File too large — max 5MB allowed");
-  const path = `uploads/${new Date().getFullYear()}/${crypto.randomUUID()}.${ext}`;
+export async function uploadImage(file: File | Blob, folder = "uploads"): Promise<string> {
+  const prepared = await prepareImage(file);
+  if (prepared.size > 5 * 1024 * 1024) throw new Error("File too large — max 5MB after resizing");
+  const ext = EXTENSIONS[prepared.type] ?? "webp";
+  const path = `${folder}/${new Date().getFullYear()}/${crypto.randomUUID()}.${ext}`;
   const { error } = await db()
     .storage.from("media")
-    .upload(path, file, { contentType: file.type, cacheControl: "31536000" });
+    .upload(path, prepared, { contentType: prepared.type, cacheControl: "31536000" });
   if (error) throw new Error(error.message);
   return db().storage.from("media").getPublicUrl(path).data.publicUrl;
 }

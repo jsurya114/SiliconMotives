@@ -9,14 +9,15 @@ const columns = [
       ["Custom software", "/#capabilities"],
       ["Cloud infrastructure", "/#capabilities"],
       ["DevOps & reliability", "/#capabilities"],
-      ["Case study", "/#case-study"],
+      ["Case studies", "/case-studies"],
+      ["Projects", "/projects"],
       ["Agency partners", "/agency-partners"],
     ],
   },
   {
     title: "Company",
     links: [
-      ["Process", "/#process"],
+      ["How we’re built", "/#remote"],
       ["Team", "/#team"],
       ["Questions", "/#faq"],
       ["Engineering notes", "/blog"],
