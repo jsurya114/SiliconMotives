@@ -101,8 +101,8 @@ export default async function LandingPage({
               <a className="button button-primary" href="/#contact">
                 Start your project <ArrowUpRight size={18} />
               </a>
-              <a className="text-link" href="/#portfolio">
-                See our work <ArrowUpRight size={17} />
+              <a className="text-link" href="/#case-study">
+                See a production case study <ArrowUpRight size={17} />
               </a>
             </div>
           </div>

@@ -12,51 +12,6 @@ export interface PortfolioProject {
   link?: string;
   clientName?: string;
 }
-const archive: PortfolioProject[] = [
-  {
-    _id: "archive-1",
-    title: "StyleVault",
-    category: "E-commerce",
-    description: "A fashion storefront with a product-led shopping experience.",
-    image: "/images/portfolio-ecommerce.png",
-  },
-  {
-    _id: "archive-2",
-    title: "Kerala Pearl",
-    category: "Hospitality website",
-    description: "A considered digital experience for a Kerala restaurant.",
-    image: "/images/portfolio-restaurant.png",
-  },
-  {
-    _id: "archive-3",
-    title: "HomesKerala",
-    category: "Property platform",
-    description: "A property discovery experience built around clear listings.",
-    image: "/images/portfolio-realestate.png",
-  },
-  {
-    _id: "archive-4",
-    title: "EliteFit",
-    category: "Fitness website",
-    description: "A bold, accessible website concept for a fitness brand.",
-    image: "/images/portfolio-fitness.png",
-  },
-  {
-    _id: "archive-5",
-    title: "CareFirst",
-    category: "Healthcare website",
-    description:
-      "A clear interface for services, practitioners, and appointments.",
-    image: "/images/portfolio-healthcare.png",
-  },
-  {
-    _id: "archive-6",
-    title: "Explore Kerala",
-    category: "Travel website",
-    description: "A visual destination and tour discovery experience.",
-    image: "/images/portfolio-travel.png",
-  },
-];
 export function safeProjectLink(value?: string) {
   if (!value) return null;
   try {
@@ -71,31 +26,31 @@ export default function Portfolio({
 }: {
   data?: PortfolioProject[] | null;
 }) {
-  const preview = !data?.length;
-  const projects = preview ? archive : data;
+  // Only real projects from the CMS are shown; the section hides when empty.
+  const projects = data ?? [];
   const [active, setActive] = useState(0);
   // Collapsed: 6 projects on desktop, 3 on mobile (extras hidden via CSS).
   const [expanded, setExpanded] = useState(false);
   const visible = expanded ? projects : projects.slice(0, 6);
   const current = visible[active] ?? visible[0];
+  if (!current) return null;
   const currentLink = safeProjectLink(current.link);
   const count = String(projects.length).padStart(2, "0");
   return (
-    <section id="portfolio" className="section work-section">
+    <section id="work" className="section work-section">
       <div className="shell">
         <div className="section-heading">
           <div>
-            <span className="eyebrow">02 / SELECTED WORK</span>
+            <span className="eyebrow">MORE CLIENT WORK</span>
             <h2>
-              Ideas made tangible.
+              Other projects
               <br />
-              Work made to matter.
+              we’ve delivered.
             </h2>
           </div>
           <p>
-            {preview
-              ? "A look through our existing design archive. These previews show the visual direction of each concept; published client case studies will follow."
-              : "A selection of websites, platforms, and digital experiences from our portfolio."}
+            A selection of client projects, from business systems to commerce
+            and websites.
           </p>
         </div>
         <div className="work-layout">
@@ -182,7 +137,6 @@ export default function Portfolio({
               ))}
               <span className="work-preview-tag mono">
                 {String(active + 1).padStart(2, "0")} / {count}
-                {preview ? " · DESIGN PREVIEW" : ""}
               </span>
             </div>
             <div className="work-preview-caption">

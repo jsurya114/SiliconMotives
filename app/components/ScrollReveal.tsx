@@ -4,10 +4,10 @@ import { useEffect, useRef } from "react";
 const EASE = "cubic-bezier(.2,.7,.2,1)";
 /** Blocks that fade up as they enter the viewport. */
 const REVEAL =
-  "[data-reveal], .section-heading > p, .about-grid > div, .faq-intro, .faq-list details, .contact-grid > *, .svc-card, .approach-intro > p";
+  "[data-reveal], .section-heading > p, .faq-intro, .faq-list details, .contact-grid > *, .svc-card, .approach-intro > p, .case-copy > p, .case-stats";
 /** Headings that wipe in from a mask. */
 const HEADINGS =
-  ".section-heading h2, .approach-intro h2, .faq-intro h2, .about-grid h2, .contact-grid h2, .clients-heading h2";
+  ".section-heading h2, .approach-intro h2, .faq-intro h2, .case-copy h2, .team-grid h2, .contact-grid h2";
 
 /**
  * Scroll motion as progressive enhancement: content is fully visible without

@@ -33,13 +33,13 @@ export async function generateMetadata(): Promise<Metadata> {
       type: "website",
       locale: "en_IN",
       siteName,
-      title: `${siteName} — World-class software. Zero overhead.`,
+      title: `${siteName} — Software built to scale. Infrastructure built to last.`,
       description: siteDescription,
       ...(url ? { url } : {}),
     },
     twitter: {
       card: "summary_large_image",
-      title: `${siteName} — Web design & web app development, Kochi`,
+      title: `${siteName} — Custom software, AWS & DevOps engineering`,
       description: siteDescription,
     },
     robots: url

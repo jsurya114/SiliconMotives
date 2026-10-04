@@ -28,20 +28,19 @@ export default function Contact() {
     <section id="contact" className="contact-section">
       <div className="shell contact-grid">
         <div>
-          <span className="eyebrow">08 / LET’S MAKE IT HAPPEN</span>
+          <span className="eyebrow">07 / START A PROJECT</span>
           <h2>
             Something
             <br />
             on your mind<span>?</span>
           </h2>
           <p>
-            A new idea. A product to improve. A problem worth solving. Tell us
-            what you’re thinking, and you’ll hear back from the people who
-            would actually build it.
+            A new product, a system that needs to scale, or infrastructure that
+            needs an owner. Tell us about it and an engineer will reply.
           </p>
           <div className="contact-note">
-            <span className="status-dot" /> No sales scripts. Just a real
-            conversation with engineers.
+            <span className="status-dot" /> Prefer to start small? Ask about a
+            pilot project.
           </div>
         </div>
         <form onSubmit={submit} className="contact-form">
@@ -71,15 +70,15 @@ export default function Contact() {
             </label>
           </div>
           <label htmlFor="contact-service">
-            What can we help you with?
+            What can we help with?
             <select id="contact-service" name="service" defaultValue="">
-              <option value="">Select a service (optional)</option>
-              <option value="web-development">Custom web application</option>
-              <option value="custom-ecommerce">Custom e-commerce platform</option>
-              <option value="crm-erp">CRM & ERP systems</option>
-              <option value="shopify-wordpress">Shopify & WordPress</option>
-              <option value="static-website">Business website</option>
-              <option value="cloud-deployment">AWS hosting & deployment</option>
+              <option value="">Select a topic (optional)</option>
+              <option value="custom-software">Custom software / backend</option>
+              <option value="cloud-infrastructure">AWS cloud infrastructure</option>
+              <option value="devops">DevOps, CI/CD &amp; reliability</option>
+              <option value="takeover">Take over an existing system</option>
+              <option value="agency-partnership">Agency partnership</option>
+              <option value="website">Website, Shopify or WordPress</option>
               <option value="other">Something else</option>
             </select>
           </label>

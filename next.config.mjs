@@ -13,6 +13,7 @@ const nextConfig = {
     ];
   },
   images: {
+    formats: ["image/avif", "image/webp"],
     remotePatterns: [
       // Supabase Storage (public "media" bucket)
       {

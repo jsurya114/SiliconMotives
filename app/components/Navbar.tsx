@@ -16,11 +16,11 @@ export default function Navbar() {
       <div className="shell nav-inner">
         <Brand />
         <nav className="desktop-nav" aria-label="Main navigation">
-          <a href="/#services">Services</a>
-          <a href="/#portfolio">Our work</a>
-          <a href="/#technologies">Technologies</a>
-          <a href="/#approach">How we work</a>
-          <a href="/#about">Who we are</a>
+          <a href="/#capabilities">Capabilities</a>
+          <a href="/#case-study">Case study</a>
+          <a href="/#process">Process</a>
+          <a href="/agency-partners">Agency partners</a>
+          <a href="/#team">Team</a>
         </nav>
         <a href="/#contact" className="nav-cta">
           Let’s talk <ArrowUpRight size={16} />
@@ -42,16 +42,15 @@ export default function Navbar() {
           aria-label="Mobile navigation"
         >
           {[
-            ["Services", "services"],
-            ["Our work", "portfolio"],
-            ["Our clients", "clients"],
-            ["Technologies", "technologies"],
-            ["Client stories", "testimonials"],
-            ["How we work", "approach"],
-            ["Who we are", "about"],
-            ["Let’s talk", "contact"],
-          ].map(([label, id]) => (
-            <a key={id} href={`/#${id}`} onClick={() => setOpen(false)}>
+            ["Capabilities", "/#capabilities"],
+            ["Case study", "/#case-study"],
+            ["Process", "/#process"],
+            ["Agency partners", "/agency-partners"],
+            ["Team", "/#team"],
+            ["Questions", "/#faq"],
+            ["Let’s talk", "/#contact"],
+          ].map(([label, href]) => (
+            <a key={href} href={href} onClick={() => setOpen(false)}>
               {label}
               <ArrowUpRight size={18} />
             </a>

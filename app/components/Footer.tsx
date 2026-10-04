@@ -4,35 +4,32 @@ import LocalTime from "./LocalTime";
 import { landingPages } from "../lib/landing";
 const columns = [
   {
-    title: "Services",
+    title: "Capabilities",
     links: [
-      ["Custom web applications", "/#services"],
-      ["Custom e-commerce", "/#services"],
-      ["CRM & ERP systems", "/#services"],
-      ["Shopify & WordPress", "/#services"],
-      ["Cloud & deployment", "/#services"],
+      ["Custom software", "/#capabilities"],
+      ["Cloud infrastructure", "/#capabilities"],
+      ["DevOps & reliability", "/#capabilities"],
+      ["Case study", "/#case-study"],
+      ["Agency partners", "/agency-partners"],
     ],
   },
   {
     title: "Company",
     links: [
-      ["Our work", "/#portfolio"],
-      ["How we work", "/#approach"],
-      ["Technologies", "/#technologies"],
-      ["Who we are", "/#about"],
+      ["Process", "/#process"],
+      ["Team", "/#team"],
+      ["Questions", "/#faq"],
       ["Engineering notes", "/blog"],
     ],
   },
   {
-    title: "Kochi · Kerala · India",
-    links: landingPages.map((p) => [p.metaTitle.replace(/ Company/, ""), `/${p.slug}`]),
+    title: "Services in India",
+    links: landingPages.map((p) => [p.footerLabel, `/${p.slug}`]),
   },
   {
     title: "Get in touch",
     links: [
       ["Start a project", "/#contact"],
-      ["Good questions", "/#faq"],
-      ["Client stories", "/#testimonials"],
       ["Share your experience", "/submit-testimonial"],
     ],
   },
@@ -44,9 +41,9 @@ export default function Footer() {
         <div className="footer-brand">
           <Brand />
           <p>
-            Engineering value.
+            Custom software,
             <br />
-            Not overhead.
+            cloud &amp; DevOps engineering.
           </p>
           <a href="/#contact" className="button button-primary">
             Start a project <ArrowUpRight size={18} />
@@ -74,7 +71,7 @@ export default function Footer() {
       </div>
       <div className="shell footer-bottom">
         <span>© {new Date().getFullYear()} SiliconMotives. All rights reserved.</span>
-        <span>Remote-first. Based in Kerala. Working with clients worldwide.</span>
+        <span>Remote-first engineering, based in Kerala, India.</span>
         <a href="#" className="footer-top-link" aria-label="Back to top">
           <ArrowUp size={18} />
         </a>

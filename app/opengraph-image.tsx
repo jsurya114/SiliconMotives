@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 export const alt =
-  "SiliconMotives — World-class software. Zero overhead.";
+  "SiliconMotives — Software built to scale. Infrastructure built to last.";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 export default function Image() {
@@ -24,14 +24,14 @@ export default function Image() {
         style={{
           display: "flex",
           flexDirection: "column",
-          fontSize: 82,
+          fontSize: 68,
           letterSpacing: -4,
           lineHeight: 1.05,
           marginTop: 55,
         }}
       >
-        <span>World-class software.</span>
-        <span style={{ color: "#9a9a9a" }}>Zero overhead.</span>
+        <span>Software built to scale.</span>
+        <span style={{ color: "#9a9a9a" }}>Infrastructure built to last.</span>
       </div>
       <div
         style={{
@@ -42,8 +42,8 @@ export default function Image() {
           color: "#bababa",
         }}
       >
-        <span>Remote-first software engineering</span>
-        <span>Kerala, India · Clients worldwide</span>
+        <span>Custom software · Cloud infrastructure · DevOps</span>
+        <span>Kerala, India</span>
       </div>
     </div>,
     size,

@@ -1,60 +1,39 @@
 import { ArrowUpRight, Plus } from "lucide-react";
 export const faqs = [
   {
-    topic: "Getting started",
-    q: "We have an idea, but no detailed plan. Is that okay?",
-    short: "Absolutely. Most great products start exactly there.",
-    a: "We shape it with you: clarify your goals, map the features that matter most, and turn the idea into a clear scope before any code is written.",
-    link: ["Start a conversation", "#contact"],
+    topic: "Scope",
+    q: "What kinds of projects do you take on?",
+    short: "Custom software, AWS infrastructure and DevOps, plus the operations that follow.",
+    a: "Typical work includes business applications and SaaS platforms, backend systems and APIs, AWS environments, CI/CD and production support. For businesses in India we also build websites, Shopify and WordPress stores.",
+    link: ["See capabilities", "#capabilities"],
   },
   {
-    topic: "Why remote-first",
-    q: "Why remote-first? Isn’t an office team safer?",
-    short: "Quality comes from people and practices, not postcodes.",
-    a: "Running lean means your budget goes into engineering (skilled people, modern tools, solid infrastructure, and quality) rather than office overhead. With agreed rhythms, regular demos, and direct access to the team, working remotely never means being distant from your project.",
-    link: ["Who we are", "#about"],
+    topic: "Existing systems",
+    q: "Can you take over an existing production system?",
+    short: "Yes. We start by understanding it before changing anything.",
+    a: "We review the code, infrastructure, deployments and monitoring, document what we find, and agree priorities with you. Then we stabilise, improve and take on day-to-day operations.",
+    link: ["Discuss your system", "#contact"],
   },
   {
-    topic: "Services",
-    q: "What kinds of projects can we bring you?",
-    short: "Custom software, from first idea to live product.",
-    a: "We build custom web applications and e-commerce platforms, CRM and ERP systems, Shopify and WordPress stores, and business websites, and we handle AWS hosting and deployment too.",
-    link: ["See what we do", "#services"],
+    topic: "International",
+    q: "Do you work with international clients?",
+    short: "Our client work so far has been in India, and we’re now opening to U.S. and international teams.",
+    a: "We’ve built and operate production systems for businesses in India, including an e-commerce platform with 5,000+ users on AWS. We’re now taking on projects and agency partnerships with U.S. and international companies, often starting with a small, well-scoped pilot.",
+    link: ["Agency partnerships", "/agency-partners"],
   },
   {
-    topic: "Cost & timeline",
-    q: "How do you scope and price a project?",
-    short: "Clearly, and before any work begins.",
-    a: "We discuss your goals, requirements, and constraints, then propose a scope, delivery approach, and estimate so you can make an informed decision. If priorities change along the way, we talk it through with you first.",
-    link: ["Get an estimate", "#contact"],
-  },
-  {
-    topic: "Working together",
-    q: "What is it like working with a remote team?",
-    short: "Close. You’ll always know where things stand.",
-    a: "We agree on communication channels, milestones, and a working rhythm from the start. Regular demos, written updates, and direct conversations with the people building keep you close to the work.",
-    link: ["How we work", "#approach"],
-  },
-  {
-    topic: "Existing products",
-    q: "Can you improve a website or app we already have?",
-    short: "Yes. We can start right where you are.",
-    a: "We review what you have, what’s working, and what’s holding it back, then recommend whether to improve, extend, or rebuild, based on what’s right for your business.",
-    link: ["Tell us about it", "#contact"],
-  },
-  {
-    topic: "Location",
-    q: "Do you work with clients outside India?",
-    short: "Yes. We work with clients around the world.",
-    a: "Kerala is our home base, but our remote-first model is built for international work. We plan overlapping working hours with you, agree communication channels from day one, and share written updates so progress never waits on a meeting.",
-    link: ["Who we are", "#about"],
+    topic: "Time zones",
+    q: "How do you communicate across time zones?",
+    short: "Agreed overlap hours, written updates and regular demos.",
+    a: "We agree communication channels and overlapping hours at the start. Written progress updates and demos of working software mean progress never waits on a meeting, and you can always talk to the engineers directly.",
+    link: ["How we work", "#process"],
   },
   {
     topic: "After launch",
-    q: "What happens after the product goes live?",
-    short: "We don’t disappear. We stay with you.",
-    a: "We offer deployment, maintenance, and ongoing support, so your product stays secure, dependable, and ready for its next chapter.",
-    link: ["Plan your launch", "#contact"],
+    q: "What happens after launch?",
+    short: "We stay responsible for keeping it running.",
+    a: "We can run the production system for you: monitoring and alerts, backups, security updates, incident response and planned improvements, on a retainer that fits your needs.",
+    link: ["Start a project", "#contact"],
   },
 ];
 export default function FAQ() {
@@ -62,15 +41,15 @@ export default function FAQ() {
     <section id="faq" className="faq-wrap">
       <div className="section shell faq-section">
         <div className="faq-intro">
-          <span className="eyebrow">07 / GOOD QUESTIONS</span>
+          <span className="eyebrow">06 / QUESTIONS</span>
           <h2>
             Good questions.
             <br />
             <span className="muted">Honest answers.</span>
           </h2>
           <p>
-            Everything you might want to know before starting a project with
-            us, answered plainly. No jargon, no sales script.
+            The questions people usually ask before working with us, answered
+            plainly.
           </p>
           <div className="faq-ask">
             <div className="faq-typing" aria-hidden="true">
@@ -83,7 +62,8 @@ export default function FAQ() {
             </div>
             <strong>Have a different question?</strong>
             <p>
-              Send it our way. Every message is read by our team, not a bot.
+              Send it our way. You’ll get an answer from an engineer, not a
+              sales script.
             </p>
             <a href="#contact" className="button button-primary">
               Ask us directly <ArrowUpRight size={18} />

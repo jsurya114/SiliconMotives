@@ -14,26 +14,24 @@ function getSiteUrl() {
 export const siteUrl = getSiteUrl();
 export const siteName = "SiliconMotives";
 export const siteTitle =
-  "Web Design & Web App Development in Kochi, Kerala | SiliconMotives";
+  "SiliconMotives | Custom Software, AWS & DevOps Engineering";
 export const siteDescription =
-  "SiliconMotives is a remote-first web design and web application development company based in Kochi, Kerala, India. Custom websites, web apps, e-commerce, and CRM/ERP systems for clients in Kochi, Kottayam, across Kerala, and worldwide.";
+  "SiliconMotives designs, builds and operates custom software and AWS cloud infrastructure: backend systems, DevOps, CI/CD and production operations. An engineering team based in Kerala, India.";
 export const siteKeywords = [
-  "web design Kochi",
-  "website design company Kochi",
-  "web development company Kochi",
-  "web app development Kochi",
-  "web application development Kerala",
-  "website design Kerala",
-  "web design company Kerala",
-  "website design Kottayam",
-  "web development Kottayam",
-  "e-commerce website development Kerala",
-  "custom web application development India",
-  "software development company Kochi",
-  "CRM ERP development Kerala",
-  "Shopify developer Kochi",
-  "WordPress website design Kerala",
-  "Next.js development India",
+  "custom software development",
+  "software engineering company",
+  "backend development",
+  "AWS infrastructure",
+  "cloud infrastructure engineering",
+  "DevOps services",
+  "CI/CD",
+  "Terraform",
+  "Docker",
+  "production operations",
+  "system architecture",
+  "white-label development partner",
+  "software development company Kerala",
+  "software development India",
 ];
 /** Public business facts used in structured data. Only add verified details. */
 export const business = {
@@ -59,11 +57,11 @@ export const business = {
     { name: "Jayasoorya S", jobTitle: "Co-founder" },
   ],
   services: [
-    "Website design",
-    "Web application development",
-    "E-commerce website development",
-    "CRM and ERP development",
-    "Shopify and WordPress development",
-    "Cloud hosting and deployment",
+    "Custom software engineering",
+    "Backend and API development",
+    "AWS cloud infrastructure engineering",
+    "DevOps, CI/CD and reliability engineering",
+    "Production operations and maintenance",
+    "Website, Shopify and WordPress development",
   ],
 };

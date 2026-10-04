@@ -8,6 +8,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // /blog is excluded while it is a noindex placeholder; add it once articles exist.
   return [
     { url: baseUrl, lastModified: now, changeFrequency: "weekly", priority: 1 },
+    { url: `${baseUrl}/agency-partners`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
     ...landingPages.map((page) => ({
       url: `${baseUrl}/${page.slug}`,
       lastModified: now,

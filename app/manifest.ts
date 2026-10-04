@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import { siteDescription, siteName } from "./lib/site";
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: `${siteName} — Web Design & Web App Development, Kochi`,
+    name: `${siteName} — Software, Cloud & DevOps Engineering`,
     short_name: siteName,
     description: siteDescription,
     start_url: "/",

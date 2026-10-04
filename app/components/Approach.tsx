@@ -1,47 +1,51 @@
 import { Check } from "lucide-react";
 const steps = [
   {
-    title: "Understand",
-    text: "We listen first. Together, we define the problem, the priorities, and what success looks like.",
-    outcomes: ["Discovery conversation", "Agreed scope & priorities", "Estimate & delivery plan"],
+    title: "Discovery",
+    text: "We learn your goals, constraints and any existing systems before proposing anything.",
   },
   {
-    title: "Build with intent",
-    text: "Small iterations, considered decisions, and regular demos keep your product moving in the right direction.",
-    outcomes: ["Working demos", "Iterative releases", "Written progress updates"],
+    title: "Architecture",
+    text: "We design the system, data model and infrastructure, and agree the delivery plan and estimate.",
   },
   {
-    title: "Deploy & evolve",
-    text: "Testing, cloud setup, deployment, and clear documentation. We launch your product and keep its foundation solid for the next chapter.",
-    outcomes: ["Testing & launch", "Cloud deployment", "Documentation & ongoing support"],
+    title: "Build",
+    text: "Small iterations with regular demos and code review, so priorities can change before they get expensive.",
+  },
+  {
+    title: "Deploy",
+    text: "Automated pipelines take code to production the same way every time, into an environment we set up properly.",
+  },
+  {
+    title: "Operate",
+    text: "After launch we keep the system healthy: monitoring, maintenance, updates and improvements.",
   },
 ];
-const rhythm = [
-  "Regular demos of real, working software",
-  "Written updates you can read in minutes",
-  "Direct conversations with the people building",
-  "Overlapping working hours planned around your time zone",
+const afterLaunch = [
+  "Monitoring, logging and alerts",
+  "Backups, patches and security updates",
+  "Incident response and fixes",
+  "Planned improvements as you grow",
 ];
 export default function Approach() {
   return (
-    <section id="approach" className="approach section">
+    <section id="process" className="approach section">
       <div className="shell approach-layout">
         <div className="approach-intro">
-          <span className="eyebrow">03 / THE WAY WE WORK</span>
+          <span className="eyebrow">03 / PROCESS</span>
           <h2>
-            Close collaboration.
+            From discovery
             <br />
-            Wherever you are.
+            to production.
           </h2>
           <p>
-            Remote is how we work. Accountability is how we deliver. There are
-            no account-manager layers: you work directly with the engineers
-            building your product.
+            A clear engineering process, and one team that owns the result. We
+            don’t build something and disappear.
           </p>
           <div className="rhythm-card" data-reveal>
-            <span className="mono">HOW WE STAY CLOSE</span>
+            <span className="mono">AFTER LAUNCH, WE STAY ON</span>
             <ul>
-              {rhythm.map((item) => (
+              {afterLaunch.map((item) => (
                 <li key={item}>
                   <Check size={15} aria-hidden="true" />
                   {item}
@@ -57,17 +61,11 @@ export default function Approach() {
                 0{i + 1}
               </span>
               <div className="approach-step-body">
-                <span className="mono">STEP 0{i + 1} / 03</span>
+                <span className="mono">
+                  STEP 0{i + 1} / 0{steps.length}
+                </span>
                 <h3>{step.title}</h3>
                 <p>{step.text}</p>
-                <div className="approach-outcomes">
-                  <span className="mono">WHAT YOU GET</span>
-                  <ul>
-                    {step.outcomes.map((x) => (
-                      <li key={x}>{x}</li>
-                    ))}
-                  </ul>
-                </div>
               </div>
             </li>
           ))}

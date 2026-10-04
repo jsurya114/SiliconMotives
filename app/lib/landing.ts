@@ -20,6 +20,8 @@ export interface LandingPage {
   faqs: { q: string; a: string }[];
   serviceType: string;
   areaServed: string;
+  /** Short label for footer / related links. */
+  footerLabel: string;
 }
 
 export const landingPages: LandingPage[] = [
@@ -99,6 +101,7 @@ export const landingPages: LandingPage[] = [
     ],
     serviceType: "Website design",
     areaServed: "Kochi",
+    footerLabel: "Website design, Kochi",
   },
   {
     slug: "web-application-development-kochi",
@@ -158,7 +161,7 @@ export const landingPages: LandingPage[] = [
     ],
     localHeading: "A Kochi engineering team for Kerala and beyond",
     local: [
-      "We’re based in Kochi and build web applications for businesses across Kerala, India, and abroad. Our remote-first process (agreed milestones, demos, and written progress updates) works just as well whether you’re in Infopark or on another continent.",
+      "We’re based in Kochi and build web applications for businesses across Kerala and India. Our remote-first process (agreed milestones, demos, and written progress updates) works the same whether you’re in Infopark or anywhere else.",
     ],
     faqs: [
       {
@@ -176,6 +179,7 @@ export const landingPages: LandingPage[] = [
     ],
     serviceType: "Web application development",
     areaServed: "Kochi",
+    footerLabel: "Web app development, Kochi",
   },
   {
     slug: "ecommerce-website-development-kerala",
@@ -235,7 +239,7 @@ export const landingPages: LandingPage[] = [
     ],
     localHeading: "From Kochi to stores across Kerala",
     local: [
-      "Our team is based in Kochi and builds online stores for retailers, brands, and producers across Kerala, from Thiruvananthapuram to Kozhikode, as well as for businesses selling to customers across India and overseas.",
+      "Our team is based in Kochi and builds online stores for retailers, brands, and producers across Kerala, from Thiruvananthapuram to Kozhikode, as well as for businesses selling to customers across India.",
     ],
     faqs: [
       {
@@ -253,6 +257,7 @@ export const landingPages: LandingPage[] = [
     ],
     serviceType: "E-commerce website development",
     areaServed: "Kerala",
+    footerLabel: "E-commerce development, Kerala",
   },
   {
     slug: "website-design-kottayam",
@@ -330,83 +335,164 @@ export const landingPages: LandingPage[] = [
     ],
     serviceType: "Website design",
     areaServed: "Kottayam",
+    footerLabel: "Website design, Kottayam",
   },
   {
-    slug: "web-development-company-kerala",
-    metaTitle: "Web Development Company in Kerala, India",
+    slug: "software-development-company-kerala",
+    metaTitle: "Software Development Company in Kerala, India",
     metaDescription:
-      "SiliconMotives is a remote-first web development company in Kerala, India, building websites, web applications, e-commerce, and CRM/ERP systems for clients in India and worldwide.",
+      "SiliconMotives is a software and cloud engineering company in Kerala, India: custom software, backend systems, AWS infrastructure and DevOps for businesses that need production-grade systems.",
     keywords: [
-      "web development company Kerala",
-      "web development company India",
-      "software company Kerala",
-      "remote web development team India",
+      "software development company Kerala",
+      "software company Kochi",
+      "custom software development India",
+      "backend development Kerala",
       "CRM ERP development Kerala",
     ],
-    eyebrow: "WEB DEVELOPMENT · KERALA, INDIA",
-    h1: "A web development company in Kerala, working with clients worldwide.",
+    eyebrow: "SOFTWARE DEVELOPMENT · KERALA, INDIA",
+    h1: "A software development company in Kerala that builds and runs production systems.",
     intro: [
-      "SiliconMotives is a remote-first web development company based in Kochi, Kerala. We design, build, and deploy websites, web applications, e-commerce platforms, and business systems for clients across India and around the world.",
-      "We believe great software doesn’t require a large office. It requires talented people, strong engineering practices, clear communication, and accountability. Staying lean lets us put your budget where it matters: engineering and quality.",
+      "SiliconMotives is a software and cloud engineering company based in Kochi, Kerala. We build custom applications and backend systems, set up their AWS infrastructure, and keep them running after launch.",
+      "Our work in India includes an e-commerce platform with 5,000+ users that we help develop and operate on AWS. One team owns the system from architecture to day-to-day operations.",
     ],
-    serviceHeading: "Our development services",
+    serviceHeading: "What we build and run",
     services: [
       {
-        title: "Custom web applications",
-        text: "Portals, dashboards, and SaaS products built with React, Next.js, Node.js, and PostgreSQL.",
-      },
-      {
-        title: "E-commerce development",
-        text: "Custom storefronts, Shopify, and WooCommerce with payments, inventory, and fast checkout.",
+        title: "Custom software & backends",
+        text: "Business applications, SaaS platforms, APIs and integrations, built with React, Next.js, Node.js and PostgreSQL.",
       },
       {
         title: "CRM & ERP systems",
-        text: "Leads, customers, operations, and reporting brought together in one connected workflow.",
+        text: "Leads, customers, operations and reporting brought together in one system shaped around your workflow.",
       },
       {
-        title: "Cloud & deployment",
-        text: "AWS hosting, CI/CD pipelines, SSL, backups, monitoring, and ongoing maintenance.",
+        title: "AWS infrastructure",
+        text: "Production environments on EC2, RDS, S3, CloudFront and Route 53, designed for growth and kept healthy.",
+      },
+      {
+        title: "DevOps & operations",
+        text: "CI/CD, Docker, Terraform, monitoring, backups and ongoing production support after launch.",
       },
     ],
-    whyHeading: "Why clients in India and abroad choose us",
+    whyHeading: "Why businesses choose SiliconMotives",
     why: [
       {
-        title: "Engineering value, not overhead",
-        text: "Our remote-first model keeps costs lean, so more of your investment goes into skilled people and good infrastructure.",
+        title: "Production experience",
+        text: "We run real systems in production on AWS, not just build them and hand them over.",
       },
       {
-        title: "Time zones planned in",
-        text: "For international clients we agree overlapping working hours and rely on clear written updates.",
+        title: "One accountable team",
+        text: "The engineers who design your system also build, deploy and operate it, so nothing is lost in hand-offs.",
       },
       {
         title: "Direct access to engineers",
-        text: "You work with the people building your product, with no layers in between.",
+        text: "You talk to the people doing the work, with no account-manager layers in between.",
       },
       {
-        title: "Ownership from start to finish",
-        text: "One accountable team covers design, development, testing, deployment, and support.",
+        title: "Budget goes into engineering",
+        text: "A lean, remote-first structure means more of your investment goes into people, infrastructure and quality.",
       },
     ],
-    localHeading: "Rooted in Kerala, working worldwide",
+    localHeading: "Based in Kochi, built for growth",
     local: [
-      "Kerala has a deep pool of engineering talent, and we’re proud to be part of it. From our base in Kochi, we collaborate with businesses across Kerala, the rest of India, and abroad.",
+      "We’re based in Kochi and work with businesses across Kerala and India. We’re now also opening partnerships with U.S. and international companies and agencies.",
     ],
     faqs: [
       {
-        q: "Do you work with international clients?",
-        a: "Yes. Our remote-first process (agreed milestones, demos, and written updates) is built for collaborating across time zones.",
+        q: "Can you take over and maintain an existing system?",
+        a: "Yes. We review the code and infrastructure first, document what we find, then stabilise, improve and operate it.",
       },
       {
         q: "Which technologies do you use?",
-        a: "Mostly React, Next.js, TypeScript, Node.js, and PostgreSQL, deployed on AWS, plus Shopify, WordPress, and WooCommerce where they fit best.",
+        a: "Mostly React, Next.js, TypeScript, Node.js and PostgreSQL, deployed on AWS with Docker, Terraform, Nginx and PM2.",
       },
       {
         q: "How do we get started?",
         a: "Send us a short note about your project. We’ll set up a call to understand your goals, then propose a scope and estimate.",
       },
     ],
-    serviceType: "Web development",
+    serviceType: "Software development",
     areaServed: "Kerala",
+    footerLabel: "Software development, Kerala",
+  },
+  {
+    slug: "aws-cloud-devops-services",
+    metaTitle: "AWS Cloud Infrastructure & DevOps Services",
+    metaDescription:
+      "AWS infrastructure and DevOps services from SiliconMotives: production architecture on EC2, RDS, S3, CloudFront and Route 53, CI/CD, Docker, Terraform, monitoring and ongoing operations.",
+    keywords: [
+      "AWS infrastructure services",
+      "DevOps services India",
+      "AWS consultant India",
+      "CI/CD setup",
+      "Terraform AWS",
+      "cloud cost optimization AWS",
+    ],
+    eyebrow: "AWS CLOUD · DEVOPS · RELIABILITY",
+    h1: "AWS infrastructure and DevOps, set up properly and kept running.",
+    intro: [
+      "Production systems need more than a server and a deploy script. We design AWS environments, automate how code reaches production, and run the operations that keep it healthy.",
+      "We operate AWS production infrastructure today, including the platform behind an e-commerce business with 5,000+ users.",
+    ],
+    serviceHeading: "Cloud and DevOps work we take on",
+    services: [
+      {
+        title: "AWS architecture & setup",
+        text: "Production environments on EC2, RDS, S3, CloudFront and Route 53, sized for your workload and growth.",
+      },
+      {
+        title: "CI/CD & deployments",
+        text: "Automated pipelines and Docker-based environments, so releases are routine and repeatable.",
+      },
+      {
+        title: "Infrastructure as code",
+        text: "Terraform-managed infrastructure that can be reviewed, versioned and rebuilt consistently.",
+      },
+      {
+        title: "Operations & reliability",
+        text: "Monitoring, logging, alerts, backups, security hardening and incident support after launch.",
+      },
+    ],
+    whyHeading: "What you get",
+    why: [
+      {
+        title: "Infrastructure you can understand",
+        text: "Documented environments and code-defined infrastructure, not a black box only one person can touch.",
+      },
+      {
+        title: "Fewer surprises in production",
+        text: "Monitoring, alerts and backups are part of the setup, not an afterthought.",
+      },
+      {
+        title: "Cost-aware architecture",
+        text: "We size resources to the workload and look for savings as usage changes.",
+      },
+      {
+        title: "Ongoing ownership",
+        text: "We can stay on to operate the system, on a retainer that fits your needs.",
+      },
+    ],
+    localHeading: "A remote engineering team in Kerala, India",
+    local: [
+      "We work with businesses across India and are now opening partnerships with U.S. and international companies and agencies, often starting with a small, well-scoped pilot.",
+    ],
+    faqs: [
+      {
+        q: "Can you take over our existing AWS setup?",
+        a: "Yes. We audit the current environment first, then propose and carry out improvements in agreed, low-risk steps.",
+      },
+      {
+        q: "Do you use infrastructure as code?",
+        a: "Yes. We use Terraform where it fits, so infrastructure changes are reviewed, versioned and repeatable.",
+      },
+      {
+        q: "Can you help reduce our AWS bill?",
+        a: "We review resource sizing, storage and data transfer, and recommend changes that lower cost without hurting reliability.",
+      },
+    ],
+    serviceType: "Cloud infrastructure and DevOps",
+    areaServed: "Worldwide",
+    footerLabel: "AWS & DevOps services",
   },
 ];
 
