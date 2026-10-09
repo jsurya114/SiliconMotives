@@ -8,7 +8,7 @@ export default function Team({ members }: { members: TeamMember[] }) {
     <section id="team" className="section shell team-section">
       <div className="section-heading">
         <div>
-          <span className="eyebrow">06 / TEAM</span>
+          <span className="eyebrow">07 / TEAM</span>
           <h2>
             Small enough that every project matters.
             <br />

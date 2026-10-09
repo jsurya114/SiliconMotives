@@ -10,7 +10,7 @@ export default function RemoteFirst() {
     <section id="remote" className="remote-section">
       <div className="section shell remote-grid">
         <div>
-          <span className="eyebrow">05 / HOW WE’RE BUILT</span>
+          <span className="eyebrow">06 / HOW WE’RE BUILT</span>
           <h2>
             Remote by design.
             <br />

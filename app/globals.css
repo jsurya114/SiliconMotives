@@ -1357,6 +1357,249 @@ section[id] {
 .lp-breadcrumb a:hover {
   color: var(--paper);
 }
+
+/* Project journey */
+.approach-section {
+  padding: 124px 0 132px;
+  color: #111;
+  background: #efefeb;
+  overflow: clip;
+}
+.approach-layout {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.82fr) minmax(0, 1.18fr);
+  align-items: start;
+  gap: clamp(48px, 8vw, 124px);
+}
+.approach-intro {
+  position: sticky;
+  top: 128px;
+  padding-top: 14px;
+}
+.approach-intro .eyebrow {
+  color: #666;
+}
+.approach-intro h2 {
+  max-width: 560px;
+  font-size: clamp(38px, 4.2vw, 59px);
+  letter-spacing: -0.06em;
+  line-height: 1.04;
+  font-weight: 450;
+}
+.approach-intro h2 .muted {
+  color: #666;
+}
+.approach-intro > p {
+  max-width: 425px;
+  margin-top: 23px;
+  color: #5f5f5c;
+  font-size: 14px;
+  line-height: 1.85;
+}
+.approach-progress {
+  max-width: 390px;
+  margin-top: 46px;
+  padding-top: 20px;
+  border-top: 1px solid #cecec8;
+}
+.approach-progress-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #777;
+  font-size: 9px;
+}
+.approach-progress-meta strong {
+  color: #171717;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 21px;
+  letter-spacing: -1px;
+  font-weight: 500;
+}
+.approach-progress-track {
+  height: 3px;
+  margin-top: 14px;
+  overflow: hidden;
+  background: #d6d6d1;
+}
+.approach-progress-track span {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: #222;
+  transform-origin: left center;
+  transition: transform 500ms cubic-bezier(.2,.7,.2,1);
+}
+.approach-progress-title {
+  display: block;
+  min-height: 22px;
+  margin-top: 11px;
+  color: #333;
+  font-size: 12px;
+}
+.approach-aside-note {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 40px;
+  color: #696966;
+  font-size: 11px;
+}
+.approach-steps {
+  display: grid;
+  gap: 15px;
+}
+.approach-step {
+  display: grid;
+  grid-template-columns: 57px minmax(0, 1fr);
+  gap: 22px;
+  min-height: 204px;
+  padding: 27px 30px 24px;
+  border: 1px solid #d8d8d2;
+  border-radius: 5px;
+  background: #f8f8f5;
+  transition: background 350ms ease, border-color 350ms ease, transform 350ms ease;
+}
+.approach-step.is-current {
+  border-color: #9d9d97;
+  background: #fff;
+  transform: translateX(-5px);
+}
+.approach-step-mark {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  padding-top: 5px;
+}
+.approach-step-number {
+  color: #8d8d87;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 17px;
+  font-style: italic;
+}
+.approach-step-icon {
+  display: grid;
+  place-items: center;
+  width: 43px;
+  height: 43px;
+  border: 1px solid #deded8;
+  border-radius: 4px;
+  color: #333;
+  background: #f0f0ec;
+}
+.approach-step-copy {
+  min-width: 0;
+}
+.approach-step-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+.approach-step-heading h3 {
+  font-size: 20px;
+  letter-spacing: -0.7px;
+}
+.approach-step-arrow {
+  color: #777;
+  transition: transform 300ms ease, color 300ms ease;
+}
+.approach-step.is-current .approach-step-arrow {
+  color: #111;
+  transform: rotate(-45deg);
+}
+.approach-step-copy > p {
+  max-width: 570px;
+  margin-top: 11px;
+  color: #666;
+  font-size: 13px;
+  line-height: 1.75;
+}
+.approach-outcome {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 10px;
+  margin-top: 20px;
+  padding-top: 14px;
+  border-top: 1px solid #e5e5df;
+  color: #444;
+  font-size: 10px;
+}
+.approach-outcome .mono {
+  color: #777;
+  font-size: 8px;
+}
+@media (max-width: 900px) {
+  .approach-layout {
+    grid-template-columns: minmax(230px, 0.75fr) minmax(0, 1.25fr);
+    gap: 38px;
+  }
+  .approach-step {
+    grid-template-columns: 45px minmax(0, 1fr);
+    gap: 15px;
+    padding: 23px 20px;
+  }
+  .approach-step-icon {
+    width: 38px;
+    height: 38px;
+  }
+}
+@media (max-width: 767px) {
+  .approach-section {
+    padding: 82px 0 88px;
+  }
+  .approach-layout {
+    grid-template-columns: 1fr;
+    gap: 35px;
+  }
+  .approach-intro {
+    position: static;
+    padding-top: 0;
+  }
+  .approach-intro h2 {
+    font-size: clamp(37px, 9vw, 52px);
+  }
+  .approach-intro > p {
+    font-size: 15px;
+  }
+  .approach-progress {
+    max-width: none;
+    margin-top: 30px;
+  }
+  .approach-aside-note {
+    display: none;
+  }
+  .approach-steps {
+    gap: 12px;
+  }
+  .approach-step,
+  .approach-step.is-current {
+    grid-template-columns: 40px minmax(0, 1fr);
+    gap: 13px;
+    min-height: 0;
+    padding: 22px 17px 20px;
+    transform: none;
+  }
+  .approach-step-heading h3 {
+    font-size: 19px;
+  }
+  .approach-step-copy > p {
+    font-size: 14px;
+  }
+  .approach-outcome {
+    gap: 5px 8px;
+    font-size: 10px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .approach-step,
+  .approach-step-arrow,
+  .approach-progress-track span {
+    transition: none;
+  }
+}
 .lp-hero h1 {
   max-width: 980px;
   font-size: clamp(38px, 5.2vw, 76px);

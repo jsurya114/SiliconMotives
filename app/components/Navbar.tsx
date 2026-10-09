@@ -17,6 +17,7 @@ export default function Navbar() {
         <Brand />
         <nav className="desktop-nav" aria-label="Main navigation">
           <a href="/#capabilities">Capabilities</a>
+          <a href="/#how-we-work">How we work</a>
           <a href="/case-studies">Case studies</a>
           <a href="/projects">Projects</a>
           <a href="/agency-partners">Agency partners</a>
@@ -43,6 +44,7 @@ export default function Navbar() {
         >
           {[
             ["Capabilities", "/#capabilities"],
+            ["How we work", "/#how-we-work"],
             ["Case studies", "/case-studies"],
             ["Projects", "/projects"],
             ["Agency partners", "/agency-partners"],

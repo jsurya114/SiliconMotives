@@ -9,6 +9,7 @@ import ClientLogos from "./components/ClientLogos";
 import Testimonials from "./components/Testimonials";
 import Partners from "./components/Partners";
 import RemoteFirst from "./components/RemoteFirst";
+import HowWeWork from "./components/HowWeWork";
 import Team from "./components/Team";
 import FAQ from "./components/FAQ";
 import Navbar from "./components/Navbar";
@@ -136,6 +137,7 @@ export default async function Home() {
         <ClientLogos clients={clients} />
         <Testimonials items={testimonials} />
         <Partners />
+        <HowWeWork />
         <RemoteFirst />
         <Team members={team} />
         <FAQ faqs={faqs} />

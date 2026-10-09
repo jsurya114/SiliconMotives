@@ -32,7 +32,7 @@ export default function Contact({
     <section id="contact" className="contact-section">
       <div className="shell contact-grid">
         <div>
-          <span className="eyebrow">08 / START A PROJECT</span>
+          <span className="eyebrow">09 / START A PROJECT</span>
           <h2>
             Something
             <br />

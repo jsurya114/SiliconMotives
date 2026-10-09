@@ -6,7 +6,7 @@ export default function FAQ({ faqs }: { faqs: Faq[] }) {
     <section id="faq" className="faq-wrap">
       <div className="section shell faq-section">
         <div className="faq-intro">
-          <span className="eyebrow">07 / QUESTIONS</span>
+          <span className="eyebrow">08 / QUESTIONS</span>
           <h2>
             Good questions.
             <br />
