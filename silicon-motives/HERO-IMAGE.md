@@ -1,0 +1,21 @@
+# Hero image
+
+Current background asset: `dist/images/cloud-sky.jpg`
+
+## Current cloud background prompt
+
+Use case: stylized-concept. Asset type: seamless wide full-bleed hero background for a minimalist remote software engineering website. Wide 16:9 landscape. A vast serene open sky filled only with layered soft white cumulus clouds and gentle high-altitude haze, drifting cloud layers stretching into distance. No ground, no landscape, absolutely no mountains, hills, horizon, coastline, buildings, or earth. Subtle translucent fine curved connection arcs and a few tiny warm sage green light nodes lightly linking clouds to suggest cloud computing and a distributed remote team; refined and barely visible, not science fiction. The LEFT 42 percent is almost entirely pale warm ivory sky with very soft haze and minimal detail, open clear negative space for very dark readable website headline. The RIGHT half has softly sculpted clouds with richer pale blue gray and warm cream shading, no sharp contrast. Upper and middle area clouds are light and airy; bottom also remains cloud layers only. Restrained palette warm ivory, quiet sky blue, soft sage, delicate forest green details. Premium art direction, elegant natural cloud photography blended with subtle abstract connections. No mountains of any kind, no land, no buildings, no people, no laptop, no giant cloud icon, no text, no logo, no watermark, no frame. Intended to sit behind dark headline text with a natural fade into an off-white webpage.
+
+Previous background asset: `dist/images/client-collaboration.jpg`
+
+Previous asset retained: `dist/images/remote-workspace.jpg`
+
+## Current background prompt
+
+Use case: photorealistic-natural. Asset type: full-width background photograph for Silicon Motives, a remote-first engineering company's client-facing website. Wide cinematic 16:9 landscape composition. Authentic editorial photograph of a small collaborative product discussion: two business collaborators at a simple natural oak table, a South Asian software professional and a client reviewing a laptop with an abstract clean software dashboard and a paper product sketch. Focus on their natural hands pointing at the laptop and sketch, torsos visible, faces mostly outside the frame. Warm daylight, quiet contemporary residential or small meeting setting, muted green foliage visible through a window suggesting Kerala. No large corporate office. Subjects, laptop and all visual detail concentrated in the RIGHT HALF, LEFT HALF mostly softly lit pale warm plaster wall and subtle out-of-focus window light, generous negative space for dark website headline. Premium understated editorial photography, natural believable anatomy, warm off-white and forest green tones, real wood textures. Customer partnership and useful software are the story. No logos, no text overlays, no watermarks, no fake recognizable product brands, no neon, no futuristic effects, no staged handshakes. This is an illustrative client collaboration scene, not actual company staff or customers.
+
+Generated with the built-in image generation tool. This is an illustrative scene, not a photograph of the company's actual workplace.
+
+## Previous image prompt
+
+Use case: photorealistic-natural. Asset type: premium software company website hero photograph. Create a wide landscape editorial photograph, 3:2 composition, of a beautifully simple remote software engineer's home workspace in tropical Kerala. A slim unbranded open laptop on a warm natural wood desk beside a large open window, subtle out-of-focus code on the screen, one notebook and a ceramic coffee cup. Beyond the window are soft lush palm leaves and tropical greenery. Quiet authentic residential setting, no corporate office. Soft morning daylight, tactile natural textures, restrained warm cream and deep forest green palette to fit a minimal off-white website. Camera at desk height, thoughtful asymmetrical composition, laptop in center-left and beautiful window greenery to right, clean uncluttered image. Photographic realism, refined natural color grading, no people, no logos, no text overlays, no watermarks, no infographic, no square tile or decorative frames. This is an illustrative scene, not a documentary photograph of a real company office.
