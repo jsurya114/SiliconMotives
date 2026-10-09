@@ -29,6 +29,38 @@
  .menu-toggle{display:flex;gap:15px;align-items:center;background:none;border:1px solid var(--line);padding:7px 11px;font-size:12px;color:var(--ink);border-radius:3px}.menu-toggle span{font-size:20px;line-height:1}
  .solutions-grid{gap:24px}.solution h3{font-size:20px}.testimonial-layout{gap:44px}.coming-soon{padding-left:30px}
 }
+
+/* Founder profiles: circular monograms with a clear featured founder. */
+.about-grid{align-items:center;gap:clamp(48px,8vw,112px)}
+.about-copy>p:not(.eyebrow){max-width:470px;color:#697361;font-size:14px}
+.about-copy>p:not(.eyebrow)+p:not(.eyebrow){margin-top:17px}
+.about-copy h2{max-width:570px}
+.about-signoff{display:flex;align-items:center;gap:17px;margin-top:34px}
+.about-signoff .eyebrow{margin:0;color:#66705e;font-size:8px;white-space:nowrap}
+.about-signoff-rule{width:65px;height:1px;background:#bdc7b5}
+.founders{display:grid;grid-template-columns:1fr;gap:13px;align-content:center}
+.founder{position:relative;isolation:isolate;display:flex;align-items:center;gap:22px;min-height:145px;padding:16px 52px 16px 18px;border:1px solid #d9dfd2;border-radius:7px;background:#fbfcf8;overflow:hidden;transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease}
+.founder:hover{transform:translateY(-3px);border-color:#aab7a1;box-shadow:0 12px 28px #23372d12}
+.founder-featured{background:linear-gradient(115deg,#23372d,#30483a);border-color:#30483a;color:#f4f6ef}
+.founder-featured:hover{border-color:#526d58}
+.founder-featured::after{content:"";position:absolute;z-index:-1;right:-69px;top:50%;width:205px;height:205px;border:1px solid #ffffff18;border-radius:50%;transform:translateY(-50%);box-shadow:0 0 0 21px #ffffff08,0 0 0 43px #ffffff05}
+.initials{position:relative;flex:0 0 106px;width:106px;height:106px;border:1px solid #c5d1bc;border-radius:50%;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 35% 30%,#f0f4e8,#d5e1c9 70%);font-family:Georgia,"Times New Roman",serif;font-size:34px;font-style:italic;font-weight:500;letter-spacing:-3px;color:#304938}
+.initials::after{content:"";position:absolute;inset:7px;border:1px solid #506a4a35;border-radius:50%}
+.initials-jayasoorya{background:radial-gradient(circle at 35% 30%,#f0eee0,#dedbc7 70%);border-color:#d0cdb7;color:#66684d}
+.initials-jayasoorya::after{border-color:#77785c35}
+.founder-meta{position:relative;z-index:1;min-width:0}
+.founder-kicker{display:block;font-family:var(--font);font-size:8px;font-weight:600;letter-spacing:1.35px;color:#77816e}
+.founder-featured .founder-kicker{color:#c8d7b9}
+.founder-meta h3{margin:7px 0 2px;font-family:var(--display);font-size:21px;font-weight:600;letter-spacing:-.65px}
+.founder-meta p{margin:0;color:#77816e;font-size:12px}
+.founder-featured .founder-meta p{color:#c7d0c0}
+.founder-index{position:absolute;top:18px;right:19px;color:#9ba392;font-family:Georgia,"Times New Roman",serif;font-size:13px;font-style:italic}
+.founder-featured .founder-index{color:#d4e6a8}
+.founders .founder-note{grid-column:auto;display:flex;align-items:center;gap:8px;border-top:1px solid #d1d9c7;padding-top:13px;margin:9px 0 0!important;color:#687261;font-size:10px}
+.founders .founder-note .location-dot{margin:0;font-size:15px}
+@media(max-width:1100px){.about-grid{gap:48px}.founder{gap:16px;padding-left:14px}.initials{flex-basis:92px;width:92px;height:92px}}
+@media(max-width:760px){.about-grid{gap:32px}.about-copy>p:not(.eyebrow){font-size:14px}.founders{gap:11px}.founder{min-height:118px;gap:15px;padding:13px 42px 13px 13px}.initials{flex-basis:82px;width:82px;height:82px;font-size:29px}.founder-meta h3{font-size:19px}.founder-index{top:14px;right:14px;font-size:11px}.founder-featured::after{right:-95px;width:180px;height:180px}.about-signoff{margin-top:24px}}
+@media(prefers-reduced-motion:reduce){.founder{transition:none}}
 @media(max-width:760px){
  .header nav{padding-inline:20px}.solutions-grid{grid-template-columns:1fr;gap:34px}.solution h3{max-width:none;font-size:22px;margin-top:13px}.solution p{margin-bottom:19px}
  .testimonial-layout{grid-template-columns:1fr;gap:30px}.coming-soon{padding:27px 0 0;border-left:0;border-top:1px solid #cbd5c0}
