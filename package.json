@@ -1,35 +1,10 @@
 {
-  "name": "siliconmotives",
-  "version": "0.1.0",
+  "name": "silicon-motives",
+  "version": "1.0.0",
   "private": true,
+  "description": "Silicon Motives company website",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint",
-    "seed:content": "node scripts/seed-content.mjs"
-  },
-  "dependencies": {
-    "@supabase/ssr": "^0.12.7",
-    "@supabase/supabase-js": "^2.117.2",
-    "lucide-react": "^1.24.0",
-    "next": "14.2.35",
-    "nodemailer": "^10.0.14",
-    "react": "^18",
-    "react-dom": "^18",
-    "react-easy-crop": "^6.2.2",
-    "swiper": "^10.3.1"
-  },
-  "devDependencies": {
-    "@types/node": "^20",
-    "@types/nodemailer": "^8.0.2",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
-    "autoprefixer": "^10.5.2",
-    "eslint": "^8",
-    "eslint-config-next": "14.2.35",
-    "postcss": "^8.5.16",
-    "tailwindcss": "^3.4.19",
-    "typescript": "^5"
+    "dev": "node server.mjs",
+    "check": "node --check dist/script.js && node --check server.mjs"
   }
 }

@@ -1,29 +1,23 @@
-# SiliconMotives
+# Silicon Motives
 
-Remote-first engineering company based in Kerala, India. Jasil M is the Founder; Jayasoorya S is the Co-founder.
-
-Next.js 14 website with a Supabase-backed CMS. Services cover CRM/ERP, e-commerce and Shopify, WordPress, static websites, custom applications, and AWS hosting/deployment.
+Minimal responsive company website for Silicon Motives, Kochi, Kerala.
 
 ## Run locally
 
+Requires Node.js. No dependencies to install.
+
 ```sh
-npm install
 npm run dev
 ```
 
-The backend is Supabase (database, admin login, image storage). Copy `.env.example` to `.env.local` and follow [SUPABASE.md](./SUPABASE.md) to create the project, schema, and first admin.
+Open http://127.0.0.1:3000. The deployable static site is in `dist/`.
 
-## Content
+## Edit
 
-- Portfolio and approved testimonials are fetched from Supabase.
-- Add an optional **Client / company name** in the portfolio editor to include a client in the client section. Company names in approved testimonial roles (e.g. `Founder, Example Company`) are also used.
-- When the API is unavailable, bundled portfolio images appear as labeled design previews. Client endorsements and client names are never fabricated.
-- The service list, technologies, founder story, and other homepage copy are maintained in the page/components.
-- A generated monochrome hero image replaces the earlier orbital artwork. Scroll reveals progressively enhance visible HTML and respect reduced-motion preferences.
+- `dist/index.html`: page sections and company copy
+- `dist/styles.css`: typography, colors, and responsive layouts
+- `dist/script.js`: mobile navigation and downloadable project brief
 
-Set `SITE_URL` to the confirmed production origin before building to enable indexable metadata and canonical/sitemap URLs. See [implementation notes](./SILICONMOTIVES.md) for deployment details.
+The service categories and process are initial proposed website copy for the founders to review. No invented clients, testimonials, or portfolio claims are included. Public contact details have not yet been supplied. The brief form downloads a text file locally and does not submit information to a server. Add the confirmed public email before launching a public company site.
 
-```sh
-npm run lint
-npm run build
-```
+Google Fonts supplies DM Sans and Manrope; system font fallbacks are provided.

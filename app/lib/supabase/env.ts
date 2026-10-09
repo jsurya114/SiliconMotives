@@ -1,4 +1,0 @@
-export const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL ?? "";
-export const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? "";
-/** False until the Supabase project keys are added to the environment. */
-export const supabaseConfigured = Boolean(supabaseUrl && supabaseAnonKey);
