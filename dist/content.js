@@ -91,6 +91,7 @@
   function renderSettings(settings) {
     const whatsappNumber = settings.whatsapp_number || '918590184265';
     const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
+    api.whatsappNumber = whatsappNumber;
     document.querySelectorAll('.whatsapp-link').forEach(link => { link.href = whatsappUrl; });
     const links = [];
     if (settings.contact_email) links.push(`<a href="mailto:${escapeHtml(settings.contact_email)}">${escapeHtml(settings.contact_email)}</a>`);
@@ -108,12 +109,16 @@
       dialog.querySelector('button[type="submit"]').firstChild.textContent = 'Send project brief ';
       document.querySelector('#open-brief').firstChild.textContent = 'Send us a project brief ';
       api.acceptsBriefs = true;
+    } else {
+      document.querySelector('#brief-dialog :scope > p').textContent = 'Fill this in and we’ll open a ready-to-send WhatsApp message to our team.';
+      document.querySelector('#brief-form button[type="submit"]').firstChild.textContent = 'Continue to WhatsApp ';
     }
   }
 
   const api = {
     configured,
     acceptsBriefs: false,
+    whatsappNumber: '918590184265',
     async submitBrief({ name, email, message }) {
       await rest('contact_submissions', {
         method: 'POST',

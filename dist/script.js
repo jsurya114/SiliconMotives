@@ -63,20 +63,27 @@ briefForm.addEventListener('submit', async (event) => {
     }
     return;
   }
-  downloadBrief(data);
+  sendBriefOnWhatsApp(data);
 });
 
-function downloadBrief(data) {
-  const brief =`SILICON MOTIVES — PROJECT BRIEF\n\nName: ${data.get('name')}\nEmail: ${data.get('email')}\n\nProject details\n${data.get('project')}\n\nThis brief was prepared locally. It has not been sent to Silicon Motives.\n`;
-  const url = URL.createObjectURL(new Blob([brief], { type: 'text/plain;charset=utf-8' }));
+function sendBriefOnWhatsApp(data) {
+  const phone = window.SiliconContent?.whatsappNumber || '918590184265';
+  const message = [
+    'Hi Silicon Motives! I would like to discuss a project.',
+    '',
+    `Name: ${data.get('name').trim()}`,
+    `Email: ${data.get('email').trim()}`,
+    '',
+    'Project details:',
+    data.get('project').trim(),
+  ].join('\n');
   const link = document.createElement('a');
-  link.href = url;
-  link.download = 'silicon-motives-project-brief.txt';
-  document.body.append(link);
+  link.href = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+  link.target = '_blank';
+  link.rel = 'noopener noreferrer';
+  link.textContent = 'Open WhatsApp to send your brief';
+  briefStatus.replaceChildren(document.createTextNode('Your brief is ready. Review it in WhatsApp, then tap Send: '), link);
   link.click();
-  link.remove();
-  setTimeout(() => URL.revokeObjectURL(url), 1000);
-  briefStatus.textContent = 'Your download is ready. Keep the brief to share with our team; nothing has been sent.';
 }
 
 // Motion is progressive enhancement: content remains readable without JavaScript.
