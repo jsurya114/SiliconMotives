@@ -4,7 +4,10 @@
   "private": true,
   "description": "Silicon Motives company website",
   "scripts": {
-    "dev": "node server.mjs",
-    "check": "node --check dist/script.js && node --check server.mjs"
-  }
+    "dev": "node --env-file-if-exists=.env.local server.mjs",
+    "check": "node --check dist/script.js && node --check dist/admin/admin.js && node --check dist/public-content.js && node --check server.mjs && node --check api/auth.js && node --check api/content.js && node --check api/upload.js",
+    "test": "node --test tests/*.test.mjs",
+    "sync": "node scripts/sync.mjs"
+  },
+  "type": "module"
 }

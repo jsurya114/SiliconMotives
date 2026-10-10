@@ -3,3 +3,8 @@ node_modules/
 .sites-runtime/
 *.tar.gz
 *.zip
+
+.env*
+!.env.example
+.vercel/
+.playwright-mcp/
