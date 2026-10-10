@@ -52,40 +52,58 @@ document.querySelector('#brief-form').addEventListener('submit', (event) => {
   document.querySelector('#brief-status').textContent = 'Your download is ready. Keep the brief to share with our team; nothing has been sent.';
 });
 
-const processSteps = [...document.querySelectorAll('.process-step')];
+// Native scrolling drives a compact stack; no scroll interception or animation library.
+const journey = document.querySelector('.journey-section');
+const journeyStages = [...document.querySelectorAll('.journey-stage')];
+const journeyMarkers = [...document.querySelectorAll('.journey-marker')];
+const journeyTabs = [...document.querySelectorAll('.journey-tab')];
 const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
-const progressNumber = document.querySelector('.approach-current-number');
-const progressTitle = document.querySelector('.progress-current-title');
-const progressFill = document.querySelector('.progress-fill');
-const setCurrentStep = (step) => {
-  const index = processSteps.indexOf(step);
-  if (index < 0) return;
-  processSteps.forEach((item) => item.classList.toggle('is-current', item === step));
-  if (progressNumber) progressNumber.textContent = step.dataset.step;
-  if (progressTitle) progressTitle.textContent = step.querySelector('h3').textContent;
-  if (progressFill) progressFill.style.width = `${((index + 1) / processSteps.length) * 100}%`;
-};
-if (processSteps.length) {
-  if (!motionPreference.matches) document.documentElement.classList.add('has-process-motion');
-  setCurrentStep(processSteps[0]);
-  if ('IntersectionObserver' in window) {
-    const revealObserver = new IntersectionObserver((entries, observer) => {
-      for (const entry of entries) {
-        if (!entry.isIntersecting) continue;
-        entry.target.classList.add('is-visible');
-        observer.unobserve(entry.target);
-      }
-    }, { threshold: 0.12, rootMargin: '0px 0px -58% 0px' });
-    const progressObserver = new IntersectionObserver((entries) => {
-      const current = entries.filter((entry) => entry.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-      if (current) setCurrentStep(current.target);
-    }, { threshold: 0.15, rootMargin: '-35% 0px -45% 0px' });
-    processSteps.forEach((step) => {
-      progressObserver.observe(step);
-      if (!motionPreference.matches) revealObserver.observe(step);
-      else step.classList.add('is-visible');
+if (journey && journeyStages.length) {
+  let pending = false;
+  let active = -1;
+  const updateJourney = () => {
+    pending = false;
+    const stickyTop = parseFloat(getComputedStyle(journeyStages[0]).top) || 0;
+    const rects = journeyMarkers.map(marker => marker.getBoundingClientRect());
+    const heights = journeyStages.map(stage => stage.offsetHeight);
+    let current = 0;
+    rects.forEach((rect, index) => { if (rect.top <= stickyTop + 80) current = index; });
+    journeyStages.forEach((stage, index) => {
+      const nextTop = rects[index + 1]?.top;
+      const overlap = nextTop == null ? 0 : Math.max(0, Math.min(1, (stickyTop + heights[index] - nextTop) / heights[index]));
+      const progress = Math.max(0, Math.min(1, (stickyTop + heights[index] - rects[index].top) / heights[index]));
+      stage.style.setProperty('--stack-scale', motionPreference.matches ? 1 : (1 - overlap * 0.035).toFixed(4));
+      stage.style.setProperty('--stack-shade', motionPreference.matches ? 0 : (overlap * 0.12).toFixed(4));
+      journeyTabs[index].style.setProperty('--stage-progress', progress.toFixed(4));
     });
-  } else {
-    processSteps.forEach((step, index) => setTimeout(() => step.classList.add('is-visible'), index * 140));
-  }
+    if (current !== active) {
+      active = current;
+      journeyStages.forEach((stage, index) => {
+        stage.classList.toggle('is-current', index === current);
+        journeyTabs[index].classList.toggle('is-complete', index < current);
+        if (index === current) journeyTabs[index].setAttribute('aria-current', 'step');
+        else journeyTabs[index].removeAttribute('aria-current');
+      });
+    }
+  };
+  const scheduleJourney = () => {
+    if (!pending) { pending = true; requestAnimationFrame(updateJourney); }
+  };
+  const configureMotion = () => {
+    journey.classList.toggle('has-journey-stack', !motionPreference.matches);
+    scheduleJourney();
+  };
+  journeyTabs.forEach((tab, index) => tab.addEventListener('click', event => {
+    event.preventDefault();
+    const stickyTop = parseFloat(getComputedStyle(journeyStages[index]).top) || 160;
+    const top = window.scrollY + journeyMarkers[index].getBoundingClientRect().top - stickyTop;
+    window.scrollTo({ top, behavior: motionPreference.matches ? 'instant' : 'smooth' });
+    history.replaceState(null, '', tab.getAttribute('href'));
+  }));
+  configureMotion();
+  motionPreference.addEventListener('change', configureMotion);
+  window.addEventListener('scroll', scheduleJourney, { passive: true });
+  window.addEventListener('resize', scheduleJourney);
+  window.addEventListener('pageshow', scheduleJourney);
+  document.fonts.ready.then(scheduleJourney);
 }
