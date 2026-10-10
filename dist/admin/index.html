@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#102b46">
+  <title>Admin — Silicon Motives</title>
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="admin.css">
+  <script src="../config.js"></script>
+  <script type="module" src="admin.js"></script>
+  <script>
+    // admin.js replaces the loading text; if it is still there, a script failed to load.
+    setTimeout(function () {
+      var boot = document.querySelector('.boot');
+      if (boot) boot.textContent = 'The admin could not load. Check your internet connection and reload the page.';
+    }, 12000);
+  </script>
+</head>
+<body>
+  <div id="app" aria-live="polite"><p class="boot">Loading admin…</p></div>
+  <div class="toasts" id="toasts" role="status" aria-live="polite"></div>
+  <dialog id="editor" aria-labelledby="editor-title"></dialog>
+</body>
+</html>

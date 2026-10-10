@@ -37,10 +37,37 @@ briefDialog.addEventListener('click', (event) => {
   const rect = briefDialog.getBoundingClientRect();
   if (event.target === briefDialog && (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom)) briefDialog.close();
 });
-document.querySelector('#brief-form').addEventListener('submit', (event) => {
+const briefForm = document.querySelector('#brief-form');
+const briefStatus = document.querySelector('#brief-status');
+briefForm.addEventListener('submit', async (event) => {
   event.preventDefault();
-  const data = new FormData(event.currentTarget);
-  const brief = `SILICON MOTIVES — PROJECT BRIEF\n\nName: ${data.get('name')}\nEmail: ${data.get('email')}\n\nProject details\n${data.get('project')}\n\nThis brief was prepared locally. It has not been sent to Silicon Motives.\n`;
+  const data = new FormData(briefForm);
+  const content = window.SiliconContent;
+  if (content?.acceptsBriefs) {
+    // Bots fill the hidden field; pretend success without sending.
+    if (data.get('website')) {
+      briefStatus.textContent = 'Thank you. Your brief has been sent.';
+      return;
+    }
+    const submit = briefForm.querySelector('button[type="submit"]');
+    submit.disabled = true;
+    briefStatus.textContent = 'Sending…';
+    try {
+      await content.submitBrief({ name: data.get('name').trim(), email: data.get('email').trim(), message: data.get('project').trim() });
+      briefForm.reset();
+      briefStatus.textContent = 'Thank you. Your brief has been sent and we’ll be in touch soon.';
+    } catch (error) {
+      briefStatus.textContent = `Sorry, your brief could not be sent. ${error.message}`;
+    } finally {
+      submit.disabled = false;
+    }
+    return;
+  }
+  downloadBrief(data);
+});
+
+function downloadBrief(data) {
+  const brief =`SILICON MOTIVES — PROJECT BRIEF\n\nName: ${data.get('name')}\nEmail: ${data.get('email')}\n\nProject details\n${data.get('project')}\n\nThis brief was prepared locally. It has not been sent to Silicon Motives.\n`;
   const url = URL.createObjectURL(new Blob([brief], { type: 'text/plain;charset=utf-8' }));
   const link = document.createElement('a');
   link.href = url;
@@ -49,8 +76,8 @@ document.querySelector('#brief-form').addEventListener('submit', (event) => {
   link.click();
   link.remove();
   setTimeout(() => URL.revokeObjectURL(url), 1000);
-  document.querySelector('#brief-status').textContent = 'Your download is ready. Keep the brief to share with our team; nothing has been sent.';
-});
+  briefStatus.textContent = 'Your download is ready. Keep the brief to share with our team; nothing has been sent.';
+}
 
 // Reveal each step once, leaving the layout and native scrolling unchanged.
 const workSteps = [...document.querySelectorAll('.work-step')];
