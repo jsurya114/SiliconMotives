@@ -52,58 +52,26 @@ document.querySelector('#brief-form').addEventListener('submit', (event) => {
   document.querySelector('#brief-status').textContent = 'Your download is ready. Keep the brief to share with our team; nothing has been sent.';
 });
 
-// Native scrolling drives a compact stack; no scroll interception or animation library.
-const journey = document.querySelector('.journey-section');
-const journeyStages = [...document.querySelectorAll('.journey-stage')];
-const journeyMarkers = [...document.querySelectorAll('.journey-marker')];
-const journeyTabs = [...document.querySelectorAll('.journey-tab')];
-const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
-if (journey && journeyStages.length) {
-  let pending = false;
-  let active = -1;
-  const updateJourney = () => {
-    pending = false;
-    const stickyTop = parseFloat(getComputedStyle(journeyStages[0]).top) || 0;
-    const rects = journeyMarkers.map(marker => marker.getBoundingClientRect());
-    const heights = journeyStages.map(stage => stage.offsetHeight);
-    let current = 0;
-    rects.forEach((rect, index) => { if (rect.top <= stickyTop + 80) current = index; });
-    journeyStages.forEach((stage, index) => {
-      const nextTop = rects[index + 1]?.top;
-      const overlap = nextTop == null ? 0 : Math.max(0, Math.min(1, (stickyTop + heights[index] - nextTop) / heights[index]));
-      const progress = Math.max(0, Math.min(1, (stickyTop + heights[index] - rects[index].top) / heights[index]));
-      stage.style.setProperty('--stack-scale', motionPreference.matches ? 1 : (1 - overlap * 0.035).toFixed(4));
-      stage.style.setProperty('--stack-shade', motionPreference.matches ? 0 : (overlap * 0.12).toFixed(4));
-      journeyTabs[index].style.setProperty('--stage-progress', progress.toFixed(4));
+// Reveal each step once, leaving the layout and native scrolling unchanged.
+const workSteps = [...document.querySelectorAll('.work-step')];
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+if ('IntersectionObserver' in window && !reducedMotion.matches) {
+  const workObserver = new IntersectionObserver(entries => {
+    const visible = entries.filter(entry => entry.isIntersecting);
+    visible.forEach((entry, index) => {
+      entry.target.style.setProperty('--reveal-delay', `${index * 80}ms`);
+      entry.target.classList.remove('is-waiting');
+      entry.target.classList.add('is-shown');
+      workObserver.unobserve(entry.target);
     });
-    if (current !== active) {
-      active = current;
-      journeyStages.forEach((stage, index) => {
-        stage.classList.toggle('is-current', index === current);
-        journeyTabs[index].classList.toggle('is-complete', index < current);
-        if (index === current) journeyTabs[index].setAttribute('aria-current', 'step');
-        else journeyTabs[index].removeAttribute('aria-current');
-      });
-    }
-  };
-  const scheduleJourney = () => {
-    if (!pending) { pending = true; requestAnimationFrame(updateJourney); }
-  };
-  const configureMotion = () => {
-    journey.classList.toggle('has-journey-stack', !motionPreference.matches);
-    scheduleJourney();
-  };
-  journeyTabs.forEach((tab, index) => tab.addEventListener('click', event => {
-    event.preventDefault();
-    const stickyTop = parseFloat(getComputedStyle(journeyStages[index]).top) || 160;
-    const top = window.scrollY + journeyMarkers[index].getBoundingClientRect().top - stickyTop;
-    window.scrollTo({ top, behavior: motionPreference.matches ? 'instant' : 'smooth' });
-    history.replaceState(null, '', tab.getAttribute('href'));
-  }));
-  configureMotion();
-  motionPreference.addEventListener('change', configureMotion);
-  window.addEventListener('scroll', scheduleJourney, { passive: true });
-  window.addEventListener('resize', scheduleJourney);
-  window.addEventListener('pageshow', scheduleJourney);
-  document.fonts.ready.then(scheduleJourney);
+  }, { threshold: 0.15, rootMargin: '0px 0px -32px 0px' });
+  workSteps.forEach(step => {
+    step.classList.add('is-waiting');
+    workObserver.observe(step);
+  });
+  reducedMotion.addEventListener('change', event => {
+    if (!event.matches) return;
+    workObserver.disconnect();
+    workSteps.forEach(step => step.classList.remove('is-waiting', 'is-shown'));
+  });
 }
