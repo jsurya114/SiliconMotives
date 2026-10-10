@@ -59,8 +59,8 @@ Git repo root is this folder. Remote: `github.com/jsurya114/SiliconMotives`, bra
 
 ## State on 2026-10-10
 
-- **Admin work is on branch `admin-content-studio`** (commit `9c61e84`, pushed to GitHub). `main` is untouched at `607ec30`. Nothing is merged or deployed.
-- **Uncommitted on that branch:** a fix in `api/auth.js` and `lib/cms.mjs` so `GET /api/auth` clears the session cookie only when the browser sent one. Before it, a link from another site could sign the admin out. Verified locally; waiting for the owner's go-ahead to commit and push. This file also has uncommitted edits.
+- **Admin work is on branch `admin-content-studio`**, pushed to GitHub. `main` is untouched at `607ec30`. Nothing is merged or deployed.
+- **Forced-logout fix is included** (`06a7f33`): `GET /api/auth` clears the session cookie only when the browser sent one. Before it, a link from another site could sign the admin out.
 - **Checked locally with no database:** `/` and `/admin` return 200; `/api/auth` returns `{configured:false}`; public `/api/content` returns 503 and the page keeps its static content; admin routes return 401 without a cookie; a wrong `Origin` returns 403; `npm run check` passes.
 - **Never run against Supabase.** There is no `.env.local`. Sign-in, create/edit/delete, image upload and the public page rendering real rows are untested end to end.
 - **Not deployed** with the admin.
