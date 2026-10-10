@@ -1,10 +1,11 @@
-import { body, configured, handleError, HttpError, json, requireAdmin, sameOrigin, sessionCookie, supabase } from '../lib/cms.mjs';
+import { accessToken, body, configured, handleError, HttpError, json, requireAdmin, sameOrigin, sessionCookie, supabase } from '../lib/cms.mjs';
 export default async function handler(req, res) {
   try {
     if (req.method === 'GET') {
       if (!configured()) return json(res, 200, { configured: false, authenticated: false });
       try { const { user } = await requireAdmin(req); return json(res, 200, { configured: true, authenticated: true, email: user.email }); }
-      catch (error) { if (error.status === 401 || error.status === 403) { res.setHeader('Set-Cookie', sessionCookie(req)); return json(res, 200, { configured: true, authenticated: false }); } throw error; }
+      // Clear only a cookie the browser sent. A link from another site arrives without it and must not sign the admin out.
+      catch (error) { if (error.status === 401 || error.status === 403) { if (accessToken(req)) res.setHeader('Set-Cookie', sessionCookie(req)); return json(res, 200, { configured: true, authenticated: false }); } throw error; }
     }
     if (!['POST', 'DELETE'].includes(req.method)) throw new HttpError(405, 'Method not allowed.');
     sameOrigin(req);
