@@ -89,12 +89,12 @@
   };
 
   function renderSettings(settings) {
-    const whatsappNumber = settings.whatsapp_number || '918590184262';
+    const whatsappNumber = settings.whatsapp_number || '918590184265';
     const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
     document.querySelectorAll('.whatsapp-link').forEach(link => { link.href = whatsappUrl; });
     const links = [];
     if (settings.contact_email) links.push(`<a href="mailto:${escapeHtml(settings.contact_email)}">${escapeHtml(settings.contact_email)}</a>`);
-    if (!settings.contact_phone && !settings.whatsapp_number) links.push('<a href="tel:+918590184262">+91 85901 84262</a>');
+    if (!settings.contact_phone && !settings.whatsapp_number) links.push('<a href="tel:+918590184265">+91 85901 84265</a>');
     if (settings.contact_phone) links.push(`<a href="tel:${escapeHtml(settings.contact_phone.replace(/[^+\d]/g, ''))}">${escapeHtml(settings.contact_phone)}</a>`);
     links.push(`<a href="${escapeHtml(whatsappUrl)}" target="_blank" rel="noopener noreferrer">Chat on WhatsApp</a>`);
     if (safeUrl(settings.linkedin_url)) links.push(`<a href="${safeUrl(settings.linkedin_url)}" target="_blank" rel="noopener noreferrer">LinkedIn</a>`);
