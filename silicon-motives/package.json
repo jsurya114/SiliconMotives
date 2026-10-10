@@ -5,6 +5,7 @@
   "description": "Silicon Motives company website",
   "scripts": {
     "dev": "node server.mjs",
-    "check": "node --check dist/script.js && node --check server.mjs"
-  }
+    "check": "node --check dist/script.js && node --check dist/content.js && node --check dist/config.js && node --input-type=module --check < dist/admin/admin.js && node --check dist/admin/boot.js && node --check server.mjs"
+  },
+  "type": "module"
 }
