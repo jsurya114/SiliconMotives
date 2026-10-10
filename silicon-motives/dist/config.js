@@ -1,8 +1,5 @@
-// Supabase connection for the public site and the admin panel.
-// Use the project URL and the anon / publishable key from Supabase → Project
-// Settings → API. Both are safe to publish; access is enforced by the
-// row-level security policies in supabase/migrations. Never put the
-// service-role / secret key here.
+// Empty fallback for previews. The dev server and build generate this file
+// from SUPABASE_URL and SUPABASE_PUBLISHABLE_KEY. Keep values out of source.
 window.SM_CONFIG = {
   supabaseUrl: '',
   supabaseAnonKey: '',

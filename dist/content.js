@@ -8,6 +8,7 @@
 
   const escapeHtml = (value) => String(value ?? '').replace(/[&<>"']/g, (ch) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]));
   const safeUrl = (value) => (/^https?:\/\//i.test(value || '') ? escapeHtml(value) : '');
+  const whatsappMessage = 'Hi Silicon Motives! I have a project in mind and would love to explore how we can bring it to life. Could we discuss the right solution, timeline, and estimate?';
   const pad = (n) => String(n).padStart(2, '0');
   const initialsOf = (name) => String(name || '').split(/\s+/).filter(Boolean).slice(0, 2).map((part) => part[0].toUpperCase()).join('');
   const chatIcon = '<svg class="action-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.4 8.4 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8v.5Z"/><path d="M8 10h8m-8 4h5"/></svg>';
@@ -88,10 +89,14 @@
   };
 
   function renderSettings(settings) {
+    const whatsappNumber = settings.whatsapp_number || '918590184262';
+    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
+    document.querySelectorAll('.whatsapp-link').forEach(link => { link.href = whatsappUrl; });
     const links = [];
     if (settings.contact_email) links.push(`<a href="mailto:${escapeHtml(settings.contact_email)}">${escapeHtml(settings.contact_email)}</a>`);
+    if (!settings.contact_phone && !settings.whatsapp_number) links.push('<a href="tel:+918590184262">+91 85901 84262</a>');
     if (settings.contact_phone) links.push(`<a href="tel:${escapeHtml(settings.contact_phone.replace(/[^+\d]/g, ''))}">${escapeHtml(settings.contact_phone)}</a>`);
-    if (settings.whatsapp_number) links.push(`<a href="https://wa.me/${escapeHtml(settings.whatsapp_number)}" target="_blank" rel="noopener noreferrer">WhatsApp</a>`);
+    links.push(`<a href="${escapeHtml(whatsappUrl)}" target="_blank" rel="noopener noreferrer">Chat on WhatsApp</a>`);
     if (safeUrl(settings.linkedin_url)) links.push(`<a href="${safeUrl(settings.linkedin_url)}" target="_blank" rel="noopener noreferrer">LinkedIn</a>`);
     if (safeUrl(settings.instagram_url)) links.push(`<a href="${safeUrl(settings.instagram_url)}" target="_blank" rel="noopener noreferrer">Instagram</a>`);
     const note = document.querySelector('.contact-note');
@@ -126,7 +131,11 @@
 
   Object.entries(renderers).forEach(([table, render]) => {
     list(table)
-      .then((rows) => { if (rows.length) render(rows); })
+      .then((rows) => {
+        if (!rows.length) return;
+        render(rows);
+        document.dispatchEvent(new Event('silicon:content-updated'));
+      })
       .catch((error) => console.warn(`Silicon Motives: could not load ${table}.`, error));
   });
 })();

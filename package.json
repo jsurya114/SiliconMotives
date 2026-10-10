@@ -5,8 +5,11 @@
   "description": "Silicon Motives company website",
   "scripts": {
     "dev": "node server.mjs",
+    "build": "node scripts/build.mjs",
+    "seed:admin": "node scripts/seed-admin.mjs",
     "check": "node --check dist/script.js && node --check dist/content.js && node --check dist/config.js && node --input-type=module --check < dist/admin/admin.js && node --check dist/admin/boot.js && node --check server.mjs",
     "sync": "node scripts/sync-nested.mjs"
   },
-  "type": "module"
+  "type": "module",
+  "engines": { "node": ">=22" }
 }

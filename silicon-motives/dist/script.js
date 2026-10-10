@@ -79,26 +79,159 @@ function downloadBrief(data) {
   briefStatus.textContent = 'Your download is ready. Keep the brief to share with our team; nothing has been sent.';
 }
 
-// Reveal each step once, leaving the layout and native scrolling unchanged.
-const workSteps = [...document.querySelectorAll('.work-step')];
+// Motion is progressive enhancement: content remains readable without JavaScript.
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-if ('IntersectionObserver' in window && !reducedMotion.matches) {
-  const workObserver = new IntersectionObserver(entries => {
-    const visible = entries.filter(entry => entry.isIntersecting);
-    visible.forEach((entry, index) => {
-      entry.target.style.setProperty('--reveal-delay', `${index * 80}ms`);
-      entry.target.classList.remove('is-waiting');
-      entry.target.classList.add('is-shown');
-      workObserver.unobserve(entry.target);
-    });
-  }, { threshold: 0.15, rootMargin: '0px 0px -32px 0px' });
-  workSteps.forEach(step => {
-    step.classList.add('is-waiting');
-    workObserver.observe(step);
+const motionAnimations = new Set();
+function animateEntrance(element, delay = 0, distance = 22) {
+  if (reducedMotion.matches || !element.animate) return;
+  const animation = element.animate([
+    { opacity: 0, transform: `translateY(${distance}px)` },
+    { opacity: 1, transform: 'translateY(0)' },
+  ], { duration: 650, delay, easing: 'cubic-bezier(.22, 1, .36, 1)', fill: 'both' });
+  motionAnimations.add(animation);
+  animation.onfinish = () => {
+    motionAnimations.delete(animation);
+    animation.cancel(); // Restore the element's own hover transforms.
+  };
+}
+
+const introParts = document.querySelectorAll('.hero-content > .eyebrow, .hero-title-line, .hero-description, .hero-actions, .hero-footer');
+introParts.forEach((element, index) => animateEntrance(element, index * 95, 20));
+
+const revealSelector = [
+  '.belief-grid > *', '.section-heading > *', '.clients-heading > *',
+  '.about-copy', '.founder', '.service', '.solution',
+  '.remote-grid > :first-child', '.principles article', '.work-heading > *',
+  '.work-step', '.portfolio-heading > *', '.folio-item', '.testimonial-card',
+  '.faq-section > :first-child', '.faqs', '.contact-inner > .eyebrow',
+  '.contact-inner > h2', '.contact-inner > p', '.contact-inner > .button',
+].join(',');
+const observed = new WeakSet();
+const waiting = new Set();
+const revealObserver = 'IntersectionObserver' in window ? new IntersectionObserver(entries => {
+  entries.filter(entry => entry.isIntersecting).forEach((entry, index) => {
+    const element = entry.target;
+    element.classList.remove('reveal-pending');
+    waiting.delete(element);
+    revealObserver.unobserve(element);
+    animateEntrance(element, Math.min(index, 3) * 70);
   });
-  reducedMotion.addEventListener('change', event => {
-    if (!event.matches) return;
-    workObserver.disconnect();
-    workSteps.forEach(step => step.classList.remove('is-waiting', 'is-shown'));
+}, { threshold: 0, rootMargin: '0px 0px -40px 0px' }) : null;
+
+function prepareReveals() {
+  // Supabase replaces some cards after the first paint.
+  for (const element of waiting) {
+    if (!element.isConnected) {
+      revealObserver.unobserve(element);
+      waiting.delete(element);
+    }
+  }
+  if (!revealObserver || reducedMotion.matches) return;
+  document.querySelectorAll(revealSelector).forEach(element => {
+    if (observed.has(element)) return;
+    observed.add(element);
+    // Avoid hiding CMS content that replaces a card already being read.
+    if (element.getBoundingClientRect().top < window.innerHeight - 40) return;
+    element.classList.add('reveal-pending');
+    waiting.add(element);
+    revealObserver.observe(element);
   });
 }
+// Keyboard navigation must never focus an invisible card.
+document.addEventListener('focusin', event => {
+  const element = event.target.closest('.reveal-pending');
+  if (!element) return;
+  element.classList.remove('reveal-pending');
+  waiting.delete(element);
+  revealObserver?.unobserve(element);
+});
+
+const faqStates = new WeakMap();
+const activeFaqs = new Set();
+function setFaqOpen(details, open) {
+  let state = faqStates.get(details);
+  if (!state) {
+    state = { open: details.open, animation: null };
+    faqStates.set(details, state);
+  }
+  const from = details.getBoundingClientRect().height;
+  if (state.animation) {
+    state.animation.onfinish = null;
+    state.animation.cancel();
+  }
+  state.open = open;
+  details.classList.toggle('is-expanded', open);
+  const summary = details.querySelector('summary');
+  summary.setAttribute('aria-expanded', String(open));
+  const finish = () => {
+    details.open = state.open;
+    details.classList.remove('faq-animating');
+    state.animation?.cancel();
+    state.animation = null;
+    activeFaqs.delete(details);
+  };
+  if (reducedMotion.matches || !details.animate) {
+    finish();
+    return;
+  }
+  details.open = true;
+  const style = getComputedStyle(details);
+  const to = open ? details.getBoundingClientRect().height : summary.offsetHeight + parseFloat(style.borderTopWidth) + parseFloat(style.borderBottomWidth);
+  details.classList.add('faq-animating');
+  state.animation = details.animate([{ height: `${from}px` }, { height: `${to}px` }], {
+    duration: 280, easing: 'cubic-bezier(.22, 1, .36, 1)', fill: 'both',
+  });
+  activeFaqs.add(details);
+  state.animation.onfinish = finish;
+}
+// Delegate clicks so newly published FAQ entries work immediately.
+document.querySelector('.faqs').addEventListener('click', event => {
+  const summary = event.target.closest('summary');
+  if (!summary) return;
+  event.preventDefault();
+  const details = summary.parentElement;
+  const open = !(faqStates.get(details)?.open ?? details.open);
+  if (open) {
+    document.querySelectorAll('.faqs details[open]').forEach(other => {
+      if (other !== details) setFaqOpen(other, false);
+    });
+  }
+  setFaqOpen(details, open);
+});
+// Finish an in-flight expansion before text reflows to a different width.
+window.addEventListener('resize', () => {
+  for (const details of activeFaqs) faqStates.get(details).animation?.finish();
+});
+reducedMotion.addEventListener('change', event => {
+  if (!event.matches) return;
+  revealObserver?.disconnect();
+  for (const element of waiting) element.classList.remove('reveal-pending');
+  waiting.clear();
+  for (const animation of motionAnimations) animation.finish();
+  for (const details of activeFaqs) faqStates.get(details).animation?.finish();
+});
+document.addEventListener('silicon:content-updated', prepareReveals);
+prepareReveals();
+
+// Duplicate only the visual track so the loop has no jump or repeated tab stops.
+const clientTrack = document.querySelector('.client-logo-grid');
+const clientMarquee = document.querySelector('.client-marquee');
+function prepareClientMarquee() {
+  if (clientTrack.querySelector(':scope > .client-logo-group')) return;
+  const group = document.createElement('div');
+  group.className = 'client-logo-group';
+  group.append(...clientTrack.children);
+  const duplicate = group.cloneNode(true);
+  duplicate.setAttribute('aria-hidden', 'true');
+  duplicate.inert = true;
+  duplicate.querySelectorAll('a').forEach(link => link.tabIndex = -1);
+  clientTrack.replaceChildren(group, duplicate);
+  clientTrack.classList.add('is-ready');
+}
+// One published client still fills a complete loop on wide screens.
+const sizeClientMarquee = () => clientMarquee.style.setProperty('--client-window-width', `${clientMarquee.clientWidth}px`);
+if ('ResizeObserver' in window) new ResizeObserver(sizeClientMarquee).observe(clientMarquee);
+else window.addEventListener('resize', sizeClientMarquee);
+sizeClientMarquee();
+document.addEventListener('silicon:content-updated', prepareClientMarquee);
+prepareClientMarquee();

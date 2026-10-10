@@ -135,7 +135,7 @@ async function run(promise) {
 }
 
 if (!config.supabaseUrl || !config.supabaseAnonKey) {
-  app.innerHTML = `<div class="auth"><div class="auth-card"><p class="eyebrow">Setup needed</p><h1>Connect Supabase</h1><p>Add your Supabase project URL and anon key to <code>dist/config.js</code>, then run the migration in <code>supabase/migrations</code>. The README has step-by-step instructions.</p></div></div>`;
+  app.innerHTML = `<div class="auth"><div class="auth-card"><p class="eyebrow">Setup needed</p><h1>Connect Supabase</h1><p>Set <code>SUPABASE_URL</code> and <code>SUPABASE_PUBLISHABLE_KEY</code> in your local <code>.env</code> or hosting environment, then restart or redeploy the site. Run the migration in <code>supabase/migrations</code>. The README has step-by-step instructions.</p></div></div>`;
 } else {
 const { createClient } = await import('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/+esm');
 
