@@ -38,6 +38,15 @@ Git repo root is this folder. Remote: `github.com/jsurya114/SiliconMotives`, bra
 
 **Public page.** Any non-200 from `/api/content` leaves the static HTML untouched, so the site works with no database.
 
+## Design theme
+
+- **Voice:** calm, editorial, plain-spoken. Tagline "Good software. Clear purpose." Headlines pair a plain line with an italic serif line in teal, for example "Good ideas. *Made tangible.*" No invented clients, testimonials or portfolio claims.
+- **Palette:** navy `#102b46`, ink `#10243a`, teal accent `#07767b` (hover `#06666b`), mint highlight `#7ee2d1`, paper `#fafaf7`, soft `#eef3f6`, line `#d8e2e8`, muted text `#536577`.
+- **Type, public site:** DM Sans for body, Manrope for display, Georgia italic for accents. Section labels are small uppercase eyebrows numbered like `07 / PORTFOLIO`.
+- **Type, admin:** Inter with system fallbacks and Georgia for accents. No web font is loaded there because the CSP blocks external styles. Same navy, teal and mint; paper is `#f5f7f8`.
+- **Shapes:** thin 1px borders, mostly small radii (2 to 6px), pill buttons and tags, circular avatars.
+- **Public sections, in order:** Hero, Belief, Clients, About (founders), Services, Solutions, Remote, Approach, Portfolio, Testimonials, FAQ, Contact.
+
 ## Rules to keep
 
 - Stay dependency-free vanilla ES modules. No framework, bundler or build step.
@@ -50,7 +59,8 @@ Git repo root is this folder. Remote: `github.com/jsurya114/SiliconMotives`, bra
 
 ## State on 2026-10-10
 
-- **All admin work is uncommitted.** `main` equals `origin/main` at `607ec30`. Modified: `.gitignore`, `dist/index.html`, `dist/styles.css`, `package.json`, `server.mjs`, `vercel.json`. Untracked: `api/`, `lib/`, `scripts/`, `supabase/`, `dist/admin/`, `dist/content-model.js`, `dist/public-content.js`, `.env.example`.
+- **Admin work is on branch `admin-content-studio`** (commit `9c61e84`, pushed to GitHub). `main` is untouched at `607ec30`. Nothing is merged or deployed.
+- **Uncommitted on that branch:** a fix in `api/auth.js` and `lib/cms.mjs` so `GET /api/auth` clears the session cookie only when the browser sent one. Before it, a link from another site could sign the admin out. Verified locally; waiting for the owner's go-ahead to commit and push. This file also has uncommitted edits.
 - **Checked locally with no database:** `/` and `/admin` return 200; `/api/auth` returns `{configured:false}`; public `/api/content` returns 503 and the page keeps its static content; admin routes return 401 without a cookie; a wrong `Origin` returns 403; `npm run check` passes.
 - **Never run against Supabase.** There is no `.env.local`. Sign-in, create/edit/delete, image upload and the public page rendering real rows are untested end to end.
 - **Not deployed** with the admin.
