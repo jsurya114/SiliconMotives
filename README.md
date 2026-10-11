@@ -44,7 +44,7 @@ Changes appear on the site as soon as they are saved. The client and testimonial
 ## Setting up Supabase (one time)
 
 1. Create a project at https://supabase.com.
-2. Run the migrations in `supabase/migrations/` in timestamp order: either paste each SQL file into **SQL Editor** and run it, or use the Supabase CLI (`supabase link` then `supabase db push`). The migrations create the CMS, starter content, and the published Woobe, NasaLogistic, Picbox, and Uniwayin portfolio projects. Existing published projects are kept as unpublished drafts when Woobe is added.
+2. Run the migrations in `supabase/migrations/` in timestamp order: either paste each SQL file into **SQL Editor** and run it, or use the Supabase CLI (`supabase link` then `supabase db push`). The migrations create the CMS, starter content, and the published Woobe, NasaLogistic, Picbox, Uniwayin, and Dental Buddy portfolio projects. Existing published projects are kept as unpublished drafts when Woobe is added. For an existing installation with the earlier migrations applied, run `20261012150000_feature_dental_buddy_portfolio.sql` to add Dental Buddy to the admin and live CMS portfolio. Deploying the website does not run database migrations.
 3. Copy the project URL and publishable (or legacy anon) key from the project's **Connect** dialog into `.env` as `SUPABASE_URL` and `SUPABASE_PUBLISHABLE_KEY`. Set the same variables on your hosting provider. Never use the service-role or secret key.
 4. Create the admin login: **Authentication → Users → Add user**, with an email and a strong password (tick "Auto Confirm User").
 5. Grant that user admin access in **SQL Editor**:
