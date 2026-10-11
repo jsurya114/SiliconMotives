@@ -13,7 +13,6 @@
   const pad = (n) => String(n).padStart(2, '0');
   const initialsOf = (name) => String(name || '').split(/\s+/).filter(Boolean).slice(0, 2).map((part) => part[0].toUpperCase()).join('');
   const chatIcon = '<svg class="action-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.4 8.4 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8v.5Z"/><path d="M8 10h8m-8 4h5"/></svg>';
-  const externalIcon = '<svg class="action-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg>';
 
   async function rest(path, options = {}) {
     const response = await fetch(`${baseUrl}/rest/v1/${path}`, {
@@ -50,14 +49,10 @@
     projects(rows) {
       document.querySelector('.portfolio-grid').innerHTML = rows.map((row, i) => {
         const image = safeImageUrl(row.image_url);
-        const link = safeUrl(row.project_url);
         const art = image
           ? `<div class="folio-art folio-art-photo"><img src="${image}" alt="${escapeHtml(row.image_alt)}" loading="lazy" decoding="async"></div>`
           : `<div class="folio-art folio-art-photo folio-art-empty" aria-hidden="true"><span>${escapeHtml(initialsOf(row.title))}</span></div>`;
-        const action = link
-          ? `<a class="folio-contact" href="${link}" target="_blank" rel="noopener noreferrer">View project ${externalIcon}</a>`
-          : `<a class="folio-contact" href="#contact" aria-label="Discuss a project like ${escapeHtml(row.title)}">Discuss a similar project ${chatIcon}</a>`;
-        return `<article class="folio-item" aria-labelledby="folio-title-${row.id}">${art}<div class="folio-meta"><span>${escapeHtml(row.category.toUpperCase())}</span><span>${pad(i + 1)} / ${pad(rows.length)}</span></div><h3 id="folio-title-${row.id}">${escapeHtml(row.title)}</h3><p class="folio-description">${escapeHtml(row.description)}</p><div class="folio-tags">${row.tags.map((tag) => `<span>${escapeHtml(tag)}</span>`).join('')}</div>${action}</article>`;
+        return `<article class="folio-item" aria-labelledby="folio-title-${row.id}">${art}<div class="folio-meta"><span>${escapeHtml(row.category.toUpperCase())}</span><span>${pad(i + 1)} / ${pad(rows.length)}</span></div><h3 id="folio-title-${row.id}">${escapeHtml(row.title)}</h3><p class="folio-description">${escapeHtml(row.description)}</p><div class="folio-tags">${row.tags.map((tag) => `<span>${escapeHtml(tag)}</span>`).join('')}</div></article>`;
       }).join('');
       document.querySelector('.portfolio-disclosure')?.remove();
     },

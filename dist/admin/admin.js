@@ -51,7 +51,7 @@ const collections = {
       { name: 'tags', label: 'Tags', type: 'tags', help: 'Comma separated, up to 8.' },
       { name: 'image_url', label: 'Cover image', type: 'image', allowLocal: true, help: 'Landscape, around 1200 × 800. Local /images/ paths are supported.' },
       { name: 'image_alt', label: 'Image description', type: 'text', max: 200, help: 'Describes the image for screen readers.' },
-      { name: 'project_url', label: 'Project link', type: 'url', help: 'Optional. Leave empty to show “Discuss a similar project”.' },
+      { name: 'project_url', label: 'Project reference link', type: 'url', help: 'Optional admin reference. Project cards do not show an external link.' },
     ],
     defaults: { published: false, tags: [] },
   },
