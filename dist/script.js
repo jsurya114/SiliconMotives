@@ -232,15 +232,13 @@ sizeClientMarquee();
 document.addEventListener('silicon:content-updated', prepareClientMarquee);
 prepareClientMarquee();
 
-// Keep testimonial motion readable, pausable, and compatible with CMS updates.
+// Keep testimonial motion readable and compatible with CMS updates.
 const testimonialTrack = document.querySelector('.testimonial-grid');
 const testimonialMarquee = document.querySelector('.testimonial-marquee');
-const testimonialPause = document.querySelector('.testimonial-pause');
 function prepareTestimonialMarquee() {
-  if (!testimonialTrack || !testimonialMarquee || !testimonialPause) return;
+  if (!testimonialTrack || !testimonialMarquee) return;
   if (testimonialTrack.querySelector(':scope > .testimonial-group')) return;
   testimonialTrack.classList.remove('is-ready');
-  testimonialPause.hidden = true;
   if (testimonialTrack.children.length < 2) return;
   const group = document.createElement('div');
   group.className = 'testimonial-group';
@@ -252,18 +250,12 @@ function prepareTestimonialMarquee() {
   duplicate.querySelectorAll('a, button, [tabindex]').forEach(element => element.tabIndex = -1);
   testimonialTrack.replaceChildren(group, duplicate);
   testimonialTrack.classList.add('is-ready');
-  testimonialPause.hidden = false;
 }
-if (testimonialMarquee && testimonialTrack && testimonialPause) {
+if (testimonialMarquee && testimonialTrack) {
   const sizeTestimonials = () => testimonialMarquee.style.setProperty('--testimonial-window-width', `${testimonialMarquee.clientWidth}px`);
   if ('ResizeObserver' in window) new ResizeObserver(sizeTestimonials).observe(testimonialMarquee);
   else window.addEventListener('resize', sizeTestimonials);
   sizeTestimonials();
-  testimonialPause.addEventListener('click', () => {
-    const paused = testimonialTrack.classList.toggle('is-paused');
-    testimonialPause.setAttribute('aria-pressed', String(paused));
-    testimonialPause.textContent = paused ? 'Resume animation' : 'Pause animation';
-  });
   document.addEventListener('silicon:content-updated', prepareTestimonialMarquee);
   prepareTestimonialMarquee();
 }
