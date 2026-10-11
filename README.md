@@ -66,10 +66,10 @@ These are suggested wording for review, not quotes supplied or approved by the c
 | Client | Suggested testimonial |
 | --- | --- |
 | Abdul Rahman — CEO, NasaLogistic | The team understood how we manage driver availability and orders. NasaLogistic brings those tasks into one place and is straightforward for our team to use. |
-| Rakhi S — Dental Buddy | Dental Buddy brings patient records, appointments, and billing into one place. The team listened to our clinic's needs and kept the system practical for day-to-day use. |
-| Gokul — Woobe | Woobe's weight-based shopping needed a clear, simple experience. The team worked through the details with us and built a storefront that fits the way we sell. |
+| Rakhi S — Dentist, Dental Buddy | Dental Buddy brings patient records, appointments, and billing into one place. The team listened to our clinic's needs and kept the system practical for day-to-day use. |
+| Gokul — Entrepreneur, Woobe | Woobe's weight-based shopping needed a clear, simple experience. The team worked through the details with us and built a storefront that fits the way we sell. |
 
-Review each entry with its named client, update the wording if needed, then publish it in admin. Published entries automatically replace the public testimonial placeholders. Roles for Rakhi S and Gokul are intentionally blank because none were supplied.
+Review each entry with its named client, update the wording if needed, then publish it in admin. Published entries automatically replace the public testimonial placeholders. Run `20261012180000_testimonial_client_roles.sql` to set Rakhi S’s role to Dentist and Gokul’s to Entrepreneur. This preserves the saved quotes and publication status. Testimonials use a horizontal loop like the client showcase, with pause/resume controls, hover pause, and a static layout for reduced-motion preferences.
 
 ## Setting up Supabase (one time)
 

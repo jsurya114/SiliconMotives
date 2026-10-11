@@ -529,3 +529,32 @@ body.dialog-open .whatsapp-float{visibility:hidden}
 .founder-featured .founder-linkedin{color:#9ce8d9}
 .founder-linkedin:focus-visible{outline:2px solid currentColor;outline-offset:3px;border-radius:2px}
 @media(max-width:760px){.founder-linkedin{min-height:40px;margin-top:4px;font-size:12px}}
+
+/* Testimonials follow the client showcase's continuous horizontal motion. */
+.testimonial-marquee{overflow:hidden;padding-block:6px;mask-image:linear-gradient(90deg,transparent,#000 2%,#000 98%,transparent)}
+#testimonials .testimonial-grid.is-ready{display:flex;width:max-content;gap:0;animation:client-scroll 44s linear infinite}
+.testimonial-group{display:flex;align-items:stretch;justify-content:space-around;gap:20px;padding-right:20px;min-width:var(--testimonial-window-width,0px);flex:none}
+#testimonials .testimonial-group .testimonial-card{flex:none;width:350px;border:1px solid #d4e0e5;border-radius:12px;background:#fff;padding:26px}
+#testimonials .quote-mark{font-size:48px;color:var(--accent);margin-bottom:0}
+#testimonials .testimonial-card>p{font-size:15px;line-height:1.8;color:var(--ink);margin:16px 0 24px}
+#testimonials .testimonial-person div>span{font-size:14px;font-weight:600;color:var(--ink)}
+#testimonials .testimonial-person small{font-size:12px;line-height:1.6;color:var(--muted)}
+#testimonials .avatar-placeholder{flex:none}
+.testimonial-controls{display:flex;justify-content:flex-end;margin-top:14px}
+.testimonial-pause{min-height:44px;padding:8px 16px;border:1px solid #bdcdd5;border-radius:24px;background:transparent;color:var(--ink);font-size:12px}
+.testimonial-pause:hover{background:#fff;border-color:var(--accent)}
+.testimonial-pause[hidden]{display:none}
+#testimonials .testimonial-grid.is-paused,#testimonials .testimonial-grid:focus-within{animation-play-state:paused}
+@media(hover:hover){.testimonial-marquee:hover .testimonial-grid.is-ready{animation-play-state:paused}}
+@media(max-width:760px){
+ .testimonial-group{gap:14px;padding-right:14px}
+ #testimonials .testimonial-group .testimonial-card{width:min(320px,calc(100vw - 64px));padding:22px}
+ #testimonials .testimonial-card>p{font-size:16px;line-height:1.65}
+}
+@media(prefers-reduced-motion:reduce){
+ .testimonial-marquee{overflow:visible;mask-image:none}
+ #testimonials .testimonial-grid.is-ready{animation:none;transform:none;width:100%}
+ .testimonial-group{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));width:100%;min-width:0;gap:20px;padding:0}
+ .testimonial-group[aria-hidden="true"],.testimonial-controls{display:none}
+ #testimonials .testimonial-group .testimonial-card{width:100%;min-width:0}
+}

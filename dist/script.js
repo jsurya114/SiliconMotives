@@ -98,7 +98,7 @@ const revealSelector = [
   '.belief-grid > *', '.section-heading > *', '.clients-heading > *',
   '.about-copy', '.founder', '.service', '.solution',
   '.remote-grid > :first-child', '.principles article', '.work-heading > *',
-  '.work-step', '.portfolio-heading > *', '.folio-item', '.testimonial-card',
+  '.work-step', '.portfolio-heading > *', '.folio-item', '.testimonial-marquee',
   '.faq-section > :first-child', '.faqs', '.contact-inner > .eyebrow',
   '.contact-inner > h2', '.contact-inner > p', '.contact-inner > .button',
 ].join(',');
@@ -231,3 +231,39 @@ else window.addEventListener('resize', sizeClientMarquee);
 sizeClientMarquee();
 document.addEventListener('silicon:content-updated', prepareClientMarquee);
 prepareClientMarquee();
+
+// Keep testimonial motion readable, pausable, and compatible with CMS updates.
+const testimonialTrack = document.querySelector('.testimonial-grid');
+const testimonialMarquee = document.querySelector('.testimonial-marquee');
+const testimonialPause = document.querySelector('.testimonial-pause');
+function prepareTestimonialMarquee() {
+  if (!testimonialTrack || !testimonialMarquee || !testimonialPause) return;
+  if (testimonialTrack.querySelector(':scope > .testimonial-group')) return;
+  testimonialTrack.classList.remove('is-ready');
+  testimonialPause.hidden = true;
+  if (testimonialTrack.children.length < 2) return;
+  const group = document.createElement('div');
+  group.className = 'testimonial-group';
+  group.append(...testimonialTrack.children);
+  const duplicate = group.cloneNode(true);
+  duplicate.setAttribute('aria-hidden', 'true');
+  duplicate.inert = true;
+  duplicate.querySelectorAll('[id]').forEach(element => element.removeAttribute('id'));
+  duplicate.querySelectorAll('a, button, [tabindex]').forEach(element => element.tabIndex = -1);
+  testimonialTrack.replaceChildren(group, duplicate);
+  testimonialTrack.classList.add('is-ready');
+  testimonialPause.hidden = false;
+}
+if (testimonialMarquee && testimonialTrack && testimonialPause) {
+  const sizeTestimonials = () => testimonialMarquee.style.setProperty('--testimonial-window-width', `${testimonialMarquee.clientWidth}px`);
+  if ('ResizeObserver' in window) new ResizeObserver(sizeTestimonials).observe(testimonialMarquee);
+  else window.addEventListener('resize', sizeTestimonials);
+  sizeTestimonials();
+  testimonialPause.addEventListener('click', () => {
+    const paused = testimonialTrack.classList.toggle('is-paused');
+    testimonialPause.setAttribute('aria-pressed', String(paused));
+    testimonialPause.textContent = paused ? 'Resume animation' : 'Pause animation';
+  });
+  document.addEventListener('silicon:content-updated', prepareTestimonialMarquee);
+  prepareTestimonialMarquee();
+}
