@@ -50,9 +50,9 @@
       document.querySelector('.portfolio-grid').innerHTML = rows.map((row, i) => {
         const image = safeImageUrl(row.image_url);
         const art = image
-          ? `<div class="folio-art folio-art-photo"><img src="${image}" alt="${escapeHtml(row.image_alt)}" loading="lazy" decoding="async"></div>`
-          : `<div class="folio-art folio-art-photo folio-art-empty" aria-hidden="true"><span>${escapeHtml(initialsOf(row.title))}</span></div>`;
-        return `<article class="folio-item" aria-labelledby="folio-title-${row.id}">${art}<div class="folio-meta"><span>${escapeHtml(row.category.toUpperCase())}</span><span>${pad(i + 1)} / ${pad(rows.length)}</span></div><h3 id="folio-title-${row.id}">${escapeHtml(row.title)}</h3><p class="folio-description">${escapeHtml(row.description)}</p><div class="folio-tags">${row.tags.map((tag) => `<span>${escapeHtml(tag)}</span>`).join('')}</div></article>`;
+          ? `<div class="project-thumbnail"><img src="${image}" alt="${escapeHtml(row.image_alt)}" loading="lazy" decoding="async"></div>`
+          : `<div class="project-thumbnail project-thumbnail-empty" aria-hidden="true"><span>${escapeHtml(initialsOf(row.title))}</span></div>`;
+        return `<article class="folio-item project-row" aria-labelledby="folio-title-${row.id}"><span class="project-index" aria-hidden="true">${pad(i + 1)}</span><div class="project-copy"><p class="project-category">${escapeHtml(row.category)}</p><h3 id="folio-title-${row.id}">${escapeHtml(row.title)}</h3><p class="project-summary">${escapeHtml(row.description)}</p></div>${art}</article>`;
       }).join('');
       document.querySelector('.portfolio-disclosure')?.remove();
     },
