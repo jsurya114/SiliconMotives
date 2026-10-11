@@ -508,7 +508,7 @@ body.dialog-open .whatsapp-float{visibility:hidden}
 .demo-client svg{width:28px;height:28px;flex:none;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
 #clients .demo-client-2{color:#487063}#clients .demo-client-3{font-family:Georgia,serif;font-size:25px;font-style:italic;color:#515577}
 #clients .demo-client-4{color:#345c72}#clients .demo-client-5{color:#696048}#clients .demo-client-6{color:#356660}
-#clients .client-logo-grid.is-paused,#clients .client-logo-grid:focus-within{animation-play-state:paused}
+#clients .client-logo-grid:focus-within{animation-play-state:paused}
 @keyframes client-scroll{to{transform:translateX(-50%)}}
 @media(hover:hover){.client-marquee:hover .client-logo-grid.is-ready{animation-play-state:paused}}
 @media(max-width:760px){#clients .client-logo{width:174px;min-height:92px;font-size:17px;padding:18px 14px}.demo-client svg{width:25px;height:25px}#clients .demo-client-3{font-size:24px}.clients-heading h2{font-size:30px}.clients-heading>p{font-size:12px}}
@@ -540,7 +540,7 @@ body.dialog-open .whatsapp-float{visibility:hidden}
 #testimonials .testimonial-person div>span{font-size:14px;font-weight:600;color:var(--ink)}
 #testimonials .testimonial-person small{font-size:12px;line-height:1.6;color:var(--muted)}
 #testimonials .avatar-placeholder{flex:none}
-#testimonials .testimonial-grid.is-paused,#testimonials .testimonial-grid:focus-within{animation-play-state:paused}
+#testimonials .testimonial-grid:focus-within{animation-play-state:paused}
 @media(hover:hover){.testimonial-marquee:hover .testimonial-grid.is-ready{animation-play-state:paused}}
 @media(max-width:760px){
  .testimonial-group{gap:14px;padding-right:14px}
