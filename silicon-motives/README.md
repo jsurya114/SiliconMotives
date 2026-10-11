@@ -57,6 +57,20 @@ Signed-in admins can:
 
 Changes appear on the site as soon as they are saved. The client and testimonial sections keep their preview content until you publish real entries; the portfolio starts with the Woobe case study.
 
+### Client testimonial drafts
+
+Run `supabase/migrations/20261012170000_client_testimonial_drafts.sql` in Supabase SQL Editor to add three unpublished entries under **Admin → Testimonials**. Deploying the website does not apply this migration. It can be re-run without duplicating these entries or overwriting existing client feedback.
+
+These are suggested wording for review, not quotes supplied or approved by the clients:
+
+| Client | Suggested testimonial |
+| --- | --- |
+| Abdul Rahman — CEO, NasaLogistic | The team understood how we manage driver availability and orders. NasaLogistic brings those tasks into one place and is straightforward for our team to use. |
+| Rakhi S — Dental Buddy | Dental Buddy brings patient records, appointments, and billing into one place. The team listened to our clinic's needs and kept the system practical for day-to-day use. |
+| Gokul — Woobe | Woobe's weight-based shopping needed a clear, simple experience. The team worked through the details with us and built a storefront that fits the way we sell. |
+
+Review each entry with its named client, update the wording if needed, then publish it in admin. Published entries automatically replace the public testimonial placeholders. Roles for Rakhi S and Gokul are intentionally blank because none were supplied.
+
 ## Setting up Supabase (one time)
 
 1. Create a project at https://supabase.com.

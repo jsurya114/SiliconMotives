@@ -76,7 +76,7 @@ const collections = {
     subtitle: (row) => row.quote,
     image: 'avatar_url',
     fields: [
-      { name: 'quote', label: 'Quote', type: 'textarea', required: true, max: 800 },
+      { name: 'quote', label: 'Quote', type: 'textarea', required: true, max: 800, help: 'Suggested wording is a draft. Confirm it with the named client before publishing.' },
       { name: 'author_name', label: 'Name', type: 'text', required: true, max: 80 },
       { name: 'author_role', label: 'Role', type: 'text', max: 80 },
       { name: 'company', label: 'Company', type: 'text', max: 80 },
@@ -269,7 +269,7 @@ async function renderCollection(key, main = document.querySelector('#main')) {
           <span class="thumb">${image ? `<img src="${escapeHtml(image)}" alt="">` : escapeHtml(initialsOf(c.title(row)))}</span>
           <div class="row-main"><div class="row-title">${escapeHtml(c.title(row))}</div><div class="row-sub">${escapeHtml(c.subtitle(row) || '')}</div></div>
           <div class="row-actions">
-            <span class="pill ${row.published ? 'pill-live' : ''}">${row.published ? 'Published' : 'Hidden'}</span>
+            <span class="pill ${row.published ? 'pill-live' : ''}">${row.published ? 'Published' : key === 'testimonials' ? 'Draft' : 'Hidden'}</span>
             <button class="btn btn-icon btn-ghost" data-action="up" aria-label="Move up"${i === 0 ? ' disabled' : ''}>↑</button>
             <button class="btn btn-icon btn-ghost" data-action="down" aria-label="Move down"${i === rows.length - 1 ? ' disabled' : ''}>↓</button>
             <button class="btn" data-action="toggle">${row.published ? 'Hide' : 'Publish'}</button>
