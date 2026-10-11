@@ -38,10 +38,13 @@
     team_members(rows) {
       const note = document.querySelector('.founders .founder-note');
       const cards = rows.map((row, i) => {
-        const photo = safeUrl(row.photo_url);
+        const founder = /^jasil m$/i.test(row.name.trim()) ? 'jasil' : /^jayasoorya s$/i.test(row.name.trim()) ? 'jayasoorya' : '';
+        const defaultPhoto = founder ? `/images/${founder}.jpg` : '';
+        const photo = safeImageUrl(row.photo_url || defaultPhoto);
+        const portraitClass = photo ? ` founder-portrait${photo === defaultPhoto ? ` founder-portrait-${founder}` : ''}` : '';
         const profile = /jasil/i.test(row.name) ? 'https://www.linkedin.com/in/jasilmeledath/' : /jayasoorya/i.test(row.name) ? 'https://www.linkedin.com/in/jayasoorya-suryadas/' : '';
         const avatar = photo ? `<img src="${photo}" alt="" loading="lazy" decoding="async">` : escapeHtml(initialsOf(row.name));
-        return `<article class="founder ${i === 0 ? 'founder-featured' : 'founder-secondary'}"><div class="initials ${i % 2 ? 'initials-jayasoorya' : ''}" aria-hidden="true">${avatar}</div><div class="founder-meta"><span class="founder-kicker">${escapeHtml(row.kicker || `TEAM ${pad(i + 1)}`)}</span><h3>${escapeHtml(row.name)}</h3><p>${escapeHtml(row.role)}</p>${profile ? `<a class="founder-linkedin" href="${profile}" target="_blank" rel="noopener noreferrer">Connect on LinkedIn <span aria-hidden="true">↗</span></a>` : ''}</div><span class="founder-index" aria-hidden="true">${pad(i + 1)}</span></article>`;
+        return `<article class="founder ${i === 0 ? 'founder-featured' : 'founder-secondary'}"><div class="initials ${i % 2 ? 'initials-jayasoorya' : ''}${portraitClass}" aria-hidden="true">${avatar}</div><div class="founder-meta"><span class="founder-kicker">${escapeHtml(row.kicker || `TEAM ${pad(i + 1)}`)}</span><h3>${escapeHtml(row.name)}</h3><p>${escapeHtml(row.role)}</p>${profile ? `<a class="founder-linkedin" href="${profile}" target="_blank" rel="noopener noreferrer">Connect on LinkedIn</a>` : ''}</div><span class="founder-index" aria-hidden="true">${pad(i + 1)}</span></article>`;
       }).join('');
       document.querySelector('.founders').innerHTML = cards + (note ? note.outerHTML : '');
     },

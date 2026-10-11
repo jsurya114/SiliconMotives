@@ -33,7 +33,7 @@ const collections = {
       { name: 'name', label: 'Name', type: 'text', required: true, max: 80 },
       { name: 'role', label: 'Role', type: 'text', max: 80, help: 'e.g. Co-founder' },
       { name: 'kicker', label: 'Small label', type: 'text', max: 40, help: 'e.g. FOUNDER 01. Leave empty to use TEAM 01, TEAM 02…' },
-      { name: 'photo_url', label: 'Photo', type: 'image', help: 'Square image works best. Without a photo, initials are shown.' },
+      { name: 'photo_url', label: 'Photo', type: 'image', allowLocal: true, help: 'Upload a portrait or use a local /images/ path. Jasil and Jayasoorya use their default portraits when empty; other team members show initials.' },
     ],
     defaults: { published: true },
   },
@@ -365,7 +365,7 @@ function bindImageFields(form, folder, uploaded) {
       preview.innerHTML = url ? `<img src="${escapeHtml(url)}" alt="">` : 'No image';
       removeButton.hidden = !url;
     };
-    input.addEventListener('input', () => show(/^https?:\/\//.test(input.value) || (folder === 'projects' && /^\/images\/[A-Za-z0-9._/-]+$/.test(input.value)) ? input.value : ''));
+    input.addEventListener('input', () => show(/^https?:\/\//.test(input.value) || (['projects', 'team_members'].includes(folder) && /^\/images\/[A-Za-z0-9._/-]+$/.test(input.value) && !/(?:^|\/)\.\.(?:\/|$)/.test(input.value)) ? input.value : ''));
     removeButton.addEventListener('click', () => { input.value = ''; show(''); });
     fileInput.addEventListener('change', async () => {
       const file = fileInput.files[0];

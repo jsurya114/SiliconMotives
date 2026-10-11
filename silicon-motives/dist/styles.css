@@ -344,6 +344,13 @@ input::placeholder,textarea::placeholder{color:#617182;opacity:1}
 /* Content managed from the admin panel. */
 .visually-hidden{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .initials img{width:100%;height:100%;border-radius:50%;object-fit:cover}
+/* Keep the original photos intact; frame faces and shoulders inside the circles. */
+.founder-portrait{overflow:hidden;background:#dce5e9}
+.founder-portrait::after{display:none}
+.founder-portrait img{display:block;object-position:center 25%}
+.founder-portrait-jasil img,.founder-portrait-jayasoorya img{position:absolute;max-width:none;height:auto;border-radius:0}
+.founder-portrait-jasil img{width:150%;left:-40%;top:-70%}
+.founder-portrait-jayasoorya img{width:167%;left:0;top:-10%}
 .client-logo{display:flex;align-items:center;justify-content:center;min-height:96px;padding:21px;border:1px solid var(--line);border-radius:6px;background:#fff;color:var(--ink);font:500 16px var(--display);text-align:center;transition:border-color .2s}
 a.client-logo:hover{border-color:#96aac2}
 .client-logo img{max-width:100%;max-height:48px;object-fit:contain}
@@ -518,10 +525,7 @@ body.dialog-open .whatsapp-float{visibility:hidden}
 #clients .client-logo-grid:not(.is-ready) .client-logo{width:100%}
 
 .founder-linkedin{display:inline-flex;align-items:center;gap:5px;min-height:36px;margin-top:7px;color:var(--accent);font-size:11px;font-weight:600;text-decoration:none}
-.founder-linkedin span{font-size:14px;transition:transform .18s ease}
 .founder-linkedin:hover{text-decoration:underline;text-underline-offset:3px}
-.founder-linkedin:hover span{transform:translate(2px,-2px)}
 .founder-featured .founder-linkedin{color:#9ce8d9}
 .founder-linkedin:focus-visible{outline:2px solid currentColor;outline-offset:3px;border-radius:2px}
 @media(max-width:760px){.founder-linkedin{min-height:40px;margin-top:4px;font-size:12px}}
-@media(prefers-reduced-motion:reduce){.founder-linkedin span{transition:none}}
