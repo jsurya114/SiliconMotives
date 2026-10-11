@@ -39,52 +39,41 @@ briefDialog.addEventListener('click', (event) => {
 });
 const briefForm = document.querySelector('#brief-form');
 const briefStatus = document.querySelector('#brief-status');
+let sendingIdea = false;
 briefForm.addEventListener('submit', async (event) => {
   event.preventDefault();
+  if (sendingIdea) return;
   const data = new FormData(briefForm);
-  const content = window.SiliconContent;
-  if (content?.acceptsBriefs) {
-    // Bots fill the hidden field; pretend success without sending.
-    if (data.get('website')) {
-      briefStatus.textContent = 'Thank you. Your brief has been sent.';
-      return;
+  const submit = briefForm.querySelector('button[type="submit"]');
+  sendingIdea = true;
+  submit.disabled = true;
+  briefForm.setAttribute('aria-busy', 'true');
+  briefStatus.textContent = 'Sending your idea…';
+  let failureMessage = 'Please check your connection or email siliconmotives@gmail.com directly.';
+  try {
+    const response = await fetch('/api/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name: data.get('name').trim(), email: data.get('email').trim(), message: data.get('project').trim(), website: data.get('website') }),
+      signal: AbortSignal.timeout(35000),
+    });
+    const result = await response.json();
+    if (!response.ok || !result.ok) {
+      failureMessage = result.error || 'Please try again or email siliconmotives@gmail.com directly.';
+      throw new Error('Submission failed');
     }
-    const submit = briefForm.querySelector('button[type="submit"]');
-    submit.disabled = true;
-    briefStatus.textContent = 'Sending…';
-    try {
-      await content.submitBrief({ name: data.get('name').trim(), email: data.get('email').trim(), message: data.get('project').trim() });
-      briefForm.reset();
-      briefStatus.textContent = 'Thank you. Your brief has been sent and we’ll be in touch soon.';
-    } catch (error) {
-      briefStatus.textContent = `Sorry, your brief could not be sent. ${error.message}`;
-    } finally {
-      submit.disabled = false;
-    }
-    return;
+    briefForm.reset();
+    briefStatus.textContent = 'Thank you! Your idea has been sent to our team. We’ll reply by email.';
+  } catch (error) {
+    briefStatus.textContent = error.name === 'TimeoutError'
+      ? 'Sending is taking longer than expected. Please email siliconmotives@gmail.com if you need to follow up.'
+      : `Your idea could not be sent. ${failureMessage}`;
+  } finally {
+    sendingIdea = false;
+    submit.disabled = false;
+    briefForm.removeAttribute('aria-busy');
   }
-  sendBriefOnWhatsApp(data);
 });
-
-function sendBriefOnWhatsApp(data) {
-  const phone = window.SiliconContent?.whatsappNumber || '918590184265';
-  const message = [
-    'Hi Silicon Motives! I would like to discuss a project.',
-    '',
-    `Name: ${data.get('name').trim()}`,
-    `Email: ${data.get('email').trim()}`,
-    '',
-    'Project details:',
-    data.get('project').trim(),
-  ].join('\n');
-  const link = document.createElement('a');
-  link.href = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
-  link.target = '_blank';
-  link.rel = 'noopener noreferrer';
-  link.textContent = 'Open WhatsApp to send your brief';
-  briefStatus.replaceChildren(document.createTextNode('Your brief is ready. Review it in WhatsApp, then tap Send: '), link);
-  link.click();
-}
 
 // Motion is progressive enhancement: content remains readable without JavaScript.
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');

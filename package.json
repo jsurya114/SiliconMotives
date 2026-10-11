@@ -7,9 +7,15 @@
     "dev": "node server.mjs",
     "build": "node scripts/build.mjs",
     "seed:admin": "node scripts/seed-admin.mjs",
-    "check": "node --check dist/script.js && node --check dist/content.js && node --check dist/config.js && node --input-type=module --check < dist/admin/admin.js && node --check dist/admin/boot.js && node --check server.mjs",
-    "sync": "node scripts/sync-nested.mjs"
+    "check": "node --check dist/script.js && node --check dist/content.js && node --check dist/config.js && node --input-type=module --check < dist/admin/admin.js && node --check dist/admin/boot.js && node --check server.mjs && node --check api/contact.js && node --check lib/contact.mjs",
+    "sync": "node scripts/sync-nested.mjs",
+    "test": "node --test tests/*.test.mjs"
   },
   "type": "module",
-  "engines": { "node": ">=22" }
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "nodemailer": "^10.1.0"
+  }
 }

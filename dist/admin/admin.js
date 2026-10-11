@@ -235,7 +235,7 @@ async function renderDashboard(main) {
 
   const todo = [];
   if (!settings.contact_email && !settings.contact_phone) todo.push('<a href="#/settings">Add a contact email or phone</a> so visitors can reach you directly.');
-  if (!settings.accepting_briefs) todo.push('The website brief form is <a href="#/settings">switched off</a>; visitors can only download their brief.');
+  if (!settings.accepting_briefs) todo.push('Admin inbox copies are <a href="#/settings">switched off</a>. Website ideas still go to siliconmotives@gmail.com when SMTP is configured.');
   if (!byKey.clients.live) todo.push('<a href="#/clients">Add client logos</a> to replace the “coming soon” placeholders.');
   if (!byKey.testimonials.live) todo.push('<a href="#/testimonials">Publish a testimonial</a> to replace the placeholders.');
   if (!byKey.projects.live) todo.push('<a href="#/projects">Publish a project</a> to feature it in the portfolio.');
@@ -463,8 +463,8 @@ async function renderSettings(main) {
     <div class="page-head"><div><p class="eyebrow">Site</p><h1>Contact & settings</h1><p>Contact details appear in the “Something in mind?” section. Leave a field empty to hide it.</p></div></div>
     <form class="panel panel-pad" id="settings-form" style="max-width:640px" novalidate>
       ${settingsFields.map((field) => fieldHtml(field, settings[field.name])).join('')}
-      <label class="check"><input type="checkbox" name="accepting_briefs"${settings.accepting_briefs ? ' checked' : ''}> Accept project briefs from the website</label>
-      <p class="field-help" style="margin:-8px 0 20px">When on, the brief form sends submissions here. When off, visitors download their brief as a text file instead.</p>
+      <label class="check"><input type="checkbox" name="accepting_briefs"${settings.accepting_briefs ? ' checked' : ''}> Save website enquiries in the admin inbox</label>
+      <p class="field-help" style="margin:-8px 0 20px">When on, emailed enquiries are also saved here. Email delivery to siliconmotives@gmail.com is independent of this setting.</p>
       <button class="btn btn-primary" type="submit">Save settings</button>
       <p class="small muted" style="margin:14px 0 0">Last updated ${formatDate(settings.updated_at)}</p>
     </form>`;
@@ -495,7 +495,7 @@ async function renderSubmissions(main) {
   const rows = await run(query);
 
   main.innerHTML = `
-    <div class="page-head"><div><p class="eyebrow">Inbox</p><h1>Project briefs</h1><p>Briefs sent from the website’s contact form.</p></div>${rows.length ? '<button class="btn" id="export">Export CSV</button>' : ''}</div>
+    <div class="page-head"><div><p class="eyebrow">Inbox</p><h1>Project briefs</h1><p>Copies of emailed enquiries, saved when the admin inbox setting is enabled.</p></div>${rows.length ? '<button class="btn" id="export">Export CSV</button>' : ''}</div>
     <div class="filters" role="group" aria-label="Filter by status">
       ${[...submissionStatuses, 'all'].map((status) => `<button class="btn" data-filter="${status}" aria-pressed="${status === filter}">${status[0].toUpperCase()}${status.slice(1)}</button>`).join('')}
     </div>

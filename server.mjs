@@ -3,6 +3,7 @@ import { readFile, stat } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { browserConfig } from './scripts/config.mjs';
+import contactHandler from './api/contact.js';
 
 const root = path.resolve(fileURLToPath(new URL('./dist/', import.meta.url)));
 const mimeTypes = { '.html': 'text/html; charset=utf-8', '.css': 'text/css; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.svg': 'image/svg+xml', '.jpg': 'image/jpeg', '.png': 'image/png', '.webp': 'image/webp', '.json': 'application/json' };
@@ -11,6 +12,10 @@ http.createServer(async (request, response) => {
   try {
     const url = new URL(request.url, 'http://localhost');
     const pathname = decodeURIComponent(url.pathname);
+    if (pathname === '/api/contact') {
+      await contactHandler(request, response);
+      return;
+    }
     if (pathname === '/config.js') {
       response.writeHead(200, { 'Content-Type': 'text/javascript; charset=utf-8', 'Cache-Control': 'no-store' });
       response.end(browserConfig());

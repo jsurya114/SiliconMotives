@@ -7,10 +7,14 @@
     "dev": "node server.mjs",
     "build": "node scripts/build.mjs",
     "seed:admin": "node scripts/seed-admin.mjs",
-    "check": "node --check dist/script.js && node --check dist/content.js && node --check dist/config.js && node --input-type=module --check < dist/admin/admin.js && node --check dist/admin/boot.js && node --check server.mjs"
+    "check": "node --check dist/script.js && node --check dist/content.js && node --check dist/config.js && node --input-type=module --check < dist/admin/admin.js && node --check dist/admin/boot.js && node --check server.mjs && node --check api/contact.js && node --check lib/contact.mjs",
+    "test": "node --test tests/*.test.mjs"
   },
   "type": "module",
   "engines": {
     "node": ">=22"
+  },
+  "dependencies": {
+    "nodemailer": "^10.1.0"
   }
 }

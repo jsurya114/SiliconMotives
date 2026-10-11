@@ -94,7 +94,8 @@
     api.whatsappNumber = whatsappNumber;
     document.querySelectorAll('.whatsapp-link').forEach(link => { link.href = whatsappUrl; });
     const links = [];
-    if (settings.contact_email) links.push(`<a href="mailto:${escapeHtml(settings.contact_email)}">${escapeHtml(settings.contact_email)}</a>`);
+    const contactEmail = settings.contact_email || 'siliconmotives@gmail.com';
+    links.push(`<a href="mailto:${escapeHtml(contactEmail)}">${escapeHtml(contactEmail)}</a>`);
     if (!settings.contact_phone && !settings.whatsapp_number) links.push('<a href="tel:+918590184265">+91 85901 84265</a>');
     if (settings.contact_phone) links.push(`<a href="tel:${escapeHtml(settings.contact_phone.replace(/[^+\d]/g, ''))}">${escapeHtml(settings.contact_phone)}</a>`);
     links.push(`<a href="${escapeHtml(whatsappUrl)}" target="_blank" rel="noopener noreferrer">Chat on WhatsApp</a>`);
@@ -103,29 +104,11 @@
     const note = document.querySelector('.contact-note');
     if (note && links.length) note.innerHTML = links.join('<span aria-hidden="true"> · </span>');
 
-    if (settings.accepting_briefs) {
-      const dialog = document.querySelector('#brief-dialog');
-      dialog.querySelector(':scope > p').textContent = 'Share a few details and we’ll get back to you. We only use them to reply to your enquiry.';
-      dialog.querySelector('button[type="submit"]').firstChild.textContent = 'Send project brief ';
-      document.querySelector('#open-brief').firstChild.textContent = 'Send us a project brief ';
-      api.acceptsBriefs = true;
-    } else {
-      document.querySelector('#brief-dialog :scope > p').textContent = 'Fill this in and we’ll open a ready-to-send WhatsApp message to our team.';
-      document.querySelector('#brief-form button[type="submit"]').firstChild.textContent = 'Continue to WhatsApp ';
-    }
   }
 
   const api = {
     configured,
-    acceptsBriefs: false,
     whatsappNumber: '918590184265',
-    async submitBrief({ name, email, message }) {
-      await rest('contact_submissions', {
-        method: 'POST',
-        headers: { Prefer: 'return=minimal' },
-        body: JSON.stringify({ name, email, message }),
-      });
-    },
   };
   window.SiliconContent = api;
   if (!configured) return;
