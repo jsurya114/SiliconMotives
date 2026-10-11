@@ -1,6 +1,6 @@
 # Silicon Motives
 
-Responsive company website for Silicon Motives, Kochi, Kerala, with an admin panel for managing its content.
+Next.js App Router + React + TypeScript + Tailwind CSS company website for Silicon Motives, Kochi, Kerala, with a Supabase admin panel. The migration preserves the existing design, content, and animations.
 
 ## Run locally
 
@@ -15,9 +15,9 @@ Open http://127.0.0.1:3000 for the site and http://127.0.0.1:3000/admin for the 
 
 ## Deploy
 
-Vercel installs dependencies with `npm ci`, builds the static site into `build/`, and deploys `api/contact.js` as a Node.js function. Set `SUPABASE_URL`, `SUPABASE_PUBLISHABLE_KEY`, `SMTP_USER`, and `SMTP_PASS` in the Vercel project environment variables and redeploy. Deploy the repository, not just the `build/` directory: a static-only host cannot run the email endpoint. The build creates public browser configuration without editing tracked source in `dist/`.
+Vercel uses the Next.js framework, installs dependencies with `npm ci`, and runs `npm run build` with output in `.next/`. The contact Route Handler runs in the Node.js runtime. Set `SUPABASE_URL`, `SUPABASE_PUBLISHABLE_KEY`, `SMTP_USER`, and `SMTP_PASS` in the Vercel project environment variables and redeploy. Use either the repository root or the synchronized `silicon-motives/` directory as the Vercel Root Directory. Remove any old dashboard overrides for the Other framework or `build/` output. This app needs a Next.js server; static export does not support the email endpoint. Only the public Supabase URL and publishable key are passed to the admin browser.
 
-`.env` and `build/` are Git-ignored. Only empty placeholders are committed. The URL and publishable key remain visible in the browser by design; database access is enforced by Supabase row-level security. Never use a secret or service-role key for `SUPABASE_PUBLISHABLE_KEY`.
+`.env`, `.next/`, and generated TypeScript files are Git-ignored. Only empty placeholders are committed. The URL and publishable key remain visible in the browser by design; database access is enforced by Supabase row-level security. Never use a secret or service-role key for `SUPABASE_PUBLISHABLE_KEY`.
 
 ## Email delivery
 
@@ -34,18 +34,25 @@ Run `npm test`, `npm run check`, and `npm run build` before deployment. Automate
 
 ## Project layout
 
-- `dist/index.html`: page sections and the built-in copy
-- `dist/styles.css`: typography, colors, and responsive layouts
-- `dist/script.js`: navigation, scroll reveals, and the idea form
-- `api/contact.js` and `lib/contact.mjs`: server-side Nodemailer delivery and optional admin inbox copies
-- `tests/`: email handler and form tests
-- `dist/content.js`: loads published content from Supabase and renders it into the page
-- `dist/config.js`: empty fallback; the dev server and build generate configuration from environment variables
-- `.env.example`: names of the required environment variables, without values
-- `dist/admin/`: the admin panel (`/admin/`)
+- `app/(site)/`: server-rendered homepage and preserved responsive styles
+- `components/site/`: React sections, navigation, scroll animations, marquees, and contact dialog
+- `app/globals.css`: Tailwind imports and design tokens; preflight is omitted to preserve the existing design
+- `app/admin/` and `components/admin/`: authenticated React admin at `/admin`
+- `lib/content.ts` and `lib/default-content.json`: published Supabase content and bundled fallbacks
+- `app/api/contact/route.ts`, `lib/contact-route.mjs`, and `lib/contact.mjs`: server-side Nodemailer delivery and optional admin inbox copies
+- `public/images/`: cloud imagery, project covers, and founder portraits
+- `tests/`: delivery, Route Handler adapter, and contact submission tests
 - `supabase/migrations/`: database tables, security policies, media storage, and starting content
+- `.env.example`: environment variable names without credentials
 
-Without Supabase configuration, the site uses the content in `index.html`. Email works independently of Supabase. Without SMTP credentials, the form retains the visitor’s input and shows a direct email address; it does not claim success or open WhatsApp.
+Public content is fetched on each page request without caching. Refresh the public page after saving an admin edit. Without Supabase configuration (or if a collection is empty/unavailable), the site uses bundled fallback content. Email works independently of Supabase. Without SMTP credentials, the form retains the visitor’s input and shows a direct email address; it does not claim success or open WhatsApp.
+
+To run the production server locally:
+
+```sh
+npm run build
+npm start
+```
 
 ## Admin panel
 
@@ -55,7 +62,7 @@ Signed-in admins can:
 - **Services, Team, Portfolio, Clients, Testimonials, FAQs**: add, edit, reorder, publish or hide, and delete entries, with image uploads where relevant
 - **Contact & settings**: set the contact email, phone, WhatsApp, LinkedIn, and Instagram shown on the site, and enable or disable admin inbox copies of emailed enquiries
 
-Changes appear on the site as soon as they are saved. The client and testimonial sections keep their preview content until you publish real entries; the portfolio starts with the Woobe case study.
+Saved changes appear on the next public page load. Existing Supabase tables, accounts, permissions, and uploaded media are retained; this framework migration requires no new database migration. The client and testimonial sections keep their preview content until you publish real entries; the portfolio includes Woobe, NasaLogistic, Picbox, Uniwayin, and Dental Buddy.
 
 ### Client testimonial drafts
 
@@ -84,7 +91,7 @@ Review each entry with its named client, update the wording if needed, then publ
    select id from auth.users where email = 'you@example.com';
    ```
 
-6. In **Authentication → URL Configuration**, set the Site URL to your live domain and add `https://your-domain/admin/` (and `http://127.0.0.1:3000/admin` for local use) to the redirect URLs so password reset links work.
+6. In **Authentication → URL Configuration**, set the Site URL to your live domain and add `https://your-domain/admin/` (and `http://127.0.0.1:3000/admin/` and `http://localhost:3000/admin/` for local use) to the redirect URLs so password reset links work.
 7. Recommended: in **Authentication → Providers → Email**, turn off "Allow new users to sign up". New accounts get no admin access either way, but this keeps the user list clean.
 
 To add another admin later, repeat steps 4 and 5. To remove one, delete the row from `public.admin_users` or delete the user.

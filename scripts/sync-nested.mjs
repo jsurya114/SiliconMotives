@@ -1,16 +1,15 @@
-import { cp, mkdir } from 'node:fs/promises';
+import { cp, mkdir, readFile, writeFile } from 'node:fs/promises';
 const source = new URL('../', import.meta.url);
 const nested = new URL('../silicon-motives/', import.meta.url);
 await mkdir(nested, { recursive: true });
-// Keep the repository's visible nested website checkout deployable alongside the root.
-for (const entry of ['dist', 'api', 'lib', 'tests', 'package-lock.json', 'supabase/migrations', '.openai', 'scripts/config.mjs', 'scripts/build.mjs', 'scripts/seed-admin.mjs', '.env.example', 'server.mjs', 'package.json', 'vercel.json', '.gitignore', 'README.md', 'HERO-IMAGE.md']) {
+// Both repository roots deploy the same Next.js app; credentials never sync.
+for (const entry of ['app', 'components', 'public', 'lib', 'tests', 'supabase/migrations', '.openai', 'scripts/config.mjs', 'scripts/seed-admin.mjs', 'package.json', 'package-lock.json', 'next.config.ts', 'postcss.config.mjs', 'tsconfig.json', 'vercel.json', '.env.example', '.gitignore', 'README.md', 'HERO-IMAGE.md']) {
   const destination = new URL(entry, nested);
   const slash = entry.lastIndexOf('/');
   if (slash >= 0) await mkdir(new URL(`${entry.slice(0, slash + 1)}`, nested), { recursive: true });
   await cp(new URL(entry, source), destination, { recursive: true, force: true });
 }
-// Sync is run from the repository root; the nested deployment copy does not host this script.
-const nestedPackage = JSON.parse(await (await import('node:fs/promises')).readFile(new URL('package.json', nested), 'utf8'));
-delete nestedPackage.scripts.sync;
-await (await import('node:fs/promises')).writeFile(new URL('package.json', nested), `${JSON.stringify(nestedPackage, null, 2)}\n`);
-console.log('Nested website copy synchronized.');
+const pkg = JSON.parse(await readFile(new URL('package.json', nested), 'utf8'));
+delete pkg.scripts.sync;
+await writeFile(new URL('package.json', nested), `${JSON.stringify(pkg, null, 2)}\n`);
+console.log('Nested Next.js app synchronized.');

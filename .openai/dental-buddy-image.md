@@ -1,7 +1,7 @@
 # Dental Buddy portfolio image
 
 - Tool: built-in imagegen
-- Asset: `dist/images/dental-buddy-cover.jpg`
+- Asset: `public/images/dental-buddy-cover.jpg`
 - Generated at 1536 × 1024 and converted to JPEG for the website.
 - Illustrative editorial image, not an actual client clinic or product screenshot.
 

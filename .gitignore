@@ -9,3 +9,8 @@ build/
 !.env.example
 .vercel/
 .playwright-mcp/
+
+.next/
+out/
+*.tsbuildinfo
+next-env.d.ts

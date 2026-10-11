@@ -1,14 +1,14 @@
 # Hero image
 
-Current background asset: `dist/images/cloud-sky.jpg`
+Current background asset: `public/images/cloud-sky.jpg`
 
 ## Current cloud background prompt
 
 Use case: stylized-concept. Asset type: seamless wide full-bleed hero background for a minimalist remote software engineering website. Wide 16:9 landscape. A vast serene open sky filled only with layered soft white cumulus clouds and gentle high-altitude haze, drifting cloud layers stretching into distance. No ground, no landscape, absolutely no mountains, hills, horizon, coastline, buildings, or earth. Subtle translucent fine curved connection arcs and a few tiny warm sage green light nodes lightly linking clouds to suggest cloud computing and a distributed remote team; refined and barely visible, not science fiction. The LEFT 42 percent is almost entirely pale warm ivory sky with very soft haze and minimal detail, open clear negative space for very dark readable website headline. The RIGHT half has softly sculpted clouds with richer pale blue gray and warm cream shading, no sharp contrast. Upper and middle area clouds are light and airy; bottom also remains cloud layers only. Restrained palette warm ivory, quiet sky blue, soft sage, delicate forest green details. Premium art direction, elegant natural cloud photography blended with subtle abstract connections. No mountains of any kind, no land, no buildings, no people, no laptop, no giant cloud icon, no text, no logo, no watermark, no frame. Intended to sit behind dark headline text with a natural fade into an off-white webpage.
 
-Previous background asset: `dist/images/client-collaboration.jpg`
+Previous background asset: `public/images/client-collaboration.jpg`
 
-Previous asset retained: `dist/images/remote-workspace.jpg`
+Previous asset retained: `public/images/remote-workspace.jpg`
 
 ## Current background prompt
 

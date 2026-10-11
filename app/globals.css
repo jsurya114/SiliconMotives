@@ -1,0 +1,16 @@
+@layer theme, base, components, utilities;
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/utilities.css" layer(utilities);
+@source "../components";
+@source "./";
+
+@theme inline {
+  --color-ink: #10243a;
+  --color-navy: #102b46;
+  --color-muted: #536577;
+  --color-accent: #07767b;
+  --color-paper: #fafaf7;
+  --color-soft: #eef3f6;
+  --font-sans: 'DM Sans', system-ui, sans-serif;
+  --font-display: 'Manrope', system-ui, sans-serif;
+}
