@@ -39,12 +39,12 @@ Signed-in admins can:
 - **Services, Team, Portfolio, Clients, Testimonials, FAQs**: add, edit, reorder, publish or hide, and delete entries, with image uploads where relevant
 - **Contact & settings**: set the contact email, phone, WhatsApp, LinkedIn, and Instagram shown on the site, and turn the brief form on or off
 
-Changes appear on the site as soon as they are saved. A section keeps its built-in copy until it has at least one published entry, so the client logos, testimonials, and portfolio placeholders stay until real ones are published.
+Changes appear on the site as soon as they are saved. The client and testimonial sections keep their preview content until you publish real entries; the portfolio starts with the Woobe case study.
 
 ## Setting up Supabase (one time)
 
 1. Create a project at https://supabase.com.
-2. Run the migration: either paste `supabase/migrations/20261010120000_admin_cms.sql` into **SQL Editor** and run it, or use the Supabase CLI (`supabase link` then `supabase db push`). This creates the tables, row-level security, the `media` storage bucket, and the current services, team, and FAQ copy.
+2. Run the migrations in `supabase/migrations/` in timestamp order: either paste each SQL file into **SQL Editor** and run it, or use the Supabase CLI (`supabase link` then `supabase db push`). The migrations create the CMS, starter content, and the published Woobe portfolio project. Existing published projects are kept as unpublished drafts when Woobe is added.
 3. Copy the project URL and publishable (or legacy anon) key from the project's **Connect** dialog into `.env` as `SUPABASE_URL` and `SUPABASE_PUBLISHABLE_KEY`. Set the same variables on your hosting provider. Never use the service-role or secret key.
 4. Create the admin login: **Authentication → Users → Add user**, with an email and a strong password (tick "Auto Confirm User").
 5. Grant that user admin access in **SQL Editor**:

@@ -377,6 +377,23 @@ input::placeholder,textarea::placeholder{color:#617182;opacity:1}
 .published-quote,.faqs details p{white-space:pre-line;overflow-wrap:anywhere}.cms-empty{grid-column:1/-1;font-size:13px;color:var(--muted);padding:25px 0;margin:0;line-height:1.8}.folio-description,.folio-item h3,.testimonial-person{overflow-wrap:anywhere}
 @media(min-width:761px) and (max-width:1100px){.published-project-image{grid-column:1;grid-row:1/6;height:330px}}
 
+/* Feature the real Woobe engagement as a single, readable case-study card. */
+.portfolio-grid{grid-template-columns:minmax(0,1fr);gap:20px}
+.folio-item{display:grid;grid-template-columns:minmax(0,1.12fr) minmax(280px,.88fr);grid-template-rows:auto auto auto auto 1fr;column-gap:clamp(26px,4vw,64px);align-content:stretch;padding:clamp(18px,2.8vw,36px);border:1px solid #d7e1e8;border-radius:16px;background:#fff;box-shadow:0 12px 34px #102b460a}
+.portfolio-section .folio-art{grid-column:1;grid-row:1/6;height:auto;min-height:350px;aspect-ratio:1.16;border:0;border-radius:10px;background:#eee1d1}
+.portfolio-section .folio-art::before{display:none}
+.folio-art-photo img{width:100%;height:100%;object-fit:cover}
+.folio-image-label{position:absolute;left:15px;bottom:15px;padding:7px 10px;border:1px solid #fff8;border-radius:4px;background:#fffE;color:#382b2c;font-size:8px;font-weight:650;letter-spacing:1px}
+.folio-item .folio-meta,.folio-item h3,.folio-item .folio-description,.folio-item .folio-tags,.folio-item .folio-contact{grid-column:2}
+.folio-item .folio-meta{grid-row:1;margin:8px 0 20px;font-size:9px;letter-spacing:.75px}
+.folio-item h3{grid-row:2;font-size:clamp(26px,3vw,38px);line-height:1.16;letter-spacing:-1.15px;margin:0 0 15px}
+.folio-item .folio-description{grid-row:3;max-width:430px;font-size:14px;line-height:1.8;margin:0 0 22px}
+.folio-item .folio-tags{grid-row:4;align-self:start;margin:0 0 20px;gap:8px}
+.folio-item .folio-tags span{font-size:10px;padding:6px 11px}
+.folio-item .folio-contact{grid-row:5;align-self:end;margin-top:auto;font-size:12px}
+@media(max-width:760px){.folio-item{grid-template-columns:minmax(0,1fr);grid-template-rows:auto auto auto auto auto;gap:0;padding:14px}.portfolio-section .folio-art{grid-column:1;grid-row:1;min-height:0;aspect-ratio:1.2}.folio-item .folio-meta{grid-column:1;grid-row:2;margin:17px 0 11px;font-size:8px}.folio-item h3{grid-column:1;grid-row:3;font-size:25px;margin-bottom:10px}.folio-item .folio-description{grid-column:1;grid-row:4;font-size:13px;margin-bottom:16px}.folio-item .folio-tags{grid-column:1;grid-row:5;margin-bottom:12px}.folio-item .folio-contact{grid-column:1;grid-row:6}}
+@media(prefers-reduced-motion:reduce){.folio-item,.folio-contact{transition:none}}
+
 /* Content managed from the admin panel. */
 .visually-hidden{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .initials img{width:100%;height:100%;border-radius:50%;object-fit:cover}

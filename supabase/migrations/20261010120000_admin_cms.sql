@@ -58,6 +58,18 @@ as $$
   select value is null or value = '' or value ~* '^https?://[^\s]+$';
 $$;
 
+create or replace function public.is_project_image_url(value text)
+returns boolean
+language sql
+immutable
+set search_path = ''
+as $$
+  select public.is_web_url(value) or (
+    value ~ '^/images/[A-Za-z0-9._/-]+$'
+    and value !~ '(^|/)\.\.(/|$)'
+  );
+$$;
+
 -- ── Site settings (single row) ────────────────────────────────────────────
 create table public.site_settings (
   id smallint primary key default 1 check (id = 1),
@@ -102,7 +114,7 @@ create table public.projects (
   category text not null default '' check (char_length(category) <= 60),
   description text not null default '' check (char_length(description) <= 500),
   tags text[] not null default '{}' check (cardinality(tags) <= 8),
-  image_url text not null default '' check (public.is_web_url(image_url)),
+  image_url text not null default '' check (public.is_project_image_url(image_url)),
   image_alt text not null default '' check (char_length(image_alt) <= 200),
   project_url text not null default '' check (public.is_web_url(project_url)),
   sort_order integer not null default 0,
@@ -268,6 +280,9 @@ insert into public.services (kicker, title, description, sort_order) values
 insert into public.team_members (name, role, kicker, sort_order) values
   ('Jasil M', 'Co-founder', 'FOUNDER 01', 1),
   ('Jayasoorya S', 'Co-founder', 'FOUNDER 02', 2);
+
+insert into public.projects (title, category, description, tags, image_url, image_alt, project_url, sort_order, published) values
+  ('Woobe — Fashion, by Weight', 'Full-stack e-commerce', 'Co-developed with Jasil M for a real client, this production storefront pairs mobile-first shopping with intuitive ₹/kg pricing and secure checkout.', array['Weight-based pricing', 'Razorpay & COD', 'AWS infrastructure'], '/images/woobe-fashion-cover.jpg', 'Editorial fashion cover visual for the Woobe case study, not a screenshot of the live store.', 'https://github.com/jsurya114/Wobee-ecommerce', 1, true);
 
 insert into public.faqs (question, answer, sort_order) values
   ('How does working with a remote team work?', 'We agree on communication channels, review points, and a working rhythm at the beginning. Written updates, shared documentation, and scheduled conversations help keep decisions and progress clear.', 1),

@@ -40,7 +40,7 @@ const collections = {
   projects: {
     label: 'Portfolio',
     singular: 'project',
-    intro: 'Once at least one project is published, it replaces the illustrative concepts on the site.',
+    intro: 'Published projects appear on the public site in this order. Use the published toggle to control visibility.',
     title: (row) => row.title,
     subtitle: (row) => [row.category, row.tags.join(', ')].filter(Boolean).join(' · '),
     image: 'image_url',
@@ -49,7 +49,7 @@ const collections = {
       { name: 'category', label: 'Category', type: 'text', max: 60, help: 'e.g. Custom software' },
       { name: 'description', label: 'Description', type: 'textarea', max: 500 },
       { name: 'tags', label: 'Tags', type: 'tags', help: 'Comma separated, up to 8.' },
-      { name: 'image_url', label: 'Cover image', type: 'image', help: 'Landscape, around 1200 × 800.' },
+      { name: 'image_url', label: 'Cover image', type: 'image', allowLocal: true, help: 'Landscape, around 1200 × 800. Local /images/ paths are supported.' },
       { name: 'image_alt', label: 'Image description', type: 'text', max: 200, help: 'Describes the image for screen readers.' },
       { name: 'project_url', label: 'Project link', type: 'url', help: 'Optional. Leave empty to show “Discuss a similar project”.' },
     ],
@@ -239,7 +239,7 @@ async function renderDashboard(main) {
   if (!settings.accepting_briefs) todo.push('The website brief form is <a href="#/settings">switched off</a>; visitors can only download their brief.');
   if (!byKey.clients.live) todo.push('<a href="#/clients">Add client logos</a> to replace the “coming soon” placeholders.');
   if (!byKey.testimonials.live) todo.push('<a href="#/testimonials">Publish a testimonial</a> to replace the placeholders.');
-  if (!byKey.projects.live) todo.push('<a href="#/projects">Publish a project</a> to replace the illustrative portfolio concepts.');
+  if (!byKey.projects.live) todo.push('<a href="#/projects">Publish a project</a> to feature it in the portfolio.');
 
   main.innerHTML = `
     <div class="page-head"><div><p class="eyebrow">Overview</p><h1>Welcome back</h1><p>Changes you publish here appear on the website straight away.</p></div></div>
@@ -332,12 +332,14 @@ function fieldHtml(field, value) {
     case 'tags':
       return `<label class="field" for="${id}">${field.label}${help}<input type="text" id="${id}" name="${field.name}" value="${escapeHtml((value || []).join(', '))}"></label>`;
     case 'image':
+      const imageType = field.allowLocal ? 'text' : 'url';
+      const imagePattern = field.allowLocal ? 'https?://.+|/images/[A-Za-z0-9._/-]+' : 'https?://.+';
       return `<div class="field"><label class="field" for="${id}" style="margin:0">${field.label}${help}</label>
         <div class="image-field" data-image-field="${field.name}">
           <div class="image-preview">${value ? `<img src="${escapeHtml(value)}" alt="">` : 'No image'}</div>
           <div class="image-controls">
             <div class="btns"><label class="btn">Upload image<input type="file" accept="${IMAGE_TYPES.join(',')}" hidden></label><button type="button" class="btn btn-danger" data-remove-image${value ? '' : ' hidden'}>Remove</button></div>
-            <input type="url" id="${id}" name="${field.name}" value="${escapeHtml(value)}" placeholder="…or paste an image URL (https://)" pattern="https?://.+">
+            <input type="${imageType}" id="${id}" name="${field.name}" value="${escapeHtml(value)}" placeholder="…or paste an image URL (https://)" pattern="${imagePattern}">
           </div>
         </div></div>`;
     default: {
@@ -364,7 +366,7 @@ function bindImageFields(form, folder, uploaded) {
       preview.innerHTML = url ? `<img src="${escapeHtml(url)}" alt="">` : 'No image';
       removeButton.hidden = !url;
     };
-    input.addEventListener('input', () => show(/^https?:\/\//.test(input.value) ? input.value : ''));
+    input.addEventListener('input', () => show(/^https?:\/\//.test(input.value) || (folder === 'projects' && /^\/images\/[A-Za-z0-9._/-]+$/.test(input.value)) ? input.value : ''));
     removeButton.addEventListener('click', () => { input.value = ''; show(''); });
     fileInput.addEventListener('change', async () => {
       const file = fileInput.files[0];

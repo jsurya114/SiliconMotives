@@ -8,6 +8,7 @@
 
   const escapeHtml = (value) => String(value ?? '').replace(/[&<>"']/g, (ch) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]));
   const safeUrl = (value) => (/^https?:\/\//i.test(value || '') ? escapeHtml(value) : '');
+  const safeImageUrl = (value) => (/^https?:\/\//i.test(value || '') || (/^\/images\/[A-Za-z0-9._/-]+$/.test(value || '') && !/(?:^|\/)\.\.(?:\/|$)/.test(value)) ? escapeHtml(value) : '');
   const whatsappMessage = 'Hi Silicon Motives! I have a project in mind and would love to explore how we can bring it to life. Could we discuss the right solution, timeline, and estimate?';
   const pad = (n) => String(n).padStart(2, '0');
   const initialsOf = (name) => String(name || '').split(/\s+/).filter(Boolean).slice(0, 2).map((part) => part[0].toUpperCase()).join('');
@@ -48,7 +49,7 @@
 
     projects(rows) {
       document.querySelector('.portfolio-grid').innerHTML = rows.map((row, i) => {
-        const image = safeUrl(row.image_url);
+        const image = safeImageUrl(row.image_url);
         const link = safeUrl(row.project_url);
         const art = image
           ? `<div class="folio-art folio-art-photo"><img src="${image}" alt="${escapeHtml(row.image_alt)}" loading="lazy" decoding="async"></div>`
