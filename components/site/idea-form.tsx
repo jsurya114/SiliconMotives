@@ -2,25 +2,29 @@
 import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { submitIdea } from '@/lib/submit-idea.mjs';
-import { MailIcon } from './icons';
-export function IdeaForm() {
+import { ChatIcon } from '../ui/icons';
+import { Button } from '../ui/Button';
+import { useSmoothScroll } from '../motion/SmoothScroll';
+export function IdeaForm({ label = 'Tell us about your idea' }: { label?: string }) {
   const dialog = useRef<HTMLDialogElement>(null);
   const pending = useRef(false);
   const [mounted, setMounted] = useState(false);
   const [sending, setSending] = useState(false);
   const [status, setStatus] = useState('');
+  const { lenis } = useSmoothScroll();
   useEffect(() => { setMounted(true); return () => document.body.classList.remove('dialog-open'); }, []);
-  function open() { dialog.current?.showModal(); document.body.classList.add('dialog-open'); }
+  function open() { dialog.current?.showModal(); document.body.classList.add('dialog-open'); lenis()?.stop(); }
   return <>
-    <button className="button button-dark" id="open-brief" onClick={open}>Tell us about your idea <span aria-hidden="true"><MailIcon /></span></button>
-    {mounted && createPortal(<dialog ref={dialog} id="brief-dialog" aria-labelledby="brief-title" className="text-left" onClose={() => document.body.classList.remove('dialog-open')} onClick={event => {
+    <Button type="button" id="open-brief" onClick={open} aria-haspopup="dialog" icon={<ChatIcon />}>{label}</Button>
+    {mounted && createPortal(<dialog ref={dialog} id="brief-dialog" aria-labelledby="brief-title" className="public-site idea-dialog on-dark text-left" data-lenis-prevent onClose={() => { document.body.classList.remove('dialog-open'); lenis()?.start(); }} onClick={event => {
       const rect = event.currentTarget.getBoundingClientRect();
       if (event.target === event.currentTarget && (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom)) dialog.current?.close();
     }}>
-      <div className="dialog-header"><p className="eyebrow">LET’S START WITH YOUR IDEA</p><button className="close-dialog" aria-label="Close idea form" onClick={() => dialog.current?.close()}>×</button></div>
-      <h2 id="brief-title">A little context.<br />A better start.</h2>
-      <p>Tell us a little about your idea. Your message goes straight to siliconmotives@gmail.com, and we’ll reply to your email.</p>
-      <form id="brief-form" aria-busy={sending} onSubmit={async event => {
+      <div className="p-6 sm:p-10">
+      <div className="flex items-center justify-between gap-4"><p className="label text-lagoon">Let’s start with your idea</p><button className="grid size-11 shrink-0 place-items-center rounded-full border border-cloud/25 text-2xl" aria-label="Close idea form" onClick={() => dialog.current?.close()}>×</button></div>
+      <h2 id="brief-title" className="display mt-6 text-[clamp(2.25rem,6vw,3.5rem)]">A little context.<br />A better start.</h2>
+      <p className="mt-5 text-[1.0625rem] leading-[1.6] text-mist">Tell us a little about your idea. Your message goes straight to siliconmotives@gmail.com, and we’ll reply to your email.</p>
+      <form id="brief-form" className="mt-8 grid gap-5" aria-busy={sending} onSubmit={async event => {
         event.preventDefault(); if (pending.current) return;
         const form = event.currentTarget; const data = new FormData(form);
         pending.current = true; setSending(true); setStatus('Sending your idea…');
@@ -30,13 +34,14 @@ export function IdeaForm() {
         } catch (error) { setStatus(`Your idea could not be sent. ${(error as Error).message}`); }
         finally { pending.current = false; setSending(false); }
       }}>
-        <label>Your name<input name="name" autoComplete="name" required maxLength={100} placeholder="Full name" /></label>
-        <label>Email address<input name="email" type="email" autoComplete="email" required maxLength={254} placeholder="you@company.com" /></label>
-        <label>What would you like to build?<textarea name="project" rows={4} required maxLength={5000} placeholder="Your idea, goals, and anything we should know…" /></label>
-        <label className="visually-hidden" aria-hidden="true">Leave this field empty<input name="website" tabIndex={-1} autoComplete="off" /></label>
-        <button className="button button-dark disabled:cursor-wait disabled:opacity-60" type="submit" disabled={sending}>Send your idea <span aria-hidden="true"><MailIcon /></span></button>
-        <p id="brief-status" role="status">{status}</p>
+        <label className="field grid gap-2"><span className="label text-cloud/90">Your name</span><input name="name" autoComplete="name" required maxLength={100} placeholder="Full name" /></label>
+        <label className="field grid gap-2"><span className="label text-cloud/90">Email address</span><input name="email" type="email" autoComplete="email" required maxLength={254} placeholder="you@company.com" /></label>
+        <label className="field grid gap-2"><span className="label text-cloud/90">What would you like to build?</span><textarea name="project" rows={4} required maxLength={5000} placeholder="Your idea, goals, and anything we should know…" /></label>
+        <label className="sr-only" aria-hidden="true">Leave this field empty<input name="website" tabIndex={-1} autoComplete="off" /></label>
+        <div className="mt-2"><Button variant="lagoon" className="disabled:cursor-wait disabled:opacity-60" type="submit" disabled={sending}>Send your idea</Button></div>
+        <p id="brief-status" role="status" className="min-h-6 text-[1rem] text-mist">{status}</p>
       </form>
+      </div>
     </dialog>, document.body)}
   </>;
 }
