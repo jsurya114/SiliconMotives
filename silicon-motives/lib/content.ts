@@ -5,7 +5,7 @@ export function publicConfig() {
   return { supabaseUrl: process.env.SUPABASE_URL || '', supabaseAnonKey: process.env.SUPABASE_PUBLISHABLE_KEY || '' };
 }
 export async function loadContent(): Promise<SiteContent> {
-  const content: SiteContent = { ...defaults, clients: [], testimonials: [], settings: {} };
+  const content: SiteContent = { ...defaults, testimonials: [], settings: {} };
   const { supabaseUrl, supabaseAnonKey } = publicConfig();
   if (!supabaseUrl || !supabaseAnonKey) return content;
   const tables = ['services', 'projects', 'team_members', 'faqs', 'clients', 'testimonials', 'site_settings'] as const;

@@ -25,19 +25,14 @@ export function Portfolio({ rows }: { rows: ContentRow[] }) {
   </div></section>;
 }
 
-const demoClients = [
-  ['Northline', 'M12 3 3 21h18L12 3Zm0 6v12M7 13h10'], ['Aster Labs', 'M12 2v20M2 12h20M5 5l14 14M5 19 19 5'],
-  ['Velora', 'm3 5 9 15 9-15M7 5l5 8 5-8'], ['Orbit & Co.', 'M20 12a8 8 0 1 1-8-8M16 3h5v5M8 12a4 4 0 1 0 4-4'],
-  ['Luma Studio', 'M4 20V4h6v10h10v6H4Z'], ['Fieldwork', 'M4 4h16v16H4zM4 12h16M12 4v16'],
-];
 export function Clients({ rows }: { rows: ContentRow[] }) {
   return <section className="clients-section" id="clients" aria-labelledby="clients-title"><div className="site-container">
-    <div className="clients-heading"><div><p className="eyebrow">OUR CLIENTS</p><h2 id="clients-title">People we build with.</h2></div>{!rows.length && <p>Illustrative client names for this preview.</p>}</div>
+    <div className="clients-heading"><div><p className="eyebrow">OUR CLIENTS</p><h2 id="clients-title">People we build with.</h2></div></div>
     <Marquee kind="client">{rows.length ? rows.map(row => {
       const logo = safeImage(row.logo_url); const url = safeUrl(row.website_url);
       const content = logo ? <img src={logo} alt={row.name} loading="lazy" decoding="async" /> : <span>{row.name}</span>;
       return url ? <a className="client-logo" key={row.id} href={url} target="_blank" rel="noopener noreferrer">{content}</a> : <div className="client-logo" key={row.id}>{content}</div>;
-    }) : demoClients.map(([name, path], i) => <div className={`client-logo demo-client demo-client-${i + 1}`} key={name}><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d={path} /></svg><span>{name}</span></div>)}</Marquee>
+    }) : null}</Marquee>
   </div></section>;
 }
 

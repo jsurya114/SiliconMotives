@@ -67,6 +67,13 @@
       "image_alt": "Illustrative dental clinic scene for Dental Buddy, not a photograph of the client clinic or a product screenshot."
     }
   ],
+  "clients": [
+    { "id": "client-nasalogistics", "name": "NasaLogistics", "logo_url": "/images/client-logos/nasalogistics.svg", "website_url": "" },
+    { "id": "client-woobe", "name": "Woobe", "logo_url": "/images/client-logos/woobe.svg", "website_url": "" },
+    { "id": "client-dental-buddy", "name": "Dental Buddy", "logo_url": "/images/client-logos/dental-buddy.svg", "website_url": "" },
+    { "id": "client-picbox", "name": "Picbox", "logo_url": "/images/client-logos/picbox.svg", "website_url": "" },
+    { "id": "client-uniwayin", "name": "Uniwayin", "logo_url": "/images/client-logos/uniwayin.svg", "website_url": "" }
+  ],
   "faqs": [
     {
       "id": "1",

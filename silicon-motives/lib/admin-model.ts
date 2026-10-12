@@ -50,7 +50,7 @@ export const collections: Record<string, Collection> = {
   clients: {
     label: 'Clients',
     singular: 'client',
-    intro: 'Logos in “Our clients”. Once one is published, the placeholders are replaced.',
+    intro: 'Published logos appear in “Our clients”. Add a client-approved logo or use a custom wordmark asset.',
     title: (row) => row.name,
     subtitle: (row) => row.website_url,
     image: 'logo_url',
