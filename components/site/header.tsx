@@ -15,7 +15,7 @@ export function Header() {
   }, []);
   return <header className={`header${scrolled ? ' is-scrolled' : ''}`}><div className="site-container header-inner flex items-center justify-between">
     <a className="brand-text" href="#home" aria-label="Silicon Motives home">Silicon Motives</a>
-    <button className="menu-toggle" aria-expanded={open} aria-controls="navigation" onClick={() => setOpen(!open)}>Menu <span aria-hidden="true">+</span></button>
+    <button className="menu-toggle" aria-label={open ? 'Close navigation' : 'Open navigation'} aria-expanded={open} aria-controls="navigation" onClick={() => setOpen(!open)}><span className="menu-icon" aria-hidden="true"><i></i><i></i><i></i></span></button>
     <nav id="navigation" className={open ? 'is-open' : ''} aria-label="Main navigation" onClick={() => setOpen(false)}>
       {[['home', 'Home'], ['about', 'About'], ['services', 'Services'], ['solutions', 'Solutions'], ['testimonials', 'Testimonials'], ['portfolio', 'Portfolio']].map(([id, text]) => <a key={id} href={`#${id}`}>{text}</a>)}
       <a className="nav-cta" href="#contact">Let’s talk <span aria-hidden="true"><ChatIcon /></span></a>
