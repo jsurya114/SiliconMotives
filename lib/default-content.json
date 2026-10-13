@@ -65,6 +65,14 @@
       "description": "Used daily in a live dental clinic, Dental Buddy brings patient records, prescriptions, appointments, and billing together with role-based access for clinic teams.",
       "image_url": "/images/dental-buddy-cover.jpg",
       "image_alt": "Illustrative dental clinic scene for Dental Buddy, not a photograph of the client clinic or a product screenshot."
+    },
+    {
+      "id": "6",
+      "title": "JJC Artworks — Church Interior Woodwork",
+      "category": "BUSINESS WEBSITE",
+      "description": "A website for JJC Artworks, church interior woodworkers, presenting their craftsmanship and completed work so parishes and churches can see what they make and get in touch.",
+      "image_url": "/images/jjc-artworks-cover.jpg",
+      "image_alt": "Illustrative carved wooden church arches for JJC Artworks, not a photograph of their work or a site screenshot."
     }
   ],
   "clients": [
@@ -72,7 +80,8 @@
     { "id": "client-woobe", "name": "Woobe", "logo_url": "/images/client-logos/woobe.svg", "website_url": "" },
     { "id": "client-dental-buddy", "name": "Dental Buddy", "logo_url": "/images/client-logos/dental-buddy.svg", "website_url": "" },
     { "id": "client-picbox", "name": "Picbox", "logo_url": "/images/client-logos/picbox.svg", "website_url": "" },
-    { "id": "client-uniwayin", "name": "Uniwayin", "logo_url": "/images/client-logos/uniwayin.svg", "website_url": "" }
+    { "id": "client-uniwayin", "name": "Uniwayin", "logo_url": "/images/client-logos/uniwayin.svg", "website_url": "" },
+    { "id": "client-jjc-artworks", "name": "JJC Artworks", "logo_url": "/images/client-logos/jjc-artworks.svg", "website_url": "" }
   ],
   "faqs": [
     {
