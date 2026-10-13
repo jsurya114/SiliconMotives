@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, type ReactNode } from "react";
+import { useRef, type ReactNode } from "react";
 import { gsap, ScrollTrigger, useGSAP, MQ } from "@/lib/gsap";
 
 type Props = {
@@ -8,17 +8,14 @@ type Props = {
   className?: string;
   /** Seconds for one full loop at rest. */
   speed?: number;
-  label: string;
 };
 
 /**
  * Velocity-reactive ticker. The first run is the real content; the second is
  * an aria-hidden duplicate so the loop is seamless.
  */
-export function Marquee({ children, className = "", speed = 40, label }: Props) {
+export function Marquee({ children, className = "", speed = 40 }: Props) {
   const ref = useRef<HTMLDivElement>(null);
-  const paused = useRef(false);
-  const [isPaused, setIsPaused] = useState(false);
   const interaction = useRef(false);
 
   useGSAP(
@@ -48,7 +45,7 @@ export function Marquee({ children, className = "", speed = 40, label }: Props) 
         });
 
         const tick = (_t: number, dt: number) => {
-          if (!visible || paused.current || interaction.current || document.hidden) return;
+          if (!visible || interaction.current || document.hidden) return;
           const base = (50 / speed) * (dt / 1000);
           x = wrap(x + dir * base * (1 + boost));
           boost *= 0.92;
@@ -73,9 +70,6 @@ export function Marquee({ children, className = "", speed = 40, label }: Props) 
           {children}
         </div>
       </div>
-      </div>
-      <div className="wrap mt-6 flex justify-end motion-reduce:hidden">
-        <button type="button" className="label min-h-11 rounded-full border border-current/30 px-4" aria-label={`${isPaused ? 'Resume' : 'Pause'} ${label}`} aria-pressed={isPaused} onClick={() => { paused.current = !paused.current; setIsPaused(paused.current); }}>{isPaused ? 'Resume' : 'Pause'} <span aria-hidden="true">{isPaused ? '▶' : 'Ⅱ'}</span></button>
       </div>
     </div>
   );

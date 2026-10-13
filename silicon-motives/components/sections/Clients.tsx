@@ -11,7 +11,7 @@ export function Clients({ rows }: { rows: ContentRow[] }) {
       <SectionLabel className="mb-4">{site.clients.eyebrow}</SectionLabel>
       <RevealText as="h2" id="clients-title" className="display t-h3 !text-[clamp(1.75rem,3vw,2.75rem)]">{site.clients.title}</RevealText>
     </div>
-    <Marquee className="mt-10 sm:mt-14" speed={36} label="client showcase">
+    <Marquee className="mt-10 sm:mt-14" speed={36}>
       <ul className="client-list flex shrink-0 items-center">
         {rows.map(row => {
           const logo = safeImage(row.logo_url);

@@ -77,7 +77,7 @@ These are suggested wording for review, not quotes supplied or approved by the c
 | Rakhi S — Dentist, Dental Buddy | Dental Buddy brings patient records, appointments, and billing into one place. The team listened to our clinic's needs and kept the system practical for day-to-day use. |
 | Gokul — Entrepreneur, Woobe | Woobe's weight-based shopping needed a clear, simple experience. The team worked through the details with us and built a storefront that fits the way we sell. |
 
-Review each entry with its named client, update the wording if needed, then publish it in admin. Published entries appear in the public testimonial reel. Run `20261012180000_testimonial_client_roles.sql` to set Rakhi S’s role to Dentist and Gokul’s to Entrepreneur. This preserves the saved quotes and publication status. Testimonials use a horizontal loop like the client showcase, with pause/resume controls, hover pause, and a static layout for reduced-motion preferences.
+Review each entry with its named client, update the wording if needed, then publish it in admin. Published entries appear in the public testimonial reel. Run `20261012180000_testimonial_client_roles.sql` to set Rakhi S’s role to Dentist and Gokul’s to Entrepreneur. This preserves the saved quotes and publication status. Testimonials use a horizontal loop like the client showcase, pause on hover or keyboard focus, and use a static layout for reduced-motion preferences.
 
 ## Setting up Supabase (one time)
 

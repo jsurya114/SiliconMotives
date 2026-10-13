@@ -192,11 +192,11 @@ function WorkIndex({ rows }: { rows: ContentRow[] }) {
               data-row=""
               onClick={() => setActive(i)}
               onPointerEnter={() => finePointer() && setActive(i)}
-              className="group flex w-full items-center justify-between gap-6 border-b border-cloud/15 py-6 pr-2 pl-7 text-left"
+              className="group flex w-full items-center justify-between gap-4 border-b border-cloud/15 py-4 pr-2 pl-5 text-left"
             >
               <span className="block">
                 <span
-                  className={`display block text-[clamp(1.875rem,2.7vw,2.875rem)] transition-colors duration-500 ${
+                  className={`display block text-[clamp(1.5rem,2.15vw,2.25rem)] transition-colors duration-300 ${
                     selected ? "text-cloud" : "text-mist group-hover:text-cloud/90"
                   }`}
                 >
@@ -210,7 +210,7 @@ function WorkIndex({ rows }: { rows: ContentRow[] }) {
               </span>
               <span
                 aria-hidden="true"
-                className={`grid size-10 shrink-0 place-items-center rounded-full transition-all duration-500 ease-[var(--ease-expo)] ${
+                  className={`grid size-9 shrink-0 place-items-center rounded-full transition-all duration-300 ease-[var(--ease-expo)] ${
                   selected ? "translate-x-0 bg-lagoon text-monsoon opacity-100" : "-translate-x-3 opacity-0"
                 }`}
               >
@@ -227,7 +227,7 @@ function WorkIndex({ rows }: { rows: ContentRow[] }) {
         aria-labelledby={current ? `work-tab-${current.id}` : undefined}
         className="col-span-7"
       >
-        <div data-frame="" className="relative aspect-[3/2] overflow-hidden rounded-[24px] bg-harbour">
+        <div data-frame="" className="relative aspect-[16/10] overflow-hidden rounded-2xl bg-harbour">
           {rows.map((item, i) => (
             <div
               key={item.id}
@@ -245,7 +245,7 @@ function WorkIndex({ rows }: { rows: ContentRow[] }) {
             className="pointer-events-none absolute inset-x-0 top-0 z-[3] h-0.5 bg-lagoon opacity-0 shadow-[0_0_24px_4px_rgba(126,226,209,0.55)]"
           />
         </div>
-        <div data-caption="" className="mt-7 grid min-h-[8.5rem] grid-cols-7 gap-x-8">
+        <div data-caption="" className="mt-5 grid min-h-[5rem] grid-cols-7 gap-x-6">
           <p className="label col-span-2 pt-1.5 tracking-[0.06em] text-lagoon">{current?.category}</p>
           <p className="col-span-5 text-[1.125rem] leading-[1.6] text-cloud/85">{current?.description}</p>
         </div>
@@ -295,15 +295,15 @@ function WorkCard({ item, wide = false }: { item: ContentRow; wide?: boolean }) 
 
 export function Portfolio({ rows }: { rows: ContentRow[] }) {
   return (
-    <section id="portfolio" data-header="dark" aria-labelledby="portfolio-title" className="grain on-dark section-y bg-monsoon text-cloud">
+    <section id="portfolio" data-header="dark" aria-labelledby="portfolio-title" className="grain on-dark bg-monsoon py-20 text-cloud sm:py-24 lg:py-28">
       <div className="wrap relative z-[2]">
         <Reveal>
           <SectionLabel index={portfolio.index} tone="dark">
             {portfolio.eyebrow}
           </SectionLabel>
         </Reveal>
-        <div className="mt-8 mb-14 flex flex-col gap-8 lg:mb-20 lg:flex-row lg:items-end lg:justify-between">
-          <RevealText as="h2" id="portfolio-title" split="chars" className="display text-[clamp(3.25rem,10vw,9.5rem)] !leading-[0.85]">
+        <div className="mt-6 mb-10 flex flex-col gap-6 lg:mb-12 lg:flex-row lg:items-end lg:justify-between">
+          <RevealText as="h2" id="portfolio-title" split="chars" className="display text-[clamp(3rem,7vw,6rem)] !leading-[0.88]">
             {portfolio.title}
           </RevealText>
           <Reveal className="lg:max-w-[22rem] lg:pb-3">
@@ -313,7 +313,7 @@ export function Portfolio({ rows }: { rows: ContentRow[] }) {
 
         {rows.length ? <WorkIndex rows={rows} /> : null}
 
-        <ul className="grid gap-14 md:grid-cols-2 md:gap-x-6 md:gap-y-16 lg:hidden">
+        <ul className="grid gap-10 md:grid-cols-2 md:gap-x-6 md:gap-y-12 lg:hidden">
           {rows.map((item, i) => {
             // An odd one out on tablets spans both columns instead of sitting alone.
             const wide = rows.length % 2 === 1 && i === rows.length - 1;

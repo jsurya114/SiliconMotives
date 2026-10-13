@@ -7,7 +7,7 @@ import { ChatIcon, PinIcon } from '../ui/icons';
 export function Hero() {
   const { hero } = site;
   return <section id="home" data-header="light" aria-label={site.brand.name} className="hero-static relative overflow-hidden bg-cloud">
-    <Image src="/images/cloud-sky.jpg" alt="" fill preload sizes="100vw" className="object-cover object-[30%_50%]" />
+    <Image src="/images/cloud-sky-v2.jpg" alt="" fill preload sizes="100vw" className="object-cover object-[30%_50%]" />
     <div aria-hidden="true" className="absolute inset-0" style={{ background: 'linear-gradient(100deg, rgba(236,240,242,.72) 0%, rgba(236,240,242,.35) 45%, rgba(236,240,242,0) 75%), linear-gradient(0deg, rgba(236,240,242,.6) 0%, rgba(236,240,242,0) 30%)' }} />
     <div className="wrap relative flex min-h-svh flex-col justify-end pt-32 pb-6 sm:pb-8">
       <p className="label mb-6 flex items-center gap-3 sm:mb-8"><span aria-hidden="true" className="h-px w-8 bg-current opacity-40" />{hero.eyebrow}</p>

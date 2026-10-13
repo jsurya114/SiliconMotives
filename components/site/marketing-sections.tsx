@@ -1,5 +1,5 @@
 export function Hero() { return (<section className="hero" id="home">
-      <img className="hero-background" src="/images/cloud-sky.jpg" width="1672" height="941" alt="" fetchPriority="high" decoding="async" />
+      <img className="hero-background" src="/images/cloud-sky-v2.jpg" width="1672" height="941" alt="" fetchPriority="high" decoding="async" />
       <div className="site-container hero-inner">
         <div className="hero-content">
           <p className="eyebrow"><span className="status-dot"></span> REMOTE ENGINEERING. REAL BUSINESS VALUE.</p>

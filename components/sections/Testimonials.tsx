@@ -14,7 +14,7 @@ export function Testimonials({ rows }: { rows: ContentRow[] }) {
       <RevealText as="h2" id="testimonials-title" lines={testimonials.title} className="display t-h2 lg:col-span-8" />
       {!rows.length && <Reveal className="self-end lg:col-span-4"><p className="text-[1.1875rem] leading-[1.55] text-slate">{testimonials.lead}</p></Reveal>}
     </div>
-    {rows.length ? <Marquee className="mt-16 lg:mt-20" speed={70} label="client reviews">
+    {rows.length ? <Marquee className="mt-16 lg:mt-20" speed={70}>
       <div className="review-list flex shrink-0 gap-5 pr-5">
         {rows.map(row => <figure key={row.id} className="flex w-[min(84vw,26rem)] shrink-0 flex-col rounded-[24px] border border-ink/20 bg-cloud-2 p-7 sm:p-8">
           <span aria-hidden="true" className="font-serif text-[4.5rem] leading-[0.6] text-lagoon-ink">“</span>
