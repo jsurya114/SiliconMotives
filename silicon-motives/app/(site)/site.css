@@ -211,19 +211,6 @@ html.lenis, html.lenis body { height: auto; }
   }
 }
 
-/* ── Testimonial reel ─────────────────────────────────────────────────── */
-.reel {
-  animation: reel 60s linear infinite;
-}
-.reel:hover,
-.reel:focus-within {
-  animation-play-state: paused;
-}
-@keyframes reel {
-  to {
-    transform: translate3d(-50%, 0, 0);
-  }
-}
 @media (prefers-reduced-motion: reduce) {
   .reel {
     animation: none;
@@ -301,6 +288,7 @@ html.lenis, html.lenis body { height: auto; }
 }
 
 @media (prefers-reduced-motion: reduce) {
+  &,
   *,
   *::before,
   *::after {
@@ -327,6 +315,9 @@ html.lenis, html.lenis body { height: auto; }
   .public-site .client-list img { max-height: 80px; }
   .public-site .client-list a:focus-visible { outline-color: var(--color-monsoon); }
   .public-site .contact-address { overflow-wrap: anywhere; }
+}
+
+@layer components {
   html:not(.motion-ready) .public-site [data-case] { position: relative; min-height: auto; margin-bottom: 0; }
   html:not(.motion-ready) .public-site .marquee [data-track] { width: 100%; overflow-x: auto; }
   html:not(.motion-ready) .public-site .marquee [data-duplicate] { display: none; }
