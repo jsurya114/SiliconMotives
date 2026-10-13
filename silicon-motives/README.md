@@ -1,6 +1,6 @@
 # Silicon Motives
 
-Next.js App Router + React + TypeScript + Tailwind CSS company website for Silicon Motives, Kochi, Kerala, with a Supabase admin panel. The migration preserves the existing design, content, and animations.
+Next.js App Router + React + TypeScript + Tailwind CSS company website for Silicon Motives, Kochi, Kerala, with a Supabase admin panel. The public homepage follows the visual direction in [SiliconMotivesv3](https://github.com/jasilmeledath/SiliconMotivesv3). Published content comes from Supabase; the remote first story and service copy use the bundled presentation content.
 
 ## Run locally
 
@@ -34,9 +34,10 @@ Run `npm test`, `npm run check`, and `npm run build` before deployment. Automate
 
 ## Project layout
 
-- `app/(site)/`: server-rendered homepage and preserved responsive styles
-- `components/site/`: React sections, navigation, scroll animations, marquees, and contact dialog
-- `app/globals.css`: Tailwind imports and design tokens; preflight is omitted to preserve the existing design
+- `app/(site)/`: server-rendered homepage and reference theme styles
+- `components/sections/` and `components/motion/`: public sections and scroll effects; the hero stays static
+- `components/site/`: existing enquiry form, email integration, and original application components
+- `app/globals.css`: Tailwind theme and shared utilities; public-site resets are scoped away from the admin
 - `app/admin/` and `components/admin/`: authenticated React admin at `/admin`
 - `lib/content.ts` and `lib/default-content.json`: published Supabase content and bundled fallbacks
 - `app/api/contact/route.ts`, `lib/contact-route.mjs`, and `lib/contact.mjs`: server-side Nodemailer delivery and optional admin inbox copies
@@ -62,7 +63,7 @@ Signed-in admins can:
 - **Services, Team, Portfolio, Clients, Testimonials, FAQs**: add, edit, reorder, publish or hide, and delete entries, with image uploads where relevant
 - **Contact & settings**: set the contact email, phone, WhatsApp, LinkedIn, and Instagram shown on the site, and enable or disable admin inbox copies of emailed enquiries
 
-Saved changes appear on the next public page load. Existing Supabase tables, accounts, permissions, and uploaded media are retained; this framework migration requires no new database migration. The client and testimonial sections keep their preview content until you publish real entries; the portfolio includes Woobe, NasaLogistic, Picbox, Uniwayin, and Dental Buddy.
+Saved changes appear on the next public page load. Existing Supabase tables, accounts, permissions, and uploaded media are retained; this framework migration requires no new database migration. Client, testimonial, portfolio, team, and FAQ sections display published CMS entries, with bundled fallbacks for portfolio, clients, FAQs, and founder details.
 
 ### Client testimonial drafts
 
@@ -76,7 +77,7 @@ These are suggested wording for review, not quotes supplied or approved by the c
 | Rakhi S — Dentist, Dental Buddy | Dental Buddy brings patient records, appointments, and billing into one place. The team listened to our clinic's needs and kept the system practical for day-to-day use. |
 | Gokul — Entrepreneur, Woobe | Woobe's weight-based shopping needed a clear, simple experience. The team worked through the details with us and built a storefront that fits the way we sell. |
 
-Review each entry with its named client, update the wording if needed, then publish it in admin. Published entries automatically replace the public testimonial placeholders. Run `20261012180000_testimonial_client_roles.sql` to set Rakhi S’s role to Dentist and Gokul’s to Entrepreneur. This preserves the saved quotes and publication status. Testimonials use a horizontal loop like the client showcase, with pause/resume controls, hover pause, and a static layout for reduced-motion preferences.
+Review each entry with its named client, update the wording if needed, then publish it in admin. Published entries appear in the public testimonial reel. Run `20261012180000_testimonial_client_roles.sql` to set Rakhi S’s role to Dentist and Gokul’s to Entrepreneur. This preserves the saved quotes and publication status. Testimonials use a horizontal loop like the client showcase, with pause/resume controls, hover pause, and a static layout for reduced-motion preferences.
 
 ## Setting up Supabase (one time)
 

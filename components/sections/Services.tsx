@@ -10,6 +10,8 @@ import { ArrowIcon } from "../ui/icons";
 import { ServiceArt } from "./ServiceArt";
 import type { ContentRow } from "@/lib/content";
 
+const artSlugs = ["web", "custom", "cloud", "ongoing"];
+
 const { services } = site;
 
 export function Services({ rows }: { rows: ContentRow[] }) {
@@ -139,7 +141,7 @@ export function Services({ rows }: { rows: ContentRow[] }) {
               <p className="label text-lagoon">{item.kicker}</p>
               <div className="my-8 flex h-32 items-center text-cloud/80 sm:h-40 lg:my-auto lg:h-[min(30svh,13rem)]">
                 <div data-art="" className="h-full">
-                  <ServiceArt slug={services.items[i % services.items.length].slug} />
+                  <ServiceArt slug={artSlugs[i % artSlugs.length]} />
                 </div>
               </div>
               <h3 className="display t-h3 !leading-[0.98] !tracking-[-0.035em] lg:!text-[clamp(2rem,3vw,3rem)]">

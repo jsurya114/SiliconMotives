@@ -1,5 +1,7 @@
 # Hero image
 
+The static homepage hero uses the reference project’s original cloud background, with no entrance, scroll, or image animation.
+
 Current background asset: `public/images/cloud-sky.jpg`
 
 ## Current cloud background prompt

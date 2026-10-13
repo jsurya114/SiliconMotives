@@ -138,7 +138,12 @@ function MobileMenu({ onClose, settings }: { onClose: () => void; settings: Cont
     d.showModal();
     document.body.classList.add('dialog-open');
     const media = window.matchMedia(MQ.desktop);
-    const desktop = () => { if (media.matches) onClose(); };
+    const desktop = () => {
+      if (media.matches) {
+        d.close();
+        onClose();
+      }
+    };
     media.addEventListener('change', desktop);
     if (window.matchMedia(MQ.motion).matches) {
       const tl = gsap.timeline();
