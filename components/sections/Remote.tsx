@@ -107,10 +107,11 @@ export function Remote() {
           </div>
         </div>
 
-        <Reveal as="ul" stagger={0.1} className="mt-20 grid gap-10 md:grid-cols-3 md:gap-8 lg:mt-28">
-          {remote.principles.map((p) => (
+        <Reveal as="ul" stagger={0.1} className="mt-16 grid gap-10 md:grid-cols-3 md:gap-8 lg:mt-20">
+          {remote.principles.map((p, i) => (
             <li key={p.name} className="border-t border-cloud/15 pt-6">
-              <h3 className="display t-h3">{p.name}</h3>
+              <p className="label text-lagoon">{String(i + 1).padStart(2, "0")}</p>
+              <h3 className="display t-h3 mt-3">{p.name}</h3>
               <p className="mt-4 text-[1.0625rem] leading-[1.6] text-mist">{p.body}</p>
             </li>
           ))}

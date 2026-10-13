@@ -44,11 +44,11 @@ export function Solutions() {
           </Reveal>
         </div>
 
-        <ol className="mt-16 border-b border-ink/20 lg:mt-24">
+        <ol className="mt-14 border-b border-ink/20 lg:mt-20">
           {solutions.items.map((item) => (
             <li key={item.name} data-row="" data-reveal="" className="group relative">
               <span data-rule="" aria-hidden="true" className="absolute inset-x-0 top-0 h-px origin-left bg-ink/20" />
-              <div className="grid gap-y-4 py-10 md:grid-cols-12 md:gap-x-8 lg:py-14">
+              <div className="grid gap-y-4 py-9 md:grid-cols-12 md:gap-x-8 lg:py-12">
                 <p data-part="" className="label text-lagoon-ink md:col-span-3 md:pt-3">
                   {item.kicker}
                 </p>

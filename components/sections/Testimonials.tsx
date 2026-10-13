@@ -12,11 +12,10 @@ export function Testimonials({ rows }: { rows: ContentRow[] }) {
     <div className="wrap grid gap-y-8 lg:grid-cols-12 lg:gap-x-8">
       <Reveal className="lg:col-span-12"><SectionLabel index={testimonials.index}>{testimonials.eyebrow}</SectionLabel></Reveal>
       <RevealText as="h2" id="testimonials-title" lines={testimonials.title} className="display t-h2 lg:col-span-8" />
-      {!rows.length && <Reveal className="self-end lg:col-span-4"><p className="text-[1.1875rem] leading-[1.55] text-slate">{testimonials.lead}</p></Reveal>}
     </div>
     {rows.length ? <Marquee className="mt-16 lg:mt-20" speed={70}>
-      <div className="review-list flex shrink-0 gap-5 pr-5">
-        {rows.map(row => <figure key={row.id} className="flex w-[min(84vw,26rem)] shrink-0 flex-col rounded-[24px] border border-ink/20 bg-cloud-2 p-7 sm:p-8">
+      <div className="review-list flex shrink-0 gap-4 pr-4">
+        {rows.map(row => <figure key={row.id} className="flex w-[min(84vw,26rem)] shrink-0 flex-col rounded-[24px] bg-cloud-2 p-7 ring-1 ring-ink/10 sm:p-8">
           <span aria-hidden="true" className="font-serif text-[4.5rem] leading-[0.6] text-lagoon-ink">“</span>
           <blockquote className="mt-6 whitespace-pre-line font-serif text-[1.375rem] leading-[1.4]">{row.quote}</blockquote>
           <figcaption className="mt-auto flex items-center gap-3 pt-8">
@@ -25,6 +24,6 @@ export function Testimonials({ rows }: { rows: ContentRow[] }) {
           </figcaption>
         </figure>)}
       </div>
-    </Marquee> : <div className="wrap mt-12"><div className="rounded-[24px] border border-dashed border-ink/30 p-8 sm:p-10"><p className="label text-lagoon-ink">Client stories, coming soon</p><p className="mt-4 max-w-xl text-[1.375rem] leading-[1.4]">We’re collecting feedback from the people we build with. In the meantime, explore the projects that brought us together.</p><a href="#portfolio" className="label link-line mt-6 inline-block">Explore our work ↗</a></div></div>}
+    </Marquee> : <Reveal className="wrap mt-12 lg:mt-16"><div className="flex flex-col gap-6 border-t border-ink/15 pt-8 md:flex-row md:items-end md:justify-between"><div><p className="label text-lagoon-ink">Client stories, coming soon</p><p className="mt-3 max-w-xl text-[1.1875rem] leading-[1.55] text-slate">We’re collecting feedback from the people we build with. In the meantime, explore the projects that brought us together.</p></div><a href="#portfolio" className="label link-line shrink-0 self-start md:self-auto">Explore our work ↗</a></div></Reveal>}
   </section>;
 }
