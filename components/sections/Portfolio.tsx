@@ -24,14 +24,14 @@ function Project({ item, index }: { item: ContentRow; index: number }) {
 
   return (
     <article data-project="" aria-labelledby={`project-${item.id}`} className="group flex h-full flex-col">
-      <div className="relative aspect-[4/3] overflow-hidden rounded-[16px] bg-harbour">
+      <div className="relative aspect-[4/3] overflow-hidden rounded-[20px] bg-harbour">
         {image ? (
           <Image
             src={image}
             alt={item.image_alt || ""}
             fill
             unoptimized={!image.startsWith("/images/")}
-            sizes="(min-width: 1280px) 18vw, (min-width: 768px) 30vw, 46vw"
+            sizes="(min-width: 1440px) 430px, (min-width: 1024px) 30vw, (min-width: 640px) 48vw, 100vw"
             className="object-cover transition-transform duration-700 ease-[var(--ease-expo)] group-hover:scale-105"
           />
         ) : (
@@ -44,15 +44,15 @@ function Project({ item, index }: { item: ContentRow; index: number }) {
         </span>
       </div>
 
-      <div className="mt-4 flex flex-1 flex-col">
-        {item.category ? <p className="label text-[0.6875rem] tracking-[0.06em] text-lagoon sm:text-[0.75rem]">{item.category}</p> : null}
+      <div className="mt-5 flex flex-1 flex-col">
+        {item.category ? <p className="label tracking-[0.06em] text-lagoon">{item.category}</p> : null}
         <h3 id={`project-${item.id}`} className="mt-1.5">
-          <span className="block font-display text-[1.125rem] leading-[1.15] font-bold tracking-[-0.025em] sm:text-[1.3125rem]">{name}</span>
+          <span className="block font-display text-[1.375rem] leading-[1.15] font-bold tracking-[-0.025em] lg:text-[1.5rem]">{name}</span>
           {descriptor ? <span className="sr-only"> — </span> : null}
           {descriptor ? <span className="mt-1 block font-serif text-[0.9375rem] leading-[1.35] text-mist italic">{descriptor}</span> : null}
         </h3>
         {item.description ? (
-          <p className="mt-3 line-clamp-3 hidden text-[0.875rem] leading-[1.55] text-cloud/65 sm:block">{item.description}</p>
+          <p className="mt-3 line-clamp-3 text-[0.9375rem] leading-[1.55] text-cloud/65">{item.description}</p>
         ) : null}
       </div>
     </article>
@@ -79,10 +79,11 @@ export function Portfolio({ rows }: { rows: ContentRow[] }) {
           const lag = () => Math.round(((slot.offsetLeft - grid.offsetLeft) / grid.offsetWidth) * 180);
           gsap.fromTo(
             card,
-            { y: 140, opacity: 0 },
+            { y: 140, opacity: 0, scale: 0.94 },
             {
               y: 0,
               opacity: 1,
+              scale: 1,
               ease: "power3.out",
               scrollTrigger: {
                 trigger: slot,
@@ -118,9 +119,9 @@ export function Portfolio({ rows }: { rows: ContentRow[] }) {
           </Reveal>
         </div>
 
-        <ol data-grid="" className="mt-12 grid grid-cols-2 gap-x-4 gap-y-10 md:grid-cols-3 md:gap-x-6 lg:mt-16 xl:grid-cols-5" aria-label="Projects">
+        <ol data-grid="" className="mt-12 flex flex-wrap justify-center gap-x-4 gap-y-12 sm:gap-x-6 lg:mt-16 lg:gap-x-8 lg:gap-y-16" aria-label="Projects">
           {rows.map((item, i) => (
-            <li key={item.id} data-slot="">
+            <li key={item.id} data-slot="" className="w-full sm:w-[calc((100%-1.5rem)/2)] lg:w-[calc((100%-4rem)/3)]">
               <Project item={item} index={i} />
             </li>
           ))}
