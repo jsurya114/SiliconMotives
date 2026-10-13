@@ -133,34 +133,36 @@ html.lenis, html.lenis body { height: auto; }
 }
 
 /* ── Header ───────────────────────────────────────────────────────────── */
+/* A full-width sheet of frosted glass that tints to the section beneath it. */
 .site-header {
   --hdr-fg: var(--color-ink);
+  --hdr-glass: var(--color-cloud);
+  --hdr-edge: var(--color-ink);
   color: var(--hdr-fg);
-  transition:
-    transform 0.45s var(--ease-expo),
-    color 0.35s ease;
-  will-change: transform;
+  transition: color 0.35s ease;
 }
 .site-header[data-tone="dark"] {
   --hdr-fg: var(--color-cloud);
-}
-.site-header[data-hidden="true"] {
-  transform: translateY(-110%);
+  --hdr-glass: var(--color-monsoon);
+  --hdr-edge: var(--color-cloud);
 }
 .site-header__bar {
+  background: color-mix(in oklab, var(--hdr-glass) 22%, transparent);
+  backdrop-filter: blur(18px) saturate(170%);
+  -webkit-backdrop-filter: blur(18px) saturate(170%);
+  box-shadow:
+    inset 0 1px 0 color-mix(in oklab, white 22%, transparent),
+    inset 0 -1px 0 color-mix(in oklab, var(--hdr-edge) 8%, transparent);
   transition:
     background-color 0.35s ease,
     box-shadow 0.35s ease;
 }
 .site-header[data-scrolled="true"] .site-header__bar {
-  backdrop-filter: blur(14px) saturate(140%);
-  -webkit-backdrop-filter: blur(14px) saturate(140%);
-  background: color-mix(in oklab, var(--color-cloud) 72%, transparent);
-  box-shadow: 0 0 0 1px color-mix(in oklab, var(--color-ink) 8%, transparent);
-}
-.site-header[data-scrolled="true"][data-tone="dark"] .site-header__bar {
-  background: color-mix(in oklab, var(--color-monsoon) 70%, transparent);
-  box-shadow: 0 0 0 1px color-mix(in oklab, var(--color-cloud) 10%, transparent);
+  background: color-mix(in oklab, var(--hdr-glass) 55%, transparent);
+  box-shadow:
+    inset 0 1px 0 color-mix(in oklab, white 18%, transparent),
+    inset 0 -1px 0 color-mix(in oklab, var(--hdr-edge) 12%, transparent),
+    0 10px 30px -18px color-mix(in oklab, var(--color-monsoon) 45%, transparent);
 }
 
 /* ── Services rail ────────────────────────────────────────────────────── */

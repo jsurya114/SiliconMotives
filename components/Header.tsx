@@ -13,23 +13,17 @@ export function Header({ settings }: { settings: ContentRow }) {
   const [open, setOpen] = useState(false);
   const { lenis } = useSmoothScroll();
 
-  // Tone follows the section under the bar; hide on scroll down, show on up.
-  // Direction only flips after a few pixels of travel, so the slow tail of a
-  // smooth scroll never toggles the bar back and forth.
+  // Tone follows the section under the bar. The bar itself always stays in view.
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    let last = window.scrollY;
-    let travel = 0;
-    let hidden = false;
     let raf = 0;
     const set = (key: string, value: string) => {
       if (el.dataset[key] !== value) el.dataset[key] = value;
     };
     const update = () => {
       raf = 0;
-      const y = window.scrollY;
-      const probe = 36;
+      const probe = 32;
       const sections = document.querySelectorAll<HTMLElement>("[data-header]");
       let tone = "light";
       for (const s of sections) {
@@ -40,15 +34,7 @@ export function Header({ settings }: { settings: ContentRow }) {
         }
       }
       set("tone", tone);
-      set("scrolled", String(y > 24));
-      const delta = y - last;
-      last = y;
-      // Accumulate travel in one direction; reset when it reverses.
-      travel = Math.sign(delta) === Math.sign(travel) ? travel + delta : delta;
-      if (y < 160 || el.contains(document.activeElement)) hidden = false;
-      else if (travel > 48) hidden = true;
-      else if (travel < -24) hidden = false;
-      set("hidden", String(hidden));
+      set("scrolled", String(window.scrollY > 24));
     };
     const onScroll = () => {
       if (!raf) raf = requestAnimationFrame(update);
@@ -76,11 +62,9 @@ export function Header({ settings }: { settings: ContentRow }) {
         className="site-header fixed inset-x-0 top-0 z-50"
         data-tone="light"
         data-scrolled="false"
-        data-hidden="false"
-        onFocus={() => ref.current && (ref.current.dataset.hidden = "false")}
       >
-        <div className="wrap pt-3">
-          <div className="site-header__bar flex h-14 items-center justify-between rounded-full pr-2 pl-5">
+        <div className="site-header__bar">
+          <div className="wrap flex h-16 items-center justify-between">
             <a
               href="#home"
               aria-label={site.ui.homeLabel}
@@ -186,8 +170,8 @@ function MobileMenu({ onClose, settings }: { onClose: () => void; settings: Cont
         close();
       }}
     >
-      <div className="wrap flex h-full flex-col pt-3 pb-8">
-        <div className="flex h-14 items-center justify-between pr-2 pl-5">
+      <div className="wrap flex h-full flex-col pb-8">
+        <div className="flex h-16 items-center justify-between">
           <span className="font-display text-[1.125rem] font-extrabold tracking-[-0.04em]">{site.brand.name}</span>
           <button
             type="button"

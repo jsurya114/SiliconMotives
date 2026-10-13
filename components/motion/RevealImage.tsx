@@ -13,10 +13,12 @@ type Props = {
   /** Oversize the image and drift it against the scroll. */
   parallax?: boolean;
   radius?: number;
+  /** Static framing (e.g. a zoom) on the wrapper, so the reveal tween never overrides it. */
+  frameStyle?: React.CSSProperties;
 };
 
 /** Clip-path opens from an inset frame while the photo settles from 1.3x. */
-export function RevealImage({ src, alt, sizes, className = "", imgClassName = "", parallax = false, radius = 24 }: Props) {
+export function RevealImage({ src, alt, sizes, className = "", imgClassName = "", parallax = false, radius = 24, frameStyle }: Props) {
   const ref = useRef<HTMLDivElement>(null);
 
   useGSAP(
@@ -58,7 +60,7 @@ export function RevealImage({ src, alt, sizes, className = "", imgClassName = ""
       className={`relative overflow-hidden ${className}`}
       style={{ borderRadius: radius }}
     >
-      <div data-inner="" className={`absolute ${parallax ? "-inset-y-[10%] inset-x-0" : "inset-0"}`}>
+      <div data-inner="" className={`absolute ${parallax ? "-inset-y-[10%] inset-x-0" : "inset-0"}`} style={frameStyle}>
         <Image src={src} alt={alt} fill unoptimized={!src.startsWith('/images/')} sizes={sizes} className={`object-cover ${imgClassName}`} />
       </div>
     </div>

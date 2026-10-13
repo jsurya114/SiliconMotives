@@ -169,6 +169,8 @@ export const site = {
         role: "Co-founder",
         image: "/images/jayasoorya.jpg",
         linkedin: "https://www.linkedin.com/in/jayasoorya-suryadas/",
+        // Zoom the waist-up photo to head and shoulders inside the round frame.
+        crop: { scale: 1.8, origin: "0% 7%" },
       },
     ],
     linkedinLabel: "Connect on LinkedIn",

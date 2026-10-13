@@ -38,6 +38,7 @@ export function People({ rows }: { rows: ContentRow[] }) {
             {rows.map((f, i) => {
               const founder = people.founders.find(person => person.name.toLowerCase() === String(f.name).trim().toLowerCase());
               const photo = safeImage(f.photo_url || founder?.image);
+              const crop = founder && "crop" in founder ? founder.crop : null;
               return <li key={f.id} className="flex flex-col items-start">
                 {photo ? <RevealImage
                   src={photo}
@@ -46,6 +47,7 @@ export function People({ rows }: { rows: ContentRow[] }) {
                   radius={9999}
                   className="aspect-square w-44 bg-harbour sm:w-56"
                   imgClassName="object-[50%_18%]"
+                  frameStyle={crop ? { transform: `scale(${crop.scale})`, transformOrigin: crop.origin } : undefined}
                 /> : <div aria-hidden="true" className="display grid aspect-square w-44 place-items-center rounded-full bg-harbour text-[3.5rem] text-lagoon sm:w-56">{initials(f.name)}</div>}
                 <Reveal className="mt-6 flex flex-col items-start gap-4">
                   <div>
