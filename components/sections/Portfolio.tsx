@@ -8,9 +8,9 @@ import { MQ } from "@/lib/gsap";
 import { RevealText } from "../motion/RevealText";
 import { Reveal } from "../motion/Reveal";
 import { SectionLabel } from "../ui/SectionLabel";
-import { ArrowIcon } from "../ui/icons";
+import { ArrowIcon, ArrowUpRight } from "../ui/icons";
 import type { ContentRow } from "@/lib/content";
-import { safeImage, initials } from "@/lib/urls";
+import { safeImage, safeUrl, initials, pad } from "@/lib/urls";
 
 const { portfolio } = site;
 const EASE = "outExpo";
@@ -21,6 +21,41 @@ const reducedMotion = () => typeof window !== "undefined" && window.matchMedia(M
 function splitTitle(title: unknown) {
   const [name, ...rest] = String(title ?? "").split(" — ");
   return { name, descriptor: rest.join(" — ") };
+}
+
+/** CMS rows may carry tags as an array or a comma-separated string. */
+function tagList(tags: unknown): string[] {
+  const list = Array.isArray(tags) ? tags : typeof tags === "string" ? tags.split(",") : [];
+  return list.map((t) => String(t).trim()).filter(Boolean).slice(0, 4);
+}
+
+function Tags({ item, className = "" }: { item: ContentRow; className?: string }) {
+  const tags = tagList(item.tags);
+  return tags.length ? (
+    <ul className={`flex flex-wrap gap-2 ${className}`} aria-label="Technologies">
+      {tags.map((tag) => (
+        <li key={tag} className="label rounded-full border border-cloud/20 px-3 py-1 text-cloud/80">
+          {tag}
+        </li>
+      ))}
+    </ul>
+  ) : null;
+}
+
+function ProjectLink({ item, className = "" }: { item: ContentRow; className?: string }) {
+  const href = safeUrl(item.project_url);
+  const { name } = splitTitle(item.title);
+  return href ? (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={`label inline-flex items-center gap-2 text-lagoon underline-offset-4 hover:underline ${className}`}
+    >
+      View {name} <ArrowUpRight size={14} />
+      <span className="sr-only">(opens in a new tab)</span>
+    </a>
+  ) : null;
 }
 
 function Cover({ item, sizes, className = "" }: { item: ContentRow; sizes: string; className?: string }) {
@@ -61,7 +96,7 @@ function useEnter(ref: React.RefObject<HTMLElement | null>, prepare: (el: HTMLEl
   }, []);
 }
 
-/* ── Desktop: an index of every project beside one large live preview ──────── */
+/* ── Desktop: a numbered index beside one large live preview ──────────────── */
 
 function WorkIndex({ rows }: { rows: ContentRow[] }) {
   const [active, setActive] = useState(0);
@@ -74,13 +109,13 @@ function WorkIndex({ rows }: { rows: ContentRow[] }) {
     root,
     (el) => {
       utils.set(el.querySelectorAll("[data-row]"), { opacity: 0, translateY: 36 });
-      utils.set(el.querySelector("[data-frame]")!, { clipPath: "inset(12% 10% 12% 10% round 24px)" });
-      utils.set(el.querySelector("[data-caption]")!, { opacity: 0 });
+      utils.set(el.querySelector("[data-frame]")!, { clipPath: "inset(12% 10% 12% 10% round 28px)" });
+      utils.set(el.querySelectorAll("[data-caption] > *"), { opacity: 0, translateY: 20 });
     },
     (el) => {
       animate(el.querySelectorAll("[data-row]"), { opacity: 1, translateY: 0, duration: 1100, delay: stagger(70), ease: EASE });
-      animate(el.querySelector("[data-frame]")!, { clipPath: "inset(0% 0% 0% 0% round 24px)", duration: 1400, ease: EASE });
-      animate(el.querySelector("[data-caption]")!, { opacity: 1, duration: 900, delay: 500, ease: EASE });
+      animate(el.querySelector("[data-frame]")!, { clipPath: "inset(0% 0% 0% 0% round 28px)", duration: 1400, ease: EASE });
+      animate(el.querySelectorAll("[data-caption] > *"), { opacity: 1, translateY: 0, duration: 900, delay: stagger(70, { start: 500 }), ease: EASE });
       moveIndicator(0, false);
     },
   );
@@ -144,7 +179,8 @@ function WorkIndex({ rows }: { rows: ContentRow[] }) {
       duration: 950,
       ease: EASE,
     });
-    animate(caption, { opacity: [0, 1], translateY: [14, 0], duration: 800, delay: stagger(60, { start: 120 }), ease: EASE });
+    utils.remove(caption);
+    animate(caption, { opacity: [0, 1], translateY: [18, 0], duration: 800, delay: stagger(60, { start: 160 }), ease: EASE });
   }, [active]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const onKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
@@ -162,63 +198,89 @@ function WorkIndex({ rows }: { rows: ContentRow[] }) {
   };
 
   const current = rows[active];
+  const { name, descriptor } = splitTitle(current?.title);
   const finePointer = () => window.matchMedia(MQ.finePointer).matches;
 
   return (
-    <div ref={root} className="hidden lg:grid lg:grid-cols-12 lg:gap-x-8">
-      <div
-        role="tablist"
-        aria-orientation="vertical"
-        aria-labelledby="portfolio-title"
-        onKeyDown={onKeyDown}
-        className="relative col-span-5 self-start border-t border-cloud/15"
-      >
-        <span data-indicator="" aria-hidden="true" className="absolute top-0 left-0 w-0.5 bg-lagoon" />
-        {rows.map((item, i) => {
-          const { name, descriptor } = splitTitle(item.title);
-          const selected = i === active;
-          return (
-            <button
-              key={item.id}
-              ref={(el) => {
-                tabs.current[i] = el;
-              }}
-              id={`work-tab-${item.id}`}
-              role="tab"
-              type="button"
-              aria-selected={selected}
-              aria-controls="work-panel"
-              tabIndex={selected ? 0 : -1}
-              data-row=""
-              onClick={() => setActive(i)}
-              onPointerEnter={() => finePointer() && setActive(i)}
-              className="group flex w-full items-center justify-between gap-4 border-b border-cloud/15 py-4 pr-2 pl-5 text-left"
-            >
-              <span className="block">
-                <span
-                  className={`display block text-[clamp(1.5rem,2.15vw,2.25rem)] transition-colors duration-300 ${
-                    selected ? "text-cloud" : "text-mist group-hover:text-cloud/90"
-                  }`}
-                >
-                  {name}
-                </span>
-                {descriptor ? (
-                  <span className="mt-2 block font-display text-[0.9375rem] font-semibold tracking-[-0.01em] text-mist">
-                    {descriptor}
-                  </span>
-                ) : null}
-              </span>
-              <span
-                aria-hidden="true"
-                  className={`grid size-9 shrink-0 place-items-center rounded-full transition-all duration-300 ease-[var(--ease-expo)] ${
-                  selected ? "translate-x-0 bg-lagoon text-monsoon opacity-100" : "-translate-x-3 opacity-0"
+    <div ref={root} className="hidden lg:grid lg:grid-cols-12 lg:gap-x-10">
+      <div className="col-span-5 flex flex-col">
+        <div
+          role="tablist"
+          aria-orientation="vertical"
+          aria-labelledby="portfolio-title"
+          onKeyDown={onKeyDown}
+          className="relative border-t border-cloud/15"
+        >
+          <span data-indicator="" aria-hidden="true" className="absolute top-0 left-0 w-0.5 bg-lagoon" />
+          {rows.map((item, i) => {
+            const row = splitTitle(item.title);
+            const selected = i === active;
+            return (
+              <button
+                key={item.id}
+                ref={(el) => {
+                  tabs.current[i] = el;
+                }}
+                id={`work-tab-${item.id}`}
+                role="tab"
+                type="button"
+                aria-selected={selected}
+                aria-controls="work-panel"
+                tabIndex={selected ? 0 : -1}
+                data-row=""
+                onClick={() => setActive(i)}
+                onPointerEnter={() => finePointer() && setActive(i)}
+                className={`group grid w-full grid-cols-[2.75rem_1fr_auto] items-center gap-x-3 border-b border-cloud/15 py-5 pr-2 pl-5 text-left transition-colors duration-300 ${
+                  selected ? "bg-cloud/[0.04]" : "hover:bg-cloud/[0.02]"
                 }`}
               >
-                <ArrowIcon size={15} />
-              </span>
-            </button>
-          );
-        })}
+                <span
+                  aria-hidden="true"
+                  className={`label self-start pt-2 tabular-nums transition-colors duration-300 ${selected ? "text-lagoon" : "text-mist/70"}`}
+                >
+                  {pad(i + 1)}
+                </span>
+                <span className="block min-w-0">
+                  <span
+                    className={`display block text-[clamp(1.5rem,2.15vw,2.25rem)] transition-colors duration-300 ${
+                      selected ? "text-cloud" : "text-mist group-hover:text-cloud/90"
+                    }`}
+                  >
+                    {row.name}
+                  </span>
+                  {row.descriptor ? (
+                    <span className="mt-1.5 block font-display text-[0.9375rem] font-semibold tracking-[-0.01em] text-mist">
+                      {row.descriptor}
+                    </span>
+                  ) : null}
+                </span>
+                <span
+                  aria-hidden="true"
+                  className={`grid size-9 shrink-0 place-items-center rounded-full transition-all duration-300 ease-[var(--ease-expo)] ${
+                    selected ? "translate-x-0 bg-lagoon text-monsoon opacity-100" : "-translate-x-3 opacity-0"
+                  }`}
+                >
+                  <ArrowIcon size={15} />
+                </span>
+              </button>
+            );
+          })}
+        </div>
+
+        <div data-row="" className="mt-auto flex items-end justify-between gap-6 pt-10">
+          <p className="max-w-[17rem] text-[1rem] leading-[1.55] text-mist">
+            Have something similar in mind? We’ll help you shape it into software that works.
+          </p>
+          <a
+            href="#contact"
+            className="group inline-flex shrink-0 items-center gap-3 rounded-full bg-lagoon py-3 pr-3 pl-6 font-display text-[0.9375rem] font-semibold text-monsoon transition-colors hover:bg-lagoon-deep"
+          >
+            Start a project
+            <span className="grid size-8 place-items-center rounded-full bg-monsoon text-lagoon transition-transform duration-300 ease-[var(--ease-expo)] group-hover:translate-x-1">
+              <ArrowIcon size={14} />
+            </span>
+          </a>
+        </div>
       </div>
 
       <div
@@ -227,7 +289,7 @@ function WorkIndex({ rows }: { rows: ContentRow[] }) {
         aria-labelledby={current ? `work-tab-${current.id}` : undefined}
         className="col-span-7"
       >
-        <div data-frame="" className="relative aspect-[16/10] overflow-hidden rounded-2xl bg-harbour">
+        <div data-frame="" className="relative aspect-[4/3] overflow-hidden rounded-[28px] bg-harbour ring-1 ring-cloud/10">
           {rows.map((item, i) => (
             <div
               key={item.id}
@@ -242,88 +304,182 @@ function WorkIndex({ rows }: { rows: ContentRow[] }) {
           <span
             data-scan=""
             aria-hidden="true"
-            className="pointer-events-none absolute inset-x-0 top-0 z-[3] h-0.5 bg-lagoon opacity-0 shadow-[0_0_24px_4px_rgba(126,226,209,0.55)]"
+            className="pointer-events-none absolute inset-x-0 top-0 z-[5] h-0.5 bg-lagoon opacity-0 shadow-[0_0_24px_4px_rgba(126,226,209,0.55)]"
           />
-        </div>
-        <div data-caption="" className="mt-5 grid min-h-[5rem] grid-cols-7 gap-x-6">
-          <p className="label col-span-2 pt-1.5 tracking-[0.06em] text-lagoon">{current?.category}</p>
-          <p className="col-span-5 text-[1.125rem] leading-[1.6] text-cloud/85">{current?.description}</p>
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 z-[3] bg-[linear-gradient(to_top,rgba(11,26,43,0.96)_0%,rgba(11,26,43,0.78)_32%,rgba(11,26,43,0)_62%),linear-gradient(to_bottom,rgba(11,26,43,0.45),rgba(11,26,43,0)_22%)]"
+          />
+          <div className="absolute inset-x-0 top-0 z-[4] flex items-center justify-between p-6">
+            <span className="label rounded-full border border-cloud/20 bg-monsoon/50 px-3.5 py-1.5 tracking-[0.06em] text-lagoon backdrop-blur-md">
+              {current?.category}
+            </span>
+            <span className="label rounded-full bg-monsoon/50 px-3.5 py-1.5 tabular-nums text-cloud/90 backdrop-blur-md">
+              {pad(active + 1)} <span className="text-mist">/ {pad(rows.length)}</span>
+            </span>
+          </div>
+          <div data-caption="" className="absolute inset-x-0 bottom-0 z-[4] p-8 xl:p-10">
+            <h3 className="display text-[clamp(2.5rem,4vw,3.75rem)] text-cloud">
+              {name}
+              {descriptor ? <span className="sr-only"> — {descriptor}</span> : null}
+            </h3>
+            {descriptor ? (
+              <p aria-hidden="true" className="mt-2 font-display text-[1.0625rem] font-semibold tracking-[-0.01em] text-lagoon">
+                {descriptor}
+              </p>
+            ) : null}
+            <p className="mt-4 max-w-[38rem] text-[1.0625rem] leading-[1.6] text-cloud/85">{current?.description}</p>
+            {current && (tagList(current.tags).length || safeUrl(current.project_url)) ? (
+              <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-3">
+                <Tags item={current} />
+                <ProjectLink item={current} />
+              </div>
+            ) : null}
+          </div>
         </div>
       </div>
     </div>
   );
 }
 
-/* ── Tablet and phone: compact cards, two up on tablets ────────────────────── */
+/* ── Tablet and phone: a swipeable rail of cards with controls ─────────────── */
 
-function WorkCard({ item, wide = false }: { item: ContentRow; wide?: boolean }) {
-  const ref = useRef<HTMLElement>(null);
+function WorkCard({ item }: { item: ContentRow }) {
   const { name, descriptor } = splitTitle(item.title);
-
-  useEnter(
-    ref,
-    (el) => {
-      utils.set(el.querySelector("[data-cover]")!, { clipPath: "inset(14% 8% 14% 8% round 20px)" });
-      utils.set(el.querySelectorAll("[data-text] > *"), { opacity: 0, translateY: 24 });
-    },
-    (el) => {
-      animate(el.querySelector("[data-cover]")!, { clipPath: "inset(0% 0% 0% 0% round 20px)", duration: 1300, ease: EASE });
-      animate(el.querySelector("[data-cover] img") ?? el, { scale: [1.18, 1], duration: 1600, ease: EASE });
-      animate(el.querySelectorAll("[data-text] > *"), { opacity: 1, translateY: 0, duration: 1000, delay: stagger(70, { start: 200 }), ease: EASE });
-    },
-  );
-
   return (
-    <article ref={ref} aria-labelledby={`work-card-${item.id}`}>
-      <div data-cover="" className={`relative aspect-[16/10] overflow-hidden rounded-[20px] bg-harbour ${wide ? "md:aspect-[21/9]" : ""}`}>
-        <Cover item={item} sizes={wide ? "100vw" : "(min-width: 768px) 46vw, 100vw"} />
+    <article
+      aria-labelledby={`work-card-${item.id}`}
+      className="flex h-full flex-col overflow-hidden rounded-[24px] border border-cloud/10 bg-harbour"
+    >
+      <div className="relative aspect-[4/3] overflow-hidden bg-tide">
+        <Cover item={item} sizes="(min-width: 768px) 60vw, 86vw" />
+        <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_bottom,rgba(11,26,43,0.5),rgba(11,26,43,0)_35%)]" />
+        <span className="label absolute top-4 left-4 max-w-[calc(100%-2rem)] truncate rounded-full bg-monsoon/60 px-3 py-1.5 tracking-[0.06em] text-lagoon backdrop-blur-md">
+          {item.category}
+        </span>
       </div>
-      <div data-text="" className="mt-6">
-        <p className="label tracking-[0.06em] text-lagoon">{item.category}</p>
-        <h3 id={`work-card-${item.id}`} className="mt-3">
+      <div className="flex flex-1 flex-col p-6">
+        <h3 id={`work-card-${item.id}`}>
           <span className="display block text-[clamp(2rem,6.5vw,2.75rem)]">{name}</span>
           {descriptor ? <span className="sr-only"> — </span> : null}
           {descriptor ? (
-            <span className="mt-2 block font-display text-[1rem] font-semibold tracking-[-0.01em] text-cloud/80">{descriptor}</span>
+            <span className="mt-2 block font-display text-[1rem] font-semibold tracking-[-0.01em] text-lagoon">{descriptor}</span>
           ) : null}
         </h3>
-        <p className="mt-4 text-[1.0625rem] leading-[1.6] text-mist">{item.description}</p>
+        <p className="mt-4 text-[1.0625rem] leading-[1.6] text-cloud/80">{item.description}</p>
+        <Tags item={item} className="mt-5" />
+        <ProjectLink item={item} className="mt-auto pt-5" />
       </div>
     </article>
   );
 }
 
+function WorkRail({ rows }: { rows: ContentRow[] }) {
+  const [active, setActive] = useState(0);
+  const root = useRef<HTMLDivElement>(null);
+  const rail = useRef<HTMLUListElement>(null);
+
+  useEnter(
+    root,
+    (el) => utils.set(el.querySelectorAll("[data-card]"), { opacity: 0, translateX: 60 }),
+    (el) => animate(el.querySelectorAll("[data-card]"), { opacity: 1, translateX: 0, duration: 1200, delay: stagger(90), ease: EASE }),
+  );
+
+  // The card whose left edge sits nearest the rail's start is the current one.
+  const onScroll = () => {
+    const el = rail.current;
+    if (!el) return;
+    const items = Array.from(el.children) as HTMLElement[];
+    let nearest = 0;
+    items.forEach((item, i) => {
+      if (Math.abs(item.offsetLeft - el.scrollLeft - el.offsetLeft) < Math.abs(items[nearest].offsetLeft - el.scrollLeft - el.offsetLeft)) nearest = i;
+    });
+    // At the far end the last card may never reach the start edge.
+    if (el.scrollLeft + el.clientWidth >= el.scrollWidth - 4) nearest = items.length - 1;
+    setActive(nearest);
+  };
+
+  const go = (index: number) => {
+    const el = rail.current;
+    const item = el?.children[index] as HTMLElement | undefined;
+    if (!el || !item) return;
+    el.scrollTo({ left: item.offsetLeft - el.offsetLeft, behavior: reducedMotion() ? "auto" : "smooth" });
+  };
+
+  const control =
+    "grid size-12 place-items-center rounded-full border border-cloud/20 text-cloud transition-colors hover:border-lagoon hover:text-lagoon disabled:pointer-events-none disabled:opacity-35";
+
+  return (
+    <div ref={root} className="lg:hidden">
+      <ul
+        ref={rail}
+        onScroll={onScroll}
+        aria-label="Projects"
+        className="-mx-[clamp(1rem,4vw,3rem)] flex snap-x snap-mandatory scroll-px-[clamp(1rem,4vw,3rem)] gap-4 overflow-x-auto px-[clamp(1rem,4vw,3rem)] pb-2 [scrollbar-width:none] md:gap-6 [&::-webkit-scrollbar]:hidden"
+      >
+        {rows.map((item) => (
+          <li key={item.id} data-card="" className="w-[86%] shrink-0 snap-start sm:w-[70%] md:w-[58%]">
+            <WorkCard item={item} />
+          </li>
+        ))}
+      </ul>
+
+      <div className="mt-8 flex items-center gap-5">
+        <div className="relative h-px flex-1 bg-cloud/15" aria-hidden="true">
+          <span
+            className="absolute inset-y-0 left-0 -top-px h-[3px] rounded-full bg-lagoon transition-[width] duration-500 ease-[var(--ease-expo)]"
+            style={{ width: `${((active + 1) / rows.length) * 100}%` }}
+          />
+        </div>
+        <p className="label tabular-nums text-cloud/90" aria-live="polite">
+          <span className="sr-only">Project </span>
+          {pad(active + 1)} <span className="text-mist">/ {pad(rows.length)}</span>
+        </p>
+        <div className="flex gap-2">
+          <button type="button" className={control} onClick={() => go(active - 1)} disabled={active === 0} aria-label="Previous project">
+            <span className="rotate-180">
+              <ArrowIcon size={16} />
+            </span>
+          </button>
+          <button type="button" className={control} onClick={() => go(active + 1)} disabled={active === rows.length - 1} aria-label="Next project">
+            <ArrowIcon size={16} />
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export function Portfolio({ rows }: { rows: ContentRow[] }) {
   return (
-    <section id="portfolio" data-header="dark" aria-labelledby="portfolio-title" className="grain on-dark bg-monsoon py-20 text-cloud sm:py-24 lg:py-28">
+    <section id="portfolio" data-header="dark" aria-labelledby="portfolio-title" className="grain on-dark overflow-hidden bg-monsoon py-20 text-cloud sm:py-24 lg:py-28">
       <div className="wrap relative z-[2]">
         <Reveal>
           <SectionLabel index={portfolio.index} tone="dark">
             {portfolio.eyebrow}
           </SectionLabel>
         </Reveal>
-        <div className="mt-6 mb-10 flex flex-col gap-6 lg:mb-12 lg:flex-row lg:items-end lg:justify-between">
+        <div className="mt-6 mb-10 flex flex-col gap-6 lg:mb-14 lg:flex-row lg:items-end lg:justify-between">
           <RevealText as="h2" id="portfolio-title" split="chars" className="display text-[clamp(3rem,7vw,6rem)] !leading-[0.88]">
             {portfolio.title}
           </RevealText>
-          <Reveal className="lg:max-w-[22rem] lg:pb-3">
+          <Reveal className="flex items-end gap-8 lg:max-w-[30rem] lg:pb-3">
             <p className="font-serif text-[clamp(1.5rem,2vw,1.875rem)] leading-[1.25] text-cloud/90">{portfolio.lead}</p>
+            {rows.length ? (
+              <p className="hidden shrink-0 border-l border-cloud/15 pl-6 sm:block">
+                <span className="display block text-[2.75rem] tabular-nums text-lagoon">{pad(rows.length)}</span>
+                <span className="label mt-1 block text-mist">Projects</span>
+              </p>
+            ) : null}
           </Reveal>
         </div>
 
-        {rows.length ? <WorkIndex rows={rows} /> : null}
-
-        <ul className="grid gap-10 md:grid-cols-2 md:gap-x-6 md:gap-y-12 lg:hidden">
-          {rows.map((item, i) => {
-            // An odd one out on tablets spans both columns instead of sitting alone.
-            const wide = rows.length % 2 === 1 && i === rows.length - 1;
-            return (
-              <li key={item.id} className={wide ? "md:col-span-2" : ""}>
-                <WorkCard item={item} wide={wide} />
-              </li>
-            );
-          })}
-        </ul>
+        {rows.length ? (
+          <>
+            <WorkIndex rows={rows} />
+            <WorkRail rows={rows} />
+          </>
+        ) : null}
       </div>
     </section>
   );
