@@ -34,21 +34,19 @@ export function People({ rows }: { rows: ContentRow[] }) {
             </Reveal>
           </div>
 
-          <ul className="grid gap-12 sm:grid-cols-2 lg:col-span-7 lg:col-start-6 lg:gap-8">
+          <ul className="grid gap-8 sm:grid-cols-2 lg:col-span-8 lg:gap-6">
             {rows.map((f, i) => {
               const founder = people.founders.find(person => person.name.toLowerCase() === String(f.name).trim().toLowerCase());
               const photo = safeImage(f.photo_url || founder?.image);
-              const crop = founder && "crop" in founder ? founder.crop : null;
-              return <li key={f.id} className="flex flex-col items-start">
+              return <li key={f.id} className={i % 2 ? "sm:mt-16" : ""}>
                 {photo ? <RevealImage
                   src={photo}
                   alt=""
-                  sizes="(min-width: 640px) 14rem, 11rem"
-                  radius={9999}
-                  className="aspect-square w-44 bg-harbour sm:w-56"
-                  imgClassName="object-[50%_18%]"
-                  frameStyle={crop ? { transform: `scale(${crop.scale})`, transformOrigin: crop.origin } : undefined}
-                /> : <div aria-hidden="true" className="display grid aspect-square w-44 place-items-center rounded-full bg-harbour text-[3.5rem] text-lagoon sm:w-56">{initials(f.name)}</div>}
+                  sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 100vw"
+                  className="aspect-[4/5] bg-harbour"
+                  imgClassName="object-[50%_25%]"
+                  parallax
+                /> : <div aria-hidden="true" className="display grid aspect-[4/5] place-items-center rounded-[24px] bg-harbour text-[5rem] text-lagoon">{initials(f.name)}</div>}
                 <Reveal className="mt-6 flex flex-col items-start gap-4">
                   <div>
                     <p className="label text-mist">{f.kicker || `Team ${String(i + 1).padStart(2, '0')}`}</p>

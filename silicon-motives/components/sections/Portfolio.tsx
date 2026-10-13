@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useRef } from "react";
 import { site } from "@/content/site";
-import { gsap, ScrollTrigger, useGSAP, MQ } from "@/lib/gsap";
+import { gsap, useGSAP, MQ } from "@/lib/gsap";
 import { RevealText } from "../motion/RevealText";
 import { Reveal } from "../motion/Reveal";
 import { SectionLabel } from "../ui/SectionLabel";
@@ -62,21 +62,37 @@ function Project({ item, index }: { item: ContentRow; index: number }) {
 export function Portfolio({ rows }: { rows: ContentRow[] }) {
   const ref = useRef<HTMLElement>(null);
 
-  // Cards rise from below with an eased stagger as each row reaches the
-  // viewport; batching keeps later rows staggered when the grid wraps.
+  // Each card rises from below as the page scrolls, tied to the scroll so the
+  // motion is always visible. Cards further right start a little later, so a
+  // row ripples up left to right. The list item is the trigger and the card
+  // inside it moves, so measurements are never thrown off by the tween.
   useGSAP(
     () => {
       const section = ref.current;
       if (!section) return;
+      const grid = section.querySelector<HTMLElement>("[data-grid]");
+      if (!grid) return;
       const mm = gsap.matchMedia();
       mm.add(MQ.motion, () => {
-        const cards = gsap.utils.toArray<HTMLElement>("[data-project]", section);
-        gsap.set(cards, { y: 80, opacity: 0 });
-        ScrollTrigger.batch(cards, {
-          start: "top 90%",
-          once: true,
-          onEnter: (batch) =>
-            gsap.to(batch, { y: 0, opacity: 1, duration: 1.2, ease: "expo.out", stagger: 0.12, overwrite: true }),
+        gsap.utils.toArray<HTMLElement>("[data-slot]", grid).forEach((slot) => {
+          const card = slot.querySelector("[data-project]");
+          const lag = () => Math.round(((slot.offsetLeft - grid.offsetLeft) / grid.offsetWidth) * 180);
+          gsap.fromTo(
+            card,
+            { y: 140, opacity: 0 },
+            {
+              y: 0,
+              opacity: 1,
+              ease: "power3.out",
+              scrollTrigger: {
+                trigger: slot,
+                start: () => `top+=${lag()} bottom`,
+                end: () => `top+=${lag()} 62%`,
+                scrub: 1,
+                invalidateOnRefresh: true,
+              },
+            },
+          );
         });
       });
     },
@@ -102,9 +118,9 @@ export function Portfolio({ rows }: { rows: ContentRow[] }) {
           </Reveal>
         </div>
 
-        <ol className="mt-12 grid grid-cols-2 gap-x-4 gap-y-10 md:grid-cols-3 md:gap-x-6 lg:mt-16 xl:grid-cols-5" aria-label="Projects">
+        <ol data-grid="" className="mt-12 grid grid-cols-2 gap-x-4 gap-y-10 md:grid-cols-3 md:gap-x-6 lg:mt-16 xl:grid-cols-5" aria-label="Projects">
           {rows.map((item, i) => (
-            <li key={item.id}>
+            <li key={item.id} data-slot="">
               <Project item={item} index={i} />
             </li>
           ))}
