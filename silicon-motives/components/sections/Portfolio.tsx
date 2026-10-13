@@ -31,6 +31,7 @@ function Project({ item, index }: { item: ContentRow; index: number }) {
             alt={item.image_alt || ""}
             fill
             unoptimized={!image.startsWith("/images/")}
+            quality={90}
             sizes="(min-width: 1440px) 430px, (min-width: 1024px) 30vw, (min-width: 640px) 48vw, 100vw"
             className="object-cover transition-transform duration-700 ease-[var(--ease-expo)] group-hover:scale-105"
           />
@@ -79,11 +80,10 @@ export function Portfolio({ rows }: { rows: ContentRow[] }) {
           const lag = () => Math.round(((slot.offsetLeft - grid.offsetLeft) / grid.offsetWidth) * 180);
           gsap.fromTo(
             card,
-            { y: 140, opacity: 0, scale: 0.94 },
+            { y: 140, opacity: 0 },
             {
               y: 0,
               opacity: 1,
-              scale: 1,
               ease: "power3.out",
               scrollTrigger: {
                 trigger: slot,

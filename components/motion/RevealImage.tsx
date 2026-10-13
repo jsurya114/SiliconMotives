@@ -59,7 +59,7 @@ export function RevealImage({ src, alt, sizes, className = "", imgClassName = ""
       style={{ borderRadius: radius }}
     >
       <div data-inner="" className={`absolute ${parallax ? "-inset-y-[10%] inset-x-0" : "inset-0"}`}>
-        <Image src={src} alt={alt} fill unoptimized={!src.startsWith('/images/')} sizes={sizes} className={`object-cover ${imgClassName}`} />
+        <Image src={src} alt={alt} fill unoptimized={!src.startsWith('/images/')} quality={90} sizes={sizes} className={`object-cover ${imgClassName}`} />
       </div>
     </div>
   );

@@ -3,52 +3,74 @@
 import { useRef } from "react";
 import { site } from "@/content/site";
 import { gsap, useGSAP, MQ } from "@/lib/gsap";
+import { RevealText } from "../motion/RevealText";
+import { Reveal } from "../motion/Reveal";
 import { SectionLabel } from "../ui/SectionLabel";
 import { PinIcon } from "../ui/icons";
 
 const { remote } = site;
-const N = remote.principles.length;
 
-// The section holds in place while each principle slides up over the last;
-// it releases once the final card has settled. Without motion the cards
-// simply sit in a list.
+// Kochi sits at the origin; arcs reach out to collaborators anywhere.
+const ORIGIN = { x: 200, y: 250 };
+const PEERS = [
+  { x: 40, y: 70 },
+  { x: 150, y: 40 },
+  { x: 330, y: 60 },
+  { x: 380, y: 170 },
+  { x: 360, y: 330 },
+  { x: 60, y: 350 },
+];
+
+function arc(to: { x: number; y: number }) {
+  const mx = (ORIGIN.x + to.x) / 2;
+  const my = (ORIGIN.y + to.y) / 2 - Math.hypot(to.x - ORIGIN.x, to.y - ORIGIN.y) * 0.35;
+  return `M${ORIGIN.x} ${ORIGIN.y} Q${mx} ${my} ${to.x} ${to.y}`;
+}
+
+function SignalMap() {
+  return (
+    <svg viewBox="0 0 420 400" className="h-auto w-full overflow-visible" aria-hidden="true" focusable="false">
+      <g stroke="currentColor" fill="none" className="text-cloud/15">
+        {[60, 110, 160, 210].map((r) => (
+          <circle key={r} data-ring="" cx={ORIGIN.x} cy={ORIGIN.y} r={r} strokeWidth="1" />
+        ))}
+      </g>
+      <g fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" className="text-lagoon">
+        {PEERS.map((p, i) => (
+          <path key={i} data-arc="" d={arc(p)} />
+        ))}
+      </g>
+      {PEERS.map((p, i) => (
+        <circle key={i} data-peer="" cx={p.x} cy={p.y} r="5" className="fill-monsoon stroke-cloud/70" strokeWidth="1.4" />
+      ))}
+      <circle data-pulse="" cx={ORIGIN.x} cy={ORIGIN.y} r="18" className="fill-lagoon/20" />
+      <circle cx={ORIGIN.x} cy={ORIGIN.y} r="7" className="fill-lagoon" />
+    </svg>
+  );
+}
+
 export function Remote() {
   const ref = useRef<HTMLElement>(null);
 
   useGSAP(
     () => {
-      const section = ref.current;
-      if (!section) return;
       const mm = gsap.matchMedia();
       mm.add(MQ.motion, () => {
-        const cards = gsap.utils.toArray<HTMLElement>("[data-principle]", section);
-        const steps = gsap.utils.toArray<HTMLElement>("[data-step]", section);
-        const bar = section.querySelector("[data-progress]");
-        gsap.set(cards.slice(1), { yPercent: 115, opacity: 0 });
-        gsap.set(steps.slice(1), { opacity: 0.35 });
-
+        const map = ref.current!.querySelector("[data-map]");
         const tl = gsap.timeline({
-          defaults: { ease: "power2.inOut", duration: 1 },
-          scrollTrigger: {
-            trigger: section,
-            start: "top top",
-            end: () => `+=${window.innerHeight * (N - 1) * 0.75}`,
-            pin: true,
-            scrub: 1,
-            anticipatePin: 1,
-            invalidateOnRefresh: true,
-          },
+          scrollTrigger: { trigger: map, start: "top 80%", end: "bottom 40%", scrub: 0.8 },
         });
-        tl.fromTo(bar, { scaleX: 1 / N }, { scaleX: 1, ease: "none", duration: N - 1 }, 0);
-        cards.slice(1).forEach((card, i) => {
-          const at = i;
-          tl.to(card, { yPercent: 0, opacity: 1 }, at)
-            .to(cards[i], { scale: 0.94, opacity: 0, yPercent: -6 }, at)
-            .to(steps[i + 1], { opacity: 1, duration: 0.4 }, at + 0.3)
-            .to(steps[i], { opacity: 0.35, duration: 0.4 }, at + 0.3);
+        tl.from("[data-ring]", { scale: 0.4, opacity: 0, transformOrigin: "50% 50%", stagger: 0.1, ease: "power2.out" })
+          .from("[data-arc]", { drawSVG: 0, stagger: 0.08, ease: "power2.inOut" }, 0.1)
+          .from("[data-peer]", { scale: 0, transformOrigin: "50% 50%", stagger: 0.08, ease: "back.out(3)" }, 0.4);
+        gsap.to("[data-pulse]", {
+          scale: 2.2,
+          opacity: 0,
+          transformOrigin: "50% 50%",
+          duration: 2.4,
+          repeat: -1,
+          ease: "power2.out",
         });
-        // A short beat at the end so the last card reads before the section moves on.
-        tl.to({}, { duration: 0.35 });
       });
     },
     { scope: ref },
@@ -59,55 +81,41 @@ export function Remote() {
       ref={ref}
       data-header="dark"
       aria-labelledby="remote-title"
-      className="grain on-dark flex min-h-svh items-center overflow-hidden bg-harbour py-20 text-cloud lg:py-24"
+      className="grain on-dark section-y overflow-hidden bg-harbour text-cloud"
     >
-      <div className="wrap relative z-[2] grid items-center gap-y-10 lg:grid-cols-12 lg:gap-x-8">
-        <div className="lg:col-span-6">
-          <SectionLabel index={remote.index} tone="dark">
-            {remote.eyebrow}
-          </SectionLabel>
-          <h2 id="remote-title" className="display t-h2 mt-6 lg:mt-8">
-            {remote.title.map((line, i) => (
-              <span key={line} className="block">
-                {line}
-                {i < remote.title.length - 1 ? " " : null}
-              </span>
-            ))}
-          </h2>
-          <p className="mt-6 max-w-[30rem] font-serif text-[clamp(1.25rem,2vw,1.75rem)] leading-[1.3] text-cloud/90 lg:mt-8">{remote.lead}</p>
-          <p className="label mt-8 inline-flex items-center gap-2 rounded-full px-4 py-2 text-lagoon ring-1 ring-lagoon/40 lg:mt-10">
-            <PinIcon size={14} />
-            {remote.badge}
-          </p>
+      <div className="wrap">
+        <div className="grid items-center gap-y-12 lg:grid-cols-12 lg:gap-x-8">
+          <div className="lg:col-span-7">
+            <Reveal>
+              <SectionLabel index={remote.index} tone="dark">
+                {remote.eyebrow}
+              </SectionLabel>
+            </Reveal>
+            <RevealText as="h2" id="remote-title" lines={remote.title} className="display t-h2 mt-8" />
+            <Reveal className="mt-8 max-w-[32rem]">
+              <p className="font-serif text-[clamp(1.5rem,2.2vw,2rem)] leading-[1.25] text-cloud/90">{remote.lead}</p>
+            </Reveal>
+            <Reveal className="mt-10">
+              <p className="label inline-flex items-center gap-2 rounded-full px-4 py-2 text-lagoon ring-1 ring-lagoon/40">
+                <PinIcon size={14} />
+                {remote.badge}
+              </p>
+            </Reveal>
+          </div>
+          <div data-map="" className="mx-auto w-full max-w-[30rem] lg:col-span-5">
+            <SignalMap />
+          </div>
         </div>
 
-        <div className="lg:col-span-5 lg:col-start-8">
-          <div aria-hidden="true" className="remote-steps mb-5 items-center gap-4">
-            <div className="flex gap-3">
-              {remote.principles.map((p, i) => (
-                <span key={p.name} data-step="" className="label tabular-nums text-lagoon">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-              ))}
-            </div>
-            <span className="relative h-px flex-1 overflow-hidden bg-cloud/15">
-              <span data-progress="" className="absolute inset-0 origin-left bg-lagoon" />
-            </span>
-          </div>
-          <ul className="remote-stack grid gap-3">
-            {remote.principles.map((p, i) => (
-              <li
-                key={p.name}
-                data-principle=""
-                className="rounded-[22px] bg-monsoon p-6 ring-1 ring-cloud/10 sm:p-8"
-              >
-                <p className="label tabular-nums text-lagoon">{String(i + 1).padStart(2, "0")}</p>
-                <h3 className="mt-4 font-display text-[clamp(1.5rem,2.2vw,2rem)] leading-[1.1] font-bold tracking-[-0.03em]">{p.name}</h3>
-                <p className="mt-3 text-[1.0625rem] leading-[1.6] text-mist">{p.body}</p>
-              </li>
-            ))}
-          </ul>
-        </div>
+        <Reveal as="ul" stagger={0.1} className="mt-16 grid gap-10 md:grid-cols-3 md:gap-8 lg:mt-20">
+          {remote.principles.map((p, i) => (
+            <li key={p.name} className="border-t border-cloud/15 pt-6">
+              <p className="label text-lagoon">{String(i + 1).padStart(2, "0")}</p>
+              <h3 className="display t-h3 mt-3">{p.name}</h3>
+              <p className="mt-4 text-[1.0625rem] leading-[1.6] text-mist">{p.body}</p>
+            </li>
+          ))}
+        </Reveal>
       </div>
     </section>
   );

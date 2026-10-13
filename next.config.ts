@@ -1,6 +1,8 @@
 import type { NextConfig } from 'next';
 const config: NextConfig = {
   poweredByHeader: false,
+  // Project covers and portraits are served at 90 for crisp detail; 75 stays the default.
+  images: { qualities: [75, 90] },
   async headers() {
     return [{ source: '/admin/:path*', headers: [
       { key: 'X-Robots-Tag', value: 'noindex, nofollow' },

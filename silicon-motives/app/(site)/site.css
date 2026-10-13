@@ -327,13 +327,3 @@ html.lenis, html.lenis body { height: auto; }
   html:not(.motion-ready) .public-site .marquee .review-list { flex-wrap: wrap; justify-content: center; width: 100%; gap: 1.5rem; padding-inline: 1rem; }
   html:not(.motion-ready) .public-site .marquee .client-list li > span { display: none; }
 }
-
-/* Remote: with motion the principles share one slot and replace each other on scroll. */
-@layer components {
-  .public-site .remote-steps { display: none; }
-  @media (prefers-reduced-motion: no-preference) {
-    html.motion-ready .public-site .remote-stack { grid-template-areas: "stack"; }
-    html.motion-ready .public-site .remote-stack > li { grid-area: stack; will-change: transform, opacity; }
-    html.motion-ready .public-site .remote-steps { display: flex; }
-  }
-}
