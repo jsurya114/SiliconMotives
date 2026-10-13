@@ -24,7 +24,7 @@ function Project({ item, index }: { item: ContentRow; index: number }) {
 
   return (
     <article data-project="" aria-labelledby={`project-${item.id}`} className="group flex h-full flex-col">
-      <div className="relative aspect-[4/3] overflow-hidden rounded-[20px] bg-harbour">
+      <div className="relative aspect-[16/10] overflow-hidden rounded-2xl bg-harbour">
         {image ? (
           <Image
             src={image}
@@ -45,7 +45,7 @@ function Project({ item, index }: { item: ContentRow; index: number }) {
         </span>
       </div>
 
-      <div className="mt-5 flex flex-1 flex-col">
+      <div className="mt-4 flex flex-1 flex-col">
         {item.category ? <p className="label tracking-[0.06em] text-lagoon">{item.category}</p> : null}
         <h3 id={`project-${item.id}`} className="mt-1.5">
           <span className="block font-display text-[1.375rem] leading-[1.15] font-bold tracking-[-0.025em] lg:text-[1.5rem]">{name}</span>
@@ -53,7 +53,7 @@ function Project({ item, index }: { item: ContentRow; index: number }) {
           {descriptor ? <span className="mt-1 block font-serif text-[0.9375rem] leading-[1.35] text-mist italic">{descriptor}</span> : null}
         </h3>
         {item.description ? (
-          <p className="mt-3 line-clamp-3 text-[0.9375rem] leading-[1.55] text-cloud/65">{item.description}</p>
+          <p className="mt-2 line-clamp-2 text-[0.9375rem] leading-[1.5] text-cloud/65">{item.description}</p>
         ) : null}
       </div>
     </article>
@@ -131,7 +131,7 @@ export function Portfolio({ rows }: { rows: ContentRow[] }) {
   );
 
   return (
-    <section ref={ref} id="portfolio" data-header="dark" aria-labelledby="portfolio-title" className="grain on-dark section-y bg-monsoon text-cloud">
+    <section ref={ref} id="portfolio" data-header="dark" aria-labelledby="portfolio-title" className="grain on-dark bg-monsoon py-14 text-cloud sm:py-16 lg:py-20">
       <div className="wrap relative z-[2]">
         <div className="grid gap-6 lg:grid-cols-12 lg:items-end">
           <div className="lg:col-span-8">
@@ -149,8 +149,8 @@ export function Portfolio({ rows }: { rows: ContentRow[] }) {
           </Reveal>
         </div>
 
-        <div data-stage="" className="mt-12 lg:mt-16">
-        <ol data-grid="" className="project-stack flex flex-wrap justify-center gap-x-4 gap-y-12 sm:gap-x-6 lg:gap-x-8 lg:gap-y-16" aria-label="Projects">
+        <div data-stage="" className="mt-8 lg:mt-10">
+        <ol data-grid="" className="project-stack flex flex-wrap justify-center gap-x-4 gap-y-8 sm:gap-x-6 lg:gap-x-8 lg:gap-y-10" aria-label="Projects">
           {rows.map((item, i) => (
             <li key={item.id} data-slot="" className="w-full sm:w-[calc((100%-1.5rem)/2)] lg:w-[calc((100%-4rem)/3)]">
               <Project item={item} index={i} />
