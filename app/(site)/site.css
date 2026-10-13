@@ -184,33 +184,28 @@ html.lenis, html.lenis body { height: auto; }
 
 
 /* ── FAQ ──────────────────────────────────────────────────────────────── */
-.faq-item summary {
-  list-style: none;
-  cursor: pointer;
-}
-.faq-item summary::-webkit-details-marker {
-  display: none;
-}
-.faq-item .faq-plus {
-  transition: transform 0.6s var(--ease-expo);
-}
-.faq-item[open] .faq-plus {
-  transform: rotate(45deg);
-}
-.faq-item::details-content {
-  block-size: 0;
-  overflow: clip;
+.faq-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
   transition:
-    block-size 0.6s var(--ease-expo),
-    content-visibility 0.6s allow-discrete;
+    grid-template-rows 0.5s var(--ease-expo),
+    opacity 0.35s ease;
 }
-.faq-item[open]::details-content {
-  block-size: auto;
+.faq-row[data-open] .faq-panel {
+  grid-template-rows: 1fr;
+  opacity: 1;
 }
-@supports (interpolate-size: allow-keywords) {
-  & {
-    interpolate-size: allow-keywords;
-  }
+.faq-plus {
+  transition:
+    transform 0.5s var(--ease-expo),
+    background-color 0.3s ease,
+    color 0.3s ease;
+}
+.faq-row[data-open] .faq-plus {
+  transform: rotate(45deg);
+  background: var(--color-ink);
+  color: var(--color-cloud);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -327,3 +322,29 @@ html.lenis, html.lenis body { height: auto; }
   html:not(.motion-ready) .public-site .marquee .review-list { flex-wrap: wrap; justify-content: center; width: 100%; gap: 1.5rem; padding-inline: 1rem; }
   html:not(.motion-ready) .public-site .marquee .client-list li > span { display: none; }
 }
+
+/* ── Mobile menu ── A fixed overlay; links show even if animation never runs. */
+@keyframes menu-in { from { opacity: 0; transform: translateY(-12px); } }
+@keyframes menu-item-in { from { opacity: 0; transform: translateY(18px); } }
+@keyframes menu-out { to { opacity: 0; transform: translateY(-12px); } }
+@media (prefers-reduced-motion: no-preference) {
+  .public-site .mobile-menu { animation: menu-in 0.35s var(--ease-expo); }
+  .public-site .mobile-menu__item { animation: menu-item-in 0.6s var(--ease-expo) backwards; }
+  .public-site .mobile-menu[data-closing] { animation: menu-out 0.28s ease-in forwards; }
+}
+
+/* ── Hero on phones ── size to the content instead of the full screen, so the
+   copy no longer sits under a tall empty band of sky. */
+@media (max-width: 639.98px) {
+  .public-site .hero-static, .public-site .hero-static > .wrap { min-height: 0; }
+  .public-site .hero-static > .wrap { padding-top: 7.5rem; padding-bottom: 2rem; }
+}
+
+/* ── Projects on phones ── with motion, cards share one slot and the pinned
+   section swaps them as you scroll. Unlayered so it outranks the grid utilities. */
+@media (max-width: 1023.98px) and (prefers-reduced-motion: no-preference) {
+  html.motion-ready .public-site .project-stack { display: grid; grid-template-areas: "stack"; gap: 0; }
+  html.motion-ready .public-site .project-stack > li { grid-area: stack; width: 100%; }
+  html.motion-ready .public-site .project-progress { display: flex; }
+}
+.public-site .project-progress { display: none; }

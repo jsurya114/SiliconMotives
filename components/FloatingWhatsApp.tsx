@@ -36,16 +36,15 @@ export function FloatingWhatsApp({ number }: { number?: string }) {
       rel="noopener noreferrer"
       tabIndex={show ? 0 : -1}
       aria-hidden={!show}
-      className={`fixed right-4 bottom-4 z-40 flex items-center gap-3 rounded-full bg-cloud py-2 pr-2 pl-5 text-ink shadow-[0_18px_50px_-12px_rgba(11,26,43,0.45)] ring-1 ring-ink/10 transition-all duration-700 ease-[var(--ease-expo)] sm:right-6 sm:bottom-6 ${
+      className={`fixed right-4 bottom-4 z-40 flex items-center gap-3 rounded-full bg-cloud py-1.5 pr-1.5 pl-4 text-ink sm:py-2 sm:pr-2 sm:pl-5 shadow-[0_18px_50px_-12px_rgba(11,26,43,0.45)] ring-1 ring-ink/10 transition-all duration-700 ease-[var(--ease-expo)] sm:right-6 sm:bottom-6 ${
         show ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-6 opacity-0"
       }`}
     >
-      <span className="hidden leading-tight sm:block">
-        <span className="block font-display text-[0.9375rem] font-bold tracking-[-0.01em]">{site.floating.line1}</span>
-        <span className="block text-[0.8125rem] text-slate">{site.floating.line2}</span>
+      <span className="block leading-tight">
+        <span className="block font-display text-[0.875rem] font-bold tracking-[-0.01em] sm:text-[0.9375rem]">{site.floating.line1}</span>
+        <span className="block text-[0.75rem] text-slate sm:text-[0.8125rem]">{site.floating.line2}</span>
       </span>
-      <span className="sr-only sm:hidden">{site.floating.line2}</span>
-      <span className="grid size-11 place-items-center rounded-full bg-[#1f9d55] text-white">
+      <span className="grid size-10 shrink-0 place-items-center sm:size-11 rounded-full bg-[#1f9d55] text-white">
         <WhatsAppIcon size={20} />
       </span>
     </a>

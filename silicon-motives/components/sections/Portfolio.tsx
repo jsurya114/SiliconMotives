@@ -63,19 +63,21 @@ function Project({ item, index }: { item: ContentRow; index: number }) {
 export function Portfolio({ rows }: { rows: ContentRow[] }) {
   const ref = useRef<HTMLElement>(null);
 
-  // Each card rises from below as the page scrolls, tied to the scroll so the
-  // motion is always visible. Cards further right start a little later, so a
-  // row ripples up left to right. The list item is the trigger and the card
-  // inside it moves, so measurements are never thrown off by the tween.
+  // Desktop: each card rises with the scroll, later columns a little later.
+  // Phones: the list pins and shows one project at a time — the next slides
+  // up as the previous one sinks away — and plays back in reverse.
   useGSAP(
     () => {
       const section = ref.current;
       if (!section) return;
       const grid = section.querySelector<HTMLElement>("[data-grid]");
-      if (!grid) return;
+      const stage = section.querySelector<HTMLElement>("[data-stage]");
+      if (!grid || !stage) return;
+      const slots = gsap.utils.toArray<HTMLElement>("[data-slot]", grid);
       const mm = gsap.matchMedia();
-      mm.add(MQ.motion, () => {
-        gsap.utils.toArray<HTMLElement>("[data-slot]", grid).forEach((slot) => {
+
+      mm.add(`${MQ.motion} and ${MQ.desktop}`, () => {
+        slots.forEach((slot) => {
           const card = slot.querySelector("[data-project]");
           const lag = () => Math.round(((slot.offsetLeft - grid.offsetLeft) / grid.offsetWidth) * 180);
           gsap.fromTo(
@@ -94,6 +96,34 @@ export function Portfolio({ rows }: { rows: ContentRow[] }) {
               },
             },
           );
+        });
+      });
+
+      mm.add(`${MQ.motion} and ${MQ.mobile}`, () => {
+        if (slots.length < 2) return;
+        const counter = stage.querySelector("[data-counter]");
+        const bar = stage.querySelector("[data-bar]");
+        const steps = slots.length - 1;
+        gsap.set(slots.slice(1), { yPercent: 100, opacity: 0 });
+        const tl = gsap.timeline({
+          defaults: { ease: "power2.inOut", duration: 1 },
+          scrollTrigger: {
+            trigger: stage,
+            start: "center center",
+            end: () => `+=${window.innerHeight * 0.8 * steps}`,
+            pin: true,
+            scrub: 0.8,
+            anticipatePin: 1,
+            invalidateOnRefresh: true,
+            snap: { snapTo: 1 / steps, duration: { min: 0.2, max: 0.6 }, ease: "power2.inOut" },
+            onUpdate: (self) => {
+              if (counter) counter.textContent = pad(Math.round(self.progress * steps) + 1);
+            },
+          },
+        });
+        tl.fromTo(bar, { scaleX: 1 / slots.length }, { scaleX: 1, ease: "none", duration: steps }, 0);
+        slots.slice(1).forEach((slot, i) => {
+          tl.to(slot, { yPercent: 0, opacity: 1 }, i).to(slots[i], { yPercent: -12, scale: 0.92, opacity: 0 }, i);
         });
       });
     },
@@ -119,13 +149,23 @@ export function Portfolio({ rows }: { rows: ContentRow[] }) {
           </Reveal>
         </div>
 
-        <ol data-grid="" className="mt-12 flex flex-wrap justify-center gap-x-4 gap-y-12 sm:gap-x-6 lg:mt-16 lg:gap-x-8 lg:gap-y-16" aria-label="Projects">
+        <div data-stage="" className="mt-12 lg:mt-16">
+        <ol data-grid="" className="project-stack flex flex-wrap justify-center gap-x-4 gap-y-12 sm:gap-x-6 lg:gap-x-8 lg:gap-y-16" aria-label="Projects">
           {rows.map((item, i) => (
             <li key={item.id} data-slot="" className="w-full sm:w-[calc((100%-1.5rem)/2)] lg:w-[calc((100%-4rem)/3)]">
               <Project item={item} index={i} />
             </li>
           ))}
         </ol>
+        <div aria-hidden="true" className="project-progress mt-6 items-center gap-4">
+          <span className="label tabular-nums text-lagoon">
+            <span data-counter="">01</span> / {pad(rows.length)}
+          </span>
+          <span className="relative h-px flex-1 overflow-hidden bg-cloud/15">
+            <span data-bar="" className="absolute inset-0 origin-left bg-lagoon" />
+          </span>
+        </div>
+        </div>
       </div>
     </section>
   );

@@ -26,10 +26,8 @@ export function Services({ rows }: { rows: ContentRow[] }) {
       const cards = gsap.utils.toArray<HTMLElement>("[data-card]", section);
 
       const mm = gsap.matchMedia();
-      mm.add({ motion: MQ.motion, desktop: MQ.desktop }, (ctx) => {
-        const { motion, desktop } = ctx.conditions as { motion: boolean; desktop: boolean };
-        if (!motion) return;
-
+      // The same pinned sideways scroll runs on every screen size.
+      mm.add(MQ.motion, () => {
         const drawCard = (card: HTMLElement) =>
           gsap.from(card.querySelectorAll("svg path, svg rect, svg circle"), {
             drawSVG: 0,
@@ -39,61 +37,49 @@ export function Services({ rows }: { rows: ContentRow[] }) {
             paused: true,
           });
 
-        if (desktop) {
-          gsap.set(rail, { overflowX: 'visible', scrollSnapType: 'none' });
-          const distance = () => Math.max(0, rail.scrollWidth - window.innerWidth);
-          const move = gsap.to(rail, {
-            x: () => -distance(),
-            ease: "none",
+        gsap.set(rail, { overflowX: 'visible', scrollSnapType: 'none' });
+        const distance = () => Math.max(0, rail.scrollWidth - window.innerWidth);
+        const move = gsap.to(rail, {
+          x: () => -distance(),
+          ease: "none",
+          scrollTrigger: {
+            trigger: pinEl,
+            start: "center center",
+            end: () => `+=${distance()}`,
+            pin: true,
+            scrub: 0.6,
+            // Pre-apply the pin a frame early so a fast scroll never catches it mid-switch.
+            anticipatePin: 1,
+            invalidateOnRefresh: true,
+          },
+        });
+        cards.forEach((card, i) => {
+          const art = drawCard(card);
+          gsap.from(card, {
+            x: 120,
+            opacity: 0,
+            duration: 1.2,
+            ease: "expo.out",
             scrollTrigger: {
-              trigger: pinEl,
-              start: "center center",
-              end: () => `+=${distance()}`,
-              pin: true,
-              scrub: 0.6,
-              // Pre-apply the pin a frame early so a fast scroll never catches it mid-switch.
-              anticipatePin: 1,
-              invalidateOnRefresh: true,
+              trigger: card,
+              containerAnimation: i === 0 ? undefined : move,
+              start: i === 0 ? "top 80%" : "left 92%",
+              once: true,
+              onEnter: () => art.play(),
             },
           });
-          cards.forEach((card, i) => {
-            const art = drawCard(card);
-            gsap.from(card, {
-              x: 120,
-              opacity: 0,
-              duration: 1.2,
-              ease: "expo.out",
-              scrollTrigger: {
-                trigger: card,
-                containerAnimation: i === 0 ? undefined : move,
-                start: i === 0 ? "top 80%" : "left 92%",
-                once: true,
-                onEnter: () => art.play(),
+          const art3 = card.querySelector("[data-art]");
+          if (art3)
+            gsap.fromTo(
+              art3,
+              { xPercent: 10 },
+              {
+                xPercent: -10,
+                ease: "none",
+                scrollTrigger: { trigger: card, containerAnimation: move, start: "left right", end: "right left", scrub: true },
               },
-            });
-            const art3 = card.querySelector("[data-art]");
-            if (art3)
-              gsap.fromTo(
-                art3,
-                { xPercent: 10 },
-                {
-                  xPercent: -10,
-                  ease: "none",
-                  scrollTrigger: { trigger: card, containerAnimation: move, start: "left right", end: "right left", scrub: true },
-                },
-              );
-          });
-        } else {
-          cards.forEach((card) => {
-            const art = drawCard(card);
-            gsap.from(card, {
-              y: 40,
-              opacity: 0,
-              duration: 1.1,
-              scrollTrigger: { trigger: pinEl, start: "top 80%", once: true, onEnter: () => art.play() },
-            });
-          });
-        }
+            );
+        });
       });
     },
     { scope: ref },
@@ -103,7 +89,7 @@ export function Services({ rows }: { rows: ContentRow[] }) {
   const onFocus = (e: React.FocusEvent<HTMLElement>) => {
     const card = (e.target as HTMLElement).closest<HTMLElement>("[data-card]");
     const section = ref.current;
-    if (!card || !section || !window.matchMedia(`${MQ.desktop} and ${MQ.motion}`).matches) return;
+    if (!card || !section || !window.matchMedia(MQ.motion).matches) return;
     const rail = section.querySelector<HTMLElement>("[data-rail]")!;
     const pin = section.querySelector<HTMLElement>("[data-rail-pin]")!;
     const distance = rail.scrollWidth - window.innerWidth;
@@ -132,7 +118,7 @@ export function Services({ rows }: { rows: ContentRow[] }) {
         </Reveal>
       </div>
 
-      <div data-rail-pin="" className="flex items-center overflow-x-clip pb-20 lg:h-svh lg:pb-0">
+      <div data-rail-pin="" className="flex h-svh items-center overflow-x-clip">
         <ul data-rail="" aria-label={site.ui.servicesRail} className="rail w-full" onFocus={onFocus}>
           {rows.map((item, i) => (
             <li

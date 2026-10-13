@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { site } from "@/content/site";
-import { gsap, MQ } from "@/lib/gsap";
+import { MQ } from "@/lib/gsap";
 import { useSmoothScroll } from "./motion/SmoothScroll";
 import { ArrowIcon, CloseIcon, MenuIcon } from "./ui/icons";
 import { contactDetails } from "@/lib/urls";
@@ -121,57 +121,61 @@ export function Header({ settings }: { settings: ContentRow }) {
 }
 
 function MobileMenu({ onClose, settings }: { onClose: () => void; settings: ContentRow }) {
-  const ref = useRef<HTMLDialogElement>(null);
+  const ref = useRef<HTMLDivElement>(null);
+  const [closing, setClosing] = useState(false);
   const contact = contactDetails(settings);
 
+  // A plain fixed overlay (no <dialog>), so every mobile browser renders it.
+  // Its links are visible by default; CSS only adds a short entrance.
   useEffect(() => {
-    const d = ref.current;
-    if (!d) return;
-    d.showModal();
-    document.body.classList.add('dialog-open');
+    const el = ref.current;
+    const opener = document.activeElement as HTMLElement | null;
+    document.body.classList.add("dialog-open");
+    el?.querySelector<HTMLElement>("button")?.focus();
     const media = window.matchMedia(MQ.desktop);
-    const desktop = () => {
-      if (media.matches) {
-        d.close();
-        onClose();
-      }
+    const desktop = () => media.matches && onClose();
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") close();
+      if (e.key !== "Tab" || !el) return;
+      // Keep focus inside the menu while it is open.
+      const items = el.querySelectorAll<HTMLElement>("a, button");
+      const first = items[0];
+      const last = items[items.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
     };
-    media.addEventListener('change', desktop);
-    if (window.matchMedia(MQ.motion).matches) {
-      const tl = gsap.timeline();
-      tl.fromTo(d, { clipPath: "inset(0 0 100% 0)" }, { clipPath: "inset(0 0 0% 0)", duration: 0.9, ease: "expo.inOut" }).from(
-        d.querySelectorAll("[data-menu-item]"),
-        { yPercent: 110, duration: 1, stagger: 0.06, ease: "expo.out" },
-        "-=0.35",
-      );
-    }
-    return () => { document.body.classList.remove('dialog-open'); media.removeEventListener('change', desktop); };
+    media.addEventListener("change", desktop);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.body.classList.remove("dialog-open");
+      media.removeEventListener("change", desktop);
+      document.removeEventListener("keydown", onKey);
+      opener?.focus?.({ preventScroll: true });
+    };
   }, []);
 
   const close = (then?: () => void) => {
-    const d = ref.current;
     const finish = () => {
-      d?.close();
       onClose();
       then?.();
     };
-    if (d && window.matchMedia(MQ.motion).matches) {
-      gsap.to(d, { clipPath: "inset(0 0 100% 0)", duration: 0.7, ease: "expo.inOut", onComplete: finish });
+    if (window.matchMedia(MQ.motion).matches) {
+      setClosing(true);
+      window.setTimeout(finish, 280);
     } else finish();
   };
 
   return (
-    <dialog
+    <div
       ref={ref}
+      role="dialog"
+      aria-modal="true"
       aria-label={site.ui.mainNav}
-      className="on-dark fixed inset-0 m-0 h-svh max-h-none w-screen max-w-none bg-monsoon p-0 text-cloud backdrop:bg-transparent"
-      onCancel={(e) => {
-        e.preventDefault();
-        close();
-      }}
+      data-closing={closing || undefined}
+      className="mobile-menu on-dark fixed inset-0 z-[90] h-dvh w-full overflow-y-auto bg-monsoon text-cloud"
     >
-      <div className="wrap flex h-full flex-col pb-8">
-        <div className="flex h-16 items-center justify-between">
+      <div className="wrap flex min-h-full flex-col pb-8">
+        <div className="flex h-16 shrink-0 items-center justify-between">
           <span className="font-display text-[1.125rem] font-extrabold tracking-[-0.04em]">{site.brand.name}</span>
           <button
             type="button"
@@ -183,29 +187,29 @@ function MobileMenu({ onClose, settings }: { onClose: () => void; settings: Cont
             <CloseIcon />
           </button>
         </div>
-        <nav className="mt-auto flex flex-col gap-1 px-5">
-          {[...site.nav, site.navCta].map((item) => (
-            <span key={item.href + item.label} className="overflow-hidden">
-              <a
-                data-menu-item=""
-                href={item.href}
-                onClick={(e) => {
-                  e.preventDefault();
-                  close(() => document.querySelector(item.href)?.scrollIntoView({ behavior: "instant" }));
-                }}
-                className="display block py-1 text-[clamp(2.5rem,11vw,4.5rem)] leading-none"
-              >
-                {item.label}
-              </a>
-            </span>
+        <nav className="mt-10 flex flex-col gap-1">
+          {[...site.nav, site.navCta].map((item, i) => (
+            <a
+              key={item.href + item.label}
+              href={item.href}
+              style={{ animationDelay: `${80 + i * 45}ms` }}
+              onClick={(e) => {
+                e.preventDefault();
+                close(() => document.querySelector(item.href)?.scrollIntoView({ behavior: "instant" }));
+              }}
+              className="mobile-menu__item display flex items-center justify-between border-b border-cloud/10 py-3 text-[clamp(2rem,9vw,3.25rem)] leading-none"
+            >
+              {item.label}
+              <ArrowIcon size={18} />
+            </a>
           ))}
         </nav>
-        <p className="label mt-10 px-5 text-mist">
-          {contact.email}
+        <p className="label mt-auto pt-10 text-mist">
+          <a href={`mailto:${contact.email}`}>{contact.email}</a>
           <br />
-          {contact.phone}
+          <a href={contact.phoneHref}>{contact.phone}</a>
         </p>
       </div>
-    </dialog>
+    </div>
   );
 }

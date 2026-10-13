@@ -63,7 +63,7 @@ export function Marquee({ children, className = "", speed = 40 }: Props) {
 
   return (
     <div ref={ref} className={`marquee overflow-hidden ${className}`}>
-      <div onPointerEnter={() => { interaction.current = true; }} onPointerLeave={() => { interaction.current = false; }} onFocusCapture={() => { interaction.current = true; }} onBlurCapture={event => { if (!event.currentTarget.contains(event.relatedTarget as Node)) interaction.current = false; }}>
+      <div onPointerEnter={event => { if (event.pointerType === "mouse") interaction.current = true; }} onPointerLeave={() => { interaction.current = false; }} onFocusCapture={() => { interaction.current = true; }} onBlurCapture={event => { if (!event.currentTarget.contains(event.relatedTarget as Node)) interaction.current = false; }}>
       <div data-track="" className="flex w-max will-change-transform">
         <div data-primary="" className="flex shrink-0">{children}</div>
         <div data-duplicate="" className="flex shrink-0" aria-hidden="true" inert>
