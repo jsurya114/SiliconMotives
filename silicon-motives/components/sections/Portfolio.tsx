@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useRef } from "react";
 import { site } from "@/content/site";
-import { gsap, useGSAP, MQ } from "@/lib/gsap";
+import { gsap, ScrollTrigger, useGSAP, MQ } from "@/lib/gsap";
 import { RevealText } from "../motion/RevealText";
 import { Reveal } from "../motion/Reveal";
 import { SectionLabel } from "../ui/SectionLabel";
@@ -23,24 +23,15 @@ function Project({ item, index }: { item: ContentRow; index: number }) {
   const image = safeImage(item.image_url);
 
   return (
-    <article
-      data-project=""
-      aria-labelledby={`project-${item.id}`}
-      className="group relative grid grid-cols-[6.5rem_1fr] items-center gap-x-5 gap-y-3 py-6 sm:grid-cols-[9rem_1fr] sm:gap-x-8 lg:grid-cols-12 lg:gap-x-8 lg:py-7"
-    >
-      <span data-line="" aria-hidden="true" className="absolute inset-x-0 top-0 h-px origin-left bg-cloud/15" />
-
-      <div
-        data-thumb=""
-        className="relative row-span-2 aspect-[4/3] overflow-hidden rounded-[14px] bg-harbour lg:order-last lg:col-span-2 lg:col-start-11 lg:row-span-1"
-      >
+    <article data-project="" aria-labelledby={`project-${item.id}`} className="group flex h-full flex-col">
+      <div className="relative aspect-[4/3] overflow-hidden rounded-[16px] bg-harbour">
         {image ? (
           <Image
             src={image}
             alt={item.image_alt || ""}
             fill
             unoptimized={!image.startsWith("/images/")}
-            sizes="(min-width: 1024px) 15vw, 9rem"
+            sizes="(min-width: 1280px) 18vw, (min-width: 768px) 30vw, 46vw"
             className="object-cover transition-transform duration-700 ease-[var(--ease-expo)] group-hover:scale-105"
           />
         ) : (
@@ -48,25 +39,20 @@ function Project({ item, index }: { item: ContentRow; index: number }) {
             {initials(item.title)}
           </div>
         )}
-      </div>
-
-      <div data-text="" className="min-w-0 lg:col-span-5 lg:flex lg:items-baseline lg:gap-6">
-        <span aria-hidden="true" className="label hidden tabular-nums text-lagoon lg:inline">
+        <span aria-hidden="true" className="label absolute top-2.5 left-2.5 rounded-full bg-monsoon/70 px-2.5 py-1 tabular-nums text-lagoon backdrop-blur-sm">
           {pad(index + 1)}
         </span>
-        <h3 id={`project-${item.id}`}>
-          <span className="block font-display text-[1.375rem] leading-[1.1] font-bold tracking-[-0.03em] sm:text-[1.75rem] lg:text-[2rem]">
-            {name}
-          </span>
-          {descriptor ? <span className="sr-only"> — </span> : null}
-          {descriptor ? <span className="mt-1 block font-serif text-[1rem] leading-[1.35] text-mist italic sm:text-[1.0625rem]">{descriptor}</span> : null}
-        </h3>
       </div>
 
-      <div data-text="" className="min-w-0 lg:col-span-4">
-        {item.category ? <p className="label tracking-[0.06em] text-lagoon">{item.category}</p> : null}
+      <div className="mt-4 flex flex-1 flex-col">
+        {item.category ? <p className="label text-[0.6875rem] tracking-[0.06em] text-lagoon sm:text-[0.75rem]">{item.category}</p> : null}
+        <h3 id={`project-${item.id}`} className="mt-1.5">
+          <span className="block font-display text-[1.125rem] leading-[1.15] font-bold tracking-[-0.025em] sm:text-[1.3125rem]">{name}</span>
+          {descriptor ? <span className="sr-only"> — </span> : null}
+          {descriptor ? <span className="mt-1 block font-serif text-[0.9375rem] leading-[1.35] text-mist italic">{descriptor}</span> : null}
+        </h3>
         {item.description ? (
-          <p className="mt-2 hidden text-[0.9375rem] leading-[1.55] text-cloud/70 sm:line-clamp-3 sm:block">{item.description}</p>
+          <p className="mt-3 line-clamp-3 hidden text-[0.875rem] leading-[1.55] text-cloud/65 sm:block">{item.description}</p>
         ) : null}
       </div>
     </article>
@@ -76,30 +62,21 @@ function Project({ item, index }: { item: ContentRow; index: number }) {
 export function Portfolio({ rows }: { rows: ContentRow[] }) {
   const ref = useRef<HTMLElement>(null);
 
-  // Each row draws its hairline, wipes its thumbnail open from the left and
-  // slides its text in — once, as it enters. Same on touch and desktop.
+  // Cards rise from below with an eased stagger as each row reaches the
+  // viewport; batching keeps later rows staggered when the grid wraps.
   useGSAP(
     () => {
       const section = ref.current;
       if (!section) return;
       const mm = gsap.matchMedia();
       mm.add(MQ.motion, () => {
-        gsap.utils.toArray<HTMLElement>("[data-project]", section).forEach((project) => {
-          gsap
-            .timeline({ scrollTrigger: { trigger: project, start: "top 88%", once: true } })
-            .fromTo(project.querySelector("[data-line]"), { scaleX: 0 }, { scaleX: 1, duration: 1.1, ease: "expo.inOut" })
-            .fromTo(
-              project.querySelector("[data-thumb]"),
-              { clipPath: "inset(0% 100% 0% 0% round 14px)" },
-              { clipPath: "inset(0% 0% 0% 0% round 14px)", duration: 1, ease: "expo.inOut" },
-              0.15,
-            )
-            .fromTo(
-              project.querySelectorAll("[data-text]"),
-              { x: 24, opacity: 0 },
-              { x: 0, opacity: 1, duration: 0.9, stagger: 0.08 },
-              0.35,
-            );
+        const cards = gsap.utils.toArray<HTMLElement>("[data-project]", section);
+        gsap.set(cards, { y: 80, opacity: 0 });
+        ScrollTrigger.batch(cards, {
+          start: "top 90%",
+          once: true,
+          onEnter: (batch) =>
+            gsap.to(batch, { y: 0, opacity: 1, duration: 1.2, ease: "expo.out", stagger: 0.12, overwrite: true }),
         });
       });
     },
@@ -125,7 +102,7 @@ export function Portfolio({ rows }: { rows: ContentRow[] }) {
           </Reveal>
         </div>
 
-        <ol className="mt-12 border-b border-cloud/15 lg:mt-16" aria-label="Projects">
+        <ol className="mt-12 grid grid-cols-2 gap-x-4 gap-y-10 md:grid-cols-3 md:gap-x-6 lg:mt-16 xl:grid-cols-5" aria-label="Projects">
           {rows.map((item, i) => (
             <li key={item.id}>
               <Project item={item} index={i} />
