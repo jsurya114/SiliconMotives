@@ -7,9 +7,8 @@ import { gsap, useGSAP, MQ } from "@/lib/gsap";
 import { RevealText } from "../motion/RevealText";
 import { Reveal } from "../motion/Reveal";
 import { SectionLabel } from "../ui/SectionLabel";
-import { ArrowIcon, ArrowUpRight } from "../ui/icons";
 import type { ContentRow } from "@/lib/content";
-import { safeImage, safeUrl, initials, pad } from "@/lib/urls";
+import { safeImage, initials, pad } from "@/lib/urls";
 
 const { portfolio } = site;
 
@@ -19,122 +18,53 @@ function splitTitle(title: unknown) {
   return { name, descriptor: rest.join(" — ") };
 }
 
-/** CMS rows may carry tags as an array or a comma-separated string. */
-function tagList(tags: unknown): string[] {
-  const list = Array.isArray(tags) ? tags : typeof tags === "string" ? tags.split(",") : [];
-  return list.map((t) => String(t).trim()).filter(Boolean).slice(0, 4);
-}
-
-/* Cards alternate between a light and a dark face so each one reads as a new sheet on the pile. */
-const faces = [
-  {
-    card: "bg-cloud text-ink",
-    muted: "text-slate",
-    accent: "text-lagoon-ink",
-    rule: "border-ink/15",
-    chip: "border-ink/15 text-ink/80",
-    number: "text-ink/[0.07]",
-  },
-  {
-    card: "bg-harbour text-cloud ring-1 ring-cloud/10",
-    muted: "text-mist",
-    accent: "text-lagoon",
-    rule: "border-cloud/15",
-    chip: "border-cloud/20 text-cloud/80",
-    number: "text-cloud/[0.06]",
-  },
-];
-
-function ProjectCard({ item, index, total }: { item: ContentRow; index: number; total: number }) {
-  const face = faces[index % 2];
+function Project({ item, index }: { item: ContentRow; index: number }) {
   const { name, descriptor } = splitTitle(item.title);
   const image = safeImage(item.image_url);
-  const href = safeUrl(item.project_url);
-  const tags = tagList(item.tags);
 
   return (
-    <article
-      data-card=""
-      aria-labelledby={`project-${item.id}`}
-      className={`relative grid origin-top overflow-hidden rounded-[28px] lg:min-h-[min(36rem,calc(100svh-9rem))] lg:grid-cols-12 lg:rounded-[36px] ${face.card}`}
-    >
-      <div className="relative flex flex-col p-6 sm:p-10 lg:col-span-5 lg:p-10 xl:p-12">
-        <span
-          aria-hidden="true"
-          className={`display pointer-events-none absolute -right-2 -bottom-6 text-[clamp(8rem,16vw,15rem)] !leading-none tabular-nums select-none ${face.number}`}
-        >
-          {pad(index + 1)}
-        </span>
-
-        <div className={`flex items-center justify-between gap-4 border-b pb-5 ${face.rule}`}>
-          <p className={`label tracking-[0.06em] ${face.accent}`}>{item.category}</p>
-          <p aria-hidden="true" className={`label shrink-0 tabular-nums ${face.muted}`}>
-            {pad(index + 1)} / {pad(total)}
-          </p>
-        </div>
-
-        <h3 id={`project-${item.id}`} className="mt-8 lg:mt-10">
-          <span className="display block text-[clamp(2.5rem,5vw,4.5rem)]">{name}</span>
-          {descriptor ? <span className="sr-only"> — </span> : null}
-          {descriptor ? (
-            <span className={`mt-3 block font-serif text-[clamp(1.25rem,1.8vw,1.625rem)] leading-[1.25] italic ${face.muted}`}>
-              {descriptor}
-            </span>
-          ) : null}
-        </h3>
-
-        <p className={`relative mt-6 max-w-[30rem] text-[1.0625rem] leading-[1.65] ${face.muted}`}>{item.description}</p>
-
-        {tags.length ? (
-          <ul className="relative mt-6 flex flex-wrap gap-2" aria-label="Technologies">
-            {tags.map((tag) => (
-              <li key={tag} className={`label rounded-full border px-3 py-1 ${face.chip}`}>
-                {tag}
-              </li>
-            ))}
-          </ul>
-        ) : null}
-
-        <div className="relative mt-8 flex flex-wrap items-center gap-x-6 gap-y-3 lg:mt-auto lg:pt-10">
-          {href ? (
-            <a
-              href={href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`label inline-flex items-center gap-2 underline-offset-4 hover:underline ${face.accent}`}
-            >
-              View {name} <ArrowUpRight size={14} />
-              <span className="sr-only">(opens in a new tab)</span>
-            </a>
-          ) : null}
-          <a
-            href="#contact"
-            className="group inline-flex items-center gap-3 font-display text-[0.9375rem] font-semibold"
-          >
-            Build something like this
-            <span className="grid size-9 place-items-center rounded-full bg-lagoon text-monsoon transition-transform duration-300 ease-[var(--ease-expo)] group-hover:translate-x-1">
-              <ArrowIcon size={14} />
-            </span>
-          </a>
-        </div>
-      </div>
-
-      <div className="relative order-first aspect-[16/10] overflow-hidden lg:order-none lg:col-span-7 lg:aspect-auto lg:m-3 lg:ml-0 lg:rounded-[28px]">
+    <article data-project="" aria-labelledby={`project-${item.id}`}>
+      <div
+        data-frame=""
+        className="relative aspect-[4/3] overflow-hidden rounded-[22px] bg-harbour sm:aspect-[16/9] lg:aspect-[2/1] lg:rounded-[32px]"
+      >
         {image ? (
-          <Image
-            data-cover=""
-            src={image}
-            alt={item.image_alt || ""}
-            fill
-            unoptimized={!image.startsWith("/images/")}
-            sizes="(min-width: 1024px) 56vw, 100vw"
-            className="object-cover"
-          />
+          <div data-cover="" className="absolute -inset-y-[8%] inset-x-0">
+            <Image
+              src={image}
+              alt={item.image_alt || ""}
+              fill
+              unoptimized={!image.startsWith("/images/")}
+              sizes="(min-width: 1440px) 1344px, 100vw"
+              className="object-cover"
+            />
+          </div>
         ) : (
           <div aria-hidden="true" className="display grid h-full place-items-center bg-tide text-[6rem] text-lagoon">
             {initials(item.title)}
           </div>
         )}
+      </div>
+
+      <div data-meta="" className="mt-6 grid gap-x-8 gap-y-3 sm:mt-8 md:grid-cols-12 md:items-baseline">
+        <p aria-hidden="true" className="label tabular-nums text-lagoon md:col-span-1">
+          {pad(index + 1)}
+        </p>
+        <h3 id={`project-${item.id}`} className="md:col-span-6">
+          <span className="display block text-[clamp(2rem,4vw,3.5rem)]">{name}</span>
+          {descriptor ? <span className="sr-only"> — </span> : null}
+          {descriptor ? (
+            <span className="mt-2 block font-serif text-[clamp(1.125rem,1.5vw,1.375rem)] leading-[1.3] text-mist italic">
+              {descriptor}
+            </span>
+          ) : null}
+        </h3>
+        <div className="md:col-span-5">
+          {item.category ? <p className="label tracking-[0.06em] text-mist">{item.category}</p> : null}
+          {item.description ? (
+            <p className="mt-3 max-w-[30rem] text-[1.0625rem] leading-[1.6] text-cloud/75">{item.description}</p>
+          ) : null}
+        </div>
       </div>
     </article>
   );
@@ -143,30 +73,44 @@ function ProjectCard({ item, index, total }: { item: ContentRow; index: number; 
 export function Portfolio({ rows }: { rows: ContentRow[] }) {
   const ref = useRef<HTMLElement>(null);
 
-  // Each card pins under the header; as the next one slides over it, the one
-  // beneath sinks back and dims so the pile reads as depth.
+  // Each frame opens from a rounded inset as it rises into view while the
+  // cover drifts against the scroll. Scrubbed, so it runs on touch screens too.
   useGSAP(
     () => {
       const section = ref.current;
       if (!section) return;
-      const slots = gsap.utils.toArray<HTMLElement>("[data-slot]", section);
       const mm = gsap.matchMedia();
-      mm.add(`${MQ.motion} and ${MQ.desktop}`, () => {
-        slots.forEach((slot, i) => {
-          const next = slots[i + 1];
-          const card = slot.querySelector<HTMLElement>("[data-card]");
-          if (!next || !card) return;
-          const depth = slots.length - 1 - i;
-          gsap.to(card, {
-            scale: 1 - Math.min(depth, 4) * 0.035,
-            filter: "brightness(0.55)",
-            ease: "none",
-            scrollTrigger: { trigger: next, start: "top bottom", end: "top 20%", scrub: true },
-          });
-        });
-        slots.forEach((slot) => {
-          const cover = slot.querySelector("[data-cover]");
-          if (cover) gsap.fromTo(cover, { scale: 1.15 }, { scale: 1, ease: "none", scrollTrigger: { trigger: slot, start: "top bottom", end: "top 20%", scrub: true } });
+      mm.add(MQ.motion, () => {
+        gsap.utils.toArray<HTMLElement>("[data-project]", section).forEach((project) => {
+          const frame = project.querySelector("[data-frame]");
+          const cover = project.querySelector("[data-cover]");
+          const meta = project.querySelector("[data-meta]");
+          gsap.fromTo(
+            frame,
+            { clipPath: "inset(10% 8% 0% 8% round 40px)" },
+            {
+              clipPath: "inset(0% 0% 0% 0% round 0px)",
+              ease: "none",
+              scrollTrigger: { trigger: project, start: "top bottom", end: "top 35%", scrub: true },
+            },
+          );
+          if (cover)
+            gsap.fromTo(
+              cover,
+              { yPercent: -6, scale: 1.12 },
+              {
+                yPercent: 6,
+                scale: 1,
+                ease: "none",
+                scrollTrigger: { trigger: project, start: "top bottom", end: "bottom top", scrub: true },
+              },
+            );
+          if (meta)
+            gsap.fromTo(
+              meta.children,
+              { y: 32, opacity: 0 },
+              { y: 0, opacity: 1, duration: 1, stagger: 0.08, scrollTrigger: { trigger: meta, start: "top 92%", once: true } },
+            );
         });
       });
     },
@@ -174,41 +118,28 @@ export function Portfolio({ rows }: { rows: ContentRow[] }) {
   );
 
   return (
-    <section ref={ref} id="portfolio" data-header="dark" aria-labelledby="portfolio-title" className="grain on-dark bg-monsoon py-20 text-cloud sm:py-24 lg:py-28">
+    <section ref={ref} id="portfolio" data-header="dark" aria-labelledby="portfolio-title" className="grain on-dark section-y bg-monsoon text-cloud">
       <div className="wrap relative z-[2]">
-        <div className="grid gap-8 lg:grid-cols-12 lg:items-end">
+        <div className="grid gap-6 lg:grid-cols-12 lg:items-end">
           <div className="lg:col-span-8">
             <Reveal>
               <SectionLabel index={portfolio.index} tone="dark">
                 {portfolio.eyebrow}
               </SectionLabel>
             </Reveal>
-            <RevealText as="h2" id="portfolio-title" split="chars" className="display mt-6 text-[clamp(3rem,8vw,7.5rem)] !leading-[0.88]">
+            <RevealText as="h2" id="portfolio-title" className="display t-h2 mt-6">
               {portfolio.title}
             </RevealText>
           </div>
-          <Reveal className="lg:col-span-4 lg:pb-3">
-            <p className="font-serif text-[clamp(1.5rem,2vw,1.875rem)] leading-[1.25] text-cloud/90">{portfolio.lead}</p>
-            {rows.length ? (
-              <p className="label mt-5 flex items-center gap-3 text-mist">
-                <span className="tabular-nums text-lagoon">{pad(rows.length)}</span>
-                <span aria-hidden="true" className="h-px w-8 bg-cloud/25" />
-                selected projects, built for real clients
-              </p>
-            ) : null}
+          <Reveal className="lg:col-span-4 lg:pb-2">
+            <p className="text-[1.1875rem] leading-[1.55] text-mist">{portfolio.lead}</p>
           </Reveal>
         </div>
 
-        <ol className="mt-12 grid gap-6 md:gap-8 lg:mt-16 lg:gap-[12vh]" aria-label="Projects">
+        <ol className="mt-14 grid gap-20 sm:gap-24 lg:mt-20 lg:gap-32" aria-label="Projects">
           {rows.map((item, i) => (
-            <li
-              key={item.id}
-              data-slot=""
-              className="lg:sticky"
-              // Each card pins a little lower than the last, leaving a sliver of the pile visible.
-              style={{ top: `calc(6rem + ${i * 1.25}rem)` }}
-            >
-              <ProjectCard item={item} index={i} total={rows.length} />
+            <li key={item.id}>
+              <Project item={item} index={i} />
             </li>
           ))}
         </ol>

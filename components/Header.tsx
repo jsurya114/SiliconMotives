@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { site } from "@/content/site";
 import { gsap, MQ } from "@/lib/gsap";
 import { useSmoothScroll } from "./motion/SmoothScroll";
-import { ArrowIcon } from "./ui/icons";
+import { ArrowIcon, CloseIcon, MenuIcon } from "./ui/icons";
 import { contactDetails } from "@/lib/urls";
 import type { ContentRow } from "@/lib/content";
 
@@ -14,11 +14,18 @@ export function Header({ settings }: { settings: ContentRow }) {
   const { lenis } = useSmoothScroll();
 
   // Tone follows the section under the bar; hide on scroll down, show on up.
+  // Direction only flips after a few pixels of travel, so the slow tail of a
+  // smooth scroll never toggles the bar back and forth.
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
     let last = window.scrollY;
+    let travel = 0;
+    let hidden = false;
     let raf = 0;
+    const set = (key: string, value: string) => {
+      if (el.dataset[key] !== value) el.dataset[key] = value;
+    };
     const update = () => {
       raf = 0;
       const y = window.scrollY;
@@ -32,13 +39,16 @@ export function Header({ settings }: { settings: ContentRow }) {
           break;
         }
       }
-      el.dataset.tone = tone;
-      el.dataset.scrolled = String(y > 24);
-      if (!el.contains(document.activeElement)) {
-        el.dataset.hidden = String(y > 160 && y > last + 2);
-        if (y < last - 2) el.dataset.hidden = "false";
-      }
+      set("tone", tone);
+      set("scrolled", String(y > 24));
+      const delta = y - last;
       last = y;
+      // Accumulate travel in one direction; reset when it reverses.
+      travel = Math.sign(delta) === Math.sign(travel) ? travel + delta : delta;
+      if (y < 160 || el.contains(document.activeElement)) hidden = false;
+      else if (travel > 48) hidden = true;
+      else if (travel < -24) hidden = false;
+      set("hidden", String(hidden));
     };
     const onScroll = () => {
       if (!raf) raf = requestAnimationFrame(update);
@@ -98,8 +108,9 @@ export function Header({ settings }: { settings: ContentRow }) {
             </nav>
             <button
               type="button"
-              className="inline-flex h-10 items-center gap-2 rounded-full px-4 font-display text-[0.9375rem] font-semibold lg:hidden"
+              className="grid size-11 place-items-center rounded-full lg:hidden"
               style={{ boxShadow: "inset 0 0 0 1px color-mix(in oklab, currentColor 25%, transparent)" }}
+              aria-label={site.ui.menu}
               aria-haspopup="dialog"
               aria-expanded={open}
               onClick={() => {
@@ -107,10 +118,7 @@ export function Header({ settings }: { settings: ContentRow }) {
                 lenis()?.stop();
               }}
             >
-              {site.ui.menu}
-              <span aria-hidden="true" className="text-lg leading-none">
-                +
-              </span>
+              <MenuIcon />
             </button>
           </div>
         </div>
@@ -184,13 +192,11 @@ function MobileMenu({ onClose, settings }: { onClose: () => void; settings: Cont
           <button
             type="button"
             onClick={() => close()}
-            className="inline-flex h-10 items-center gap-2 rounded-full px-4 font-display text-[0.9375rem] font-semibold"
+            aria-label={site.ui.close}
+            className="grid size-11 place-items-center rounded-full"
             style={{ boxShadow: "inset 0 0 0 1px color-mix(in oklab, currentColor 25%, transparent)" }}
           >
-            {site.ui.close}
-            <span aria-hidden="true" className="rotate-45 text-lg leading-none">
-              +
-            </span>
+            <CloseIcon />
           </button>
         </div>
         <nav className="mt-auto flex flex-col gap-1 px-5">
