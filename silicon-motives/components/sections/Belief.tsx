@@ -21,7 +21,7 @@ export function Belief() {
             to="#0b1a2b"
             className="font-display text-[clamp(2.1rem,4.7vw,4.6rem)] leading-[1.02] font-bold tracking-[-0.04em]"
           />
-          <Reveal className="mt-12 grid gap-6 md:grid-cols-9 lg:mt-16">
+          <Reveal className="mt-10 grid gap-6 md:grid-cols-9 lg:mt-12">
             <p className="text-[1.1875rem] leading-[1.6] text-slate md:col-span-5 md:col-start-5">{belief.body}</p>
           </Reveal>
         </div>

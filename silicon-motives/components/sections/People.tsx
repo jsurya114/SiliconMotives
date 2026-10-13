@@ -3,7 +3,7 @@ import { RevealText } from "../motion/RevealText";
 import { Reveal } from "../motion/Reveal";
 import { RevealImage } from "../motion/RevealImage";
 import { SectionLabel } from "../ui/SectionLabel";
-import { ArrowUpRight, LinkedInIcon, PinIcon } from "../ui/icons";
+import { ArrowUpRight, LinkedInIcon } from "../ui/icons";
 import type { ContentRow } from "@/lib/content";
 import { initials, safeImage } from "@/lib/urls";
 
@@ -20,7 +20,7 @@ export function People({ rows }: { rows: ContentRow[] }) {
         </Reveal>
         <RevealText as="h2" id="people-title" lines={people.title} className="display t-h1 mt-8" />
 
-        <div className="mt-14 grid gap-y-14 lg:mt-20 lg:grid-cols-12 lg:gap-x-8">
+        <div className="mt-12 grid gap-y-14 lg:mt-16 lg:grid-cols-12 lg:gap-x-8">
           <div className="lg:col-span-4">
             <Reveal stagger={0.1} className="space-y-6">
               {people.body.map((p) => (
@@ -38,7 +38,7 @@ export function People({ rows }: { rows: ContentRow[] }) {
             {rows.map((f, i) => {
               const founder = people.founders.find(person => person.name.toLowerCase() === String(f.name).trim().toLowerCase());
               const photo = safeImage(f.photo_url || founder?.image);
-              return <li key={f.id} className={i % 2 ? "sm:mt-24" : ""}>
+              return <li key={f.id} className={i % 2 ? "sm:mt-16" : ""}>
                 {photo ? <RevealImage
                   src={photo}
                   alt=""
@@ -71,11 +71,6 @@ export function People({ rows }: { rows: ContentRow[] }) {
             })}
           </ul>
         </div>
-
-        <Reveal className="mt-20 flex items-center gap-3 border-t border-cloud/15 pt-6 lg:mt-28">
-          <PinIcon size={16} />
-          <p className="font-serif text-[1.375rem] italic">{people.signoff}</p>
-        </Reveal>
       </div>
     </section>
   );

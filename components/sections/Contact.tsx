@@ -14,22 +14,22 @@ export function Contact({ settings }: { settings: ContentRow }) {
   const contact = contactDetails(settings);
   return (
     <section id="contact" data-header="light" aria-labelledby="contact-title" className="section-y bg-lagoon text-monsoon">
-      <div className="wrap grid gap-y-16 lg:grid-cols-12 lg:gap-x-8">
+      <div className="wrap grid gap-y-12 lg:grid-cols-12 lg:gap-x-8">
         <div className="lg:col-span-7">
           <Reveal>
             <SectionLabel>{c.eyebrow}</SectionLabel>
           </Reveal>
-          <RevealText as="h2" id="contact-title" lines={c.title} className="display t-h1 mt-8" />
-          <Reveal className="mt-8 max-w-[34rem]">
-            <p className="text-[1.25rem] leading-[1.55]">{c.body}</p>
+          <RevealText as="h2" id="contact-title" lines={c.title} className="display t-h2 mt-6" />
+          <Reveal className="mt-6 max-w-[32rem]">
+            <p className="text-[1.1875rem] leading-[1.55]">{c.body}</p>
           </Reveal>
           <Reveal className="mt-10">
             <IdeaForm label={c.cta} />
           </Reveal>
         </div>
 
-        <Reveal className="lg:col-span-5 lg:self-end">
-          <div className="grain on-dark rounded-[24px] bg-monsoon p-7 text-cloud sm:p-10">
+        <Reveal className="lg:col-span-5 lg:self-center">
+          <div className="grain on-dark rounded-[28px] bg-monsoon p-7 text-cloud sm:p-9">
             <p className="label relative z-[2] text-lagoon">{c.hello.eyebrow}</p>
             <h3 className="display t-h3 relative z-[2] mt-5 !text-[clamp(1.875rem,2.8vw,2.75rem)]">{c.hello.title}</h3>
             <p className="relative z-[2] mt-5 text-[1.0625rem] leading-[1.6] text-mist">{c.hello.body}</p>
@@ -55,11 +55,6 @@ export function Contact({ settings }: { settings: ContentRow }) {
                   {contact.phone}
                 </a>
               </li>
-              <li>
-                <a className="link-line" href={contact.whatsappHref} target="_blank" rel="noopener noreferrer">
-                  {c.hello.cta}
-                </a>
-              </li>
             </ul>
             {(contact.linkedin || contact.instagram) && <div className="relative z-[2] mt-5 flex flex-wrap gap-5 font-display text-[0.9375rem]">
               {contact.linkedin && <a className="link-line" href={contact.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>}
@@ -68,7 +63,7 @@ export function Contact({ settings }: { settings: ContentRow }) {
           </div>
         </Reveal>
       </div>
-      <div className="wrap mt-20 lg:mt-28">
+      <div className="wrap mt-16 lg:mt-20">
         <div className="label flex items-center justify-between border-t border-monsoon/20 pt-5">
           <p>{c.signoff}</p>
           <p className="flex items-center gap-2">

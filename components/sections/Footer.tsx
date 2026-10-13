@@ -1,33 +1,14 @@
 import { site } from "@/content/site";
 import { RevealText } from "../motion/RevealText";
-import { Reveal } from "../motion/Reveal";
 import { ArrowIcon } from "../ui/icons";
 
 const { footer } = site;
 
 export function Footer() {
   return (
-    <footer data-header="dark" className="grain on-dark overflow-hidden bg-monsoon pt-24 text-cloud lg:pt-32">
+    <footer data-header="dark" className="grain on-dark overflow-hidden bg-monsoon pt-20 text-cloud lg:pt-24">
       <div className="wrap">
-        <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
-          <div>
-            <p className="label text-lagoon">{footer.eyebrow}</p>
-            <RevealText as="h2" lines={footer.title} className="display t-h2 mt-6" />
-          </div>
-          <Reveal>
-            <a
-              href="#contact"
-              className="group inline-flex items-center gap-3 font-display text-[1.25rem] font-semibold tracking-[-0.02em]"
-            >
-              <span className="link-line">{footer.cta}</span>
-              <span className="grid size-11 place-items-center rounded-full bg-lagoon text-monsoon transition-transform duration-700 ease-[var(--ease-expo)] group-hover:-rotate-45">
-                <ArrowIcon />
-              </span>
-            </a>
-          </Reveal>
-        </div>
-
-        <div className="mt-20 grid grid-cols-2 gap-x-6 gap-y-12 border-t border-cloud/15 pt-12 lg:mt-28 lg:grid-cols-12 lg:gap-8">
+        <div className="relative z-[2] grid grid-cols-2 gap-x-6 gap-y-12 lg:grid-cols-12 lg:gap-8">
           <div className="col-span-2 lg:col-span-4">
             <p className="font-display text-[1.25rem] font-extrabold tracking-[-0.04em]">{site.brand.name}</p>
             <p className="mt-4 font-serif text-[1.375rem] leading-[1.3] text-cloud/85">
@@ -77,7 +58,7 @@ export function Footer() {
         </div>
       </div>
 
-      <div className="mt-20 select-none lg:mt-28" aria-hidden="true">
+      <div className="mt-16 select-none lg:mt-20" aria-hidden="true">
         <RevealText
           as="p"
           split="chars"
