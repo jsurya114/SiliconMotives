@@ -1,8 +1,8 @@
 import type { Metadata, Viewport } from 'next';
 import './globals.css';
 export const metadata: Metadata = {
-  title: 'Silicon Motives — Good software. Clear purpose.',
-  description: 'Silicon Motives is a remote-first software engineering company based in Kochi, Kerala. Thoughtful software, clear communication, and engineering that matters.',
+  title: 'SiliconMotives — Custom Software, Cloud Infrastructure & DevOps',
+  description: 'A small remote-first engineering company working from Kerala, India on custom software, cloud infrastructure, and DevOps.',
   icons: { icon: '/favicon.svg' },
 };
 export const viewport: Viewport = { themeColor: '#0b1a2b' };

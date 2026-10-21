@@ -1,29 +1,8 @@
 {
   "services": [
-    {
-      "id": "1",
-      "title": "Web & product development",
-      "kicker": "PRODUCT BUILD",
-      "description": "Thoughtful websites and web applications that turn a business need into a useful, intuitive product."
-    },
-    {
-      "id": "2",
-      "title": "Custom software",
-      "kicker": "BUILT AROUND YOU",
-      "description": "Software shaped around your workflows, from internal tools to the systems that keep your business moving."
-    },
-    {
-      "id": "3",
-      "title": "Cloud & infrastructure",
-      "kicker": "CLOUD FOUNDATION",
-      "description": "A considered foundation for your software, with dependable deployments and room to evolve."
-    },
-    {
-      "id": "4",
-      "title": "Ongoing engineering",
-      "kicker": "AFTER LAUNCH",
-      "description": "Keep improving after launch. Resolve issues, refine performance, and build the next useful feature."
-    }
+    { "id": "1", "title": "Custom Software Engineering", "kicker": "PRODUCT BUILD", "description": "Thoughtful web applications and business software shaped around your workflows and users." },
+    { "id": "2", "title": "Cloud Infrastructure Engineering", "kicker": "CLOUD FOUNDATION", "description": "Cloud environments and deployment foundations designed for the needs of your software." },
+    { "id": "3", "title": "DevOps & Reliability", "kicker": "AFTER LAUNCH", "description": "Delivery automation, operational practices, and ongoing improvements to help services run reliably." }
   ],
   "projects": [
     {
@@ -31,6 +10,7 @@
       "title": "Woobe — Fashion, by Weight",
       "category": "FULL-STACK E-COMMERCE",
       "description": "Co-developed with Jasil M for a real client, this production storefront pairs mobile-first shopping with intuitive ₹/kg pricing and secure checkout.",
+      "tags": ["Weight-based pricing", "Razorpay & COD", "AWS infrastructure"],
       "image_url": "/images/woobe-fashion-cover.jpg",
       "image_alt": "Editorial fashion cover visual for the Woobe case study, not a screenshot of the live store."
     },
@@ -39,6 +19,7 @@
       "title": "NasaLogistic — Driver & Logistics Management",
       "category": "LOGISTICS PLATFORM",
       "description": "A production platform for driver availability, order workflows, and admin operations, built for a real client.",
+      "tags": ["Driver & order operations", "JWT + RBAC", "AWS RDS · EC2", "React · Vercel"],
       "image_url": "/images/nasalogistic-cover.jpg",
       "image_alt": "Editorial logistics cover visual for the NasaLogistic case study, not a product screenshot."
     },
@@ -47,6 +28,7 @@
       "title": "Picbox — Inventory & Invoicing System",
       "category": "INVENTORY & INVOICING",
       "description": "Built for a local events client, this production app manages rental inventory, jobs, wages, and invoicing; more than 190 PDF invoices have been generated.",
+      "tags": ["Expo mobile app", "50+ REST APIs", "190+ PDF invoices", "MongoDB + AES-256"],
       "image_url": "/images/picbox-cover.jpg",
       "image_alt": "Editorial event rental and inventory cover visual for Picbox, not a product screenshot."
     },
@@ -55,6 +37,7 @@
       "title": "Uniwayin — Education Consultancy CRM",
       "category": "EDUCATION CONSULTANCY CRM",
       "description": "A production CRM for four staff managing 280+ active leads, with follow-ups, notes, analytics, and role-based access.",
+      "tags": ["NestJS + MongoDB", "38 REST APIs", "280+ active leads", "JWT + RBAC"],
       "image_url": "/images/uniwayin-cover.jpg",
       "image_alt": "Editorial education consultancy cover visual for Uniwayin, not a product screenshot."
     },
@@ -101,7 +84,7 @@
     },
     {
       "id": "4",
-      "question": "Where is Silicon Motives based?",
+      "question": "Where is SiliconMotives based?",
       "answer": "We are based in Kochi, Kerala, India, and work remotely. Our working arrangements and meeting times can be discussed around the needs of each project."
     },
     {
@@ -120,7 +103,7 @@
     },
     {
       "id": "2",
-      "name": "Jayasoorya S",
+      "name": "Jayasoorya Suryadas",
       "role": "Co-founder",
       "kicker": "FOUNDER 02",
       "photo_url": "/images/jayasoorya.jpg"

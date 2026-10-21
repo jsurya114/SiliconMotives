@@ -62,7 +62,7 @@ export function AdminApp({ config }: { config: { supabaseUrl: string; supabaseAn
   else if (admin === null) content = <p className="boot">Checking admin access…</p>;
   else if (!admin) content = <div className="auth"><div className="auth-card"><h1>Admin access required</h1><p>This account does not have admin access.</p><button className="btn" onClick={() => client.auth.signOut()}>Sign out</button></div></div>;
   else content = <div className="shell">
-    <aside className="sidebar"><div className="brand">Silicon Motives<small>ADMIN</small></div><nav className="nav" aria-label="Admin">
+    <aside className="sidebar"><div className="brand">SiliconMotives<small>ADMIN</small></div><nav className="nav" aria-label="Admin">
       <a href="#/dashboard" aria-current={route === 'dashboard' ? 'page' : undefined}>Dashboard</a>
       <a href="#/submissions" aria-current={route === 'submissions' ? 'page' : undefined}>Submissions{count > 0 && <span className="badge">{count}</span>}</a>
       <span className="nav-group">CONTENT</span>{Object.entries(collections).map(([key, value]) => <a key={key} href={`#/${key}`} aria-current={route === key ? 'page' : undefined}>{value.label}</a>)}
@@ -84,7 +84,7 @@ function Login({ client, message, notify }: { client: SupabaseClient; message: s
     try { await run(client.auth.signInWithPassword({ email: String(data.get('email')).trim(), password: String(data.get('password')) })); }
     catch (error) { setError(errorText(error) === 'Invalid login credentials' ? 'Email or password is incorrect.' : errorText(error)); }
     finally { setBusy(false); }
-  }}><p className="eyebrow">Silicon Motives</p><h1>Admin sign in</h1><p>Sign in with your admin account.</p>{error && <p className="form-error" role="alert">{error}</p>}
+  }}><p className="eyebrow">SiliconMotives</p><h1>Admin sign in</h1><p>Sign in with your admin account.</p>{error && <p className="form-error" role="alert">{error}</p>}
     <label className="field">Email<input type="email" name="email" autoComplete="username" required /></label><label className="field">Password<input type="password" name="password" autoComplete="current-password" required /></label>
     <button className="btn btn-primary" type="submit" disabled={busy}>{busy ? 'Signing in…' : 'Sign in'}</button>
     <div className="auth-links"><button type="button" className="link-btn" disabled={busy} onClick={async () => {
@@ -97,7 +97,7 @@ function Login({ client, message, notify }: { client: SupabaseClient; message: s
 function PasswordReset({client, onDone}: {client: SupabaseClient; onDone: () => void}) {
   const [error, setError] = useState(''), [busy, setBusy] = useState(false);
   return <div className="auth"><form className="auth-card" onSubmit={async event => { event.preventDefault(); setBusy(true); const password = String(new FormData(event.currentTarget).get('password')); try { await run(client.auth.updateUser({password})); onDone(); } catch (error) { setError(errorText(error)); } finally { setBusy(false); } }}>
-    <p className="eyebrow">Silicon Motives</p><h1>Choose a new password</h1><p>Use at least 10 characters.</p>{error && <p className="form-error" role="alert">{error}</p>}
+    <p className="eyebrow">SiliconMotives</p><h1>Choose a new password</h1><p>Use at least 10 characters.</p>{error && <p className="form-error" role="alert">{error}</p>}
     <label className="field">New password<input type="password" name="password" autoComplete="new-password" minLength={10} required /></label><button className="btn btn-primary" disabled={busy}>Update password</button>
   </form></div>;
 }
@@ -112,7 +112,7 @@ function Dashboard({client, count}: {client: SupabaseClient; count: number}) {
     <section className="panel panel-pad"><h2 className="mb-3 text-lg">Content overview</h2><ul className="checklist">
       {!settings.accepting_briefs && <li>Admin inbox copies are <a href="#/settings">switched off</a>. Ideas still go to siliconmotives@gmail.com when SMTP is configured.</li>}
       {!stats.clients.live && <li><a href="#/clients">Add client logos</a> to replace the sample clients.</li>}
-      {!stats.testimonials.live && <li><a href="#/testimonials">Publish approved testimonials</a> to replace the placeholders.</li>}
+      {!stats.testimonials.live && <li><a href="#/testimonials">Publish client-approved testimonials</a> to show them on the public site.</li>}
       {!stats.projects.live && <li><a href="#/projects">Publish a project</a> to feature it in the portfolio.</li>}
       <li><a href="/" target="_blank" rel="noopener noreferrer">View your website</a></li>
     </ul></section>
@@ -221,7 +221,7 @@ function Editor({client, collectionKey, row, rows, onClose, onSaved}: {client: S
 function Settings({client, notify}: {client: SupabaseClient; notify: Notify}) {
   const [values, setValues] = useState<Row | null>(null), [error, setError] = useState(''), [saving, setSaving] = useState(false);
   useEffect(() => { let active = true; run(client.from('site_settings').select('*').eq('id', 1).single()).then(row => { if (active) setValues(row); }).catch(error => { if (active) setError(errorText(error)); }); return () => { active = false; }; }, [client]);
-  return <><div className="page-head"><div><p className="eyebrow">Site</p><h1>Contact &amp; settings</h1><p>Contact details appear in the “Something in mind?” section.</p></div></div>{error && <p className="form-error" role="alert">{error}</p>}
+  return <><div className="page-head"><div><p className="eyebrow">Site</p><h1>Contact &amp; settings</h1><p>Public email enquiries go to siliconmotives@gmail.com. Phone and social links can be updated here.</p></div></div>{error && <p className="form-error" role="alert">{error}</p>}
     {values ? <form className="panel panel-pad max-w-[640px]" onSubmit={async event => { event.preventDefault(); setSaving(true); setError('');
       const payload = {...Object.fromEntries(settingsFields.map(field => [field.name, String(values[field.name] || '').trim()])), accepting_briefs: Boolean(values.accepting_briefs)};
       try { await run(client.from('site_settings').update(payload).eq('id', 1)); notify('Settings saved.'); } catch (error) { setError(errorText(error)); } finally { setSaving(false); }
@@ -253,7 +253,7 @@ function Submissions({client, notify, refreshCount}: {client: SupabaseClient; no
       if (event.currentTarget.open && row.status === 'new' && !reading.current.has(row.id)) { reading.current.add(row.id); void status(row, 'read').finally(() => reading.current.delete(row.id)); }
     }}><summary><span className={`pill pill-${row.status}`}>{row.status}</span><div className="row-main"><div className="row-title">{row.name}</div><div className="row-sub">{row.email} — {row.message.slice(0, 120)}</div></div><span className="date">{date(row.created_at)}</span></summary>
       <div className="submission-body"><div className="submission-message">{row.message}</div><div className="submission-actions">
-        <a className="btn btn-primary" href={`mailto:${encodeURIComponent(row.email)}?subject=${encodeURIComponent('Re: Your project brief — Silicon Motives')}`} onClick={() => void status(row, 'replied')}>Reply by email</a>
+        <a className="btn btn-primary" href={`mailto:${encodeURIComponent(row.email)}?subject=${encodeURIComponent('Re: Your project brief — SiliconMotives')}`} onClick={() => void status(row, 'replied')}>Reply by email</a>
         {STATUSES.filter(value => value !== row.status).map(value => <button className="btn" key={value} disabled={busy} onClick={async () => {setBusy(true); await status(row, value); setBusy(false);}}>Mark {value}</button>)}
         <button className="btn btn-danger" disabled={busy} onClick={async () => { if (!confirm(`Delete the brief from ${row.name}? This cannot be undone.`)) return; setBusy(true); try {await run(client.from('contact_submissions').delete().eq('id', row.id)); setRows(rows => rows?.filter(item => item.id !== row.id) || null); await refreshCount(); notify('Brief deleted.');} catch (error) {notify(errorText(error));} finally {setBusy(false);} }}>Delete</button>
       </div></div>

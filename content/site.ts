@@ -1,18 +1,18 @@
 // Presentation copy for the Silicon Motives website. Published CMS content is loaded separately.
 
 const whatsappText =
-  "Hi Silicon Motives! I have a project in mind and would love to explore how we can bring it to life. Could we discuss the right solution, timeline, and estimate?";
+  "Hi SiliconMotives! I have a project in mind and would love to explore how we can bring it to life. Could we discuss the right solution, timeline, and estimate?";
 
 export const site = {
   brand: {
-    name: "Silicon Motives",
+    name: "SiliconMotives",
     tagline: "Good software. Clear purpose.",
   },
 
   seo: {
-    title: "Silicon Motives — Good software. Clear purpose.",
+    title: "SiliconMotives — Custom Software, Cloud Infrastructure & DevOps",
     description:
-      "Silicon Motives is a remote-first software engineering company based in Kochi, Kerala. Thoughtful software, clear communication, and engineering that matters.",
+      "A small remote-first engineering company working from Kerala, India on custom software, cloud infrastructure, and DevOps.",
   },
 
   contact: {
@@ -24,12 +24,11 @@ export const site = {
   },
 
   nav: [
-    { label: "Home", href: "#home" },
-    { label: "About", href: "#about" },
-    { label: "Services", href: "#services" },
-    { label: "Solutions", href: "#solutions" },
-    { label: "Testimonials", href: "#testimonials" },
-    { label: "Portfolio", href: "#portfolio" },
+    { label: "Home", href: "/" },
+    { label: "About", href: "/about" },
+    { label: "Services", href: "/#services" },
+    { label: "Projects", href: "/projects" },
+    { label: "Agency partners", href: "/agency-partners" },
   ],
   navCta: { label: "Let’s talk", href: "#contact" },
 
@@ -60,8 +59,8 @@ export const site = {
   services: {
     index: "02",
     eyebrow: "What we do",
-    title: ["Built around what", "your business needs."],
-    lead: "Practical engineering for the things your business needs to build, improve, and grow.",
+    title: ["Three capabilities.", "One engineering partner."],
+    lead: "Custom Software Engineering, Cloud Infrastructure Engineering, and DevOps & Reliability.",
   },
 
   solutions: {
@@ -119,10 +118,11 @@ export const site = {
     title: ["Simple steps.", "Thoughtful software."],
     lead: "From the first conversation to launch, we keep you involved and the next step clear.",
     steps: [
-      { name: "Understand", body: "We listen, ask questions, and get clear on what your business needs." },
-      { name: "Plan", body: "We agree on the scope, priorities, and a practical way forward." },
+      { name: "Discover", body: "We understand the users, business need, constraints, and measures of success." },
+      { name: "Architect", body: "We shape the system, delivery plan, and technical decisions before implementation." },
       { name: "Build", body: "We build in small steps, sharing progress and refining with your feedback." },
-      { name: "Launch & improve", body: "We release with care, hand over clearly, and plan what comes next." },
+      { name: "Deploy", body: "We release with care and make the operational handover clear." },
+      { name: "Operate", body: "We monitor, maintain, and improve the system with an agreed support model." },
     ],
   },
 
@@ -151,7 +151,7 @@ export const site = {
     eyebrow: "The people behind the purpose",
     title: ["Built by people.", "Driven by a shared motive."],
     body: [
-      "Silicon Motives was founded by Jayasoorya S and Jasil M in Kochi, Kerala, with a simple idea: build an efficient engineering company where location doesn’t determine quality.",
+      "SiliconMotives was founded by Jayasoorya Suryadas and Jasil M in Kerala, with a simple idea: build an efficient engineering company where location doesn’t determine quality.",
       "We’re shaping a team that values ownership, honest conversations, and pride in the product. A company where clients pay for engineering value, and where good people have the space to do meaningful work.",
     ],
     badge: "Independent by design",
@@ -159,13 +159,13 @@ export const site = {
       {
         label: "Founder 01",
         name: "Jasil M",
-        role: "Co-founder",
+        role: "Founder · Systems, cloud & architecture",
         image: "/images/jasil.jpg",
         linkedin: "https://www.linkedin.com/in/jasilmeledath/",
       },
       {
         label: "Founder 02",
-        name: "Jayasoorya S",
+        name: "Jayasoorya Suryadas",
         role: "Co-founder",
         image: "/images/jayasoorya.jpg",
         linkedin: "https://www.linkedin.com/in/jayasoorya-suryadas/",
@@ -193,7 +193,7 @@ export const site = {
   form: {
     eyebrow: "Let’s start with your idea",
     title: ["A little context.", "A better start."],
-    body: "Tell us a little about your idea. Your message goes straight to siliconmotives@gmail.com, and we’ll reply to your email.",
+    body: "Tell us a little about your idea. We’ll reply by email.",
     fields: {
       name: { label: "Your name", placeholder: "Full name" },
       email: { label: "Email address", placeholder: "you@company.com" },
@@ -222,28 +222,29 @@ export const site = {
       {
         title: "Explore",
         links: [
-          { label: "Services", href: "#services" },
-          { label: "Solutions", href: "#solutions" },
-          { label: "Projects", href: "#portfolio" },
+          { label: "Services", href: "/#services" },
+          { label: "Projects", href: "/projects" },
+          { label: "Agency Partners", href: "/agency-partners" },
         ],
       },
       {
         title: "Company",
         links: [
-          { label: "About us", href: "#about" },
-          { label: "Clients", href: "#clients" },
-          { label: "Testimonials", href: "#testimonials" },
-          { label: "Frequently asked questions", href: "#faq" },
+          { label: "About", href: "/about" },
+          { label: "Contact", href: "/contact" },
+          { label: "Privacy", href: "/privacy" },
+          { label: "Terms", href: "/terms" },
         ],
       },
     ],
     based: {
       title: "Based in Kerala",
       lines: ["Kochi, Kerala", "India"],
-      remote: ["Working remotely", "with teams everywhere."],
+      remote: ["Open to remote collaboration", "across locations."],
       cta: "Start a conversation",
     },
-    copyright: "© 2026 Silicon Motives",
+    copyright: "© 2026 SiliconMotives",
+    legal: "SiliconMotives is operated by Millionian LLC, a Wyoming limited liability company.",
     backToTop: "Back to top",
   },
 
@@ -254,7 +255,7 @@ export const site = {
     skip: "Skip to content",
     menu: "Menu",
     close: "Close",
-    homeLabel: "Silicon Motives home",
+    homeLabel: "SiliconMotives home",
     mainNav: "Main navigation",
     servicesRail: "Services",
     toggleFaq: "Show answer",

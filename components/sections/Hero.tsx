@@ -7,7 +7,7 @@ import { ChatIcon, PinIcon } from '../ui/icons';
 export function Hero() {
   const { hero } = site;
   return <section id="home" data-header="light" aria-label={site.brand.name} className="hero-static relative overflow-hidden bg-cloud">
-    <Image src="/images/cloud-sky-v2.jpg" alt="" fill preload sizes="100vw" className="object-cover object-[30%_50%]" />
+    <Image src="/images/cloud-sky-clear.webp" alt="" fill preload quality={90} sizes="100vw" className="object-cover object-[65%_50%] md:object-center" />
     <div aria-hidden="true" className="absolute inset-0" style={{ background: 'linear-gradient(100deg, rgba(236,240,242,.72) 0%, rgba(236,240,242,.35) 45%, rgba(236,240,242,0) 75%), linear-gradient(0deg, rgba(236,240,242,.6) 0%, rgba(236,240,242,0) 30%)' }} />
     <div className="wrap relative flex min-h-svh flex-col justify-end pt-32 pb-6 sm:pb-8">
       <p className="label mb-6 flex items-center gap-3 sm:mb-8"><span aria-hidden="true" className="h-px w-8 bg-current opacity-40" />{hero.eyebrow}</p>
@@ -18,9 +18,9 @@ export function Hero() {
         <p className="max-w-[34rem] text-[1.0625rem] leading-[1.55] text-ink/85 sm:text-[1.1875rem] md:col-span-6 lg:col-span-5">{hero.lead}</p>
         <div className="md:col-span-6 md:justify-self-end lg:col-span-7"><ButtonLink href={hero.cta.href} icon={<ChatIcon />}>{hero.cta.label}</ButtonLink></div>
       </div>
-      <div className="mt-10 flex items-center justify-between border-t border-ink/15 pt-4 sm:mt-14">
-        <p className="label flex items-center gap-2"><PinIcon size={15} />{hero.location}</p>
-        <p className="label hidden sm:block">{hero.promise}</p>
+      <div className="hero-footer-row mt-10 grid grid-cols-2 items-center gap-6 border-t border-ink/15 pt-4 sm:mt-14">
+        <p className="label flex items-center gap-2 text-[0.6875rem] sm:text-[0.8125rem]"><span className="shrink-0"><PinIcon size={15} /></span>{hero.location}</p>
+        <p className="label max-w-[20rem] justify-self-end text-right text-[0.6875rem] sm:text-[0.8125rem]">{hero.promise}</p>
       </div>
     </div>
   </section>;

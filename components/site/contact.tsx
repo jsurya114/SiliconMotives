@@ -2,7 +2,7 @@ import { IdeaForm } from './idea-form';
 import { whatsappUrl, safeUrl } from '@/lib/urls';
 import type { ContentRow } from '@/lib/content';
 function ContactLinks({settings}: {settings: ContentRow}) {
- const email = settings.contact_email || 'siliconmotives@gmail.com';
+ const email = 'siliconmotives@gmail.com';
  const phone = settings.contact_phone || settings.whatsapp_number || '+91 85901 84265';
  const digits = String(phone).replace(/\D/g, '');
  const displayPhone = digits === '918590184265' ? '+91 85901 84265' : phone;

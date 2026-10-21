@@ -6,24 +6,27 @@ import { Reveal } from "../motion/Reveal";
 import { Marquee } from "../motion/Marquee";
 import { SectionLabel } from "../ui/SectionLabel";
 
-export function Testimonials({ rows }: { rows: ContentRow[] }) {
+export function Testimonials({ rows, clients = [] }: { rows: ContentRow[]; clients?: ContentRow[] }) {
   const { testimonials } = site;
+  if (!rows.length) return null;
+  const clientKey = (value: unknown) => String(value || '').trim().toLowerCase().replace(/s$/, '');
   return <section id="testimonials" data-header="light" aria-labelledby="testimonials-title" className="section-y overflow-hidden bg-cloud text-ink">
     <div className="wrap grid gap-y-8 lg:grid-cols-12 lg:gap-x-8">
       <Reveal className="lg:col-span-12"><SectionLabel index={testimonials.index}>{testimonials.eyebrow}</SectionLabel></Reveal>
       <RevealText as="h2" id="testimonials-title" lines={testimonials.title} className="display t-h2 lg:col-span-8" />
     </div>
-    {rows.length ? <Marquee className="mt-16 lg:mt-20" speed={70}>
+    <Marquee className="mt-16 lg:mt-20" speed={70}>
       <div className="review-list flex shrink-0 gap-4 pr-4">
-        {rows.map(row => <figure key={row.id} className="flex w-[min(84vw,26rem)] shrink-0 flex-col rounded-[24px] bg-cloud-2 p-7 ring-1 ring-ink/10 sm:p-8">
+        {rows.map(row => { const client = clients.find((item) => item.id === row.client_id || clientKey(item.name) === clientKey(row.company)); return <figure key={row.id} className="flex w-[min(84vw,26rem)] shrink-0 flex-col rounded-[24px] bg-cloud-2 p-7 ring-1 ring-ink/10 sm:p-8">
           <span aria-hidden="true" className="font-serif text-[4.5rem] leading-[0.6] text-lagoon-ink">“</span>
           <blockquote className="mt-6 whitespace-pre-line font-serif text-[1.375rem] leading-[1.4]">{row.quote}</blockquote>
           <figcaption className="mt-auto flex items-center gap-3 pt-8">
             {safeImage(row.avatar_url) ? <img src={safeImage(row.avatar_url)} alt="" loading="lazy" decoding="async" className="size-11 rounded-full object-cover" /> : <span aria-hidden="true" className="label grid size-11 shrink-0 place-items-center rounded-full bg-monsoon text-lagoon">{initials(row.author_name)}</span>}
             <span><span className="block font-display text-[0.9375rem] font-semibold">{row.author_name}</span><span className="block text-[1rem] text-slate">{[row.author_role, row.company].filter(Boolean).join(', ')}</span></span>
+            {client && safeImage(client.logo_url) && <img src={safeImage(client.logo_url)} alt={`${client.name} logo`} loading="lazy" decoding="async" className="ml-auto max-h-8 max-w-24 object-contain" />}
           </figcaption>
-        </figure>)}
+        </figure>; })}
       </div>
-    </Marquee> : <Reveal className="wrap mt-12 lg:mt-16"><div className="flex flex-col gap-6 border-t border-ink/15 pt-8 md:flex-row md:items-end md:justify-between"><div><p className="label text-lagoon-ink">Client stories, coming soon</p><p className="mt-3 max-w-xl text-[1.1875rem] leading-[1.55] text-slate">We’re collecting feedback from the people we build with. In the meantime, explore the projects that brought us together.</p></div><a href="#portfolio" className="label link-line shrink-0 self-start md:self-auto">Explore our work ↗</a></div></Reveal>}
+    </Marquee>
   </section>;
 }

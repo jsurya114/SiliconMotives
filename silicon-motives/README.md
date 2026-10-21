@@ -1,6 +1,6 @@
-# Silicon Motives
+# SiliconMotives
 
-Next.js App Router + React + TypeScript + Tailwind CSS company website for Silicon Motives, Kochi, Kerala, with a Supabase admin panel. The public homepage follows the visual direction in [SiliconMotivesv3](https://github.com/jasilmeledath/SiliconMotivesv3). Published content comes from Supabase; the remote first story and service copy use the bundled presentation content.
+Next.js App Router + React + TypeScript + Tailwind CSS company website for SiliconMotives, Kerala, with a Supabase admin panel. The public homepage follows the visual direction in [SiliconMotivesv3](https://github.com/jasilmeledath/SiliconMotivesv3). Published content comes from Supabase; the remote first story and service copy use the bundled presentation content.
 
 ## Run locally
 
@@ -15,22 +15,22 @@ Open http://127.0.0.1:3000 for the site and http://127.0.0.1:3000/admin for the 
 
 ## Deploy
 
-Vercel uses the Next.js framework, installs dependencies with `npm ci`, and runs `npm run build` with output in `.next/`. The contact Route Handler runs in the Node.js runtime. Set `SUPABASE_URL`, `SUPABASE_PUBLISHABLE_KEY`, `SMTP_USER`, and `SMTP_PASS` in the Vercel project environment variables and redeploy. Use either the repository root or the synchronized `silicon-motives/` directory as the Vercel Root Directory. Remove any old dashboard overrides for the Other framework or `build/` output. This app needs a Next.js server; static export does not support the email endpoint. Only the public Supabase URL and publishable key are passed to the admin browser.
+Vercel uses the Next.js framework, installs dependencies with `npm ci`, and runs `npm run build` with output in `.next/`. The contact Route Handler runs in the Node.js runtime. Set `SUPABASE_URL`, `SUPABASE_PUBLISHABLE_KEY`, `SMTP_HOST`, `SMTP_PORT`, `SMTP_SECURE`, `SMTP_USER`, and `SMTP_PASS` in the Vercel project environment variables and redeploy. Use either the repository root or the synchronized `silicon-motives/` directory as the Vercel Root Directory. Remove any old dashboard overrides for the Other framework or `build/` output. This app needs a Next.js server; static export does not support the email endpoint. Only the public Supabase URL and publishable key are passed to the admin browser.
 
 `.env`, `.next/`, and generated TypeScript files are Git-ignored. Only empty placeholders are committed. The URL and publishable key remain visible in the browser by design; database access is enforced by Supabase row-level security. Never use a secret or service-role key for `SUPABASE_PUBLISHABLE_KEY`.
 
 ## Email delivery
 
-The **Tell us about your idea** form posts to `/api/contact`. Nodemailer sends to `siliconmotives@gmail.com`, with the visitor’s address in Reply-To. The sender and recipient are controlled on the server. Separate WhatsApp chat links remain available, but the form never redirects there.
+The **Tell us about your idea** form posts to `/api/contact`. Nodemailer sends to `siliconmotives@gmail.com`, with the visitor’s address in Reply-To. Configure `SMTP_HOST`, `SMTP_PORT`, `SMTP_SECURE`, `SMTP_USER`, and `SMTP_PASS` for the mailbox/provider used to send messages. The form never redirects to WhatsApp.
 
-1. Enable Google 2-Step Verification on the sending Gmail account and create an [App Password](https://myaccount.google.com/apppasswords). See [Nodemailer’s Gmail guide](https://nodemailer.com/guides/using-gmail).
-2. In Vercel → Project → Settings → Environment Variables, set `SMTP_USER=siliconmotives@gmail.com` and `SMTP_PASS` to that App Password for Production (and Preview if preview emails are wanted). Do not use your regular Gmail password or put credentials in source files, browser configuration, or chat.
+1. Get the SMTP hostname, port, TLS mode, mailbox username, and password from the domain email provider.
+2. In Vercel → Project → Settings → Environment Variables, set `SMTP_HOST`, `SMTP_PORT`, `SMTP_SECURE`, `SMTP_USER=siliconmotives@gmail.com`, and `SMTP_PASS` for Production (and Preview if preview emails are wanted). Keep credentials out of source files and browser configuration.
 3. Redeploy after saving the variables. For local development, put them in the ignored `.env` file and restart `npm run dev`.
-4. Submit a test idea from the deployed site and verify it arrives in the company inbox. A successful response means Gmail accepted the message; it does not guarantee inbox placement.
+4. Submit an enquiry from the deployed site and verify it arrives in the company inbox. A successful response means the SMTP server accepted the message; it does not guarantee inbox placement.
 
-If Supabase is configured and **Save website enquiries in the admin inbox** is enabled, the server also saves a copy. Email delivery does not depend on that setting. A failed inbox copy is logged without visitor data and does not cause an already-sent email to be reported as failed. Gmail has sending limits; use a transactional email provider if enquiry volume outgrows it.
+If Supabase is configured and **Save website enquiries in the admin inbox** is enabled, the server also saves a copy. Email delivery does not depend on that setting. A failed inbox copy is logged without visitor data and does not cause an already-sent email to be reported as failed.
 
-Run `npm test`, `npm run check`, and `npm run build` before deployment. Automated tests mock external delivery and include real Nodemailer message generation without sending email; they do not verify Gmail credentials.
+Run `npm test`, `npm run check`, and `npm run build` before deployment. Automated tests mock external delivery and include real Nodemailer message generation without sending email; they do not verify mailbox credentials.
 
 ## Project layout
 

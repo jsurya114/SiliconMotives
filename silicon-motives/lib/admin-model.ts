@@ -5,7 +5,7 @@ export const collections: Record<string, Collection> = {
   services: {
     label: 'Services',
     singular: 'service',
-    intro: 'The four cards in “What we do”. Order here is the order on the site.',
+    intro: 'The three core capability cards in “What we do”. Order here is the order on the site.',
     title: (row) => row.title,
     subtitle: (row) => row.kicker,
     fields: [
@@ -92,7 +92,6 @@ export const collections: Record<string, Collection> = {
 };
 
 export const settingsFields: Field[] = [
-  { name: 'contact_email', label: 'Contact email', type: 'email', max: 254, help: 'Shown in the contact section.' },
   { name: 'contact_phone', label: 'Phone', type: 'tel', max: 40 },
   { name: 'whatsapp_number', label: 'WhatsApp number', type: 'text', max: 20, help: 'Digits only, with country code, e.g. 919876543210.', pattern: '[0-9]*' },
   { name: 'linkedin_url', label: 'LinkedIn URL', type: 'url' },

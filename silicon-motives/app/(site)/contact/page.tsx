@@ -1,0 +1,6 @@
+import type { Metadata } from 'next';
+import { loadContent } from '@/lib/content';
+import { MarketingPage, PageIntro } from '@/components/site/marketing-page';
+import { Contact } from '@/components/sections/Contact';
+export const metadata: Metadata = { title: 'Contact SiliconMotives', description: 'Send a project enquiry or discuss an agency partnership.' };
+export default async function ContactPage() { const content = await loadContent(); return <MarketingPage><PageIntro eyebrow="Contact" title="Start with a clear conversation."><p>For a software project, tell us what you are trying to solve. For an agency partnership, share the kind of delivery support you need. Engineering operations are in Kerala, India; we work remote-first.</p><p className="mt-4"><a className="link-line" href="mailto:siliconmotives@gmail.com">siliconmotives@gmail.com</a></p><p className="mt-2">Kerala, India · Remote-first</p><p className="mt-2"><a className="link-line" href="https://www.linkedin.com/in/jasilmeledath/" target="_blank" rel="noreferrer">Jasil M on LinkedIn ↗</a> · <a className="link-line" href="https://www.linkedin.com/in/jayasoorya-suryadas/" target="_blank" rel="noreferrer">Jayasoorya Suryadas on LinkedIn ↗</a></p></PageIntro><Contact settings={content.settings} /></MarketingPage>; }

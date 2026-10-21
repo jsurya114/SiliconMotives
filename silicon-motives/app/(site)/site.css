@@ -302,6 +302,10 @@ html.lenis, html.lenis body { height: auto; }
 @layer components {
   .public-site .hero-static { min-height: 620px; }
   .public-site .hero-static > .wrap { min-height: max(620px, 100svh); }
+  .public-site .hero-footer-row {
+    margin-inline: calc((100% - 100vw) / 2);
+    padding-inline: clamp(1rem, 2vw, 2rem);
+  }
   /* Keep every part of the hero still, including its button. */
   .public-site .hero-static *, .public-site .hero-static *::before, .public-site .hero-static *::after {
     animation: none !important;

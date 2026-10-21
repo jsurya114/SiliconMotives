@@ -56,6 +56,10 @@ export function Contact({ settings }: { settings: ContentRow }) {
                 </a>
               </li>
             </ul>
+            <div className="relative z-[2] mt-6 flex flex-wrap gap-4 text-sm">
+              <a className="link-line" href="/contact">Project enquiries</a>
+              <a className="link-line" href="/agency-partners">Agency partnerships</a>
+            </div>
             {(contact.linkedin || contact.instagram) && <div className="relative z-[2] mt-5 flex flex-wrap gap-5 font-display text-[0.9375rem]">
               {contact.linkedin && <a className="link-line" href={contact.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>}
               {contact.instagram && <a className="link-line" href={contact.instagram} target="_blank" rel="noopener noreferrer">Instagram</a>}

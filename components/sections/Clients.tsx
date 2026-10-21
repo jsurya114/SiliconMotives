@@ -8,7 +8,7 @@ import { SectionLabel } from "../ui/SectionLabel";
 export function Clients({ rows }: { rows: ContentRow[] }) {
   return <section id="clients" data-header="light" aria-labelledby="clients-title" className="overflow-hidden bg-lagoon py-16 text-monsoon sm:py-20">
     <div className="wrap">
-      <SectionLabel className="mb-4">{site.clients.eyebrow}</SectionLabel>
+      <SectionLabel className="mb-4">Companies we’ve worked with</SectionLabel>
       <RevealText as="h2" id="clients-title" className="display t-h3 !text-[clamp(1.75rem,3vw,2.75rem)]">{site.clients.title}</RevealText>
     </div>
     <Marquee className="mt-10 sm:mt-14" speed={36}>

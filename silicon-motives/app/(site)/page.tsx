@@ -31,7 +31,7 @@ export default async function Home() {
       <Remote />
       <Process />
       <Portfolio rows={content.projects} />
-      <Testimonials rows={content.testimonials} />
+      <Testimonials rows={content.testimonials} clients={content.clients} />
       <Faq rows={content.faqs} />
       <People rows={content.team_members} />
       <Contact settings={content.settings} />

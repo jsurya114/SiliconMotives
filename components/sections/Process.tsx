@@ -137,7 +137,7 @@ export function Process() {
           ) : null}
         </div>
 
-        <ol data-steps="" className="relative mt-16 grid gap-12 pl-10 lg:mt-10 lg:grid-cols-4 lg:gap-8 lg:pl-0">
+        <ol data-steps="" className="relative mt-16 grid gap-12 pl-10 lg:mt-10 lg:grid-cols-5 lg:gap-6 lg:pl-0">
           <span aria-hidden="true" className="absolute top-2 bottom-2 left-[11px] w-px bg-ink/15 lg:hidden" />
           <span
             data-vline=""

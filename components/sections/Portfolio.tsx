@@ -166,6 +166,7 @@ export function Portfolio({ rows }: { rows: ContentRow[] }) {
           </span>
         </div>
         </div>
+        <div className="mt-10 flex justify-center"><a href="/projects" className="label inline-flex items-center gap-2 rounded-full border border-cloud/30 px-5 py-3 text-cloud transition-colors hover:bg-cloud hover:text-monsoon">View all projects <span aria-hidden="true">↗</span></a></div>
       </div>
     </section>
   );

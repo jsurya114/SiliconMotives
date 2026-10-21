@@ -23,7 +23,7 @@ export function IdeaForm({ label = 'Tell us about your idea' }: { label?: string
       <div className="p-6 sm:p-10">
       <div className="flex items-center justify-between gap-4"><p className="label text-lagoon">Let’s start with your idea</p><button className="grid size-11 shrink-0 place-items-center rounded-full border border-cloud/25 text-2xl" aria-label="Close idea form" onClick={() => dialog.current?.close()}>×</button></div>
       <h2 id="brief-title" className="display mt-6 text-[clamp(2.25rem,6vw,3.5rem)]">A little context.<br />A better start.</h2>
-      <p className="mt-5 text-[1.0625rem] leading-[1.6] text-mist">Tell us a little about your idea. Your message goes straight to siliconmotives@gmail.com, and we’ll reply to your email.</p>
+      <p className="mt-5 text-[1.0625rem] leading-[1.6] text-mist">Tell us a little about your idea. We’ll reply to your email.</p>
       <form id="brief-form" className="mt-8 grid gap-5" aria-busy={sending} onSubmit={async event => {
         event.preventDefault(); if (pending.current) return;
         const form = event.currentTarget; const data = new FormData(form);

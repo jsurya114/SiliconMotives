@@ -66,7 +66,7 @@ export function Header({ settings }: { settings: ContentRow }) {
         <div className="site-header__bar">
           <div className="wrap flex h-16 items-center justify-between">
             <a
-              href="#home"
+              href="/"
               aria-label={site.ui.homeLabel}
               className="font-display text-[1.125rem] font-extrabold tracking-[-0.04em]"
             >
@@ -83,7 +83,7 @@ export function Header({ settings }: { settings: ContentRow }) {
                 </a>
               ))}
               <a
-                href={site.navCta.href}
+              href="/contact"
                 className="ml-2 inline-flex h-10 items-center gap-2 rounded-full bg-lagoon px-4 font-display text-[0.9375rem] font-semibold text-monsoon transition-colors hover:bg-lagoon-deep"
               >
                 {site.navCta.label}
@@ -188,14 +188,16 @@ function MobileMenu({ onClose, settings }: { onClose: () => void; settings: Cont
           </button>
         </div>
         <nav className="mt-10 flex flex-col gap-1">
-          {[...site.nav, site.navCta].map((item, i) => (
+          {[...site.nav, { ...site.navCta, href: '/contact' }].map((item, i) => (
             <a
               key={item.href + item.label}
               href={item.href}
               style={{ animationDelay: `${80 + i * 45}ms` }}
               onClick={(e) => {
-                e.preventDefault();
-                close(() => document.querySelector(item.href)?.scrollIntoView({ behavior: "instant" }));
+                if (item.href.startsWith('#')) {
+                  e.preventDefault();
+                  close(() => document.querySelector(item.href)?.scrollIntoView({ behavior: "instant" }));
+                }
               }}
               className="mobile-menu__item display flex items-center justify-between border-b border-cloud/10 py-3 text-[clamp(2rem,9vw,3.25rem)] leading-none"
             >
