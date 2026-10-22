@@ -12,7 +12,7 @@ export function whatsappUrl(number = '918590184265') {
 }
 
 export function contactDetails(settings: Record<string, unknown>) {
-  const email = 'siliconmotives@gmail.com';
+  const email = 'hello@siliconmotives.com';
   const phone = String(settings.contact_phone || settings.whatsapp_number || '+91 85901 84265');
   const digits = phone.replace(/\D/g, '');
   const tel = phone.includes('+') ? `+${digits}` : digits.startsWith('91') ? `+${digits}` : `+91${digits}`;

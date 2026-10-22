@@ -21,10 +21,10 @@ Vercel uses the Next.js framework, installs dependencies with `npm ci`, and runs
 
 ## Email delivery
 
-The **Tell us about your idea** form posts to `/api/contact`. Nodemailer sends to `siliconmotives@gmail.com`, with the visitor’s address in Reply-To. Configure `SMTP_HOST`, `SMTP_PORT`, `SMTP_SECURE`, `SMTP_USER`, and `SMTP_PASS` for the mailbox/provider used to send messages. The form never redirects to WhatsApp.
+The project enquiry and agency partnership forms post to `/api/contact`. Nodemailer sends to `hello@siliconmotives.com`, with the visitor’s address in Reply-To. Configure `SMTP_HOST`, `SMTP_PORT`, `SMTP_SECURE`, `SMTP_USER`, and `SMTP_PASS` for the company mailbox. The form never redirects to WhatsApp.
 
 1. Get the SMTP hostname, port, TLS mode, mailbox username, and password from the domain email provider.
-2. In Vercel → Project → Settings → Environment Variables, set `SMTP_HOST`, `SMTP_PORT`, `SMTP_SECURE`, `SMTP_USER=siliconmotives@gmail.com`, and `SMTP_PASS` for Production (and Preview if preview emails are wanted). Keep credentials out of source files and browser configuration.
+2. In Vercel → Project → Settings → Environment Variables, set `SMTP_HOST`, `SMTP_PORT`, `SMTP_SECURE`, `SMTP_USER=hello@siliconmotives.com`, and `SMTP_PASS` for Production (and Preview if preview emails are wanted). Keep credentials out of source files and browser configuration.
 3. Redeploy after saving the variables. For local development, put them in the ignored `.env` file and restart `npm run dev`.
 4. Submit an enquiry from the deployed site and verify it arrives in the company inbox. A successful response means the SMTP server accepted the message; it does not guarantee inbox placement.
 
@@ -73,7 +73,7 @@ These are suggested wording for review, not quotes supplied or approved by the c
 
 | Client | Suggested testimonial |
 | --- | --- |
-| Abdul Rahman — CEO, NasaLogistic | The team understood how we manage driver availability and orders. NasaLogistic brings those tasks into one place and is straightforward for our team to use. |
+| Abdul Rahman — CEO, NasaLogistics | The team understood how we manage driver availability and orders. NasaLogistics brings those tasks into one place and is straightforward for our team to use. |
 | Rakhi S — Dentist, Dental Buddy | Dental Buddy brings patient records, appointments, and billing into one place. The team listened to our clinic's needs and kept the system practical for day-to-day use. |
 | Gokul — Entrepreneur, Woobe | Woobe's weight-based shopping needed a clear, simple experience. The team worked through the details with us and built a storefront that fits the way we sell. |
 
@@ -82,7 +82,7 @@ Review each entry with its named client, update the wording if needed, then publ
 ## Setting up Supabase (one time)
 
 1. Create a project at https://supabase.com.
-2. Run the migrations in `supabase/migrations/` in timestamp order: either paste each SQL file into **SQL Editor** and run it, or use the Supabase CLI (`supabase link` then `supabase db push`). The migrations create the CMS, starter content, and the published Woobe, NasaLogistic, Picbox, Uniwayin, and Dental Buddy portfolio projects. Existing published projects are kept as unpublished drafts when Woobe is added. For an existing installation with the earlier migrations applied, run `20261012150000_feature_dental_buddy_portfolio.sql` to add Dental Buddy to the admin and live CMS portfolio. Deploying the website does not run database migrations. Run `20261012160000_founder_portraits.sql` to save the bundled founder portraits in the Team editor and allow local photo paths. The public site also uses these portraits for Jasil M and Jayasoorya S when their photo fields are empty.
+2. Run the migrations in `supabase/migrations/` in timestamp order: either paste each SQL file into **SQL Editor** and run it, or use the Supabase CLI (`supabase link` then `supabase db push`). The migrations create the CMS, starter content, and portfolio project records for Woobe, NasaLogistics, Picbox, Uniwayin, and Dental Buddy. Existing published projects are kept as unpublished drafts when Woobe is added. For an existing installation with the earlier migrations applied, run `20261012150000_feature_dental_buddy_portfolio.sql` to add Dental Buddy to the admin and live CMS portfolio. Deploying the website does not run database migrations. Run `20261012160000_founder_portraits.sql` to save the bundled founder portraits in the Team editor and allow local photo paths. The public site also uses these portraits for Jasil M and Jayasoorya S when their photo fields are empty.
 3. Copy the project URL and publishable (or legacy anon) key from the project's **Connect** dialog into `.env` as `SUPABASE_URL` and `SUPABASE_PUBLISHABLE_KEY`. Set the same variables on your hosting provider. Never use the service-role or secret key.
 4. Create the admin login: **Authentication → Users → Add user**, with an email and a strong password (tick "Auto Confirm User").
 5. Grant that user admin access in **SQL Editor**:

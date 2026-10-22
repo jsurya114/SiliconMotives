@@ -10,21 +10,22 @@ import type { ContentRow } from "@/lib/content";
 
 const { contactSection: c } = site;
 
-export function Contact({ settings }: { settings: ContentRow }) {
+export function Contact({ settings, enquiryType = "project" }: { settings: ContentRow; enquiryType?: "project" | "agency" }) {
   const contact = contactDetails(settings);
+  const agency = enquiryType === "agency";
   return (
     <section id="contact" data-header="light" aria-labelledby="contact-title" className="section-y bg-lagoon text-monsoon">
       <div className="wrap grid gap-y-12 lg:grid-cols-12 lg:gap-x-8">
         <div className="lg:col-span-7">
           <Reveal>
-            <SectionLabel>{c.eyebrow}</SectionLabel>
+            <SectionLabel>{agency ? "Agency partnership enquiry" : c.eyebrow}</SectionLabel>
           </Reveal>
           <RevealText as="h2" id="contact-title" lines={c.title} className="display t-h2 mt-6" />
           <Reveal className="mt-6 max-w-[32rem]">
-            <p className="text-[1.1875rem] leading-[1.55]">{c.body}</p>
+            <p className="text-[1.1875rem] leading-[1.55]">{agency ? "Tell us what delivery support your agency needs, how your team works with clients, and what you would like engineering help with." : c.body}</p>
           </Reveal>
           <Reveal className="mt-10">
-            <IdeaForm label={c.cta} />
+            <IdeaForm label={agency ? "Describe your delivery needs" : c.cta} mode={enquiryType} />
           </Reveal>
         </div>
 

@@ -110,7 +110,7 @@ function Dashboard({client, count}: {client: SupabaseClient; count: number}) {
   return <><div className="page-head"><div><p className="eyebrow">Overview</p><h1>Welcome back</h1><p>Changes you publish here appear on the website straight away.</p></div></div>
     <div className="stats"><a className={`stat${count ? ' stat-alert' : ''}`} href="#/submissions"><b>{count}</b><span>New project briefs</span></a>{Object.entries(collections).map(([key, collection]) => <a key={key} className="stat" href={`#/${key}`}><b>{stats[key].live}</b><span>{collection.label} published{stats[key].total > stats[key].live && ` · ${stats[key].total - stats[key].live} hidden`}</span></a>)}</div>
     <section className="panel panel-pad"><h2 className="mb-3 text-lg">Content overview</h2><ul className="checklist">
-      {!settings.accepting_briefs && <li>Admin inbox copies are <a href="#/settings">switched off</a>. Ideas still go to siliconmotives@gmail.com when SMTP is configured.</li>}
+      {!settings.accepting_briefs && <li>Admin inbox copies are <a href="#/settings">switched off</a>. Ideas still go to hello@siliconmotives.com when SMTP is configured.</li>}
       {!stats.clients.live && <li><a href="#/clients">Add client logos</a> to replace the sample clients.</li>}
       {!stats.testimonials.live && <li><a href="#/testimonials">Publish client-approved testimonials</a> to show them on the public site.</li>}
       {!stats.projects.live && <li><a href="#/projects">Publish a project</a> to feature it in the portfolio.</li>}
@@ -221,13 +221,13 @@ function Editor({client, collectionKey, row, rows, onClose, onSaved}: {client: S
 function Settings({client, notify}: {client: SupabaseClient; notify: Notify}) {
   const [values, setValues] = useState<Row | null>(null), [error, setError] = useState(''), [saving, setSaving] = useState(false);
   useEffect(() => { let active = true; run(client.from('site_settings').select('*').eq('id', 1).single()).then(row => { if (active) setValues(row); }).catch(error => { if (active) setError(errorText(error)); }); return () => { active = false; }; }, [client]);
-  return <><div className="page-head"><div><p className="eyebrow">Site</p><h1>Contact &amp; settings</h1><p>Public email enquiries go to siliconmotives@gmail.com. Phone and social links can be updated here.</p></div></div>{error && <p className="form-error" role="alert">{error}</p>}
+  return <><div className="page-head"><div><p className="eyebrow">Site</p><h1>Contact &amp; settings</h1><p>Public email enquiries go to hello@siliconmotives.com. Phone and social links can be updated here.</p></div></div>{error && <p className="form-error" role="alert">{error}</p>}
     {values ? <form className="panel panel-pad max-w-[640px]" onSubmit={async event => { event.preventDefault(); setSaving(true); setError('');
       const payload = {...Object.fromEntries(settingsFields.map(field => [field.name, String(values[field.name] || '').trim()])), accepting_briefs: Boolean(values.accepting_briefs)};
       try { await run(client.from('site_settings').update(payload).eq('id', 1)); notify('Settings saved.'); } catch (error) { setError(errorText(error)); } finally { setSaving(false); }
     }}>{settingsFields.map(field => <TextField key={field.name} field={field} value={values[field.name]} onChange={value => setValues({...values, [field.name]: value})} />)}
       <label className="check"><input type="checkbox" checked={Boolean(values.accepting_briefs)} onChange={event => setValues({...values, accepting_briefs: event.target.checked})} /> Save website enquiries in the admin inbox</label>
-      <p className="field-help mb-5">When on, emailed enquiries are also saved here. Email delivery to siliconmotives@gmail.com is independent of this setting.</p>
+      <p className="field-help mb-5">When on, emailed enquiries are also saved here. Email delivery to hello@siliconmotives.com is independent of this setting.</p>
       <button className="btn btn-primary" disabled={saving}>{saving ? 'Saving…' : 'Save settings'}</button>
     </form> : !error && <p className="muted">Loading…</p>}
   </>;

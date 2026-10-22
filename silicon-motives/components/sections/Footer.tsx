@@ -34,7 +34,7 @@ export function Footer() {
               <p>SiliconMotives is operated by Millionian LLC, a Wyoming limited liability company.</p>
             </div>
             <div className="mt-5 flex flex-col items-start gap-3">
-              <a className="font-display text-sm font-semibold text-lagoon" href="mailto:siliconmotives@gmail.com">siliconmotives@gmail.com</a>
+              <a className="font-display text-sm font-semibold text-lagoon" href="mailto:hello@siliconmotives.com">hello@siliconmotives.com</a>
               <a href="/contact" className="inline-flex items-center gap-2 font-display text-[0.9375rem] font-semibold text-lagoon">
                 <span className="link-line">Start a conversation</span>
                 <ArrowIcon size={14} />

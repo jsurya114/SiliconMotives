@@ -16,7 +16,7 @@ export const site = {
   },
 
   contact: {
-    email: "siliconmotives@gmail.com",
+    email: "hello@siliconmotives.com",
     phone: "+91 85901 84265",
     phoneHref: "tel:+918590184265",
     whatsappHref: `https://wa.me/918590184265?text=${encodeURIComponent(whatsappText)}`,
@@ -33,12 +33,13 @@ export const site = {
   navCta: { label: "Let’s talk", href: "#contact" },
 
   hero: {
-    eyebrow: "Remote engineering. Real business value.",
-    title: ["Your vision.", "Built with purpose."],
-    lead: "Turn your ideas into software that moves your business forward. A remote engineering partner who understands your goals and cares about what you build.",
-    cta: { label: "Let’s discuss your project", href: "#contact" },
-    location: "Kochi, Kerala, India",
-    promise: "Remote by design. Invested in your success.",
+    eyebrow: "Custom Software · Cloud Infrastructure · DevOps",
+    title: ["Engineering for", "businesses & agencies."],
+    lead: "Custom Software Engineering, Cloud Infrastructure, and DevOps for businesses and agencies, delivered remotely from Kerala, India.",
+    cta: { label: "Start a project", href: "/contact?type=project" },
+    agencyCta: { label: "Agency partnerships", href: "/agency-partners" },
+    location: "Kerala, India · Remote-first",
+    promise: "For businesses and agencies",
   },
 
   belief: {
@@ -93,21 +94,20 @@ export const site = {
   remote: {
     index: "04",
     eyebrow: "Remote, with intention",
-    title: ["A smaller footprint.", "A sharper focus."],
-    lead: "Our best work doesn’t depend on a shared office. It depends on a shared standard.",
-    badge: "Based in Kochi · Built to work remotely",
+    title: ["Remote-first.", "Engineering-focused."],
+    lead: "Our engineering operations are in Kerala, India. We work with teams through planned overlap, focused work, and written progress.",
     principles: [
       {
-        name: "Engineering value first",
-        body: "We keep our company lean and put resources into our people, technology, and the quality of our work.",
+        name: "Room for engineering",
+        body: "A lean remote model keeps more of the budget focused on engineering work.",
       },
       {
-        name: "Clarity at every step",
-        body: "Clear communication, visible progress, and personal accountability keep everyone moving together.",
+        name: "Clear collaboration",
+        body: "We agree on meeting overlap, written updates, and review checkpoints with each team.",
       },
       {
-        name: "More considered by design",
-        body: "Less daily commuting and less reliance on large offices are small, meaningful steps toward working more responsibly.",
+        name: "Focused work",
+        body: "Working remotely makes it possible to hire beyond one city and avoid unnecessary commuting.",
       },
     ],
   },
@@ -127,10 +127,10 @@ export const site = {
   },
 
   portfolio: {
-    index: "06",
+    index: "08",
     eyebrow: "Portfolio",
     title: "Selected work.",
-    lead: "Real businesses. Software built around them.",
+    lead: "A commerce storefront and an event-rental operations system, described by the capabilities they provide.",
   },
 
   testimonials: {
@@ -141,20 +141,20 @@ export const site = {
   },
 
   faq: {
-    index: "08",
+    index: "10",
     eyebrow: "Frequently asked questions",
     title: ["Before we", "get started."],
   },
 
   people: {
-    index: "09",
+    index: "11",
     eyebrow: "The people behind the purpose",
     title: ["Built by people.", "Driven by a shared motive."],
     body: [
-      "SiliconMotives was founded by Jayasoorya Suryadas and Jasil M in Kerala, with a simple idea: build an efficient engineering company where location doesn’t determine quality.",
-      "We’re shaping a team that values ownership, honest conversations, and pride in the product. A company where clients pay for engineering value, and where good people have the space to do meaningful work.",
+      "SiliconMotives is led by Jasil M and Jayasoorya Suryadas from Kerala, India.",
+      "Jasil is Founder, focused on systems, cloud, and architecture. Jayasoorya is Co-founder.",
     ],
-    badge: "Independent by design",
+    badge: "Kerala · Remote-first",
     founders: [
       {
         label: "Founder 01",
@@ -206,9 +206,9 @@ export const site = {
     success: "Thank you! Your idea has been sent to our team. We’ll reply by email.",
     failurePrefix: "Your idea could not be sent.",
     errors: {
-      timeout: "Sending is taking longer than expected. Please email siliconmotives@gmail.com if you need to follow up.",
-      network: "Please check your connection or email siliconmotives@gmail.com directly.",
-      generic: "Please try again or email siliconmotives@gmail.com directly.",
+      timeout: "Sending is taking longer than expected. Please email hello@siliconmotives.com if you need to follow up.",
+      network: "Please check your connection or email hello@siliconmotives.com directly.",
+      generic: "Please try again or email hello@siliconmotives.com directly.",
     },
   },
 

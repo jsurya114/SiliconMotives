@@ -42,9 +42,9 @@ test('sends to the fixed company inbox, with visitor Reply-To and trimmed admin 
   assert.equal(ctx.sent[0].to, CONTACT_EMAIL);
   assert.equal(ctx.sent[0].from.address, CONTACT_EMAIL);
   assert.deepEqual(ctx.sent[0].replyTo, { name: 'A visitor', address: valid.email });
-  assert.equal(ctx.sent[0].subject, 'New idea — Silicon Motives website');
+  assert.equal(ctx.sent[0].subject, 'Project enquiry — SiliconMotives');
   assert.equal(ctx.sent[0].html, undefined);
-  assert.deepEqual(ctx.archived, [{ name: 'A visitor', email: valid.email, message: valid.message }]);
+  assert.deepEqual(ctx.archived, [{ name: 'A visitor', email: valid.email, message: `Enquiry type: project\n\n${valid.message}` }]);
 });
 
 test('Nodemailer builds a real message with one fixed recipient and plain-text content', async () => {
@@ -93,7 +93,7 @@ test('missing credentials return a useful error without exposing configuration',
   const ctx = setup({ env: {} });
   const res = await request(ctx.handler);
   assert.equal(res.status, 503);
-  assert.match(res.body.error, /siliconmotives@gmail.com/);
+  assert.match(res.body.error, /hello@siliconmotives.com/);
   assert.equal(ctx.sent.length, 0);
 });
 

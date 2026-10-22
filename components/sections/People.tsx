@@ -52,7 +52,7 @@ export function People({ rows }: { rows: ContentRow[] }) {
                   <div>
                     <p className="label text-mist">{f.kicker || `Team ${String(i + 1).padStart(2, '0')}`}</p>
                     <h3 className="mt-2 font-display text-[clamp(1.25rem,2vw,1.625rem)] leading-[1.1] font-bold tracking-[-0.03em]">{f.name}</h3>
-                    <p className="mt-1 text-cloud/80">{f.role}</p>
+                    <p className="mt-1 text-cloud/80">{founder?.role || f.role}</p>
                   </div>
                   {founder && <a
                     href={founder.linkedin}

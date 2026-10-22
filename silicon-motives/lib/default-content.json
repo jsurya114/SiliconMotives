@@ -9,26 +9,26 @@
       "id": "1",
       "title": "Woobe — Fashion, by Weight",
       "category": "FULL-STACK E-COMMERCE",
-      "description": "Co-developed with Jasil M for a real client, this production storefront pairs mobile-first shopping with intuitive ₹/kg pricing and secure checkout.",
+      "description": "Commerce storefront with product prices by weight (₹/kg) and Razorpay or cash-on-delivery checkout.",
       "tags": ["Weight-based pricing", "Razorpay & COD", "AWS infrastructure"],
       "image_url": "/images/woobe-fashion-cover.jpg",
       "image_alt": "Editorial fashion cover visual for the Woobe case study, not a screenshot of the live store."
     },
     {
       "id": "2",
-      "title": "NasaLogistic — Driver & Logistics Management",
+      "title": "NasaLogistics — Driver & Logistics Management",
       "category": "LOGISTICS PLATFORM",
-      "description": "A production platform for driver availability, order workflows, and admin operations, built for a real client.",
-      "tags": ["Driver & order operations", "JWT + RBAC", "AWS RDS · EC2", "React · Vercel"],
+      "description": "A logistics management platform covering driver availability, order workflows, and administrative operations.",
+      "tags": ["Driver availability", "Order workflows", "Administrative operations"],
       "image_url": "/images/nasalogistic-cover.jpg",
-      "image_alt": "Editorial logistics cover visual for the NasaLogistic case study, not a product screenshot."
+      "image_alt": "Editorial logistics cover visual for NasaLogistics, not a product screenshot."
     },
     {
       "id": "3",
       "title": "Picbox — Inventory & Invoicing System",
       "category": "INVENTORY & INVOICING",
-      "description": "Built for a local events client, this production app manages rental inventory, jobs, wages, and invoicing; more than 190 PDF invoices have been generated.",
-      "tags": ["Expo mobile app", "50+ REST APIs", "190+ PDF invoices", "MongoDB + AES-256"],
+      "description": "Inventory and invoicing software for an event-rental business, covering rental inventory, jobs, wages, and PDF invoice generation.",
+      "tags": ["Rental inventory", "Jobs and wages", "PDF invoices"],
       "image_url": "/images/picbox-cover.jpg",
       "image_alt": "Editorial event rental and inventory cover visual for Picbox, not a product screenshot."
     },
@@ -36,8 +36,8 @@
       "id": "4",
       "title": "Uniwayin — Education Consultancy CRM",
       "category": "EDUCATION CONSULTANCY CRM",
-      "description": "A production CRM for four staff managing 280+ active leads, with follow-ups, notes, analytics, and role-based access.",
-      "tags": ["NestJS + MongoDB", "38 REST APIs", "280+ active leads", "JWT + RBAC"],
+      "description": "A consultancy CRM with lead follow-ups, notes, analytics, and role-based access.",
+      "tags": ["Lead follow-ups", "Notes and analytics", "Role-based access"],
       "image_url": "/images/uniwayin-cover.jpg",
       "image_alt": "Editorial education consultancy cover visual for Uniwayin, not a product screenshot."
     },
@@ -45,7 +45,7 @@
       "id": "5",
       "title": "Dental Buddy — Smart Dental EMR System",
       "category": "DENTAL CLINIC EMR",
-      "description": "Used daily in a live dental clinic, Dental Buddy brings patient records, prescriptions, appointments, and billing together with role-based access for clinic teams.",
+      "description": "Dental clinic software for patient records, prescriptions, appointments, billing, and role-based access.",
       "image_url": "/images/dental-buddy-cover.jpg",
       "image_alt": "Illustrative dental clinic scene for Dental Buddy, not a photograph of the client clinic or a product screenshot."
     },
@@ -97,7 +97,7 @@
     {
       "id": "1",
       "name": "Jasil M",
-      "role": "Co-founder",
+      "role": "Founder · Systems, cloud & architecture",
       "kicker": "FOUNDER 01",
       "photo_url": "/images/jasil.jpg"
     },

@@ -96,6 +96,7 @@ export function Header({ settings }: { settings: ContentRow }) {
               style={{ boxShadow: "inset 0 0 0 1px color-mix(in oklab, currentColor 25%, transparent)" }}
               aria-label={site.ui.menu}
               aria-haspopup="dialog"
+              aria-controls="mobile-navigation"
               aria-expanded={open}
               onClick={() => {
                 setOpen(true);
@@ -124,6 +125,7 @@ function MobileMenu({ onClose, settings }: { onClose: () => void; settings: Cont
   const ref = useRef<HTMLDivElement>(null);
   const [closing, setClosing] = useState(false);
   const contact = contactDetails(settings);
+  const { scrollTo } = useSmoothScroll();
 
   // A plain fixed overlay (no <dialog>), so every mobile browser renders it.
   // Its links are visible by default; CSS only adds a short entrance.
@@ -171,6 +173,7 @@ function MobileMenu({ onClose, settings }: { onClose: () => void; settings: Cont
       role="dialog"
       aria-modal="true"
       aria-label={site.ui.mainNav}
+      id="mobile-navigation"
       data-closing={closing || undefined}
       className="mobile-menu on-dark fixed inset-0 z-[90] h-dvh w-full overflow-y-auto bg-monsoon text-cloud"
     >
@@ -193,11 +196,20 @@ function MobileMenu({ onClose, settings }: { onClose: () => void; settings: Cont
               key={item.href + item.label}
               href={item.href}
               style={{ animationDelay: `${80 + i * 45}ms` }}
-              onClick={(e) => {
-                if (item.href.startsWith('#')) {
-                  e.preventDefault();
-                  close(() => document.querySelector(item.href)?.scrollIntoView({ behavior: "instant" }));
-                }
+              onClick={(event) => {
+                const target = new URL(item.href, window.location.href);
+                if (target.origin !== window.location.origin) return;
+                event.preventDefault();
+                const current = new URL(window.location.href);
+                const sameDocument = target.pathname === current.pathname && target.search === current.search;
+                close(() => {
+                  if (!sameDocument) {
+                    window.location.assign(`${target.pathname}${target.search}${target.hash}`);
+                  } else if (target.hash) {
+                    window.history.pushState(null, '', `${target.pathname}${target.search}${target.hash}`);
+                    scrollTo(target.hash);
+                  }
+                });
               }}
               className="mobile-menu__item display flex items-center justify-between border-b border-cloud/10 py-3 text-[clamp(2rem,9vw,3.25rem)] leading-none"
             >

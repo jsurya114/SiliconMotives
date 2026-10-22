@@ -11,6 +11,6 @@ test('idea form sends JSON to the same email endpoint after migration', async ()
 });
 test('failed and non-JSON responses cannot be reported as sent', async () => {
   await assert.rejects(submitIdea(idea, async () => ({ok: false, json: async () => ({error: 'Email unavailable'})})), /Email unavailable/);
-  await assert.rejects(submitIdea(idea, async () => ({ok: false, json: async () => {throw new Error('HTML response');}})), /email siliconmotives@gmail.com/);
+  await assert.rejects(submitIdea(idea, async () => ({ok: false, json: async () => {throw new Error('HTML response');}})), /email hello@siliconmotives.com/);
   await assert.rejects(submitIdea(idea, async () => {throw new Error('Network error');}), /check your connection/);
 });

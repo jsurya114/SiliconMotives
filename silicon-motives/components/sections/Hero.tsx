@@ -16,7 +16,10 @@ export function Hero() {
       </h1>
       <div className="mt-8 grid gap-6 sm:mt-10 md:grid-cols-12 md:items-end">
         <p className="max-w-[34rem] text-[1.0625rem] leading-[1.55] text-ink/85 sm:text-[1.1875rem] md:col-span-6 lg:col-span-5">{hero.lead}</p>
-        <div className="md:col-span-6 md:justify-self-end lg:col-span-7"><ButtonLink href={hero.cta.href} icon={<ChatIcon />}>{hero.cta.label}</ButtonLink></div>
+        <div className="flex flex-wrap gap-3 md:col-span-6 md:justify-self-end lg:col-span-7">
+          <ButtonLink href={hero.cta.href} variant="lagoon" icon={<ChatIcon />}>{hero.cta.label}</ButtonLink>
+          <ButtonLink href={hero.agencyCta.href} variant="ghost">{hero.agencyCta.label}</ButtonLink>
+        </div>
       </div>
       <div className="hero-footer-row mt-10 grid grid-cols-2 items-center gap-6 border-t border-ink/15 pt-4 sm:mt-14">
         <p className="label flex items-center gap-2 text-[0.6875rem] sm:text-[0.8125rem]"><span className="shrink-0"><PinIcon size={15} /></span>{hero.location}</p>

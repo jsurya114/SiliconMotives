@@ -1,14 +1,11 @@
-import type { Metadata } from 'next';
 import { MarketingPage } from '@/components/site/marketing-page';
+import { pageMetadata } from '@/lib/metadata';
 
-export const metadata: Metadata = {
-  title: 'Agency Partners | SiliconMotives',
-  description: 'Engineering delivery support for U.S. agencies.',
-};
+export const metadata = pageMetadata('Agency Partners | SiliconMotives', 'Engineering delivery support for U.S. agencies.', '/agency-partners');
 
 const capabilities = [
   ['01', 'Custom software', 'Web applications and business tools shaped around your client’s requirements.'],
-  ['02', 'Cloud infrastructure', 'Practical architecture and implementation for secure, maintainable deployments.'],
+  ['02', 'Cloud infrastructure', 'Practical architecture and implementation for clear, maintainable deployments.'],
   ['03', 'DevOps & reliability', 'Delivery pipelines, deployment workflows, and operational improvements.'],
 ];
 
@@ -22,7 +19,7 @@ export default function AgencyPartnersPage() {
             <h1 className="display t-h1 mt-5 max-w-4xl">Your client.<br className="hidden sm:block" /> Our engineering.</h1>
           </div>
           <div className="max-w-2xl text-[1.125rem] leading-[1.7] text-slate lg:col-span-5 lg:justify-self-end">
-            <p>Keep the client relationship. Bring in a focused engineering partner to plan, build, deploy, and operate the software behind your work.</p>
+            <p>Keep the client relationship. Bring in a focused engineering partner to plan, build, deploy, and operate the software behind your work. Jasil M, Founder, is the technical contact for systems, cloud, and architecture.</p>
             <a href="/contact?type=agency" className="btn btn--lagoon mt-6">
               <span className="btn__label"><span>Discuss a partnership</span><span aria-hidden="true">Discuss a partnership</span></span>
               <span className="btn__icon" aria-hidden="true">↗</span>
@@ -40,6 +37,30 @@ export default function AgencyPartnersPage() {
               <span className="font-display text-sm font-semibold">{label}</span>
             </div>
           ))}
+        </div>
+      </section>
+
+      <section className="wrap grid gap-8 border-t border-ink/15 py-12 sm:py-16 lg:grid-cols-12 lg:gap-8">
+        <div className="lg:col-span-4">
+          <p className="label text-lagoon-ink">Working together</p>
+          <h2 className="display t-h3 mt-3">Clear from kickoff to handover.</h2>
+        </div>
+        <div className="grid gap-0 lg:col-span-8">
+          {[
+            ['Time-zone overlap', 'Our engineering operations work on India Standard Time (UTC+05:30). Meeting overlap with U.S. teams depends on their time zone and daylight-saving season; we agree a shared window and use written updates between calls.'],
+            ['Updates and demos', 'A weekly written progress update and a demo at each agreed milestone are our working default. We set the exact rhythm together before delivery begins.'],
+            ['Starting scope and changes', 'Start with one clearly scoped delivery milestone. We document scope changes and agree their impact before adding them to the work.'],
+            ['Confidentiality and handover', 'Confidentiality terms, repository access and ownership, and handover arrangements are agreed in writing before work begins.'],
+          ].map(([title, description], index) => (
+            <article key={title} className="grid gap-2 border-t border-ink/15 py-5 sm:grid-cols-[3rem_1fr] sm:gap-4">
+              <span className="label pt-1 text-lagoon-ink">{String(index + 1).padStart(2, '0')}</span>
+              <div className="grid gap-2 md:grid-cols-[minmax(10rem,0.8fr)_1.2fr] md:gap-8">
+                <h3 className="font-display text-lg font-semibold">{title}</h3>
+                <p className="text-base leading-7 text-slate">{description}</p>
+              </div>
+            </article>
+          ))}
+          <div className="border-t border-ink/15" />
         </div>
       </section>
 

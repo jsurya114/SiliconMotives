@@ -4,7 +4,6 @@ import { FloatingWhatsApp } from '@/components/FloatingWhatsApp';
 import { SmoothScroll } from '@/components/motion/SmoothScroll';
 import { Hero } from '@/components/sections/Hero';
 import { Belief } from '@/components/sections/Belief';
-import { Clients } from '@/components/sections/Clients';
 import { Services } from '@/components/sections/Services';
 import { Solutions } from '@/components/sections/Solutions';
 import { Remote } from '@/components/sections/Remote';
@@ -15,8 +14,14 @@ import { Faq } from '@/components/sections/Faq';
 import { People } from '@/components/sections/People';
 import { Contact } from '@/components/sections/Contact';
 import { Footer } from '@/components/sections/Footer';
+import { pageMetadata } from '@/lib/metadata';
 
 export const dynamic = 'force-dynamic';
+export const metadata = pageMetadata(
+  'SiliconMotives — Custom Software, Cloud Infrastructure & DevOps',
+  'Custom Software Engineering, Cloud Infrastructure, and DevOps for businesses and agencies, delivered remotely from Kerala, India.',
+  '/',
+);
 
 export default async function Home() {
   const content = await loadContent();
@@ -24,13 +29,12 @@ export default async function Home() {
     <Header settings={content.settings} />
     <main id="main">
       <Hero />
+      <Portfolio />
       <Belief />
-      <Clients rows={content.clients} />
       <Services rows={content.services} />
       <Solutions />
       <Remote />
       <Process />
-      <Portfolio rows={content.projects} />
       <Testimonials rows={content.testimonials} clients={content.clients} />
       <Faq rows={content.faqs} />
       <People rows={content.team_members} />
