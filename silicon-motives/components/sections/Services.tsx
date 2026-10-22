@@ -26,8 +26,8 @@ export function Services({ rows }: { rows: ContentRow[] }) {
       const cards = gsap.utils.toArray<HTMLElement>("[data-card]", section);
 
       const mm = gsap.matchMedia();
-      // The same pinned sideways scroll runs on every screen size.
-      mm.add(MQ.motion, () => {
+      // Desktop uses a pinned rail; mobile keeps a compact, swipeable row.
+      mm.add(`${MQ.motion} and ${MQ.desktop}`, () => {
         const drawCard = (card: HTMLElement) =>
           gsap.from(card.querySelectorAll("svg path, svg rect, svg circle"), {
             drawSVG: 0,
@@ -89,7 +89,7 @@ export function Services({ rows }: { rows: ContentRow[] }) {
   const onFocus = (e: React.FocusEvent<HTMLElement>) => {
     const card = (e.target as HTMLElement).closest<HTMLElement>("[data-card]");
     const section = ref.current;
-    if (!card || !section || !window.matchMedia(MQ.motion).matches) return;
+    if (!card || !section || !window.matchMedia(`${MQ.motion} and ${MQ.desktop}`).matches) return;
     const rail = section.querySelector<HTMLElement>("[data-rail]")!;
     const pin = section.querySelector<HTMLElement>("[data-rail-pin]")!;
     const distance = rail.scrollWidth - window.innerWidth;
@@ -106,39 +106,39 @@ export function Services({ rows }: { rows: ContentRow[] }) {
       aria-labelledby="services-title"
       className="grain on-dark bg-monsoon text-cloud"
     >
-      <div className="wrap section-y !pb-12 grid gap-y-8 lg:grid-cols-12 lg:gap-x-8 lg:!pb-0">
+      <div className="wrap grid gap-y-3 pt-8 pb-4 sm:gap-y-8 sm:pt-16 sm:pb-10 lg:grid-cols-12 lg:gap-x-8 lg:pt-[clamp(4.5rem,10vw,8.5rem)] lg:pb-0">
         <Reveal className="lg:col-span-12">
           <SectionLabel index={services.index} tone="dark">
             {services.eyebrow}
           </SectionLabel>
         </Reveal>
-        <RevealText as="h2" id="services-title" lines={services.title} className="display t-h1 lg:col-span-9" />
+        <RevealText as="h2" id="services-title" lines={services.title} className="display text-[clamp(1.75rem,7.7vw,2.5rem)] sm:text-[clamp(2.5rem,6.2vw,6.25rem)] lg:col-span-9" />
         <Reveal className="self-end lg:col-span-3">
-          <p className="text-[1.1875rem] leading-[1.55] text-mist">{services.lead}</p>
+          <p className="text-sm leading-[1.5] text-mist sm:text-[1.1875rem] sm:leading-[1.55]">{services.lead}</p>
         </Reveal>
       </div>
 
-      <div data-rail-pin="" className="flex h-svh items-center overflow-x-clip">
+      <div data-rail-pin="" className="flex items-center overflow-x-clip pt-2 pb-8 sm:py-6 lg:h-svh lg:py-0">
         <ul data-rail="" aria-label={site.ui.servicesRail} className="rail w-full" onFocus={onFocus}>
           {rows.map((item, i) => (
             <li
               key={item.id}
               data-card=""
-              className="grain flex w-[min(84vw,26rem)] shrink-0 flex-col overflow-hidden rounded-[24px] bg-harbour p-6 sm:p-8 lg:h-[min(72svh,40rem)] lg:w-[max(30rem,36vw)]"
+              className="grain flex w-[min(84vw,26rem)] shrink-0 flex-col overflow-hidden rounded-[24px] bg-harbour p-5 sm:p-8 lg:h-[min(72svh,40rem)] lg:w-[max(30rem,36vw)]"
             >
               <p className="label text-lagoon">{item.kicker}</p>
-              <div className="my-8 flex h-32 items-center text-cloud/80 sm:h-40 lg:my-auto lg:h-[min(30svh,13rem)]">
+              <div className="my-3 flex h-16 items-center text-cloud/80 sm:my-8 sm:h-40 lg:my-auto lg:h-[min(30svh,13rem)]">
                 <div data-art="" className="h-full">
                   <ServiceArt slug={artSlugs[i % artSlugs.length]} />
                 </div>
               </div>
-              <h3 className="display t-h3 !leading-[0.98] !tracking-[-0.035em] lg:!text-[clamp(2rem,3vw,3rem)]">
+              <h3 className="display text-xl !leading-[0.98] !tracking-[-0.035em] sm:text-[clamp(1.5rem,2.4vw,2.25rem)] lg:!text-[clamp(2rem,3vw,3rem)]">
                 {item.title}
               </h3>
-              <p className="mt-4 max-w-[30rem] text-[1.0625rem] leading-[1.6] text-mist">{item.description}</p>
+              <p className="mt-2 max-w-[30rem] text-sm leading-[1.5] text-mist sm:mt-4 sm:text-[1.0625rem] sm:leading-[1.6]">{item.description}</p>
               <a
                 href="#contact"
-                className="mt-6 inline-flex items-center gap-2 self-start font-display text-[0.9375rem] font-semibold text-cloud"
+                className="mt-4 inline-flex min-h-11 items-center gap-2 self-start font-display text-sm font-semibold text-cloud sm:mt-6 sm:min-h-0 sm:text-[0.9375rem]"
               >
                 <span className="link-line">Discuss your project</span>
                 <ArrowIcon size={14} />
