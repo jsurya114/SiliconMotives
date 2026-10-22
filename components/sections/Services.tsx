@@ -116,6 +116,7 @@ export function Services({ rows }: { rows: ContentRow[] }) {
         <RevealText as="h2" id="services-title" lines={services.title} className="display text-[clamp(1.75rem,7.7vw,2.5rem)] sm:text-[clamp(2.5rem,6.2vw,6.25rem)] lg:col-span-9" />
         <Reveal className="self-end lg:col-span-3">
           <p className="text-sm leading-[1.5] text-mist sm:text-[1.1875rem] sm:leading-[1.55]">{services.lead}</p>
+          <a href="/services" className="mt-2 inline-flex min-h-11 items-center gap-2 font-display text-sm font-semibold text-lagoon"><span className="link-line">Explore engineering services</span><ArrowIcon size={14} /></a>
           <a href={websiteDesign.path} className="mt-2 inline-flex min-h-11 items-center gap-2 font-display text-sm font-semibold text-lagoon"><span className="link-line">Website design in Kochi</span><ArrowIcon size={14} /></a>
         </Reveal>
       </div>

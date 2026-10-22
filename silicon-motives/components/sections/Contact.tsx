@@ -21,7 +21,7 @@ export function Contact({ settings, enquiryType = "project", service }: { settin
           <Reveal>
             <SectionLabel>{agency ? "Agency partnership enquiry" : website ? "Website project enquiry" : c.eyebrow}</SectionLabel>
           </Reveal>
-          <RevealText as="h2" id="contact-title" lines={website ? ["Your website.", "A clear next step."] : c.title} className="display t-h2 mt-6" />
+          <RevealText as="h2" id="contact-title" lines={agency ? ["Your delivery.", "Our engineering."] : website ? ["Your website.", "A clear next step."] : c.title} className="display t-h2 mt-6" />
           <Reveal className="mt-6 max-w-[32rem]">
             <p className="text-[1.1875rem] leading-[1.55]">{agency ? "Tell us what delivery support your agency needs, how your team works with clients, and what you would like engineering help with." : website ? "Share the purpose of your website, the pages or features you need, and any existing content. We’ll use this to discuss the scope and next steps." : c.body}</p>
           </Reveal>

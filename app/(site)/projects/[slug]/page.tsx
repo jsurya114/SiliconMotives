@@ -4,6 +4,7 @@ import type { Metadata } from 'next';
 import { ContentSection, MarketingPage, PageIntro } from '@/components/site/marketing-page';
 import { getProjectCase, projectCases } from '@/content/project-cases';
 import { pageMetadata } from '@/lib/metadata';
+import { engineeringServices, servicePath } from '@/content/engineering-services';
 import { websiteDesign } from '@/content/website-design';
 
 type Props = { params: Promise<{ slug: string }> };
@@ -42,6 +43,9 @@ export default async function ProjectDetailPage({ params }: Props) {
       {['jjc-artworks', 'woobe'].includes(project.slug) && <ContentSection title="Planning a website?">
         <p>Explore our <Link href={websiteDesign.path} className="link-line font-semibold text-ink">website design and development service</Link> from Kochi, Kerala, with remote delivery across India.</p>
       </ContentSection>}
+      <ContentSection title="Related engineering services">
+        <div className="flex flex-wrap gap-x-6 gap-y-2">{engineeringServices.filter(service => service.projects.includes(project.slug)).map(service => <Link key={service.slug} href={servicePath(service.slug)} className="inline-flex min-h-11 items-center text-base font-semibold text-ink"><span className="link-line">{service.name}</span></Link>)}<Link href="/services" className="inline-flex min-h-11 items-center text-base font-semibold text-ink"><span className="link-line">All engineering services</span></Link></div>
+      </ContentSection>
       <section className="wrap border-t border-ink/15 py-12 sm:py-16">
         <div className="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-center">
           <div><p className="label text-lagoon-ink">Have a similar challenge?</p><h2 className="display t-h3 mt-3">Let’s talk through it.</h2></div>

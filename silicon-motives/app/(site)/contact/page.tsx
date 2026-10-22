@@ -15,7 +15,7 @@ export default async function ContactPage({ searchParams }: Props) {
 
   return (
     <MarketingPage>
-      <PageIntro eyebrow={agency ? 'Agency partnership' : websiteService ? 'Website design enquiry' : 'Contact'} title={agency ? 'Your client. Our engineering.' : websiteService ? 'Let’s plan your website.' : 'Start with a clear conversation.'}>
+      <PageIntro eyebrow={agency ? 'Agency partnership' : websiteService ? 'Website design enquiry' : 'Contact'} title={agency ? 'Your client. Your brand. Our engineering.' : websiteService ? 'Let’s plan your website.' : 'Start with a clear conversation.'}>
         <p>{agency ? 'Tell us about your agency, client context, and the delivery support you need. We’ll use this to start a focused discussion.' : websiteService ? 'Tell us about your business, the website you need, and any existing site you want to improve. We work remotely from Kochi, Kerala, with businesses across India.' : 'For a software project, tell us what you are trying to solve. Engineering operations are in Kerala, India; we work remote-first.'}</p>
         <p className="mt-4"><a className="link-line" href="mailto:hello@siliconmotives.com">hello@siliconmotives.com</a></p>
         <p className="mt-2">Kerala, India · Remote-first</p>

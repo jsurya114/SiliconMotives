@@ -27,7 +27,7 @@ export const site = {
   nav: [
     { label: "Home", href: "/" },
     { label: "About", href: "/about" },
-    { label: "Services", href: "/#services" },
+    { label: "Services", href: "/services" },
     { label: "Projects", href: "/projects" },
     { label: "Agency partners", href: "/agency-partners" },
   ],
@@ -225,7 +225,7 @@ export const site = {
       {
         title: "Explore",
         links: [
-          { label: "Services", href: "/#services" },
+          { label: "Services", href: "/services" },
           { label: "Website design", href: websiteDesign.path },
           { label: "Projects", href: "/projects" },
           { label: "Agency Partners", href: "/agency-partners" },
