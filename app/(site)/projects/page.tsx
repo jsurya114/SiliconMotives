@@ -22,7 +22,7 @@ export default function ProjectsPage() {
               {project.scope.map((detail) => <li key={detail} className="flex gap-3"><span aria-hidden="true" className="text-lagoon-ink">—</span><span>{detail}</span></li>)}
             </ul>
             <Link href={`/projects/${project.slug}`} className="link-line mt-6 inline-flex w-fit items-center gap-2 font-display font-semibold">
-              Read project overview <span aria-hidden="true">↗</span>
+              {project.story?.decisions?.length ? 'Read engineering overview' : 'Read project overview'} <span aria-hidden="true">↗</span>
             </Link>
           </article>
         ))}

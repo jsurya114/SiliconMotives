@@ -1,3 +1,17 @@
+export type ProjectStory = {
+  need: string;
+  approach: string;
+  workflow: [string, string][];
+  decisions?: { title: string; explanation: string }[];
+  stack?: string[];
+  references?: { label: string; href: string }[];
+  // Add only approved, redacted product captures. Keep the gallery absent otherwise.
+  screenshots?: { src: string; alt: string; caption: string; width: number; height: number }[];
+  deliveryPeriod?: string;
+  contributors?: { name: string; responsibility: string }[];
+  result?: { statement: string; context: string; sourceLabel: string; sourceUrl?: string };
+};
+
 export type ProjectCase = {
   slug: string;
   name: string;
@@ -6,6 +20,7 @@ export type ProjectCase = {
   summary: string;
   scope: string[];
   technicalNotes: string[];
+  story?: ProjectStory;
 };
 
 // Public copy is limited to product scope documented in the project records.
@@ -24,6 +39,27 @@ export const projectCases: ProjectCase[] = [
       'Checkout options include Razorpay and cash on delivery.',
     ],
     technicalNotes: ['Cloud infrastructure: AWS.'],
+    story: {
+      need: 'Woobe’s clothing storefront needs to explain a pricing model based on weight. Customers need to understand the rate per kilogram, the weight of a product, and how that translates into a payable amount.',
+      approach: 'The application separates customer shopping, staff administration and backend business rules. The storefront and staff admin are Next.js applications; both communicate with an Express API rather than accessing the database directly.',
+      workflow: [
+        ['Browse', 'Explore garments with a displayed rate per kilogram and product weight.'],
+        ['Calculate', 'Calculate weight-based prices using integer grams and paise, then format the amount for display.'],
+        ['Check out', 'Continue through checkout with Razorpay or cash-on-delivery options.'],
+        ['Administer', 'Use a separate staff application for catalog, inventory and order workflows.'],
+      ],
+      decisions: [
+        { title: 'Keep pricing arithmetic explicit', explanation: 'The shared pricing function multiplies weight in grams by the rate in paise per kilogram, divides by 1,000, and rounds to the nearest paisa. Money and weight remain integers during the calculation; rupees and kilograms are display formats.' },
+        { title: 'Give business rules a clear boundary', explanation: 'Customer and admin applications use the API for reads and writes. The API is organized into modules with domain, application, infrastructure and interface layers, keeping the business logic separate from the web interface.' },
+        { title: 'Share definitions between applications', explanation: 'The repository contains shared packages for TypeScript types, Zod validation, UI primitives and pure utility functions. The two interfaces can use the same definitions for inputs and pricing displays.' },
+      ],
+      stack: ['Next.js', 'React', 'TypeScript', 'Node.js', 'Express', 'PostgreSQL', 'Prisma', 'Redis', 'Zod', 'Razorpay'],
+      references: [
+        { label: 'Application structure', href: 'https://github.com/jsurya114/Wobee-ecommerce/blob/c6cac10926e95697991bb7c7a5c7e83af7b23f0d/Readme.md' },
+        { label: 'Weight-based pricing implementation', href: 'https://github.com/jsurya114/Wobee-ecommerce/blob/c6cac10926e95697991bb7c7a5c7e83af7b23f0d/packages/utils/src/weight.ts' },
+        { label: 'Money representation', href: 'https://github.com/jsurya114/Wobee-ecommerce/blob/c6cac10926e95697991bb7c7a5c7e83af7b23f0d/packages/utils/src/money.ts' },
+      ],
+    },
   },
   {
     slug: 'nasalogistics',
@@ -50,6 +86,16 @@ export const projectCases: ProjectCase[] = [
       'PDF invoice generation.',
     ],
     technicalNotes: [],
+    story: {
+      need: 'Event-rental operations connect equipment, jobs, staff wages and customer invoices. Picbox brings those records into an application built around the rental workflow.',
+      approach: 'The product scope combines rental inventory and job records with wage tracking and PDF invoice generation. These functions give the business a place to manage the operational and billing parts of event work.',
+      workflow: [
+        ['Inventory', 'Maintain records for rental equipment.'],
+        ['Jobs', 'Manage the records for event-rental work.'],
+        ['Wages', 'Track wages associated with event work.'],
+        ['Invoices', 'Generate PDF invoices for customer billing.'],
+      ],
+    },
   },
   {
     slug: 'uniwayin',
@@ -63,6 +109,16 @@ export const projectCases: ProjectCase[] = [
       'Role-based access for staff.',
     ],
     technicalNotes: [],
+    story: {
+      need: 'Education consultancy work depends on keeping lead details, conversation notes and follow-ups together. Uniwayin organizes those activities in a CRM for consultancy staff.',
+      approach: 'The CRM combines lead records, follow-up tracking, notes and analytics. Role-based access distinguishes what staff can access within the application.',
+      workflow: [
+        ['Record', 'Keep enquiry and lead information in the CRM.'],
+        ['Follow up', 'Track follow-up activity and retain notes for context.'],
+        ['Review', 'Use analytics to review consultancy workflows.'],
+        ['Control access', 'Apply staff access according to their role.'],
+      ],
+    },
   },
   {
     slug: 'dental-buddy',
