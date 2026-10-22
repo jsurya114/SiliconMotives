@@ -2,12 +2,13 @@ import type { Metadata, Viewport } from 'next';
 import './globals.css';
 import { SITE_URL } from '@/lib/site-url';
 import { pageMetadata } from '@/lib/metadata';
+import { site } from '@/content/site';
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   ...pageMetadata(
     'SiliconMotives — Custom Software, Cloud Infrastructure & DevOps',
-    'A small engineering company in Kerala, India delivering custom software, cloud infrastructure, and DevOps for businesses and agencies.',
+    'SiliconMotives, founded by Jayasoorya Suryadas and Jasil M, delivers custom software, cloud infrastructure and DevOps from Kerala, India.',
     '/',
   ),
   icons: { icon: '/favicon.svg' },
@@ -23,6 +24,20 @@ const organizationSchema = {
   url: SITE_URL,
   email: 'hello@siliconmotives.com',
   description: 'Custom Software, Cloud Infrastructure, and DevOps engineering from Kerala, India.',
+  // Presentation order is independent of the visible founder cards.
+  // Search engines determine whether and how founder information is displayed.
+  founder: ['Jayasoorya Suryadas', 'Jasil M'].map(name => {
+    const person = site.people.founders.find(founder => founder.name === name)!;
+    return {
+      '@type': 'Person',
+      '@id': `${SITE_URL}/about#${person.slug}`,
+      name: person.name,
+      jobTitle: person.role,
+      url: `${SITE_URL}/about#${person.slug}`,
+      image: `${SITE_URL}${person.image}`,
+      sameAs: [person.linkedin],
+    };
+  }),
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

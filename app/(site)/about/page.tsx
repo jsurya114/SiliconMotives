@@ -3,7 +3,7 @@ import { site } from '@/content/site';
 import { ContentSection, MarketingPage, PageIntro } from '@/components/site/marketing-page';
 import { pageMetadata } from '@/lib/metadata';
 
-export const metadata = pageMetadata('About | SiliconMotives', 'Meet the founders and learn about SiliconMotives, an engineering company based in Kerala, India.', '/about');
+export const metadata = pageMetadata('About | SiliconMotives', 'Meet SiliconMotives founders Jayasoorya Suryadas and Jasil M. Custom software, cloud infrastructure and DevOps engineering from Kerala, India.', '/about');
 
 const architecture = ['Users', 'ALB', 'Auto Scaling Group', 'EC2 instances', 'Application / backend', 'Database'];
 
@@ -24,7 +24,7 @@ export default function AboutPage() {
       <ContentSection title="The founders">
         <div className="grid gap-8 sm:grid-cols-2">
           {site.people.founders.map((founder) => (
-            <article key={founder.name} className="grid gap-5 sm:grid-cols-[8rem_1fr] sm:items-center">
+            <article key={founder.name} id={founder.slug} className="grid scroll-mt-24 gap-5 sm:grid-cols-[8rem_1fr] sm:items-center">
               <div className="relative aspect-square w-40 overflow-hidden rounded-full bg-cloud-2 sm:size-32">
                 <Image src={founder.image} alt={`${founder.name}, ${founder.role}`} fill className="object-cover" style={{ objectPosition: founder.imagePosition }} sizes="(min-width: 640px) 8rem, 50vw" />
               </div>
