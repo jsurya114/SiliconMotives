@@ -4,11 +4,11 @@ import { FloatingWhatsApp } from '@/components/FloatingWhatsApp';
 import { SmoothScroll } from '@/components/motion/SmoothScroll';
 import { Hero } from '@/components/sections/Hero';
 import { Belief } from '@/components/sections/Belief';
+import { Clients } from '@/components/sections/Clients';
 import { Services } from '@/components/sections/Services';
 import { Solutions } from '@/components/sections/Solutions';
 import { Remote } from '@/components/sections/Remote';
 import { Process } from '@/components/sections/Process';
-import { Portfolio } from '@/components/sections/Portfolio';
 import { Testimonials } from '@/components/sections/Testimonials';
 import { Faq } from '@/components/sections/Faq';
 import { People } from '@/components/sections/People';
@@ -29,8 +29,8 @@ export default async function Home() {
     <Header settings={content.settings} />
     <main id="main">
       <Hero />
-      <Portfolio />
       <Belief />
+      <Clients rows={content.clients} />
       <Services rows={content.services} />
       <Solutions />
       <Remote />

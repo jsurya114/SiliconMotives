@@ -3,13 +3,13 @@ import { MarketingPage, PageIntro } from '@/components/site/marketing-page';
 import { projectCases } from '@/content/project-cases';
 import { pageMetadata } from '@/lib/metadata';
 
-export const metadata = pageMetadata('Projects | SiliconMotives', 'A commerce storefront and an event-rental inventory and invoicing system.', '/projects');
+export const metadata = pageMetadata('Projects | SiliconMotives', 'Selected software projects across commerce, logistics, business operations, healthcare, and business websites.', '/projects');
 
 export default function ProjectsPage() {
   return (
     <MarketingPage>
       <PageIntro eyebrow="Selected projects" title="Software for business operations.">
-        <p>Selected software projects across commerce and business operations.</p>
+        <p>Selected software projects across commerce, logistics, business operations, healthcare, and business websites.</p>
       </PageIntro>
       <section className="wrap grid gap-8 pb-16 md:grid-cols-2 md:gap-10" aria-label="Project showcase">
         {projectCases.map((project, index) => (

@@ -16,7 +16,10 @@ export function Clients({ rows }: { rows: ContentRow[] }) {
         {rows.map(row => {
           const logo = safeImage(row.logo_url);
           const url = safeUrl(row.website_url);
-          const content = logo ? <img src={logo} alt={row.name} loading="lazy" decoding="async" className="h-16 w-auto max-w-[16rem] object-contain sm:h-20 sm:max-w-[20rem]" /> : <span className="display text-[clamp(3rem,8vw,7rem)] leading-[1.05]">{row.name}</span>;
+          const content = <span className="flex flex-col items-center gap-3">
+            {logo && <img src={logo} alt="" loading="lazy" decoding="async" className="h-12 w-auto max-w-[16rem] object-contain sm:h-16 sm:max-w-[20rem]" />}
+            <span className="font-display text-sm font-semibold tracking-wide sm:text-base">{row.name}</span>
+          </span>;
           return <li key={row.id} className="flex items-center">
             {url ? <a href={url} target="_blank" rel="noopener noreferrer" className="mx-8 flex min-h-24 items-center sm:mx-12">{content}</a> : <div className="mx-8 flex min-h-24 items-center sm:mx-12">{content}</div>}
             <span aria-hidden="true" className="inline-block size-3 rounded-full border-2 border-monsoon" />

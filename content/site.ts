@@ -130,7 +130,7 @@ export const site = {
     index: "08",
     eyebrow: "Portfolio",
     title: "Selected work.",
-    lead: "A commerce storefront and an event-rental operations system, described by the capabilities they provide.",
+    lead: "Selected work across commerce, logistics, business operations, healthcare, and business websites.",
   },
 
   testimonials: {
