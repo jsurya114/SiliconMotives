@@ -29,7 +29,7 @@ export default function AgencyPartnersPage() {
         <div className="grid gap-10 lg:grid-cols-12 lg:items-end lg:gap-8">
           <div className="lg:col-span-7">
             <p className="label text-lagoon-ink">For U.S. agencies</p>
-            <h1 className="display t-h1 mt-5 max-w-4xl">Your client.<br /> Your brand.<br /> Our engineering.</h1>
+            <h1 className="display mt-5 max-w-full text-[clamp(2.5rem,6vw,6rem)] !leading-[1.02] [overflow-wrap:break-word]">Your client.<br /> Your brand.<br /> Our engineering.</h1>
           </div>
           <div className="max-w-2xl text-[1.125rem] leading-[1.7] text-slate lg:col-span-5 lg:justify-self-end">
             <p>When your client project goes beyond design, CMS or storefront development, SiliconMotives handles the engineering behind it. Keep the client relationship and your brand, with white-label software, backend, AWS and DevOps support delivered from Kerala, India. Jasil M, Founder, is the technical contact for systems, cloud, and architecture.</p>

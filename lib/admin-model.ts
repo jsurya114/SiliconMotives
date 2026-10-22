@@ -24,7 +24,7 @@ export const collections: Record<string, Collection> = {
     image: 'photo_url',
     fields: [
       { name: 'name', label: 'Name', type: 'text', required: true, max: 80 },
-      { name: 'role', label: 'Role', type: 'text', max: 80, help: 'e.g. Co-founder' },
+      { name: 'role', label: 'Role', type: 'text', max: 80, help: 'e.g. Founder' },
       { name: 'kicker', label: 'Small label', type: 'text', max: 40, help: 'e.g. FOUNDER 01. Leave empty to use TEAM 01, TEAM 02…' },
       { name: 'photo_url', label: 'Photo', type: 'image', allowLocal: true, help: 'Upload a portrait or use a local /images/ path. Jasil and Jayasoorya use their default portraits when empty; other team members show initials.' },
     ],

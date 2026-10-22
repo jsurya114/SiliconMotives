@@ -1,7 +1,7 @@
 import { site } from "@/content/site";
 import { RevealText } from "../motion/RevealText";
 import { Reveal } from "../motion/Reveal";
-import { RevealImage } from "../motion/RevealImage";
+import Image from "next/image";
 import { SectionLabel } from "../ui/SectionLabel";
 import { ArrowUpRight, LinkedInIcon } from "../ui/icons";
 import type { ContentRow } from "@/lib/content";
@@ -41,27 +41,29 @@ export function People({ rows }: { rows: ContentRow[] }) {
                 [person.name, ...person.aliases].some(name => normalizeName(name) === normalizeName(f.name)),
               );
               const photo = safeImage(f.photo_url || founder?.image);
-              return <li key={f.id} className="max-w-[17rem]">
-                {photo ? <RevealImage
-                  src={photo}
-                  alt=""
-                  sizes="(min-width: 640px) 17rem, 50vw"
-                  radius={20}
-                  className="aspect-[4/5] bg-harbour"
-                  imgClassName="object-[50%_25%]"
-                  parallax
-                /> : <div aria-hidden="true" className="display grid aspect-[4/5] place-items-center rounded-[20px] bg-harbour text-[3.5rem] text-lagoon">{initials(f.name)}</div>}
-                <Reveal className="mt-5 flex flex-col items-start gap-4">
+              return <li key={f.id} className="flex max-w-[17rem] flex-col">
+                <div className="relative aspect-square shrink-0 overflow-hidden rounded-full bg-harbour">
+                  {photo ? <Image
+                    src={photo}
+                    alt={`${founder?.name || f.name}, Founder`}
+                    fill
+                    sizes="(min-width: 640px) 17rem, 50vw"
+                    unoptimized={!photo.startsWith('/images/')}
+                    className="object-cover"
+                    style={{ objectPosition: founder?.imagePosition || '50% 25%' }}
+                  /> : <span aria-hidden="true" className="display grid size-full place-items-center text-[3.5rem] text-lagoon">{initials(f.name)}</span>}
+                </div>
+                <Reveal className="mt-5 flex flex-1 flex-col items-start gap-4">
                   <div>
                     <p className="label text-mist">{f.kicker || `Team ${String(i + 1).padStart(2, '0')}`}</p>
-                    <h3 className="mt-2 font-display text-[clamp(1.25rem,2vw,1.625rem)] leading-[1.1] font-bold tracking-[-0.03em]">{f.name}</h3>
+                    <h3 className="mt-2 font-display text-[clamp(1.25rem,2vw,1.625rem)] leading-[1.1] font-bold tracking-[-0.03em]">{founder?.name || f.name}</h3>
                     <p className="mt-1 text-cloud/80">{founder?.role || f.role}</p>
                   </div>
                   {founder && <a
                     href={founder.linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex shrink-0 items-center gap-2 rounded-full px-3.5 py-2 font-display text-[0.8125rem] font-semibold ring-1 ring-cloud/25 transition-colors hover:bg-cloud hover:text-monsoon"
+                    className="mt-auto inline-flex shrink-0 items-center gap-2 rounded-full px-3.5 py-2 font-display text-[0.8125rem] font-semibold ring-1 ring-cloud/25 transition-colors hover:bg-cloud hover:text-monsoon"
                   >
                     <LinkedInIcon size={14} />
                     <span>

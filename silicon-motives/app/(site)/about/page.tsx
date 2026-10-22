@@ -25,8 +25,8 @@ export default function AboutPage() {
         <div className="grid gap-8 sm:grid-cols-2">
           {site.people.founders.map((founder) => (
             <article key={founder.name} className="grid gap-5 sm:grid-cols-[8rem_1fr] sm:items-center">
-              <div className="relative aspect-square overflow-hidden rounded-full bg-cloud-2 sm:size-32">
-                <Image src={founder.image} alt={`${founder.name}, ${founder.role}`} fill className="object-cover" sizes="(min-width: 640px) 8rem, 50vw" />
+              <div className="relative aspect-square w-40 overflow-hidden rounded-full bg-cloud-2 sm:size-32">
+                <Image src={founder.image} alt={`${founder.name}, ${founder.role}`} fill className="object-cover" style={{ objectPosition: founder.imagePosition }} sizes="(min-width: 640px) 8rem, 50vw" />
               </div>
               <div>
                 <h3 className="display text-2xl font-bold">{founder.name}</h3>

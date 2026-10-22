@@ -10,9 +10,9 @@ export function Hero() {
     <Image src="/images/cloud-sky-clear.webp" alt="" fill preload quality={90} sizes="100vw" className="object-cover object-[65%_50%] md:object-center" />
     <div aria-hidden="true" className="absolute inset-0" style={{ background: 'linear-gradient(100deg, rgba(236,240,242,.72) 0%, rgba(236,240,242,.35) 45%, rgba(236,240,242,0) 75%), linear-gradient(0deg, rgba(236,240,242,.6) 0%, rgba(236,240,242,0) 30%)' }} />
     <div className="wrap relative flex min-h-svh flex-col justify-end pt-32 pb-6 sm:pb-8">
-      <p className="label mb-6 flex items-center gap-3 sm:mb-8"><span aria-hidden="true" className="h-px w-8 bg-current opacity-40" />{hero.eyebrow}</p>
-      <h1 className="hero-title display text-[13vw] leading-[0.9] sm:text-[11vw] md:text-[9.4vw] 2xl:text-[11.5rem]">
-        {hero.title.map((line, i) => <span key={line} className="block md:whitespace-nowrap">{line}{i === 0 ? ' ' : null}</span>)}
+      <p className="label mb-6 flex min-w-0 items-center gap-3 sm:mb-8"><span aria-hidden="true" className="h-px w-8 shrink-0 bg-current opacity-40" />{hero.eyebrow}</p>
+      <h1 className="hero-title display max-w-full text-[clamp(2.5rem,7.6vw,8rem)] !leading-[1.02] [overflow-wrap:break-word]">
+        {hero.title.map((line, i) => <span key={line} className="block">{line}{i === 0 ? ' ' : null}</span>)}
       </h1>
       <div className="mt-8 grid gap-6 sm:mt-10 md:grid-cols-12 md:items-end">
         <p className="max-w-[34rem] text-[1.0625rem] leading-[1.55] text-ink/85 sm:text-[1.1875rem] md:col-span-6 lg:col-span-5">{hero.lead}</p>
