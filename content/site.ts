@@ -159,6 +159,7 @@ export const site = {
       {
         label: "Founder 01",
         name: "Jasil M",
+        aliases: [],
         role: "Founder · Systems, cloud & architecture",
         image: "/images/jasil.jpg",
         linkedin: "https://www.linkedin.com/in/jasilmeledath/",
@@ -166,6 +167,7 @@ export const site = {
       {
         label: "Founder 02",
         name: "Jayasoorya Suryadas",
+        aliases: ["Jayasoorya S"],
         role: "Co-founder",
         image: "/images/jayasoorya.jpg",
         linkedin: "https://www.linkedin.com/in/jayasoorya-suryadas/",

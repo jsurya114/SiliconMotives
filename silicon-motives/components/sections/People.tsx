@@ -8,6 +8,7 @@ import type { ContentRow } from "@/lib/content";
 import { initials, safeImage } from "@/lib/urls";
 
 const { people } = site;
+const normalizeName = (name: unknown) => String(name ?? "").trim().replace(/\s+/g, " ").toLowerCase();
 
 export function People({ rows }: { rows: ContentRow[] }) {
   return (
@@ -36,7 +37,9 @@ export function People({ rows }: { rows: ContentRow[] }) {
 
           <ul className="grid grid-cols-2 gap-x-4 gap-y-10 sm:gap-x-8 lg:col-span-7 lg:col-start-6">
             {rows.map((f, i) => {
-              const founder = people.founders.find(person => person.name.toLowerCase() === String(f.name).trim().toLowerCase());
+              const founder = people.founders.find(person =>
+                [person.name, ...person.aliases].some(name => normalizeName(name) === normalizeName(f.name)),
+              );
               const photo = safeImage(f.photo_url || founder?.image);
               return <li key={f.id} className="max-w-[17rem]">
                 {photo ? <RevealImage
