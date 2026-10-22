@@ -4,6 +4,7 @@ import type { Metadata } from 'next';
 import { ContentSection, MarketingPage, PageIntro } from '@/components/site/marketing-page';
 import { getProjectCase, projectCases } from '@/content/project-cases';
 import { pageMetadata } from '@/lib/metadata';
+import { websiteDesign } from '@/content/website-design';
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -37,6 +38,9 @@ export default async function ProjectDetailPage({ params }: Props) {
         <ul className="grid gap-4 sm:grid-cols-2">
           {project.technicalNotes.map((detail) => <li key={detail} className="border-t border-ink/15 pt-4 text-ink">{detail}</li>)}
         </ul>
+      </ContentSection>}
+      {['jjc-artworks', 'woobe'].includes(project.slug) && <ContentSection title="Planning a website?">
+        <p>Explore our <Link href={websiteDesign.path} className="link-line font-semibold text-ink">website design and development service</Link> from Kochi, Kerala, with remote delivery across India.</p>
       </ContentSection>}
       <section className="wrap border-t border-ink/15 py-12 sm:py-16">
         <div className="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-center">

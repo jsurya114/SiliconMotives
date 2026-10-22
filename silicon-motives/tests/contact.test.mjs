@@ -61,6 +61,25 @@ test('Nodemailer builds a real message with one fixed recipient and plain-text c
   assert.match(built.message.toString(), /Content-Type: text\/plain/);
 });
 
+test('website enquiries retain service intent in the email and admin copy', async () => {
+  const ctx = setup();
+  const res = await request(ctx.handler, { ...valid, type: 'project', service: 'website-design' });
+  assert.equal(res.status, 200);
+  assert.equal(ctx.sent[0].subject, 'Website design enquiry — SiliconMotives');
+  assert.match(ctx.sent[0].text, /Service: Website design & development/);
+  assert.equal(ctx.archived[0].message, `Enquiry type: project\nService: Website design & development\n\n${valid.message}`);
+});
+
+test('unsupported service intent and agency/service combinations are rejected before delivery', async () => {
+  const ctx = setup();
+  for (const service of ['other', 'website-design\r\nBcc: attacker@example.com', ['website-design'], null]) {
+    assert.equal((await request(ctx.handler, { ...valid, type: 'project', service })).status, 400);
+  }
+  assert.equal((await request(ctx.handler, { ...valid, type: 'agency', service: 'website-design' })).status, 400);
+  assert.equal(ctx.sent.length, 0);
+  assert.equal(ctx.archived.length, 0);
+});
+
 test('rejects invalid payloads and header injection without sending', async () => {
   const ctx = setup();
   for (const body of [null, [], {}, { ...valid, name: ' ' }, { ...valid, name: 'Name\r\nBcc: x@example.com' },

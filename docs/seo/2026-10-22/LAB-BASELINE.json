@@ -1,0 +1,51 @@
+{
+  "date": "2026-10-22",
+  "url": "https://www.siliconmotives.com/",
+  "performance_trace": {
+    "type": "single cold-load lab observation, not field data",
+    "viewport_css_px": [390, 844],
+    "network": "Slow 4G",
+    "cpu_slowdown": 4,
+    "ignore_http_cache": true,
+    "lcp_ms": 3114,
+    "cls": 0.03,
+    "inp_ms": null,
+    "crux": "Tool reported no field data for this page",
+    "lcp_element": "Hero cloud image",
+    "lcp_resource": "https://www.siliconmotives.com/_next/image?url=%2Fimages%2Fcloud-sky-clear.webp&w=640&q=90",
+    "lcp_breakdown_ms": {
+      "ttfb": 50,
+      "load_delay": 1221,
+      "load_duration": 1809,
+      "render_delay": 34
+    },
+    "discovery_checks": {
+      "initial_html_discoverable": true,
+      "not_lazy_loaded": true,
+      "initial_network_priority": "Low",
+      "final_network_priority": "High",
+      "high_fetchpriority_check": "failed"
+    }
+  },
+  "lighthouse": {
+    "fetch_time_utc": "2026-10-22T10:20:23.710Z",
+    "version": "13.4.1",
+    "device": "mobile",
+    "mode": "navigation",
+    "scores_out_of_100": {
+      "accessibility": 100,
+      "best_practices": 100,
+      "seo": 100,
+      "agentic_browsing": 100
+    },
+    "passed_checks": 54,
+    "failed_checks": 0,
+    "performance_category_run": false,
+    "limitation": "Automated category scores do not establish search demand, indexing, rankings, full accessibility conformance or real-user performance."
+  },
+  "pagespeed_api": {
+    "strategy": "mobile",
+    "status": 429,
+    "result": "Public API quota exceeded; no PageSpeed performance score obtained. This is not a site failure."
+  }
+}

@@ -57,6 +57,14 @@ npm run build
 npm start
 ```
 
+## Website-design service and SEO records
+
+The website-design landing page is `/services/website-design-kochi`, with its service copy in `content/website-design.ts`. It is linked from the homepage services section, footer, and the relevant project overviews, and included in the generated sitemap. The canonical public origin is `https://www.siliconmotives.com`, defined in `lib/site-url.ts`; the owner subdomain has separate routing and remains noindex.
+
+Website CTAs open `/contact?type=project&service=website-design`. The form uses a website-specific brief and submits the allowlisted service intent with the project enquiry. Emails and optional admin inbox copies retain that context; agency enquiries remain a separate mode.
+
+Research, baseline evidence and implementation notes are tracked under [`docs/seo/`](https://github.com/jsurya114/SiliconMotives/tree/main/docs/seo). The dated baseline describes the site before these changes; it is not a current outstanding-error list. The SEO documents contain public website evidence and research, not credentials. Approved screenshots, measured keyword data and verified project outcomes can be added when available; no ranking position is promised.
+
 ## Admin panel
 
 The production owner panel is served at **https://owner.siliconmotives.com/**. It uses the same Vercel project and Supabase admin accounts as the public website. The subdomain root internally serves the admin page; `/admin` on the public production domains redirects to the owner subdomain. Local development and preview deployments keep `/admin` available.

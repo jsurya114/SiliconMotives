@@ -10,22 +10,23 @@ import type { ContentRow } from "@/lib/content";
 
 const { contactSection: c } = site;
 
-export function Contact({ settings, enquiryType = "project" }: { settings: ContentRow; enquiryType?: "project" | "agency" }) {
+export function Contact({ settings, enquiryType = "project", service }: { settings: ContentRow; enquiryType?: "project" | "agency"; service?: "website-design" }) {
   const contact = contactDetails(settings);
   const agency = enquiryType === "agency";
+  const website = !agency && service === "website-design";
   return (
     <section id="contact" data-header="light" aria-labelledby="contact-title" className="section-y bg-lagoon text-monsoon">
       <div className="wrap grid gap-y-12 lg:grid-cols-12 lg:gap-x-8">
         <div className="lg:col-span-7">
           <Reveal>
-            <SectionLabel>{agency ? "Agency partnership enquiry" : c.eyebrow}</SectionLabel>
+            <SectionLabel>{agency ? "Agency partnership enquiry" : website ? "Website project enquiry" : c.eyebrow}</SectionLabel>
           </Reveal>
-          <RevealText as="h2" id="contact-title" lines={c.title} className="display t-h2 mt-6" />
+          <RevealText as="h2" id="contact-title" lines={website ? ["Your website.", "A clear next step."] : c.title} className="display t-h2 mt-6" />
           <Reveal className="mt-6 max-w-[32rem]">
-            <p className="text-[1.1875rem] leading-[1.55]">{agency ? "Tell us what delivery support your agency needs, how your team works with clients, and what you would like engineering help with." : c.body}</p>
+            <p className="text-[1.1875rem] leading-[1.55]">{agency ? "Tell us what delivery support your agency needs, how your team works with clients, and what you would like engineering help with." : website ? "Share the purpose of your website, the pages or features you need, and any existing content. We’ll use this to discuss the scope and next steps." : c.body}</p>
           </Reveal>
           <Reveal className="mt-10">
-            <IdeaForm label={agency ? "Describe your delivery needs" : c.cta} mode={enquiryType} />
+            <IdeaForm label={agency ? "Describe your delivery needs" : website ? "Describe your website" : c.cta} mode={enquiryType} service={website ? service : undefined} />
           </Reveal>
         </div>
 

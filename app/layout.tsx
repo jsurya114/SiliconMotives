@@ -17,6 +17,7 @@ export const viewport: Viewport = { themeColor: '#0b1a2b' };
 const organizationSchema = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
+  '@id': `${SITE_URL}/#organization`,
   name: 'SiliconMotives',
   legalName: 'Millionian LLC',
   url: SITE_URL,

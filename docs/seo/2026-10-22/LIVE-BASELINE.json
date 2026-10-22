@@ -1,0 +1,3535 @@
+{
+  "checked_at": "2026-10-22T10:07:52.364468+00:00",
+  "robots": {
+    "requested_url": "https://www.siliconmotives.com/robots.txt",
+    "url": "https://www.siliconmotives.com/robots.txt",
+    "status": 200,
+    "redirects": [],
+    "elapsed_ms": 161,
+    "headers": {
+      "Cache-Control": "public, max-age=0, must-revalidate",
+      "Content-Type": "text/plain; charset=utf-8",
+      "X-Matched-Path": "/robots.txt"
+    },
+    "text": "User-Agent: *\nAllow: /\nDisallow: /admin\n\nSitemap: https://siliconmotives.com/sitemap.xml\n"
+  },
+  "sitemap": {
+    "requested_url": "https://www.siliconmotives.com/sitemap.xml",
+    "url": "https://www.siliconmotives.com/sitemap.xml",
+    "status": 200,
+    "redirects": [],
+    "elapsed_ms": 218,
+    "headers": {
+      "Cache-Control": "public, max-age=0, must-revalidate",
+      "Content-Type": "application/xml",
+      "X-Matched-Path": "/sitemap.xml"
+    },
+    "urls": [
+      "https://siliconmotives.com/",
+      "https://siliconmotives.com/about",
+      "https://siliconmotives.com/projects",
+      "https://siliconmotives.com/agency-partners",
+      "https://siliconmotives.com/contact",
+      "https://siliconmotives.com/privacy",
+      "https://siliconmotives.com/terms",
+      "https://siliconmotives.com/projects/woobe",
+      "https://siliconmotives.com/projects/nasalogistics",
+      "https://siliconmotives.com/projects/picbox",
+      "https://siliconmotives.com/projects/uniwayin",
+      "https://siliconmotives.com/projects/dental-buddy",
+      "https://siliconmotives.com/projects/jjc-artworks"
+    ]
+  },
+  "pages": [
+    {
+      "requested_url": "https://siliconmotives.com/",
+      "url": "https://www.siliconmotives.com/",
+      "status": 200,
+      "redirects": [
+        {
+          "status": 308,
+          "url": "https://siliconmotives.com/",
+          "location": "https://www.siliconmotives.com/"
+        }
+      ],
+      "elapsed_ms": 2407,
+      "headers": {
+        "Cache-Control": "private, no-cache, no-store, max-age=0, must-revalidate",
+        "Content-Type": "text/html; charset=utf-8",
+        "Link": "</_next/static/immutable/chunks/0nd___-s1z58g.css>; rel=preload; as=\"style\", </_next/static/immutable/chunks/41_2q5ob_jgq8.css>; rel=preload; as=\"style\"",
+        "X-Matched-Path": "/"
+      },
+      "title": "SiliconMotives \u2014 Custom Software, Cloud Infrastructure & DevOps",
+      "title_length": 63,
+      "description": "Custom Software Engineering, Cloud Infrastructure, and DevOps for businesses and agencies, delivered remotely from Kerala, India.",
+      "description_length": 129,
+      "canonical": [
+        "https://siliconmotives.com"
+      ],
+      "meta": {
+        "": "",
+        "viewport": "width=device-width, initial-scale=1",
+        "theme-color": "#0b1a2b",
+        "description": "Custom Software Engineering, Cloud Infrastructure, and DevOps for businesses and agencies, delivered remotely from Kerala, India.",
+        "og:title": "SiliconMotives \u2014 Custom Software, Cloud Infrastructure & DevOps",
+        "og:description": "Custom Software Engineering, Cloud Infrastructure, and DevOps for businesses and agencies, delivered remotely from Kerala, India.",
+        "og:url": "https://siliconmotives.com",
+        "og:site_name": "SiliconMotives",
+        "og:image": "https://siliconmotives.com/opengraph-image",
+        "og:image:width": "1200",
+        "og:image:height": "630",
+        "og:image:alt": "SiliconMotives \u2014 Custom Software, Cloud Infrastructure & DevOps",
+        "og:type": "website",
+        "twitter:card": "summary_large_image",
+        "twitter:title": "SiliconMotives \u2014 Custom Software, Cloud Infrastructure & DevOps",
+        "twitter:description": "Custom Software Engineering, Cloud Infrastructure, and DevOps for businesses and agencies, delivered remotely from Kerala, India.",
+        "twitter:image": "https://siliconmotives.com/opengraph-image"
+      },
+      "headings": [
+        {
+          "level": 1,
+          "text": "Engineering for businesses & agencies."
+        },
+        {
+          "level": 2,
+          "text": "Great software starts with great people. And the space to do their best work."
+        },
+        {
+          "level": 2,
+          "text": "People we build with."
+        },
+        {
+          "level": 2,
+          "text": "Three capabilities. One engineering partner."
+        },
+        {
+          "level": 3,
+          "text": "Web & product development"
+        },
+        {
+          "level": 3,
+          "text": "Custom software"
+        },
+        {
+          "level": 3,
+          "text": "Cloud & infrastructure"
+        },
+        {
+          "level": 3,
+          "text": "Ongoing engineering"
+        },
+        {
+          "level": 2,
+          "text": "Start with the challenge. Build what makes a difference."
+        },
+        {
+          "level": 3,
+          "text": "Launch your digital product"
+        },
+        {
+          "level": 3,
+          "text": "Connect your operations"
+        },
+        {
+          "level": 3,
+          "text": "Improve your existing platform"
+        },
+        {
+          "level": 2,
+          "text": "Remote-first. Engineering-focused."
+        },
+        {
+          "level": 3,
+          "text": "Room for engineering"
+        },
+        {
+          "level": 3,
+          "text": "Clear collaboration"
+        },
+        {
+          "level": 3,
+          "text": "Focused work"
+        },
+        {
+          "level": 2,
+          "text": "Simple steps. Thoughtful software."
+        },
+        {
+          "level": 3,
+          "text": "Discover"
+        },
+        {
+          "level": 3,
+          "text": "Architect"
+        },
+        {
+          "level": 3,
+          "text": "Build"
+        },
+        {
+          "level": 3,
+          "text": "Deploy"
+        },
+        {
+          "level": 3,
+          "text": "Operate"
+        },
+        {
+          "level": 2,
+          "text": "Their experience. In their own words."
+        },
+        {
+          "level": 2,
+          "text": "Before we get started."
+        },
+        {
+          "level": 3,
+          "text": "How does working with a remote team work?"
+        },
+        {
+          "level": 3,
+          "text": "Can you help with an existing product?"
+        },
+        {
+          "level": 3,
+          "text": "How do you estimate cost and timelines?"
+        },
+        {
+          "level": 3,
+          "text": "Where is Silicon Motives based?"
+        },
+        {
+          "level": 3,
+          "text": "What should I have ready for a first conversation?"
+        },
+        {
+          "level": 2,
+          "text": "Built by people. Driven by a shared motive."
+        },
+        {
+          "level": 3,
+          "text": "Jasil M"
+        },
+        {
+          "level": 3,
+          "text": "Jayasoorya S"
+        },
+        {
+          "level": 2,
+          "text": "Something in mind? Let\u2019s make it matter."
+        },
+        {
+          "level": 3,
+          "text": "Your next big idea starts with a hello."
+        }
+      ],
+      "schemas": [
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "name": "SiliconMotives",
+          "legalName": "Millionian LLC",
+          "url": "https://siliconmotives.com",
+          "email": "hello@siliconmotives.com",
+          "description": "Custom Software, Cloud Infrastructure, and DevOps engineering from Kerala, India."
+        }
+      ],
+      "images": [
+        {
+          "src": "/_next/image?url=%2Fimages%2Fcloud-sky-clear.webp&w=3840&q=90",
+          "alt": "",
+          "width": null,
+          "height": null,
+          "loading": null
+        },
+        {
+          "src": "https://raw.githubusercontent.com/jsurya114/SiliconMotives/main/public/images/client-logos/woobe.svg",
+          "alt": "",
+          "width": null,
+          "height": null,
+          "loading": "lazy"
+        },
+        {
+          "src": "https://raw.githubusercontent.com/jsurya114/SiliconMotives/main/public/images/client-logos/nasalogistics.svg",
+          "alt": "",
+          "width": null,
+          "height": null,
+          "loading": "lazy"
+        },
+        {
+          "src": "https://raw.githubusercontent.com/jsurya114/SiliconMotives/main/public/images/client-logos/picbox.svg",
+          "alt": "",
+          "width": null,
+          "height": null,
+          "loading": "lazy"
+        },
+        {
+          "src": "https://raw.githubusercontent.com/jsurya114/SiliconMotives/main/public/images/client-logos/dental-buddy.svg",
+          "alt": "",
+          "width": null,
+          "height": null,
+          "loading": "lazy"
+        },
+        {
+          "src": "https://raw.githubusercontent.com/jsurya114/SiliconMotives/main/public/images/client-logos/uniwayin.svg",
+          "alt": "",
+          "width": null,
+          "height": null,
+          "loading": "lazy"
+        },
+        {
+          "src": "https://raw.githubusercontent.com/jsurya114/SiliconMotives/main/public/images/client-logos/jjc-artworks.svg",
+          "alt": "",
+          "width": null,
+          "height": null,
+          "loading": "lazy"
+        },
+        {
+          "src": "https://raw.githubusercontent.com/jsurya114/SiliconMotives/main/public/images/client-logos/woobe.svg",
+          "alt": "",
+          "width": null,
+          "height": null,
+          "loading": "lazy"
+        },
+        {
+          "src": "https://raw.githubusercontent.com/jsurya114/SiliconMotives/main/public/images/client-logos/nasalogistics.svg",
+          "alt": "",
+          "width": null,
+          "height": null,
+          "loading": "lazy"
+        },
+        {
+          "src": "https://raw.githubusercontent.com/jsurya114/SiliconMotives/main/public/images/client-logos/picbox.svg",
+          "alt": "",
+          "width": null,
+          "height": null,
+          "loading": "lazy"
+        },
+        {
+          "src": "https://raw.githubusercontent.com/jsurya114/SiliconMotives/main/public/images/client-logos/dental-buddy.svg",
+          "alt": "",
+          "width": null,
+          "height": null,
+          "loading": "lazy"
+        },
+        {
+          "src": "https://raw.githubusercontent.com/jsurya114/SiliconMotives/main/public/images/client-logos/uniwayin.svg",
+          "alt": "",
+          "width": null,
+          "height": null,
+          "loading": "lazy"
+        },
+        {
+          "src": "https://raw.githubusercontent.com/jsurya114/SiliconMotives/main/public/images/client-logos/jjc-artworks.svg",
+          "alt": "",
+          "width": null,
+          "height": null,
+          "loading": "lazy"
+        },
+        {
+          "src": "https://raw.githubusercontent.com/jsurya114/SiliconMotives/main/public/images/client-logos/nasalogistics.svg",
+          "alt": "NasaLogistics logo",
+          "width": null,
+          "height": null,
+          "loading": "lazy"
+        },
+        {
+          "src": "https://raw.githubusercontent.com/jsurya114/SiliconMotives/main/public/images/client-logos/dental-buddy.svg",
+          "alt": "Dental Buddy logo",
+          "width": null,
+          "height": null,
+          "loading": "lazy"
+        },
+        {
+          "src": "https://raw.githubusercontent.com/jsurya114/SiliconMotives/main/public/images/client-logos/woobe.svg",
+          "alt": "Woobe logo",
+          "width": null,
+          "height": null,
+          "loading": "lazy"
+        },
+        {
+          "src": "https://raw.githubusercontent.com/jsurya114/SiliconMotives/main/public/images/client-logos/jjc-artworks.svg",
+          "alt": "JJC Artworks logo",
+          "width": null,
+          "height": null,
+          "loading": "lazy"
+        },
+        {
+          "src": "https://raw.githubusercontent.com/jsurya114/SiliconMotives/main/public/images/client-logos/nasalogistics.svg",
+          "alt": "NasaLogistics logo",
+          "width": null,
+          "height": null,
+          "loading": "lazy"
+        },
+        {
+          "src": "https://raw.githubusercontent.com/jsurya114/SiliconMotives/main/public/images/client-logos/dental-buddy.svg",
+          "alt": "Dental Buddy logo",
+          "width": null,
+          "height": null,
+          "loading": "lazy"
+        },
+        {
+          "src": "https://raw.githubusercontent.com/jsurya114/SiliconMotives/main/public/images/client-logos/woobe.svg",
+          "alt": "Woobe logo",
+          "width": null,
+          "height": null,
+          "loading": "lazy"
+        },
+        {
+          "src": "https://raw.githubusercontent.com/jsurya114/SiliconMotives/main/public/images/client-logos/jjc-artworks.svg",
+          "alt": "JJC Artworks logo",
+          "width": null,
+          "height": null,
+          "loading": "lazy"
+        },
+        {
+          "src": "/_next/image?url=%2Fimages%2Fjasil.jpg&w=3840&q=90",
+          "alt": "",
+          "width": null,
+          "height": null,
+          "loading": "lazy"
+        },
+        {
+          "src": "/_next/image?url=%2Fimages%2Fjayasoorya.jpg&w=3840&q=90",
+          "alt": "",
+          "width": null,
+          "height": null,
+          "loading": "lazy"
+        }
+      ],
+      "links": [
+        {
+          "href": "#main",
+          "label": "",
+          "text": "Skip to content",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/",
+          "label": "SiliconMotives home",
+          "text": "SiliconMotives",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/",
+          "label": "",
+          "text": "Home",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/about",
+          "label": "",
+          "text": "About",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/#services",
+          "label": "",
+          "text": "Services",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/projects",
+          "label": "",
+          "text": "Projects",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/agency-partners",
+          "label": "",
+          "text": "Agency partners",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/contact",
+          "label": "",
+          "text": "Let\u2019s talk",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/contact?type=project",
+          "label": "",
+          "text": "Start a projectStart a project",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/agency-partners",
+          "label": "",
+          "text": "Agency partnershipsAgency partnerships",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "#contact",
+          "label": "",
+          "text": "Discuss your project",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "#contact",
+          "label": "",
+          "text": "Discuss your project",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "#contact",
+          "label": "",
+          "text": "Discuss your project",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "#contact",
+          "label": "",
+          "text": "Discuss your project",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "#contact",
+          "label": "",
+          "text": "Discuss your idea",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "#contact",
+          "label": "",
+          "text": "Explore your workflow",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "#contact",
+          "label": "",
+          "text": "Plan your next step",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "https://www.linkedin.com/in/jasilmeledath/",
+          "label": "",
+          "text": "Connect on LinkedInLinkedIn: Jasil M",
+          "target": "_blank",
+          "rel": "noopener noreferrer"
+        },
+        {
+          "href": "https://wa.me/918590184265?text=Hi%20SiliconMotives!%20I%20have%20a%20project%20in%20mind%20and%20would%20love%20to%20explore%20how%20we%20can%20bring%20it%20to%20life.%20Could%20we%20discuss%20the%20right%20solution%2C%20timeline%2C%20and%20estimate%3F",
+          "label": "",
+          "text": "Chat on WhatsAppChat on WhatsApp",
+          "target": "_blank",
+          "rel": "noopener noreferrer"
+        },
+        {
+          "href": "mailto:hello@siliconmotives.com",
+          "label": "",
+          "text": "hello@siliconmotives.com",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "tel:+918590184265",
+          "label": "",
+          "text": "+91 85901 84265",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/contact",
+          "label": "",
+          "text": "Project enquiries",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/agency-partners",
+          "label": "",
+          "text": "Agency partnerships",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/#services",
+          "label": "",
+          "text": "Services",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/projects",
+          "label": "",
+          "text": "Projects",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/agency-partners",
+          "label": "",
+          "text": "Agency Partners",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/about",
+          "label": "",
+          "text": "About",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/contact",
+          "label": "",
+          "text": "Contact",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/privacy",
+          "label": "",
+          "text": "Privacy",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/terms",
+          "label": "",
+          "text": "Terms",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "mailto:hello@siliconmotives.com",
+          "label": "",
+          "text": "hello@siliconmotives.com",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/contact",
+          "label": "",
+          "text": "Start a conversation",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "#main",
+          "label": "",
+          "text": "Back to top",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "https://wa.me/918590184265?text=Hi%20SiliconMotives!%20I%20have%20a%20project%20in%20mind%20and%20would%20love%20to%20explore%20how%20we%20can%20bring%20it%20to%20life.%20Could%20we%20discuss%20the%20right%20solution%2C%20timeline%2C%20and%20estimate%3F",
+          "label": "",
+          "text": "Have an idea?Let\u2019s talk on WhatsApp",
+          "target": "_blank",
+          "rel": "noopener noreferrer"
+        }
+      ],
+      "main_word_count": 1161,
+      "main_text": "Custom Software \u00b7 Cloud Infrastructure \u00b7 DevOps Engineering for businesses & agencies. Custom Software Engineering, Cloud Infrastructure, and DevOps for businesses and agencies, delivered remotely from Kerala, India. Start a project Start a project Agency partnerships Agency partnerships Kerala, India \u00b7 Remote-first For businesses and agencies 01 Our belief Great software starts with great people. And the space to do their best work. We believe quality comes from talented people, strong engineering practices, and a team that cares about what it builds. Our company is built around those essentials. Companies we\u2019ve worked with People we build with. Woobe NasaLogistics Picbox Dental Buddy Uniwayin JJC Artworks Woobe NasaLogistics Picbox Dental Buddy Uniwayin JJC Artworks 02 What we do Three capabilities. One engineering partner. Custom Software Engineering, Cloud Infrastructure Engineering, and DevOps & Reliability. PRODUCT BUILD Web & product development Thoughtful websites and web applications that turn a business need into a useful, intuitive product. Discuss your project BUILT AROUND YOU Custom software Software shaped around your workflows, from internal tools to the systems that keep your business moving. Discuss your project CLOUD FOUNDATION Cloud & infrastructure A considered foundation for your software, with dependable deployments and room to evolve. Discuss your project AFTER LAUNCH Ongoing engineering Keep improving after launch. Resolve issues, refine performance, and build the next useful feature. Discuss your project 03 Solutions for your business Start with the challenge. Build what makes a difference. Technology shaped around your goals, your customers, and the way you work. Bring an idea to life 01 Launch your digital product Turn an early idea into a focused first release. Define the essentials, build a useful experience, and learn from your users. Discuss your idea Simplify everyday work 02 Connect your operations Replace disconnected tools and repetitive tasks with custom workflows, integrations, and a clearer view of your business. Explore your workflow Build for what\u2019s next 03 Improve your existing platform Give your software a stronger foundation with cloud infrastructure, thoughtful updates, and ongoing engineering support. Plan your next step 04 Remote, with intention Remote-first. Engineering-focused. Our engineering operations are in Kerala, India. We work with teams through planned overlap, focused work, and written progress. Engineering operations Kerala, India India Standard Time \u00b7 UTC+05:30 We agree meeting windows with each partner and keep decisions and progress visible in writing. 01 Room for engineering A lean remote model keeps more of the budget focused on engineering work. 02 Clear collaboration We agree on meeting overlap, written updates, and review checkpoints with each team. 03 Focused work Working remotely makes it possible to hire beyond one city and avoid unnecessary commuting. 05 How we work Simple steps. Thoughtful software. From the first conversation to launch, we keep you involved and the next step clear. 01 Discover We understand the users, business need, constraints, and measures of success. 02 Architect We shape the system, delivery plan, and technical decisions before implementation. 03 Build We build in small steps, sharing progress and refining with your feedback. 04 Deploy We release with care and make the operational handover clear. 05 Operate We monitor, maintain, and improve the system with an agreed support model. 07 What our clients say Their experience. In their own words. \u201c The team understood how we manage driver availability and orders. NasaLogistic brings those tasks into one place and is straightforward for our team to use. AR Abdul Rahman CEO, NasaLogistics \u201c Dental Buddy brings patient records, appointments, and billing into one place. The team listened to our clinic's needs and kept the system practical for day-to-day use. RS Rakhi S Dentist, Dental Buddy \u201c Woobe's weight-based shopping needed a clear, simple experience. The team worked through the details with us and built a storefront that fits the way we sell. G Gokul Entrepreneur, Woobe \u201c Our work is all about detail, and we wanted a website that does it justice. The team took the time to understand our craft and built a clean site that presents our church interior woodwork clearly. JJ Jils Joby JJC Artworks \u201c The team understood how we manage driver availability and orders. NasaLogistic brings those tasks into one place and is straightforward for our team to use. AR Abdul Rahman CEO, NasaLogistics \u201c Dental Buddy brings patient records, appointments, and billing into one place. The team listened to our clinic's needs and kept the system practical for day-to-day use. RS Rakhi S Dentist, Dental Buddy \u201c Woobe's weight-based shopping needed a clear, simple experience. The team worked through the details with us and built a storefront that fits the way we sell. G Gokul Entrepreneur, Woobe \u201c Our work is all about detail, and we wanted a website that does it justice. The team took the time to understand our craft and built a clean site that presents our church interior woodwork clearly. JJ Jils Joby JJC Artworks 10 Frequently asked questions Before we get started. How does working with a remote team work? We agree on communication channels, review points, and a working rhythm at the beginning. Written updates, shared documentation, and scheduled conversations help keep decisions and progress clear. Can you help with an existing product? Yes. We can start by understanding the existing software, its constraints, and your priorities, then agree on a focused plan for fixes, improvements, or new features. How do you estimate cost and timelines? We first need to understand your requirements and the current state of the project. From there, we can define the scope, discuss tradeoffs, and agree on an estimate before work begins. Where is Silicon Motives based? We are based in Kochi, Kerala, India, and work remotely. Our working arrangements and meeting times can be discussed around the needs of each project. What should I have ready for a first conversation? A short description of your idea or challenge is a great start. If you have a timeline, budget range, or existing product, those details help us understand what a useful next step looks like. 11 The people behind the purpose Built by people. Driven by a shared motive. SiliconMotives is led by Jasil M and Jayasoorya Suryadas from Kerala, India. Jasil is Founder, focused on systems, cloud, and architecture. Jayasoorya is Co-founder. Kerala \u00b7 Remote-first FOUNDER 01 Jasil M Founder \u00b7 Systems, cloud & architecture Connect on LinkedIn LinkedIn : Jasil M FOUNDER 02 Jayasoorya S Co-founder Your next chapter starts with a conversation Something in mind? Let\u2019s make it matter. Tell us what you\u2019re thinking. A new idea, an existing product, or a problem that needs a fresh perspective. Tell us about your idea Tell us about your idea Let\u2019s build something great Your next big idea starts with a hello. A website, a product, or a fresh start. Tell us what you have in mind and let\u2019s explore it together. Chat on WhatsApp Chat on WhatsApp hello@siliconmotives.com +91 85901 84265 Project enquiries Agency partnerships Good people. Thoughtful engineering. Kochi, India"
+    },
+    {
+      "requested_url": "https://siliconmotives.com/about",
+      "url": "https://www.siliconmotives.com/about",
+      "status": 200,
+      "redirects": [
+        {
+          "status": 308,
+          "url": "https://siliconmotives.com/about",
+          "location": "https://www.siliconmotives.com/about"
+        }
+      ],
+      "elapsed_ms": 1360,
+      "headers": {
+        "Cache-Control": "private, no-cache, no-store, max-age=0, must-revalidate",
+        "Content-Type": "text/html; charset=utf-8",
+        "Link": "</_next/static/immutable/chunks/0nd___-s1z58g.css>; rel=preload; as=\"style\", </_next/static/immutable/chunks/41_2q5ob_jgq8.css>; rel=preload; as=\"style\"",
+        "X-Matched-Path": "/about"
+      },
+      "title": "About | SiliconMotives",
+      "title_length": 22,
+      "description": "Meet the founders and learn about SiliconMotives, an engineering company based in Kerala, India.",
+      "description_length": 96,
+      "canonical": [
+        "https://siliconmotives.com/about"
+      ],
+      "meta": {
+        "": "",
+        "viewport": "width=device-width, initial-scale=1",
+        "theme-color": "#0b1a2b",
+        "description": "Meet the founders and learn about SiliconMotives, an engineering company based in Kerala, India.",
+        "og:title": "About | SiliconMotives",
+        "og:description": "Meet the founders and learn about SiliconMotives, an engineering company based in Kerala, India.",
+        "og:url": "https://siliconmotives.com/about",
+        "og:site_name": "SiliconMotives",
+        "og:image": "https://siliconmotives.com/opengraph-image",
+        "og:image:width": "1200",
+        "og:image:height": "630",
+        "og:image:alt": "SiliconMotives \u2014 Custom Software, Cloud Infrastructure & DevOps",
+        "og:type": "website",
+        "twitter:card": "summary_large_image",
+        "twitter:title": "About | SiliconMotives",
+        "twitter:description": "Meet the founders and learn about SiliconMotives, an engineering company based in Kerala, India.",
+        "twitter:image": "https://siliconmotives.com/opengraph-image"
+      },
+      "headings": [
+        {
+          "level": 1,
+          "text": "A small engineering company, built around real work."
+        },
+        {
+          "level": 2,
+          "text": "What we do"
+        },
+        {
+          "level": 2,
+          "text": "The founders"
+        },
+        {
+          "level": 3,
+          "text": "Jasil M"
+        },
+        {
+          "level": 3,
+          "text": "Jayasoorya Suryadas"
+        },
+        {
+          "level": 2,
+          "text": "How we work remotely"
+        },
+        {
+          "level": 2,
+          "text": "Illustrative architecture reference"
+        },
+        {
+          "level": 2,
+          "text": "Company information"
+        }
+      ],
+      "schemas": [
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "name": "SiliconMotives",
+          "legalName": "Millionian LLC",
+          "url": "https://siliconmotives.com",
+          "email": "hello@siliconmotives.com",
+          "description": "Custom Software, Cloud Infrastructure, and DevOps engineering from Kerala, India."
+        }
+      ],
+      "images": [
+        {
+          "src": "/_next/image?url=%2Fimages%2Fjasil.jpg&w=3840&q=75",
+          "alt": "Jasil M, Founder \u00b7 Systems, cloud & architecture",
+          "width": null,
+          "height": null,
+          "loading": "lazy"
+        },
+        {
+          "src": "/_next/image?url=%2Fimages%2Fjayasoorya.jpg&w=3840&q=75",
+          "alt": "Jayasoorya Suryadas, Co-founder",
+          "width": null,
+          "height": null,
+          "loading": "lazy"
+        }
+      ],
+      "links": [
+        {
+          "href": "#main",
+          "label": "",
+          "text": "Skip to content",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/",
+          "label": "SiliconMotives home",
+          "text": "SiliconMotives",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/",
+          "label": "",
+          "text": "Home",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/about",
+          "label": "",
+          "text": "About",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/#services",
+          "label": "",
+          "text": "Services",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/projects",
+          "label": "",
+          "text": "Projects",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/agency-partners",
+          "label": "",
+          "text": "Agency partners",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/contact",
+          "label": "",
+          "text": "Let\u2019s talk",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "https://www.linkedin.com/in/jasilmeledath/",
+          "label": "",
+          "text": "LinkedIn \u2197",
+          "target": "_blank",
+          "rel": "noreferrer"
+        },
+        {
+          "href": "https://www.linkedin.com/in/jayasoorya-suryadas/",
+          "label": "",
+          "text": "LinkedIn \u2197",
+          "target": "_blank",
+          "rel": "noreferrer"
+        },
+        {
+          "href": "/#services",
+          "label": "",
+          "text": "Services",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/projects",
+          "label": "",
+          "text": "Projects",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/agency-partners",
+          "label": "",
+          "text": "Agency Partners",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/about",
+          "label": "",
+          "text": "About",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/contact",
+          "label": "",
+          "text": "Contact",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/privacy",
+          "label": "",
+          "text": "Privacy",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/terms",
+          "label": "",
+          "text": "Terms",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "mailto:hello@siliconmotives.com",
+          "label": "",
+          "text": "hello@siliconmotives.com",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/contact",
+          "label": "",
+          "text": "Start a conversation",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "#main",
+          "label": "",
+          "text": "Back to top",
+          "target": null,
+          "rel": null
+        }
+      ],
+      "main_word_count": 174,
+      "main_text": "About SiliconMotives A small engineering company, built around real work. SiliconMotives is an engineering company focused on Custom Software, Cloud Infrastructure, and DevOps. From Kerala, India, we work with Indian businesses and are building relationships with international teams. What we do We work on business software, cloud foundations, and the delivery and operation of software systems. Custom Software Engineering Cloud Infrastructure Engineering DevOps & Reliability The founders Jasil M Founder \u00b7 Systems, cloud & architecture LinkedIn \u2197 Jayasoorya Suryadas Co-founder LinkedIn \u2197 How we work remotely We work remotely from Kerala and agree communication and review points with each partner. Illustrative architecture reference This common web deployment path is an explanatory example. It does not represent a client environment. 01 Users 02 ALB 03 Auto Scaling Group 04 EC2 instances 05 Application / backend 06 Database Company information Operating brand SiliconMotives Legal entity Millionian LLC Jurisdiction Wyoming, USA Engineering operations Kerala, India Delivery Remote-first Millionian LLC is a legal entity in Wyoming. SiliconMotives\u2019 engineering operations are in Kerala, India; Wyoming is not presented as a U.S. office."
+    },
+    {
+      "requested_url": "https://siliconmotives.com/projects",
+      "url": "https://www.siliconmotives.com/projects",
+      "status": 200,
+      "redirects": [
+        {
+          "status": 308,
+          "url": "https://siliconmotives.com/projects",
+          "location": "https://www.siliconmotives.com/projects"
+        }
+      ],
+      "elapsed_ms": 2433,
+      "headers": {
+        "Cache-Control": "private, no-cache, no-store, max-age=0, must-revalidate",
+        "Content-Type": "text/html; charset=utf-8",
+        "Link": "</_next/static/immutable/chunks/0nd___-s1z58g.css>; rel=preload; as=\"style\", </_next/static/immutable/chunks/41_2q5ob_jgq8.css>; rel=preload; as=\"style\"",
+        "X-Matched-Path": "/projects"
+      },
+      "title": "Projects | SiliconMotives",
+      "title_length": 25,
+      "description": "Selected software projects across commerce, logistics, business operations, healthcare, and business websites.",
+      "description_length": 110,
+      "canonical": [
+        "https://siliconmotives.com/projects"
+      ],
+      "meta": {
+        "": "",
+        "viewport": "width=device-width, initial-scale=1",
+        "theme-color": "#0b1a2b",
+        "description": "Selected software projects across commerce, logistics, business operations, healthcare, and business websites.",
+        "og:title": "Projects | SiliconMotives",
+        "og:description": "Selected software projects across commerce, logistics, business operations, healthcare, and business websites.",
+        "og:url": "https://siliconmotives.com/projects",
+        "og:site_name": "SiliconMotives",
+        "og:image": "https://siliconmotives.com/opengraph-image",
+        "og:image:width": "1200",
+        "og:image:height": "630",
+        "og:image:alt": "SiliconMotives \u2014 Custom Software, Cloud Infrastructure & DevOps",
+        "og:type": "website",
+        "twitter:card": "summary_large_image",
+        "twitter:title": "Projects | SiliconMotives",
+        "twitter:description": "Selected software projects across commerce, logistics, business operations, healthcare, and business websites.",
+        "twitter:image": "https://siliconmotives.com/opengraph-image"
+      },
+      "headings": [
+        {
+          "level": 1,
+          "text": "Software for business operations."
+        },
+        {
+          "level": 2,
+          "text": "Woobe"
+        },
+        {
+          "level": 2,
+          "text": "NasaLogistics"
+        },
+        {
+          "level": 2,
+          "text": "Picbox"
+        },
+        {
+          "level": 2,
+          "text": "Uniwayin"
+        },
+        {
+          "level": 2,
+          "text": "Dental Buddy"
+        },
+        {
+          "level": 2,
+          "text": "JJC Artworks"
+        }
+      ],
+      "schemas": [
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "name": "SiliconMotives",
+          "legalName": "Millionian LLC",
+          "url": "https://siliconmotives.com",
+          "email": "hello@siliconmotives.com",
+          "description": "Custom Software, Cloud Infrastructure, and DevOps engineering from Kerala, India."
+        }
+      ],
+      "images": [],
+      "links": [
+        {
+          "href": "#main",
+          "label": "",
+          "text": "Skip to content",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/",
+          "label": "SiliconMotives home",
+          "text": "SiliconMotives",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/",
+          "label": "",
+          "text": "Home",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/about",
+          "label": "",
+          "text": "About",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/#services",
+          "label": "",
+          "text": "Services",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/projects",
+          "label": "",
+          "text": "Projects",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/agency-partners",
+          "label": "",
+          "text": "Agency partners",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/contact",
+          "label": "",
+          "text": "Let\u2019s talk",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/projects/woobe",
+          "label": "",
+          "text": "Read project overview \u2197",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/projects/nasalogistics",
+          "label": "",
+          "text": "Read project overview \u2197",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/projects/picbox",
+          "label": "",
+          "text": "Read project overview \u2197",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/projects/uniwayin",
+          "label": "",
+          "text": "Read project overview \u2197",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/projects/dental-buddy",
+          "label": "",
+          "text": "Read project overview \u2197",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/projects/jjc-artworks",
+          "label": "",
+          "text": "Read project overview \u2197",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/#services",
+          "label": "",
+          "text": "Services",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/projects",
+          "label": "",
+          "text": "Projects",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/agency-partners",
+          "label": "",
+          "text": "Agency Partners",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/about",
+          "label": "",
+          "text": "About",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/contact",
+          "label": "",
+          "text": "Contact",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/privacy",
+          "label": "",
+          "text": "Privacy",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/terms",
+          "label": "",
+          "text": "Terms",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "mailto:hello@siliconmotives.com",
+          "label": "",
+          "text": "hello@siliconmotives.com",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/contact",
+          "label": "",
+          "text": "Start a conversation",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "#main",
+          "label": "",
+          "text": "Back to top",
+          "target": null,
+          "rel": null
+        }
+      ],
+      "main_word_count": 230,
+      "main_text": "Selected projects Software for business operations. Selected software projects across commerce, logistics, business operations, healthcare, and business websites. Commerce / 01 Woobe Weight-based commerce A commerce storefront designed for products priced by weight. \u2014 Product prices shown per kilogram (\u20b9/kg). \u2014 Weight-based product selection. \u2014 Checkout options include Razorpay and cash on delivery. Read project overview \u2197 Logistics software / 02 NasaLogistics Driver & logistics management A logistics platform for driver availability, order workflows, and administration. \u2014 Driver availability workflows. \u2014 Order management for logistics operations. \u2014 Administrative tools for day-to-day operations. Read project overview \u2197 Business software / 03 Picbox Event-rental inventory & invoicing An inventory and invoicing system for an event-rental business. \u2014 Rental inventory and job records. \u2014 Wage tracking for event work. \u2014 PDF invoice generation. Read project overview \u2197 Business software / 04 Uniwayin Education consultancy CRM A CRM for education consultancy lead and follow-up workflows. \u2014 Lead records and follow-up tracking. \u2014 Notes and analytics for consultancy workflows. \u2014 Role-based access for staff. Read project overview \u2197 Healthcare software / 05 Dental Buddy Dental clinic management software Clinic software bringing patient records, prescriptions, appointments, and billing into one workflow. \u2014 Patient records and prescriptions. \u2014 Appointment management. \u2014 Clinic billing workflows. Read project overview \u2197 Business website / 06 JJC Artworks Website for church interior woodwork A website presenting JJC Artworks\u2019 church interior woodwork and completed projects. \u2014 Company and craftsmanship information. \u2014 Presentation of completed work. \u2014 Contact information for prospective clients. Read project overview \u2197"
+    },
+    {
+      "requested_url": "https://siliconmotives.com/agency-partners",
+      "url": "https://www.siliconmotives.com/agency-partners",
+      "status": 200,
+      "redirects": [
+        {
+          "status": 308,
+          "url": "https://siliconmotives.com/agency-partners",
+          "location": "https://www.siliconmotives.com/agency-partners"
+        }
+      ],
+      "elapsed_ms": 1230,
+      "headers": {
+        "Cache-Control": "private, no-cache, no-store, max-age=0, must-revalidate",
+        "Content-Type": "text/html; charset=utf-8",
+        "Link": "</_next/static/immutable/chunks/0nd___-s1z58g.css>; rel=preload; as=\"style\", </_next/static/immutable/chunks/41_2q5ob_jgq8.css>; rel=preload; as=\"style\"",
+        "X-Matched-Path": "/agency-partners"
+      },
+      "title": "Agency Partners | SiliconMotives",
+      "title_length": 32,
+      "description": "Engineering delivery support for U.S. agencies.",
+      "description_length": 47,
+      "canonical": [
+        "https://siliconmotives.com/agency-partners"
+      ],
+      "meta": {
+        "": "",
+        "viewport": "width=device-width, initial-scale=1",
+        "theme-color": "#0b1a2b",
+        "description": "Engineering delivery support for U.S. agencies.",
+        "og:title": "Agency Partners | SiliconMotives",
+        "og:description": "Engineering delivery support for U.S. agencies.",
+        "og:url": "https://siliconmotives.com/agency-partners",
+        "og:site_name": "SiliconMotives",
+        "og:image": "https://siliconmotives.com/opengraph-image",
+        "og:image:width": "1200",
+        "og:image:height": "630",
+        "og:image:alt": "SiliconMotives \u2014 Custom Software, Cloud Infrastructure & DevOps",
+        "og:type": "website",
+        "twitter:card": "summary_large_image",
+        "twitter:title": "Agency Partners | SiliconMotives",
+        "twitter:description": "Engineering delivery support for U.S. agencies.",
+        "twitter:image": "https://siliconmotives.com/opengraph-image"
+      },
+      "headings": [
+        {
+          "level": 1,
+          "text": "Your client. Our engineering."
+        },
+        {
+          "level": 2,
+          "text": "Clear from kickoff to handover."
+        },
+        {
+          "level": 3,
+          "text": "Time-zone overlap"
+        },
+        {
+          "level": 3,
+          "text": "Updates and demos"
+        },
+        {
+          "level": 3,
+          "text": "Starting scope and changes"
+        },
+        {
+          "level": 3,
+          "text": "Confidentiality and handover"
+        },
+        {
+          "level": 2,
+          "text": "Where we can help"
+        },
+        {
+          "level": 3,
+          "text": "Custom software"
+        },
+        {
+          "level": 3,
+          "text": "Cloud infrastructure"
+        },
+        {
+          "level": 3,
+          "text": "DevOps & reliability"
+        },
+        {
+          "level": 2,
+          "text": "Fits your delivery model"
+        },
+        {
+          "level": 3,
+          "text": "Behind the scenes"
+        },
+        {
+          "level": 3,
+          "text": "In the room"
+        }
+      ],
+      "schemas": [
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "name": "SiliconMotives",
+          "legalName": "Millionian LLC",
+          "url": "https://siliconmotives.com",
+          "email": "hello@siliconmotives.com",
+          "description": "Custom Software, Cloud Infrastructure, and DevOps engineering from Kerala, India."
+        }
+      ],
+      "images": [],
+      "links": [
+        {
+          "href": "#main",
+          "label": "",
+          "text": "Skip to content",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/",
+          "label": "SiliconMotives home",
+          "text": "SiliconMotives",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/",
+          "label": "",
+          "text": "Home",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/about",
+          "label": "",
+          "text": "About",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/#services",
+          "label": "",
+          "text": "Services",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/projects",
+          "label": "",
+          "text": "Projects",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/agency-partners",
+          "label": "",
+          "text": "Agency partners",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/contact",
+          "label": "",
+          "text": "Let\u2019s talk",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/contact?type=agency",
+          "label": "",
+          "text": "Discuss a partnershipDiscuss a partnership\u2197",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/#services",
+          "label": "",
+          "text": "Services",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/projects",
+          "label": "",
+          "text": "Projects",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/agency-partners",
+          "label": "",
+          "text": "Agency Partners",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/about",
+          "label": "",
+          "text": "About",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/contact",
+          "label": "",
+          "text": "Contact",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/privacy",
+          "label": "",
+          "text": "Privacy",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/terms",
+          "label": "",
+          "text": "Terms",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "mailto:hello@siliconmotives.com",
+          "label": "",
+          "text": "hello@siliconmotives.com",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/contact",
+          "label": "",
+          "text": "Start a conversation",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "#main",
+          "label": "",
+          "text": "Back to top",
+          "target": null,
+          "rel": null
+        }
+      ],
+      "main_word_count": 287,
+      "main_text": "For U.S. agencies Your client. Our engineering. Keep the client relationship. Bring in a focused engineering partner to plan, build, deploy, and operate the software behind your work. Jasil M, Founder, is the technical contact for systems, cloud, and architecture. Discuss a partnership Discuss a partnership \u2197 01 Plan together 02 Build with your team 03 Deliver with care Working together Clear from kickoff to handover. 01 Time-zone overlap Our engineering operations work on India Standard Time (UTC+05:30). Meeting overlap with U.S. teams depends on their time zone and daylight-saving season; we agree a shared window and use written updates between calls. 02 Updates and demos A weekly written progress update and a demo at each agreed milestone are our working default. We set the exact rhythm together before delivery begins. 03 Starting scope and changes Start with one clearly scoped delivery milestone. We document scope changes and agree their impact before adding them to the work. 04 Confidentiality and handover Confidentiality terms, repository access and ownership, and handover arrangements are agreed in writing before work begins. Engineering support Where we can help 01 Custom software Web applications and business tools shaped around your client\u2019s requirements. 02 Cloud infrastructure Practical architecture and implementation for clear, maintainable deployments. 03 DevOps & reliability Delivery pipelines, deployment workflows, and operational improvements. A clear working relationship Fits your delivery model Behind the scenes We work with your team under agreed ownership, communication, and client visibility. In the room We can join technical conversations with your client when the role and scope are clear. We align on scope, responsibilities, and communication before work begins. Each engagement is documented with the agency in the relevant proposal and contract."
+    },
+    {
+      "requested_url": "https://siliconmotives.com/contact",
+      "url": "https://www.siliconmotives.com/contact",
+      "status": 200,
+      "redirects": [
+        {
+          "status": 308,
+          "url": "https://siliconmotives.com/contact",
+          "location": "https://www.siliconmotives.com/contact"
+        }
+      ],
+      "elapsed_ms": 2160,
+      "headers": {
+        "Cache-Control": "private, no-cache, no-store, max-age=0, must-revalidate",
+        "Content-Type": "text/html; charset=utf-8",
+        "Link": "</_next/static/immutable/chunks/0nd___-s1z58g.css>; rel=preload; as=\"style\", </_next/static/immutable/chunks/41_2q5ob_jgq8.css>; rel=preload; as=\"style\"",
+        "X-Matched-Path": "/contact"
+      },
+      "title": "Contact SiliconMotives",
+      "title_length": 22,
+      "description": "Send a project enquiry or discuss an agency partnership.",
+      "description_length": 56,
+      "canonical": [
+        "https://siliconmotives.com/contact"
+      ],
+      "meta": {
+        "": "",
+        "viewport": "width=device-width, initial-scale=1",
+        "theme-color": "#0b1a2b",
+        "description": "Send a project enquiry or discuss an agency partnership.",
+        "og:title": "Contact SiliconMotives",
+        "og:description": "Send a project enquiry or discuss an agency partnership.",
+        "og:url": "https://siliconmotives.com/contact",
+        "og:site_name": "SiliconMotives",
+        "og:image": "https://siliconmotives.com/opengraph-image",
+        "og:image:width": "1200",
+        "og:image:height": "630",
+        "og:image:alt": "SiliconMotives \u2014 Custom Software, Cloud Infrastructure & DevOps",
+        "og:type": "website",
+        "twitter:card": "summary_large_image",
+        "twitter:title": "Contact SiliconMotives",
+        "twitter:description": "Send a project enquiry or discuss an agency partnership.",
+        "twitter:image": "https://siliconmotives.com/opengraph-image"
+      },
+      "headings": [
+        {
+          "level": 1,
+          "text": "Start with a clear conversation."
+        },
+        {
+          "level": 2,
+          "text": "Something in mind? Let\u2019s make it matter."
+        },
+        {
+          "level": 3,
+          "text": "Your next big idea starts with a hello."
+        }
+      ],
+      "schemas": [
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "name": "SiliconMotives",
+          "legalName": "Millionian LLC",
+          "url": "https://siliconmotives.com",
+          "email": "hello@siliconmotives.com",
+          "description": "Custom Software, Cloud Infrastructure, and DevOps engineering from Kerala, India."
+        }
+      ],
+      "images": [],
+      "links": [
+        {
+          "href": "#main",
+          "label": "",
+          "text": "Skip to content",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/",
+          "label": "SiliconMotives home",
+          "text": "SiliconMotives",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/",
+          "label": "",
+          "text": "Home",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/about",
+          "label": "",
+          "text": "About",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/#services",
+          "label": "",
+          "text": "Services",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/projects",
+          "label": "",
+          "text": "Projects",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/agency-partners",
+          "label": "",
+          "text": "Agency partners",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/contact",
+          "label": "",
+          "text": "Let\u2019s talk",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "mailto:hello@siliconmotives.com",
+          "label": "",
+          "text": "hello@siliconmotives.com",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "https://www.linkedin.com/in/jasilmeledath/",
+          "label": "",
+          "text": "Jasil M on LinkedIn \u2197",
+          "target": "_blank",
+          "rel": "noreferrer"
+        },
+        {
+          "href": "https://www.linkedin.com/in/jayasoorya-suryadas/",
+          "label": "",
+          "text": "Jayasoorya Suryadas on LinkedIn \u2197",
+          "target": "_blank",
+          "rel": "noreferrer"
+        },
+        {
+          "href": "https://wa.me/918590184265?text=Hi%20SiliconMotives!%20I%20have%20a%20project%20in%20mind%20and%20would%20love%20to%20explore%20how%20we%20can%20bring%20it%20to%20life.%20Could%20we%20discuss%20the%20right%20solution%2C%20timeline%2C%20and%20estimate%3F",
+          "label": "",
+          "text": "Chat on WhatsAppChat on WhatsApp",
+          "target": "_blank",
+          "rel": "noopener noreferrer"
+        },
+        {
+          "href": "mailto:hello@siliconmotives.com",
+          "label": "",
+          "text": "hello@siliconmotives.com",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "tel:+918590184265",
+          "label": "",
+          "text": "+91 85901 84265",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/contact",
+          "label": "",
+          "text": "Project enquiries",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/agency-partners",
+          "label": "",
+          "text": "Agency partnerships",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/#services",
+          "label": "",
+          "text": "Services",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/projects",
+          "label": "",
+          "text": "Projects",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/agency-partners",
+          "label": "",
+          "text": "Agency Partners",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/about",
+          "label": "",
+          "text": "About",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/contact",
+          "label": "",
+          "text": "Contact",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/privacy",
+          "label": "",
+          "text": "Privacy",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/terms",
+          "label": "",
+          "text": "Terms",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "mailto:hello@siliconmotives.com",
+          "label": "",
+          "text": "hello@siliconmotives.com",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/contact",
+          "label": "",
+          "text": "Start a conversation",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "#main",
+          "label": "",
+          "text": "Back to top",
+          "target": null,
+          "rel": null
+        }
+      ],
+      "main_word_count": 144,
+      "main_text": "Contact Start with a clear conversation. For a software project, tell us what you are trying to solve. Engineering operations are in Kerala, India; we work remote-first. hello@siliconmotives.com Kerala, India \u00b7 Remote-first Jasil M on LinkedIn \u2197 \u00b7 Jayasoorya Suryadas on LinkedIn \u2197 Your next chapter starts with a conversation Something in mind? Let\u2019s make it matter. Tell us what you\u2019re thinking. A new idea, an existing product, or a problem that needs a fresh perspective. Tell us about your idea Tell us about your idea Let\u2019s build something great Your next big idea starts with a hello. A website, a product, or a fresh start. Tell us what you have in mind and let\u2019s explore it together. Chat on WhatsApp Chat on WhatsApp hello@siliconmotives.com +91 85901 84265 Project enquiries Agency partnerships Good people. Thoughtful engineering. Kochi, India"
+    },
+    {
+      "requested_url": "https://siliconmotives.com/privacy",
+      "url": "https://www.siliconmotives.com/privacy",
+      "status": 200,
+      "redirects": [
+        {
+          "status": 308,
+          "url": "https://siliconmotives.com/privacy",
+          "location": "https://www.siliconmotives.com/privacy"
+        }
+      ],
+      "elapsed_ms": 1259,
+      "headers": {
+        "Cache-Control": "private, no-cache, no-store, max-age=0, must-revalidate",
+        "Content-Type": "text/html; charset=utf-8",
+        "Link": "</_next/static/immutable/chunks/0nd___-s1z58g.css>; rel=preload; as=\"style\", </_next/static/immutable/chunks/41_2q5ob_jgq8.css>; rel=preload; as=\"style\"",
+        "X-Matched-Path": "/privacy"
+      },
+      "title": "Privacy Policy | SiliconMotives",
+      "title_length": 31,
+      "description": "How SiliconMotives handles information submitted through this website.",
+      "description_length": 70,
+      "canonical": [
+        "https://siliconmotives.com/privacy"
+      ],
+      "meta": {
+        "": "",
+        "viewport": "width=device-width, initial-scale=1",
+        "theme-color": "#0b1a2b",
+        "description": "How SiliconMotives handles information submitted through this website.",
+        "og:title": "Privacy Policy | SiliconMotives",
+        "og:description": "How SiliconMotives handles information submitted through this website.",
+        "og:url": "https://siliconmotives.com/privacy",
+        "og:site_name": "SiliconMotives",
+        "og:image": "https://siliconmotives.com/opengraph-image",
+        "og:image:width": "1200",
+        "og:image:height": "630",
+        "og:image:alt": "SiliconMotives \u2014 Custom Software, Cloud Infrastructure & DevOps",
+        "og:type": "website",
+        "twitter:card": "summary_large_image",
+        "twitter:title": "Privacy Policy | SiliconMotives",
+        "twitter:description": "How SiliconMotives handles information submitted through this website.",
+        "twitter:image": "https://siliconmotives.com/opengraph-image"
+      },
+      "headings": [
+        {
+          "level": 1,
+          "text": "Privacy Policy"
+        },
+        {
+          "level": 2,
+          "text": "Information you send"
+        },
+        {
+          "level": 2,
+          "text": "How information is used"
+        },
+        {
+          "level": 2,
+          "text": "Service providers and retention"
+        },
+        {
+          "level": 2,
+          "text": "Cookies, analytics, and security"
+        },
+        {
+          "level": 2,
+          "text": "Your choices and contact"
+        }
+      ],
+      "schemas": [
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "name": "SiliconMotives",
+          "legalName": "Millionian LLC",
+          "url": "https://siliconmotives.com",
+          "email": "hello@siliconmotives.com",
+          "description": "Custom Software, Cloud Infrastructure, and DevOps engineering from Kerala, India."
+        }
+      ],
+      "images": [],
+      "links": [
+        {
+          "href": "#main",
+          "label": "",
+          "text": "Skip to content",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/",
+          "label": "SiliconMotives home",
+          "text": "SiliconMotives",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/",
+          "label": "",
+          "text": "Home",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/about",
+          "label": "",
+          "text": "About",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/#services",
+          "label": "",
+          "text": "Services",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/projects",
+          "label": "",
+          "text": "Projects",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/agency-partners",
+          "label": "",
+          "text": "Agency partners",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/contact",
+          "label": "",
+          "text": "Let\u2019s talk",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "mailto:hello@siliconmotives.com",
+          "label": "",
+          "text": "hello@siliconmotives.com",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/#services",
+          "label": "",
+          "text": "Services",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/projects",
+          "label": "",
+          "text": "Projects",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/agency-partners",
+          "label": "",
+          "text": "Agency Partners",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/about",
+          "label": "",
+          "text": "About",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/contact",
+          "label": "",
+          "text": "Contact",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/privacy",
+          "label": "",
+          "text": "Privacy",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/terms",
+          "label": "",
+          "text": "Terms",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "mailto:hello@siliconmotives.com",
+          "label": "",
+          "text": "hello@siliconmotives.com",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/contact",
+          "label": "",
+          "text": "Start a conversation",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "#main",
+          "label": "",
+          "text": "Back to top",
+          "target": null,
+          "rel": null
+        }
+      ],
+      "main_word_count": 318,
+      "main_text": "Privacy Privacy Policy Last updated: October 22, 2026. This policy describes information handled through the SiliconMotives website. Information you send When you submit a project or agency enquiry, we collect your name, email address, enquiry type, and message so we can respond. The form also contains a hidden anti-spam field. Do not include sensitive personal, financial, or health information in an enquiry. How information is used We use enquiry details to respond and assess the requested work. The website sends submissions to our configured email provider and, when the site administrator has enabled inbox copies, stores them in the site\u2019s Supabase database for follow-up. The contact endpoint uses the request IP address and email address in short-lived, hashed in-memory rate-limit counters to reduce spam. These counters are not a persistent analytics profile and may reset when the service restarts. Service providers and retention Email delivery is handled by the configured SMTP provider. Site content and optional enquiry inbox copies are hosted with Supabase. Pages load typefaces from Google Fonts, which receives the visitor\u2019s browser request when font stylesheets and font files load. We retain enquiries as long as needed to respond, manage a potential or active business relationship, and meet applicable recordkeeping needs, then delete or anonymize them where practical. Cookies, analytics, and security The public website does not intentionally use advertising cookies or analytics tracking. The /admin area uses Supabase authentication for authorized administrators; authentication may use browser storage or cookies required for that session. We use reasonable technical safeguards, but no internet transmission or storage system can be guaranteed completely secure. Your choices and contact You may request access, correction, or deletion of an enquiry by emailing hello@siliconmotives.com . We may retain information where required for legitimate business or legal purposes. SiliconMotives is operated by Millionian LLC, a Wyoming limited liability company; engineering operations are in Kerala, India."
+    },
+    {
+      "requested_url": "https://siliconmotives.com/terms",
+      "url": "https://www.siliconmotives.com/terms",
+      "status": 200,
+      "redirects": [
+        {
+          "status": 308,
+          "url": "https://siliconmotives.com/terms",
+          "location": "https://www.siliconmotives.com/terms"
+        }
+      ],
+      "elapsed_ms": 1224,
+      "headers": {
+        "Cache-Control": "private, no-cache, no-store, max-age=0, must-revalidate",
+        "Content-Type": "text/html; charset=utf-8",
+        "Link": "</_next/static/immutable/chunks/0nd___-s1z58g.css>; rel=preload; as=\"style\", </_next/static/immutable/chunks/41_2q5ob_jgq8.css>; rel=preload; as=\"style\"",
+        "X-Matched-Path": "/terms"
+      },
+      "title": "Website Terms | SiliconMotives",
+      "title_length": 30,
+      "description": "Terms for using the SiliconMotives website.",
+      "description_length": 43,
+      "canonical": [
+        "https://siliconmotives.com/terms"
+      ],
+      "meta": {
+        "": "",
+        "viewport": "width=device-width, initial-scale=1",
+        "theme-color": "#0b1a2b",
+        "description": "Terms for using the SiliconMotives website.",
+        "og:title": "Website Terms | SiliconMotives",
+        "og:description": "Terms for using the SiliconMotives website.",
+        "og:url": "https://siliconmotives.com/terms",
+        "og:site_name": "SiliconMotives",
+        "og:image": "https://siliconmotives.com/opengraph-image",
+        "og:image:width": "1200",
+        "og:image:height": "630",
+        "og:image:alt": "SiliconMotives \u2014 Custom Software, Cloud Infrastructure & DevOps",
+        "og:type": "website",
+        "twitter:card": "summary_large_image",
+        "twitter:title": "Website Terms | SiliconMotives",
+        "twitter:description": "Terms for using the SiliconMotives website.",
+        "twitter:image": "https://siliconmotives.com/opengraph-image"
+      },
+      "headings": [
+        {
+          "level": 1,
+          "text": "Website Terms"
+        },
+        {
+          "level": 2,
+          "text": "Website information"
+        },
+        {
+          "level": 2,
+          "text": "Enquiries and services"
+        },
+        {
+          "level": 2,
+          "text": "Permitted use and intellectual property"
+        },
+        {
+          "level": 2,
+          "text": "Third-party services and liability"
+        },
+        {
+          "level": 2,
+          "text": "Operator and contact"
+        }
+      ],
+      "schemas": [
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "name": "SiliconMotives",
+          "legalName": "Millionian LLC",
+          "url": "https://siliconmotives.com",
+          "email": "hello@siliconmotives.com",
+          "description": "Custom Software, Cloud Infrastructure, and DevOps engineering from Kerala, India."
+        }
+      ],
+      "images": [],
+      "links": [
+        {
+          "href": "#main",
+          "label": "",
+          "text": "Skip to content",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/",
+          "label": "SiliconMotives home",
+          "text": "SiliconMotives",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/",
+          "label": "",
+          "text": "Home",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/about",
+          "label": "",
+          "text": "About",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/#services",
+          "label": "",
+          "text": "Services",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/projects",
+          "label": "",
+          "text": "Projects",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/agency-partners",
+          "label": "",
+          "text": "Agency partners",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/contact",
+          "label": "",
+          "text": "Let\u2019s talk",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "mailto:hello@siliconmotives.com",
+          "label": "",
+          "text": "hello@siliconmotives.com",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/#services",
+          "label": "",
+          "text": "Services",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/projects",
+          "label": "",
+          "text": "Projects",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/agency-partners",
+          "label": "",
+          "text": "Agency Partners",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/about",
+          "label": "",
+          "text": "About",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/contact",
+          "label": "",
+          "text": "Contact",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/privacy",
+          "label": "",
+          "text": "Privacy",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/terms",
+          "label": "",
+          "text": "Terms",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "mailto:hello@siliconmotives.com",
+          "label": "",
+          "text": "hello@siliconmotives.com",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/contact",
+          "label": "",
+          "text": "Start a conversation",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "#main",
+          "label": "",
+          "text": "Back to top",
+          "target": null,
+          "rel": null
+        }
+      ],
+      "main_word_count": 258,
+      "main_text": "Terms Website Terms Last updated: October 22, 2026. These terms apply to use of the SiliconMotives public website. Website information This website provides general information about SiliconMotives, its capabilities, and selected work. Content is provided for informational purposes and may change. Project examples and illustrative diagrams do not promise a particular result or describe a client's confidential environment. Enquiries and services Submitting an enquiry does not create a client, agency, employment, or other service relationship. Any paid services, scope, delivery commitments, fees, intellectual property, confidentiality, and support terms will be set out separately in an accepted proposal or written agreement. Permitted use and intellectual property You may use this website for lawful purposes. Do not attempt to disrupt its operation, probe restricted systems, or submit harmful code. Website text, branding, design, and original materials belong to SiliconMotives or their respective owners. Client names and marks are used to identify work and remain the property of those clients. Third-party services and liability Links to third-party sites are provided for convenience; we do not control their content or practices. To the extent allowed by law, the website is provided without warranties, and SiliconMotives is not liable for indirect loss arising from use of this informational website. Nothing here limits liability that cannot legally be limited. Operator and contact SiliconMotives is operated by Millionian LLC, a Wyoming limited liability company. Engineering operations are in Kerala, India. Questions about these website terms may be sent to hello@siliconmotives.com . These website terms do not replace any signed client agreement."
+    },
+    {
+      "requested_url": "https://siliconmotives.com/projects/woobe",
+      "url": "https://www.siliconmotives.com/projects/woobe",
+      "status": 200,
+      "redirects": [
+        {
+          "status": 308,
+          "url": "https://siliconmotives.com/projects/woobe",
+          "location": "https://www.siliconmotives.com/projects/woobe"
+        }
+      ],
+      "elapsed_ms": 1276,
+      "headers": {
+        "Cache-Control": "private, no-cache, no-store, max-age=0, must-revalidate",
+        "Content-Type": "text/html; charset=utf-8",
+        "Link": "</_next/static/immutable/chunks/0nd___-s1z58g.css>; rel=preload; as=\"style\", </_next/static/immutable/chunks/41_2q5ob_jgq8.css>; rel=preload; as=\"style\"",
+        "X-Matched-Path": "/projects/[slug]"
+      },
+      "title": "Woobe | Projects | SiliconMotives",
+      "title_length": 33,
+      "description": "A commerce storefront designed for products priced by weight.",
+      "description_length": 61,
+      "canonical": [
+        "https://siliconmotives.com/projects/woobe"
+      ],
+      "meta": {
+        "": "",
+        "viewport": "width=device-width, initial-scale=1",
+        "theme-color": "#0b1a2b",
+        "description": "A commerce storefront designed for products priced by weight.",
+        "og:title": "Woobe | Projects | SiliconMotives",
+        "og:description": "A commerce storefront designed for products priced by weight.",
+        "og:url": "https://siliconmotives.com/projects/woobe",
+        "og:site_name": "SiliconMotives",
+        "og:image": "https://siliconmotives.com/opengraph-image",
+        "og:image:width": "1200",
+        "og:image:height": "630",
+        "og:image:alt": "SiliconMotives \u2014 Custom Software, Cloud Infrastructure & DevOps",
+        "og:type": "website",
+        "twitter:card": "summary_large_image",
+        "twitter:title": "Woobe | Projects | SiliconMotives",
+        "twitter:description": "A commerce storefront designed for products priced by weight.",
+        "twitter:image": "https://siliconmotives.com/opengraph-image"
+      },
+      "headings": [
+        {
+          "level": 1,
+          "text": "Woobe \u2014 Weight-based commerce"
+        },
+        {
+          "level": 2,
+          "text": "What the software covers"
+        },
+        {
+          "level": 2,
+          "text": "Infrastructure"
+        },
+        {
+          "level": 2,
+          "text": "Let\u2019s talk through it."
+        }
+      ],
+      "schemas": [
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "name": "SiliconMotives",
+          "legalName": "Millionian LLC",
+          "url": "https://siliconmotives.com",
+          "email": "hello@siliconmotives.com",
+          "description": "Custom Software, Cloud Infrastructure, and DevOps engineering from Kerala, India."
+        }
+      ],
+      "images": [],
+      "links": [
+        {
+          "href": "#main",
+          "label": "",
+          "text": "Skip to content",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/",
+          "label": "SiliconMotives home",
+          "text": "SiliconMotives",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/",
+          "label": "",
+          "text": "Home",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/about",
+          "label": "",
+          "text": "About",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/#services",
+          "label": "",
+          "text": "Services",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/projects",
+          "label": "",
+          "text": "Projects",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/agency-partners",
+          "label": "",
+          "text": "Agency partners",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/contact",
+          "label": "",
+          "text": "Let\u2019s talk",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/contact?type=project",
+          "label": "",
+          "text": "Start a project \u2197",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/#services",
+          "label": "",
+          "text": "Services",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/projects",
+          "label": "",
+          "text": "Projects",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/agency-partners",
+          "label": "",
+          "text": "Agency Partners",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/about",
+          "label": "",
+          "text": "About",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/contact",
+          "label": "",
+          "text": "Contact",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/privacy",
+          "label": "",
+          "text": "Privacy",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/terms",
+          "label": "",
+          "text": "Terms",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "mailto:hello@siliconmotives.com",
+          "label": "",
+          "text": "hello@siliconmotives.com",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/contact",
+          "label": "",
+          "text": "Start a conversation",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "#main",
+          "label": "",
+          "text": "Back to top",
+          "target": null,
+          "rel": null
+        }
+      ],
+      "main_word_count": 54,
+      "main_text": "Project overview \u00b7 Commerce Woobe \u2014 Weight-based commerce A commerce storefront designed for products priced by weight. What the software covers Product prices shown per kilogram (\u20b9/kg). Weight-based product selection. Checkout options include Razorpay and cash on delivery. Infrastructure Cloud infrastructure: AWS. Have a similar challenge? Let\u2019s talk through it. Start a project \u2197"
+    },
+    {
+      "requested_url": "https://siliconmotives.com/projects/nasalogistics",
+      "url": "https://www.siliconmotives.com/projects/nasalogistics",
+      "status": 200,
+      "redirects": [
+        {
+          "status": 308,
+          "url": "https://siliconmotives.com/projects/nasalogistics",
+          "location": "https://www.siliconmotives.com/projects/nasalogistics"
+        }
+      ],
+      "elapsed_ms": 1265,
+      "headers": {
+        "Cache-Control": "private, no-cache, no-store, max-age=0, must-revalidate",
+        "Content-Type": "text/html; charset=utf-8",
+        "Link": "</_next/static/immutable/chunks/0nd___-s1z58g.css>; rel=preload; as=\"style\", </_next/static/immutable/chunks/41_2q5ob_jgq8.css>; rel=preload; as=\"style\"",
+        "X-Matched-Path": "/projects/[slug]"
+      },
+      "title": "NasaLogistics | Projects | SiliconMotives",
+      "title_length": 41,
+      "description": "A logistics platform for driver availability, order workflows, and administration.",
+      "description_length": 82,
+      "canonical": [
+        "https://siliconmotives.com/projects/nasalogistics"
+      ],
+      "meta": {
+        "": "",
+        "viewport": "width=device-width, initial-scale=1",
+        "theme-color": "#0b1a2b",
+        "description": "A logistics platform for driver availability, order workflows, and administration.",
+        "og:title": "NasaLogistics | Projects | SiliconMotives",
+        "og:description": "A logistics platform for driver availability, order workflows, and administration.",
+        "og:url": "https://siliconmotives.com/projects/nasalogistics",
+        "og:site_name": "SiliconMotives",
+        "og:image": "https://siliconmotives.com/opengraph-image",
+        "og:image:width": "1200",
+        "og:image:height": "630",
+        "og:image:alt": "SiliconMotives \u2014 Custom Software, Cloud Infrastructure & DevOps",
+        "og:type": "website",
+        "twitter:card": "summary_large_image",
+        "twitter:title": "NasaLogistics | Projects | SiliconMotives",
+        "twitter:description": "A logistics platform for driver availability, order workflows, and administration.",
+        "twitter:image": "https://siliconmotives.com/opengraph-image"
+      },
+      "headings": [
+        {
+          "level": 1,
+          "text": "NasaLogistics \u2014 Driver & logistics management"
+        },
+        {
+          "level": 2,
+          "text": "What the software covers"
+        },
+        {
+          "level": 2,
+          "text": "Let\u2019s talk through it."
+        }
+      ],
+      "schemas": [
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "name": "SiliconMotives",
+          "legalName": "Millionian LLC",
+          "url": "https://siliconmotives.com",
+          "email": "hello@siliconmotives.com",
+          "description": "Custom Software, Cloud Infrastructure, and DevOps engineering from Kerala, India."
+        }
+      ],
+      "images": [],
+      "links": [
+        {
+          "href": "#main",
+          "label": "",
+          "text": "Skip to content",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/",
+          "label": "SiliconMotives home",
+          "text": "SiliconMotives",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/",
+          "label": "",
+          "text": "Home",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/about",
+          "label": "",
+          "text": "About",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/#services",
+          "label": "",
+          "text": "Services",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/projects",
+          "label": "",
+          "text": "Projects",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/agency-partners",
+          "label": "",
+          "text": "Agency partners",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/contact",
+          "label": "",
+          "text": "Let\u2019s talk",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/contact?type=project",
+          "label": "",
+          "text": "Start a project \u2197",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/#services",
+          "label": "",
+          "text": "Services",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/projects",
+          "label": "",
+          "text": "Projects",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/agency-partners",
+          "label": "",
+          "text": "Agency Partners",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/about",
+          "label": "",
+          "text": "About",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/contact",
+          "label": "",
+          "text": "Contact",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/privacy",
+          "label": "",
+          "text": "Privacy",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/terms",
+          "label": "",
+          "text": "Terms",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "mailto:hello@siliconmotives.com",
+          "label": "",
+          "text": "hello@siliconmotives.com",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/contact",
+          "label": "",
+          "text": "Start a conversation",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "#main",
+          "label": "",
+          "text": "Back to top",
+          "target": null,
+          "rel": null
+        }
+      ],
+      "main_word_count": 49,
+      "main_text": "Project overview \u00b7 Logistics software NasaLogistics \u2014 Driver & logistics management A logistics platform for driver availability, order workflows, and administration. What the software covers Driver availability workflows. Order management for logistics operations. Administrative tools for day-to-day operations. Have a similar challenge? Let\u2019s talk through it. Start a project \u2197"
+    },
+    {
+      "requested_url": "https://siliconmotives.com/projects/picbox",
+      "url": "https://www.siliconmotives.com/projects/picbox",
+      "status": 200,
+      "redirects": [
+        {
+          "status": 308,
+          "url": "https://siliconmotives.com/projects/picbox",
+          "location": "https://www.siliconmotives.com/projects/picbox"
+        }
+      ],
+      "elapsed_ms": 1244,
+      "headers": {
+        "Cache-Control": "private, no-cache, no-store, max-age=0, must-revalidate",
+        "Content-Type": "text/html; charset=utf-8",
+        "Link": "</_next/static/immutable/chunks/0nd___-s1z58g.css>; rel=preload; as=\"style\", </_next/static/immutable/chunks/41_2q5ob_jgq8.css>; rel=preload; as=\"style\"",
+        "X-Matched-Path": "/projects/[slug]"
+      },
+      "title": "Picbox | Projects | SiliconMotives",
+      "title_length": 34,
+      "description": "An inventory and invoicing system for an event-rental business.",
+      "description_length": 63,
+      "canonical": [
+        "https://siliconmotives.com/projects/picbox"
+      ],
+      "meta": {
+        "": "",
+        "viewport": "width=device-width, initial-scale=1",
+        "theme-color": "#0b1a2b",
+        "description": "An inventory and invoicing system for an event-rental business.",
+        "og:title": "Picbox | Projects | SiliconMotives",
+        "og:description": "An inventory and invoicing system for an event-rental business.",
+        "og:url": "https://siliconmotives.com/projects/picbox",
+        "og:site_name": "SiliconMotives",
+        "og:image": "https://siliconmotives.com/opengraph-image",
+        "og:image:width": "1200",
+        "og:image:height": "630",
+        "og:image:alt": "SiliconMotives \u2014 Custom Software, Cloud Infrastructure & DevOps",
+        "og:type": "website",
+        "twitter:card": "summary_large_image",
+        "twitter:title": "Picbox | Projects | SiliconMotives",
+        "twitter:description": "An inventory and invoicing system for an event-rental business.",
+        "twitter:image": "https://siliconmotives.com/opengraph-image"
+      },
+      "headings": [
+        {
+          "level": 1,
+          "text": "Picbox \u2014 Event-rental inventory & invoicing"
+        },
+        {
+          "level": 2,
+          "text": "What the software covers"
+        },
+        {
+          "level": 2,
+          "text": "Let\u2019s talk through it."
+        }
+      ],
+      "schemas": [
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "name": "SiliconMotives",
+          "legalName": "Millionian LLC",
+          "url": "https://siliconmotives.com",
+          "email": "hello@siliconmotives.com",
+          "description": "Custom Software, Cloud Infrastructure, and DevOps engineering from Kerala, India."
+        }
+      ],
+      "images": [],
+      "links": [
+        {
+          "href": "#main",
+          "label": "",
+          "text": "Skip to content",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/",
+          "label": "SiliconMotives home",
+          "text": "SiliconMotives",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/",
+          "label": "",
+          "text": "Home",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/about",
+          "label": "",
+          "text": "About",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/#services",
+          "label": "",
+          "text": "Services",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/projects",
+          "label": "",
+          "text": "Projects",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/agency-partners",
+          "label": "",
+          "text": "Agency partners",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/contact",
+          "label": "",
+          "text": "Let\u2019s talk",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/contact?type=project",
+          "label": "",
+          "text": "Start a project \u2197",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/#services",
+          "label": "",
+          "text": "Services",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/projects",
+          "label": "",
+          "text": "Projects",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/agency-partners",
+          "label": "",
+          "text": "Agency Partners",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/about",
+          "label": "",
+          "text": "About",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/contact",
+          "label": "",
+          "text": "Contact",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/privacy",
+          "label": "",
+          "text": "Privacy",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/terms",
+          "label": "",
+          "text": "Terms",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "mailto:hello@siliconmotives.com",
+          "label": "",
+          "text": "hello@siliconmotives.com",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/contact",
+          "label": "",
+          "text": "Start a conversation",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "#main",
+          "label": "",
+          "text": "Back to top",
+          "target": null,
+          "rel": null
+        }
+      ],
+      "main_word_count": 48,
+      "main_text": "Project overview \u00b7 Business software Picbox \u2014 Event-rental inventory & invoicing An inventory and invoicing system for an event-rental business. What the software covers Rental inventory and job records. Wage tracking for event work. PDF invoice generation. Have a similar challenge? Let\u2019s talk through it. Start a project \u2197"
+    },
+    {
+      "requested_url": "https://siliconmotives.com/projects/uniwayin",
+      "url": "https://www.siliconmotives.com/projects/uniwayin",
+      "status": 200,
+      "redirects": [
+        {
+          "status": 308,
+          "url": "https://siliconmotives.com/projects/uniwayin",
+          "location": "https://www.siliconmotives.com/projects/uniwayin"
+        }
+      ],
+      "elapsed_ms": 1307,
+      "headers": {
+        "Cache-Control": "private, no-cache, no-store, max-age=0, must-revalidate",
+        "Content-Type": "text/html; charset=utf-8",
+        "Link": "</_next/static/immutable/chunks/0nd___-s1z58g.css>; rel=preload; as=\"style\", </_next/static/immutable/chunks/41_2q5ob_jgq8.css>; rel=preload; as=\"style\"",
+        "X-Matched-Path": "/projects/[slug]"
+      },
+      "title": "Uniwayin | Projects | SiliconMotives",
+      "title_length": 36,
+      "description": "A CRM for education consultancy lead and follow-up workflows.",
+      "description_length": 61,
+      "canonical": [
+        "https://siliconmotives.com/projects/uniwayin"
+      ],
+      "meta": {
+        "": "",
+        "viewport": "width=device-width, initial-scale=1",
+        "theme-color": "#0b1a2b",
+        "description": "A CRM for education consultancy lead and follow-up workflows.",
+        "og:title": "Uniwayin | Projects | SiliconMotives",
+        "og:description": "A CRM for education consultancy lead and follow-up workflows.",
+        "og:url": "https://siliconmotives.com/projects/uniwayin",
+        "og:site_name": "SiliconMotives",
+        "og:image": "https://siliconmotives.com/opengraph-image",
+        "og:image:width": "1200",
+        "og:image:height": "630",
+        "og:image:alt": "SiliconMotives \u2014 Custom Software, Cloud Infrastructure & DevOps",
+        "og:type": "website",
+        "twitter:card": "summary_large_image",
+        "twitter:title": "Uniwayin | Projects | SiliconMotives",
+        "twitter:description": "A CRM for education consultancy lead and follow-up workflows.",
+        "twitter:image": "https://siliconmotives.com/opengraph-image"
+      },
+      "headings": [
+        {
+          "level": 1,
+          "text": "Uniwayin \u2014 Education consultancy CRM"
+        },
+        {
+          "level": 2,
+          "text": "What the software covers"
+        },
+        {
+          "level": 2,
+          "text": "Let\u2019s talk through it."
+        }
+      ],
+      "schemas": [
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "name": "SiliconMotives",
+          "legalName": "Millionian LLC",
+          "url": "https://siliconmotives.com",
+          "email": "hello@siliconmotives.com",
+          "description": "Custom Software, Cloud Infrastructure, and DevOps engineering from Kerala, India."
+        }
+      ],
+      "images": [],
+      "links": [
+        {
+          "href": "#main",
+          "label": "",
+          "text": "Skip to content",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/",
+          "label": "SiliconMotives home",
+          "text": "SiliconMotives",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/",
+          "label": "",
+          "text": "Home",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/about",
+          "label": "",
+          "text": "About",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/#services",
+          "label": "",
+          "text": "Services",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/projects",
+          "label": "",
+          "text": "Projects",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/agency-partners",
+          "label": "",
+          "text": "Agency partners",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/contact",
+          "label": "",
+          "text": "Let\u2019s talk",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/contact?type=project",
+          "label": "",
+          "text": "Start a project \u2197",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/#services",
+          "label": "",
+          "text": "Services",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/projects",
+          "label": "",
+          "text": "Projects",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/agency-partners",
+          "label": "",
+          "text": "Agency Partners",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/about",
+          "label": "",
+          "text": "About",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/contact",
+          "label": "",
+          "text": "Contact",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/privacy",
+          "label": "",
+          "text": "Privacy",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/terms",
+          "label": "",
+          "text": "Terms",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "mailto:hello@siliconmotives.com",
+          "label": "",
+          "text": "hello@siliconmotives.com",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/contact",
+          "label": "",
+          "text": "Start a conversation",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "#main",
+          "label": "",
+          "text": "Back to top",
+          "target": null,
+          "rel": null
+        }
+      ],
+      "main_word_count": 51,
+      "main_text": "Project overview \u00b7 Business software Uniwayin \u2014 Education consultancy CRM A CRM for education consultancy lead and follow-up workflows. What the software covers Lead records and follow-up tracking. Notes and analytics for consultancy workflows. Role-based access for staff. Have a similar challenge? Let\u2019s talk through it. Start a project \u2197"
+    },
+    {
+      "requested_url": "https://siliconmotives.com/projects/dental-buddy",
+      "url": "https://www.siliconmotives.com/projects/dental-buddy",
+      "status": 200,
+      "redirects": [
+        {
+          "status": 308,
+          "url": "https://siliconmotives.com/projects/dental-buddy",
+          "location": "https://www.siliconmotives.com/projects/dental-buddy"
+        }
+      ],
+      "elapsed_ms": 1242,
+      "headers": {
+        "Cache-Control": "private, no-cache, no-store, max-age=0, must-revalidate",
+        "Content-Type": "text/html; charset=utf-8",
+        "Link": "</_next/static/immutable/chunks/0nd___-s1z58g.css>; rel=preload; as=\"style\", </_next/static/immutable/chunks/41_2q5ob_jgq8.css>; rel=preload; as=\"style\"",
+        "X-Matched-Path": "/projects/[slug]"
+      },
+      "title": "Dental Buddy | Projects | SiliconMotives",
+      "title_length": 40,
+      "description": "Clinic software bringing patient records, prescriptions, appointments, and billing into one workflow.",
+      "description_length": 101,
+      "canonical": [
+        "https://siliconmotives.com/projects/dental-buddy"
+      ],
+      "meta": {
+        "": "",
+        "viewport": "width=device-width, initial-scale=1",
+        "theme-color": "#0b1a2b",
+        "description": "Clinic software bringing patient records, prescriptions, appointments, and billing into one workflow.",
+        "og:title": "Dental Buddy | Projects | SiliconMotives",
+        "og:description": "Clinic software bringing patient records, prescriptions, appointments, and billing into one workflow.",
+        "og:url": "https://siliconmotives.com/projects/dental-buddy",
+        "og:site_name": "SiliconMotives",
+        "og:image": "https://siliconmotives.com/opengraph-image",
+        "og:image:width": "1200",
+        "og:image:height": "630",
+        "og:image:alt": "SiliconMotives \u2014 Custom Software, Cloud Infrastructure & DevOps",
+        "og:type": "website",
+        "twitter:card": "summary_large_image",
+        "twitter:title": "Dental Buddy | Projects | SiliconMotives",
+        "twitter:description": "Clinic software bringing patient records, prescriptions, appointments, and billing into one workflow.",
+        "twitter:image": "https://siliconmotives.com/opengraph-image"
+      },
+      "headings": [
+        {
+          "level": 1,
+          "text": "Dental Buddy \u2014 Dental clinic management software"
+        },
+        {
+          "level": 2,
+          "text": "What the software covers"
+        },
+        {
+          "level": 2,
+          "text": "Let\u2019s talk through it."
+        }
+      ],
+      "schemas": [
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "name": "SiliconMotives",
+          "legalName": "Millionian LLC",
+          "url": "https://siliconmotives.com",
+          "email": "hello@siliconmotives.com",
+          "description": "Custom Software, Cloud Infrastructure, and DevOps engineering from Kerala, India."
+        }
+      ],
+      "images": [],
+      "links": [
+        {
+          "href": "#main",
+          "label": "",
+          "text": "Skip to content",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/",
+          "label": "SiliconMotives home",
+          "text": "SiliconMotives",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/",
+          "label": "",
+          "text": "Home",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/about",
+          "label": "",
+          "text": "About",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/#services",
+          "label": "",
+          "text": "Services",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/projects",
+          "label": "",
+          "text": "Projects",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/agency-partners",
+          "label": "",
+          "text": "Agency partners",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/contact",
+          "label": "",
+          "text": "Let\u2019s talk",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/contact?type=project",
+          "label": "",
+          "text": "Start a project \u2197",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/#services",
+          "label": "",
+          "text": "Services",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/projects",
+          "label": "",
+          "text": "Projects",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/agency-partners",
+          "label": "",
+          "text": "Agency Partners",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/about",
+          "label": "",
+          "text": "About",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/contact",
+          "label": "",
+          "text": "Contact",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/privacy",
+          "label": "",
+          "text": "Privacy",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/terms",
+          "label": "",
+          "text": "Terms",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "mailto:hello@siliconmotives.com",
+          "label": "",
+          "text": "hello@siliconmotives.com",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/contact",
+          "label": "",
+          "text": "Start a conversation",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "#main",
+          "label": "",
+          "text": "Back to top",
+          "target": null,
+          "rel": null
+        }
+      ],
+      "main_word_count": 47,
+      "main_text": "Project overview \u00b7 Healthcare software Dental Buddy \u2014 Dental clinic management software Clinic software bringing patient records, prescriptions, appointments, and billing into one workflow. What the software covers Patient records and prescriptions. Appointment management. Clinic billing workflows. Have a similar challenge? Let\u2019s talk through it. Start a project \u2197"
+    },
+    {
+      "requested_url": "https://siliconmotives.com/projects/jjc-artworks",
+      "url": "https://www.siliconmotives.com/projects/jjc-artworks",
+      "status": 200,
+      "redirects": [
+        {
+          "status": 308,
+          "url": "https://siliconmotives.com/projects/jjc-artworks",
+          "location": "https://www.siliconmotives.com/projects/jjc-artworks"
+        }
+      ],
+      "elapsed_ms": 1242,
+      "headers": {
+        "Cache-Control": "private, no-cache, no-store, max-age=0, must-revalidate",
+        "Content-Type": "text/html; charset=utf-8",
+        "Link": "</_next/static/immutable/chunks/0nd___-s1z58g.css>; rel=preload; as=\"style\", </_next/static/immutable/chunks/41_2q5ob_jgq8.css>; rel=preload; as=\"style\"",
+        "X-Matched-Path": "/projects/[slug]"
+      },
+      "title": "JJC Artworks | Projects | SiliconMotives",
+      "title_length": 40,
+      "description": "A website presenting JJC Artworks\u2019 church interior woodwork and completed projects.",
+      "description_length": 83,
+      "canonical": [
+        "https://siliconmotives.com/projects/jjc-artworks"
+      ],
+      "meta": {
+        "": "",
+        "viewport": "width=device-width, initial-scale=1",
+        "theme-color": "#0b1a2b",
+        "description": "A website presenting JJC Artworks\u2019 church interior woodwork and completed projects.",
+        "og:title": "JJC Artworks | Projects | SiliconMotives",
+        "og:description": "A website presenting JJC Artworks\u2019 church interior woodwork and completed projects.",
+        "og:url": "https://siliconmotives.com/projects/jjc-artworks",
+        "og:site_name": "SiliconMotives",
+        "og:image": "https://siliconmotives.com/opengraph-image",
+        "og:image:width": "1200",
+        "og:image:height": "630",
+        "og:image:alt": "SiliconMotives \u2014 Custom Software, Cloud Infrastructure & DevOps",
+        "og:type": "website",
+        "twitter:card": "summary_large_image",
+        "twitter:title": "JJC Artworks | Projects | SiliconMotives",
+        "twitter:description": "A website presenting JJC Artworks\u2019 church interior woodwork and completed projects.",
+        "twitter:image": "https://siliconmotives.com/opengraph-image"
+      },
+      "headings": [
+        {
+          "level": 1,
+          "text": "JJC Artworks \u2014 Website for church interior woodwork"
+        },
+        {
+          "level": 2,
+          "text": "What the software covers"
+        },
+        {
+          "level": 2,
+          "text": "Let\u2019s talk through it."
+        }
+      ],
+      "schemas": [
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "name": "SiliconMotives",
+          "legalName": "Millionian LLC",
+          "url": "https://siliconmotives.com",
+          "email": "hello@siliconmotives.com",
+          "description": "Custom Software, Cloud Infrastructure, and DevOps engineering from Kerala, India."
+        }
+      ],
+      "images": [],
+      "links": [
+        {
+          "href": "#main",
+          "label": "",
+          "text": "Skip to content",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/",
+          "label": "SiliconMotives home",
+          "text": "SiliconMotives",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/",
+          "label": "",
+          "text": "Home",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/about",
+          "label": "",
+          "text": "About",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/#services",
+          "label": "",
+          "text": "Services",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/projects",
+          "label": "",
+          "text": "Projects",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/agency-partners",
+          "label": "",
+          "text": "Agency partners",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/contact",
+          "label": "",
+          "text": "Let\u2019s talk",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/contact?type=project",
+          "label": "",
+          "text": "Start a project \u2197",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/#services",
+          "label": "",
+          "text": "Services",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/projects",
+          "label": "",
+          "text": "Projects",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/agency-partners",
+          "label": "",
+          "text": "Agency Partners",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/about",
+          "label": "",
+          "text": "About",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/contact",
+          "label": "",
+          "text": "Contact",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/privacy",
+          "label": "",
+          "text": "Privacy",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/terms",
+          "label": "",
+          "text": "Terms",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "mailto:hello@siliconmotives.com",
+          "label": "",
+          "text": "hello@siliconmotives.com",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "/contact",
+          "label": "",
+          "text": "Start a conversation",
+          "target": null,
+          "rel": null
+        },
+        {
+          "href": "#main",
+          "label": "",
+          "text": "Back to top",
+          "target": null,
+          "rel": null
+        }
+      ],
+      "main_word_count": 51,
+      "main_text": "Project overview \u00b7 Business website JJC Artworks \u2014 Website for church interior woodwork A website presenting JJC Artworks\u2019 church interior woodwork and completed projects. What the software covers Company and craftsmanship information. Presentation of completed work. Contact information for prospective clients. Have a similar challenge? Let\u2019s talk through it. Start a project \u2197"
+    }
+  ],
+  "variants": [
+    {
+      "requested_url": "http://siliconmotives.com/",
+      "url": "https://www.siliconmotives.com/",
+      "status": 200,
+      "redirects": [
+        {
+          "status": 308,
+          "url": "http://siliconmotives.com/",
+          "location": "https://siliconmotives.com/"
+        },
+        {
+          "status": 308,
+          "url": "https://siliconmotives.com/",
+          "location": "https://www.siliconmotives.com/"
+        }
+      ],
+      "elapsed_ms": 1246,
+      "headers": {
+        "Cache-Control": "private, no-cache, no-store, max-age=0, must-revalidate",
+        "Content-Type": "text/html; charset=utf-8",
+        "Link": "</_next/static/immutable/chunks/0nd___-s1z58g.css>; rel=preload; as=\"style\", </_next/static/immutable/chunks/41_2q5ob_jgq8.css>; rel=preload; as=\"style\"",
+        "X-Matched-Path": "/"
+      }
+    },
+    {
+      "requested_url": "http://www.siliconmotives.com/",
+      "url": "https://www.siliconmotives.com/",
+      "status": 200,
+      "redirects": [
+        {
+          "status": 308,
+          "url": "http://www.siliconmotives.com/",
+          "location": "https://www.siliconmotives.com/"
+        }
+      ],
+      "elapsed_ms": 1505,
+      "headers": {
+        "Cache-Control": "private, no-cache, no-store, max-age=0, must-revalidate",
+        "Content-Type": "text/html; charset=utf-8",
+        "Link": "</_next/static/immutable/chunks/0nd___-s1z58g.css>; rel=preload; as=\"style\", </_next/static/immutable/chunks/41_2q5ob_jgq8.css>; rel=preload; as=\"style\"",
+        "X-Matched-Path": "/"
+      }
+    },
+    {
+      "requested_url": "https://siliconmotives.com/",
+      "url": "https://www.siliconmotives.com/",
+      "status": 200,
+      "redirects": [
+        {
+          "status": 308,
+          "url": "https://siliconmotives.com/",
+          "location": "https://www.siliconmotives.com/"
+        }
+      ],
+      "elapsed_ms": 1527,
+      "headers": {
+        "Cache-Control": "private, no-cache, no-store, max-age=0, must-revalidate",
+        "Content-Type": "text/html; charset=utf-8",
+        "Link": "</_next/static/immutable/chunks/0nd___-s1z58g.css>; rel=preload; as=\"style\", </_next/static/immutable/chunks/41_2q5ob_jgq8.css>; rel=preload; as=\"style\"",
+        "X-Matched-Path": "/"
+      }
+    },
+    {
+      "requested_url": "https://www.siliconmotives.com/",
+      "url": "https://www.siliconmotives.com/",
+      "status": 200,
+      "redirects": [],
+      "elapsed_ms": 1286,
+      "headers": {
+        "Cache-Control": "private, no-cache, no-store, max-age=0, must-revalidate",
+        "Content-Type": "text/html; charset=utf-8",
+        "Link": "</_next/static/immutable/chunks/0nd___-s1z58g.css>; rel=preload; as=\"style\", </_next/static/immutable/chunks/41_2q5ob_jgq8.css>; rel=preload; as=\"style\"",
+        "X-Matched-Path": "/"
+      }
+    },
+    {
+      "requested_url": "https://www.siliconmotives.com/about/",
+      "url": "https://www.siliconmotives.com/about",
+      "status": 200,
+      "redirects": [
+        {
+          "status": 308,
+          "url": "https://www.siliconmotives.com/about/",
+          "location": "/about"
+        }
+      ],
+      "elapsed_ms": 1087,
+      "headers": {
+        "Cache-Control": "private, no-cache, no-store, max-age=0, must-revalidate",
+        "Content-Type": "text/html; charset=utf-8",
+        "Link": "</_next/static/immutable/chunks/0nd___-s1z58g.css>; rel=preload; as=\"style\", </_next/static/immutable/chunks/41_2q5ob_jgq8.css>; rel=preload; as=\"style\"",
+        "X-Matched-Path": "/about"
+      }
+    },
+    {
+      "requested_url": "https://silicon-motives.vercel.app/",
+      "url": "https://silicon-motives.vercel.app/",
+      "status": 200,
+      "redirects": [],
+      "elapsed_ms": 1321,
+      "headers": {
+        "Cache-Control": "private, no-cache, no-store, max-age=0, must-revalidate",
+        "Content-Type": "text/html; charset=utf-8",
+        "Link": "</_next/static/immutable/chunks/0nd___-s1z58g.css>; rel=preload; as=\"style\", </_next/static/immutable/chunks/41_2q5ob_jgq8.css>; rel=preload; as=\"style\"",
+        "X-Matched-Path": "/"
+      }
+    },
+    {
+      "requested_url": "https://www.siliconmotives.com/contact?type=agency",
+      "url": "https://www.siliconmotives.com/contact?type=agency",
+      "status": 200,
+      "redirects": [],
+      "elapsed_ms": 1753,
+      "headers": {
+        "Cache-Control": "private, no-cache, no-store, max-age=0, must-revalidate",
+        "Content-Type": "text/html; charset=utf-8",
+        "Link": "</_next/static/immutable/chunks/0nd___-s1z58g.css>; rel=preload; as=\"style\", </_next/static/immutable/chunks/41_2q5ob_jgq8.css>; rel=preload; as=\"style\"",
+        "X-Matched-Path": "/contact"
+      }
+    },
+    {
+      "requested_url": "https://www.siliconmotives.com/__seo_audit_missing_page_20261022",
+      "url": "https://www.siliconmotives.com/__seo_audit_missing_page_20261022",
+      "status": 404,
+      "redirects": [],
+      "elapsed_ms": 162,
+      "headers": {
+        "Cache-Control": "public, max-age=0, must-revalidate",
+        "Content-Type": "text/html; charset=utf-8",
+        "X-Matched-Path": "/404"
+      }
+    },
+    {
+      "requested_url": "https://owner.siliconmotives.com/",
+      "url": "https://owner.siliconmotives.com/",
+      "status": 200,
+      "redirects": [],
+      "elapsed_ms": 558,
+      "headers": {
+        "Cache-Control": "private, no-cache, no-store, max-age=0, must-revalidate",
+        "Content-Type": "text/html; charset=utf-8",
+        "X-Matched-Path": "/admin",
+        "X-Robots-Tag": "noindex, nofollow"
+      }
+    },
+    {
+      "requested_url": "https://owner.siliconmotives.com/robots.txt",
+      "url": "https://owner.siliconmotives.com/robots.txt",
+      "status": 200,
+      "redirects": [],
+      "elapsed_ms": 165,
+      "headers": {
+        "Cache-Control": "no-store",
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Matched-Path": "/robots.txt",
+        "X-Robots-Tag": "noindex, nofollow"
+      }
+    },
+    {
+      "requested_url": "https://owner.siliconmotives.com/sitemap.xml",
+      "url": "https://owner.siliconmotives.com/sitemap.xml",
+      "status": 200,
+      "redirects": [],
+      "elapsed_ms": 311,
+      "headers": {
+        "Cache-Control": "no-store",
+        "Content-Type": "application/xml",
+        "X-Matched-Path": "/sitemap.xml",
+        "X-Robots-Tag": "noindex, nofollow"
+      }
+    },
+    {
+      "requested_url": "https://www.siliconmotives.com/opengraph-image",
+      "url": "https://www.siliconmotives.com/opengraph-image",
+      "status": 200,
+      "redirects": [],
+      "elapsed_ms": 437,
+      "headers": {
+        "Cache-Control": "public, max-age=0, must-revalidate",
+        "Content-Type": "image/png",
+        "X-Matched-Path": "/opengraph-image"
+      }
+    }
+  ]
+}

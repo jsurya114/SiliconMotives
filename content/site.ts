@@ -1,4 +1,5 @@
 // Presentation copy for the Silicon Motives website. Published CMS content is loaded separately.
+import { websiteDesign } from './website-design';
 
 const whatsappText =
   "Hi SiliconMotives! I have a project in mind and would love to explore how we can bring it to life. Could we discuss the right solution, timeline, and estimate?";
@@ -225,6 +226,7 @@ export const site = {
         title: "Explore",
         links: [
           { label: "Services", href: "/#services" },
+          { label: "Website design", href: websiteDesign.path },
           { label: "Projects", href: "/projects" },
           { label: "Agency Partners", href: "/agency-partners" },
         ],
