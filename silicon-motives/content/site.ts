@@ -153,7 +153,7 @@ export const site = {
     title: ["Built by people.", "Driven by a shared motive."],
     body: [
       "SiliconMotives is led by Jasil M and Jayasoorya Suryadas from Kerala, India.",
-      "Jasil is Founder, focused on systems, cloud, and architecture. Jayasoorya is Co-founder.",
+      "Jasil is Founder, focused on systems, cloud, and architecture. Jayasoorya is Co-founder and a systems and software engineer.",
     ],
     badge: "Kerala · Remote-first",
     founders: [
@@ -169,7 +169,7 @@ export const site = {
         label: "Founder 02",
         name: "Jayasoorya Suryadas",
         aliases: ["Jayasoorya S"],
-        role: "Co-founder",
+        role: "Co-founder · Systems & software engineer",
         image: "/images/jayasoorya.jpg",
         linkedin: "https://www.linkedin.com/in/jayasoorya-suryadas/",
       },
