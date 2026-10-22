@@ -300,19 +300,17 @@ html.lenis, html.lenis body { height: auto; }
 }
 
 @layer components {
-  .public-site .hero-static { min-height: 620px; }
-  .public-site .hero-static > .wrap { min-height: max(620px, 100svh); }
   .public-site .hero-footer-row {
     margin-inline: calc((100% - 100vw) / 2);
     padding-inline: clamp(1rem, 2vw, 2rem);
   }
-  /* Keep every part of the hero still, including its button. */
-  .public-site .hero-static *, .public-site .hero-static *::before, .public-site .hero-static *::after {
+  /* Keep the hero copy itself still, including its buttons; the camera moves it as one plane. */
+  .public-site .sky-hero__copy *, .public-site .sky-hero__copy *::before, .public-site .sky-hero__copy *::after {
     animation: none !important;
     transition: none !important;
     transform: none !important;
   }
-  .public-site .hero-static .btn__label span + span { display: none; }
+  .public-site .sky-hero__copy .btn__label span + span { display: none; }
   .public-site .client-list img { max-height: 80px; }
   .public-site .client-list a:focus-visible { outline-color: var(--color-monsoon); }
   .public-site .contact-address { overflow-wrap: anywhere; }
@@ -337,11 +335,164 @@ html.lenis, html.lenis body { height: auto; }
   .public-site .mobile-menu[data-closing] { animation: menu-out 0.28s ease-in forwards; }
 }
 
-/* ── Hero on phones ── size to the content instead of the full screen, so the
-   copy no longer sits under a tall empty band of sky. */
-@media (max-width: 639.98px) {
-  .public-site .hero-static, .public-site .hero-static > .wrap { min-height: 0; }
-  .public-site .hero-static > .wrap { padding-top: 7.5rem; padding-bottom: 2rem; }
+/* ── Sky hero ── photographic cloud planes around the real hero copy (docs/sky-hero.md).
+   Still, it is a layered sky; with motion, the section grows taller, its stage sticks,
+   and SkyFlight moves a camera forward through the planes (the --vp/--cam values below
+   steer it). Unlayered so the geometry outranks the base img rules. */
+.public-site .sky-hero { position: relative; background: var(--color-cloud); }
+.public-site .sky-hero__stage {
+  --vp-x: 0.8;
+  --vp-y: 0.48;
+  --cam-d: 2.3;
+  --cam-y: 0.94;
+  --cam-x: 0.06;
+  --pitch: 0.04;
+  position: relative;
+  height: 100svh;
+  min-height: 600px;
+  overflow: clip;
+  isolation: isolate;
+  background: #3d8bd6;
+}
+.public-site .sky-hero__scene, .public-site .sky-hero__ahead { position: absolute; inset: 0; pointer-events: none; }
+.public-site .sky-hero__scene { z-index: 0; }
+.public-site .sky-hero__ahead { z-index: 2; }
+.public-site .sky-hero__copy {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  height: 100%;
+  padding-top: 8rem;
+  padding-bottom: 1.5rem;
+  will-change: transform;
+}
+@media (min-width: 640px) { .public-site .sky-hero__copy { padding-bottom: 2rem; } }
+
+.public-site .sky-cloud {
+  position: absolute;
+  display: block;
+  max-width: none;
+  height: auto;
+  user-select: none;
+  -webkit-user-drag: none;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+}
+/* Oversized so the camera's lift and the idle drift never bring an edge into frame. */
+.public-site .sky-cloud--sky, .public-site .sky-cloud--far, .public-site .sky-cloud--mid {
+  inset: -4% -3% -12%;
+  width: 106%;
+  height: 116%;
+  object-fit: cover;
+  object-position: 65% 50%;
+}
+@media (min-width: 768px) {
+  .public-site .sky-cloud--sky, .public-site .sky-cloud--far, .public-site .sky-cloud--mid { object-position: center; }
+}
+
+/* Light from the upper left, matching the photographs. */
+.public-site .sky-hero__sun {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(60% 55% at 8% 0%, rgba(255, 250, 240, 0.55), rgba(255, 250, 240, 0) 70%),
+    radial-gradient(40% 40% at 0% 0%, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0) 60%);
+}
+/* The original hero's wash, so the ink copy keeps its contrast over the sky. Still, it
+   also settles into the page colour at the bottom; in flight the haze does that instead. */
+.public-site .sky-hero__scrim {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(100deg, rgba(236, 240, 242, 0.72) 0%, rgba(236, 240, 242, 0.35) 45%, rgba(236, 240, 242, 0) 75%),
+    linear-gradient(0deg, var(--color-cloud) 0%, rgba(236, 240, 242, 0.6) 10%, rgba(236, 240, 242, 0) 34%);
+}
+/* Inside the cloud: bright where the light scatters, settling to the page colour below. */
+.public-site .sky-hero__haze {
+  position: absolute;
+  inset: -10%;
+  opacity: 0;
+  background:
+    radial-gradient(70% 60% at 60% 42%, #fbfcfd 0%, rgba(244, 247, 249, 0.96) 45%, rgba(225, 233, 239, 0.9) 100%);
+}
+.public-site .sky-hero__floor {
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 62%;
+  opacity: 0;
+  background: linear-gradient(0deg, var(--color-cloud) 0%, var(--color-cloud) 30%, rgba(236, 240, 242, 0.8) 60%, rgba(236, 240, 242, 0) 100%);
+}
+
+/* Geometry, phones first. The nearest cloud: SkyFlight measures the headline and sets --title-x/-y/-em to the end
+   of its longest line, plus --eyebrow-y and --cta-y. 0.08 and 0.2 locate the cloud's dense
+   left edge within the image; it veils about ¾ em of the line, never the eyebrow, and its
+   base (0.44 of its width down) stays clear of the buttons. */
+.public-site .sky-cloud--fg-a {
+  --w: 70vw;
+  left: calc(var(--title-x, 70%) - 0.75 * var(--title-em, 0px) - 0.08 * var(--w));
+  top: clamp(var(--eyebrow-y, 0px), calc(var(--title-y, 55%) - 0.2 * var(--w)), calc(var(--cta-y, 100%) - 0.44 * var(--w)));
+  width: var(--w);
+}
+.public-site .sky-hero__stage:not([data-anchored]) .sky-cloud--fg-a { visibility: hidden; }
+.public-site .sky-cloud--deck { left: -36%; top: 100%; width: 170vw; }
+.public-site .sky-cloud--wisp, .public-site .sky-cloud--fg-b, .public-site .sky-cloud--bank { display: none; }
+@media (min-width: 768px) {
+  .public-site .sky-cloud--wisp, .public-site .sky-cloud--fg-b, .public-site .sky-cloud--bank { display: block; }
+  .public-site .sky-cloud--fg-a { --w: 62vw; }
+  .public-site .sky-cloud--fg-b { left: -10%; top: -13%; width: 30vw; }
+  .public-site .sky-cloud--wisp { left: 24%; top: 7%; width: 36vw; }
+  .public-site .sky-cloud--deck { left: -18%; top: 101%; width: 112vw; }
+  .public-site .sky-cloud--bank { left: 38%; top: 100%; width: 90vw; }
+}
+@media (min-width: 1024px) {
+  .public-site .sky-cloud--fg-a { --w: 47vw; }
+  .public-site .sky-cloud--fg-b { left: -7%; top: -15%; width: 21vw; }
+  .public-site .sky-cloud--wisp { left: 27%; top: 6%; width: 27vw; }
+  .public-site .sky-cloud--deck { left: -14%; top: 101%; width: 96vw; }
+  .public-site .sky-cloud--bank { left: 42%; top: 100%; width: 74vw; }
+}
+
+/* The flight: tall enough screens, motion allowed. --flight tells SkyFlight to run. */
+@media (prefers-reduced-motion: no-preference) and (min-height: 540px) {
+  .public-site .sky-hero { height: 240lvh; }
+  .public-site .sky-hero__stage {
+    --flight: 1;
+    position: sticky;
+    top: 0;
+    height: 100lvh;
+    min-height: 0;
+  }
+  .public-site .sky-hero__copy { height: 100svh; }
+  .public-site .sky-hero__scrim {
+    background:
+      linear-gradient(100deg, rgba(236, 240, 242, 0.72) 0%, rgba(236, 240, 242, 0.35) 45%, rgba(236, 240, 242, 0) 75%),
+      linear-gradient(0deg, rgba(236, 240, 242, 0.6) 0%, rgba(236, 240, 242, 0) 30%);
+  }
+}
+@media (prefers-reduced-motion: no-preference) and (min-height: 540px) and (max-width: 767.98px) {
+  .public-site .sky-hero { height: 215lvh; }
+  .public-site .sky-hero__stage { --vp-x: 0.62; --vp-y: 0.46; --cam-d: 2.05; --cam-y: 0.3; --cam-x: 0.03; }
+}
+
+/* Idle drift: slow, unsynchronised, and on the compositor (translate/scale compose
+   with the camera's transform). Nearer planes drift further. */
+@keyframes sky-reveal { from { opacity: 0; } }
+@keyframes sky-drift-far { 0% { translate: 0 0; } 45% { translate: -0.5vw 0.2vh; } 100% { translate: 0.6vw -0.15vh; } }
+@keyframes sky-drift-mid { 0% { translate: 0 0; scale: 1; } 55% { translate: 0.5vw -0.25vh; scale: 1.008; } 100% { translate: -0.35vw 0.2vh; scale: 1.003; } }
+@keyframes sky-drift-wisp { 0% { translate: 0 0; } 40% { translate: 1.6vw -0.4vh; } 100% { translate: -1.1vw 0.5vh; } }
+@keyframes sky-drift-near { 0% { translate: 0 0; scale: 1; } 35% { translate: -1.8vw 0.5vh; scale: 1.012; } 70% { translate: 0.9vw -0.4vh; scale: 1.004; } 100% { translate: 2.2vw 0.3vh; scale: 1.016; } }
+@keyframes sky-drift-corner { 0% { translate: 0 0; scale: 1; } 50% { translate: 1.4vw 0.8vh; scale: 1.015; } 100% { translate: -0.8vw -0.4vh; scale: 1.005; } }
+@keyframes sky-drift-low { 0% { translate: 0 0; } 50% { translate: -1.2vw -0.6vh; } 100% { translate: 0.9vw 0.3vh; } }
+@media (prefers-reduced-motion: no-preference) {
+  .public-site .sky-cloud--far { animation: sky-drift-far 149s ease-in-out -41s infinite alternate; }
+  .public-site .sky-cloud--mid { animation: sky-drift-mid 173s ease-in-out -67s infinite alternate; }
+  .public-site .sky-cloud--wisp { animation: sky-drift-wisp 83s ease-in-out -19s infinite alternate; }
+  .public-site .sky-hero__stage[data-anchored] .sky-cloud--fg-a { animation: sky-reveal 1.6s ease-out backwards, sky-drift-near 97s ease-in-out -53s infinite alternate; }
+  .public-site .sky-cloud--fg-b { animation: sky-drift-corner 71s ease-in-out -29s infinite alternate; }
+  .public-site .sky-cloud--deck { animation: sky-drift-low 113s ease-in-out -7s infinite alternate; }
+  .public-site .sky-cloud--bank { animation: sky-drift-low 127s ease-in-out -88s infinite alternate-reverse; }
 }
 
 /* ── Projects on phones ── with motion, cards share one slot and the pinned
