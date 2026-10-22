@@ -3,6 +3,9 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { createClient, type Session, type SupabaseClient } from '@supabase/supabase-js';
 import { collections, settingsFields, type Field, type Row } from '@/lib/admin-model';
 import { initials, safeImage, safeUrl } from '@/lib/urls';
+import { OWNER_URL, SITE_URL } from '@/lib/site-url';
+
+const adminPath = () => location.hostname === new URL(OWNER_URL).hostname ? '/' : '/admin/';
 
 const STATUSES = ['new', 'read', 'replied', 'archived'];
 const IMAGE_TYPES = ['image/png', 'image/jpeg', 'image/webp', 'image/avif', 'image/svg+xml'];
@@ -57,7 +60,7 @@ export function AdminApp({ config }: { config: { supabaseUrl: string; supabaseAn
   let content;
   if (!config.supabaseUrl || !config.supabaseAnonKey) content = <div className="auth"><div className="auth-card"><p className="eyebrow">Setup needed</p><h1>Connect Supabase</h1><p>Set SUPABASE_URL and SUPABASE_PUBLISHABLE_KEY in your environment, then restart or redeploy. Run the migrations described in the README.</p></div></div>;
   else if (!client || session === undefined) content = <p className="boot">Loading admin…</p>;
-  else if (recovering) content = <PasswordReset client={client} onDone={() => { setRecovering(false); history.replaceState(null, '', '/admin'); notify('Password updated.'); }} />;
+  else if (recovering) content = <PasswordReset client={client} onDone={() => { setRecovering(false); history.replaceState(null, '', adminPath()); notify('Password updated.'); }} />;
   else if (!session) content = <Login client={client} message={authError} notify={notify} />;
   else if (admin === null) content = <p className="boot">Checking admin access…</p>;
   else if (!admin) content = <div className="auth"><div className="auth-card"><h1>Admin access required</h1><p>This account does not have admin access.</p><button className="btn" onClick={() => client.auth.signOut()}>Sign out</button></div></div>;
@@ -66,7 +69,7 @@ export function AdminApp({ config }: { config: { supabaseUrl: string; supabaseAn
       <a href="#/dashboard" aria-current={route === 'dashboard' ? 'page' : undefined}>Dashboard</a>
       <a href="#/submissions" aria-current={route === 'submissions' ? 'page' : undefined}>Submissions{count > 0 && <span className="badge">{count}</span>}</a>
       <span className="nav-group">CONTENT</span>{Object.entries(collections).map(([key, value]) => <a key={key} href={`#/${key}`} aria-current={route === key ? 'page' : undefined}>{value.label}</a>)}
-      <span className="nav-group">SITE</span><a href="#/settings" aria-current={route === 'settings' ? 'page' : undefined}>Contact &amp; settings</a><a href="/" target="_blank" rel="noopener noreferrer">View site ↗</a>
+      <span className="nav-group">SITE</span><a href="#/settings" aria-current={route === 'settings' ? 'page' : undefined}>Contact &amp; settings</a><a href={SITE_URL} target="_blank" rel="noopener noreferrer">View site ↗</a>
     </nav><div className="sidebar-foot"><span>{session.user.email}</span><button className="btn" onClick={async () => { const {error} = await client.auth.signOut(); if (error) notify(error.message); }}>Sign out</button></div></aside>
     <main className="main" id="main" key={route}>
       {route === 'dashboard' ? <Dashboard client={client} count={count} /> : route === 'settings' ? <Settings client={client} notify={notify} /> : route === 'submissions' ? <Submissions client={client} notify={notify} refreshCount={refreshCount} /> : <CollectionView client={client} collectionKey={route} notify={notify} />}
@@ -90,8 +93,8 @@ function Login({ client, message, notify }: { client: SupabaseClient; message: s
     <div className="auth-links"><button type="button" className="link-btn" disabled={busy} onClick={async () => {
       const input = form.current?.elements.namedItem('email') as HTMLInputElement;
       if (!input?.value || !input.reportValidity()) { setError('Enter your email address first.'); return; }
-      setBusy(true); try { await run(client.auth.resetPasswordForEmail(input.value.trim(), { redirectTo: `${location.origin}/admin/` })); notify('If that email has an account, a reset link is on its way.'); } catch (error) { setError(errorText(error)); } finally { setBusy(false); }
-    }}>Forgot password?</button><a href="/">← Back to site</a></div>
+      setBusy(true); try { await run(client.auth.resetPasswordForEmail(input.value.trim(), { redirectTo: `${location.origin}${adminPath()}` })); notify('If that email has an account, a reset link is on its way.'); } catch (error) { setError(errorText(error)); } finally { setBusy(false); }
+    }}>Forgot password?</button><a href={SITE_URL}>← Back to site</a></div>
   </form></div>;
 }
 function PasswordReset({client, onDone}: {client: SupabaseClient; onDone: () => void}) {
@@ -114,7 +117,7 @@ function Dashboard({client, count}: {client: SupabaseClient; count: number}) {
       {!stats.clients.live && <li><a href="#/clients">Add client logos</a> to replace the sample clients.</li>}
       {!stats.testimonials.live && <li><a href="#/testimonials">Publish client-approved testimonials</a> to show them on the public site.</li>}
       {!stats.projects.live && <li><a href="#/projects">Publish a project</a> to feature it in the portfolio.</li>}
-      <li><a href="/" target="_blank" rel="noopener noreferrer">View your website</a></li>
+      <li><a href={SITE_URL} target="_blank" rel="noopener noreferrer">View your website</a></li>
     </ul></section>
   </>;
 }

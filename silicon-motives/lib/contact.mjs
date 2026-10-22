@@ -51,8 +51,8 @@ function createLimiter() {
 }
 
 export async function archiveEnquiry(enquiry, env, fetcher = fetch) {
-  const base = env.SUPABASE_URL?.replace(/\/+$/, '');
-  const key = env.SUPABASE_PUBLISHABLE_KEY;
+  const base = (env.SUPABASE_URL || env.NEXT_PUBLIC_SUPABASE_URL)?.replace(/\/+$/, '');
+  const key = env.SUPABASE_PUBLISHABLE_KEY || env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
   if (!base || !key) return;
   const headers = { apikey: key, 'Content-Type': 'application/json' };
   const settings = await fetcher(`${base}/rest/v1/site_settings?select=accepting_briefs&id=eq.1`, {

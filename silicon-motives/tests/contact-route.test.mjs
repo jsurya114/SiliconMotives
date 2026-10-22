@@ -6,7 +6,7 @@ const valid = {name: 'Visitor', email: 'visitor@example.com', message: 'Our idea
 function route() {
   const sent = [];
   const handler = toWebHandler(createContactHandler({
-    env: {SMTP_USER: CONTACT_EMAIL, SMTP_PASS: 'test-only'},
+    env: {SMTP_HOST: 'smtp.example.com', SMTP_USER: CONTACT_EMAIL, SMTP_PASS: 'test-only'},
     createTransport: () => ({sendMail: async mail => {sent.push(mail); return {accepted: [CONTACT_EMAIL]};}}),
     archive: async () => {},
   }));

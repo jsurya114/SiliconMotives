@@ -17,6 +17,8 @@ Open http://127.0.0.1:3000 for the site and http://127.0.0.1:3000/admin for the 
 
 Vercel uses the Next.js framework, installs dependencies with `npm ci`, and runs `npm run build` with output in `.next/`. The contact Route Handler runs in the Node.js runtime. Set `SUPABASE_URL`, `SUPABASE_PUBLISHABLE_KEY`, `SMTP_HOST`, `SMTP_PORT`, `SMTP_SECURE`, `SMTP_USER`, and `SMTP_PASS` in the Vercel project environment variables and redeploy. Use either the repository root or the synchronized `silicon-motives/` directory as the Vercel Root Directory. Remove any old dashboard overrides for the Other framework or `build/` output. This app needs a Next.js server; static export does not support the email endpoint. Only the public Supabase URL and publishable key are passed to the admin browser.
 
+For existing Vercel configurations, `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` are also accepted when the corresponding `SUPABASE_*` variable is empty. Both names must contain only the project URL and publishable key, never a secret or service-role key.
+
 `.env`, `.next/`, and generated TypeScript files are Git-ignored. Only empty placeholders are committed. The URL and publishable key remain visible in the browser by design; database access is enforced by Supabase row-level security. Never use a secret or service-role key for `SUPABASE_PUBLISHABLE_KEY`.
 
 ## Email delivery
@@ -57,6 +59,15 @@ npm start
 
 ## Admin panel
 
+The production owner panel is served at **https://owner.siliconmotives.com/**. It uses the same Vercel project and Supabase admin accounts as the public website. The subdomain root internally serves the admin page; `/admin` on the public production domains redirects to the owner subdomain. Local development and preview deployments keep `/admin` available.
+
+To activate the owner subdomain:
+
+1. In the existing Vercel project, open **Settings → Domains** and add `owner.siliconmotives.com` to Production. Connect it to this project, without a domain redirect to the public website.
+2. At the DNS provider for `siliconmotives.com`, create the `owner` CNAME with the exact target Vercel displays. If Vercel manages DNS, follow its automatic configuration. Wait until Vercel shows valid configuration and HTTPS is ready.
+3. In Supabase **Authentication → URL Configuration**, add `https://owner.siliconmotives.com/` to **Redirect URLs** for password recovery. Keep local development URLs as needed.
+4. Deploy these routing changes, then verify owner sign-in, password recovery, and the public website. The owner host sends `noindex, nofollow` headers and retains the existing authentication and admin membership checks.
+
 Signed-in admins can:
 
 - **Submissions**: read project briefs sent from the contact form, mark them read, replied, or archived, reply by email, delete them, and export them to CSV
@@ -92,7 +103,7 @@ Review each entry with its named client, update the wording if needed, then publ
    select id from auth.users where email = 'you@example.com';
    ```
 
-6. In **Authentication → URL Configuration**, set the Site URL to your live domain and add `https://your-domain/admin/` (and `http://127.0.0.1:3000/admin/` and `http://localhost:3000/admin/` for local use) to the redirect URLs so password reset links work.
+6. In **Authentication → URL Configuration**, set the Site URL to your live domain and add `https://owner.siliconmotives.com/` (and `http://127.0.0.1:3000/admin/` and `http://localhost:3000/admin/` for local use) to the redirect URLs so password reset links work.
 7. Recommended: in **Authentication → Providers → Email**, turn off "Allow new users to sign up". New accounts get no admin access either way, but this keeps the user list clean.
 
 To add another admin later, repeat steps 4 and 5. To remove one, delete the row from `public.admin_users` or delete the user.

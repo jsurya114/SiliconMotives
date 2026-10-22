@@ -2,7 +2,10 @@ import defaults from './default-content.json';
 export type ContentRow = Record<string, any>;
 export type SiteContent = { services: ContentRow[]; projects: ContentRow[]; team_members: ContentRow[]; faqs: ContentRow[]; clients: ContentRow[]; testimonials: ContentRow[]; settings: ContentRow };
 export function publicConfig() {
-  return { supabaseUrl: process.env.SUPABASE_URL || '', supabaseAnonKey: process.env.SUPABASE_PUBLISHABLE_KEY || '' };
+  return {
+    supabaseUrl: process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL || '',
+    supabaseAnonKey: process.env.SUPABASE_PUBLISHABLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY || '',
+  };
 }
 export async function loadContent(): Promise<SiteContent> {
   const content: SiteContent = { ...defaults, testimonials: [], settings: {} };

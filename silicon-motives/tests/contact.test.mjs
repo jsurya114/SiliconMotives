@@ -5,7 +5,7 @@ import nodemailer from 'nodemailer';
 import { createContactHandler, archiveEnquiry, CONTACT_EMAIL } from '../lib/contact.mjs';
 
 const valid = { name: 'A visitor', email: 'visitor@example.com', message: 'A booking app for our business.', website: '' };
-const env = { SMTP_USER: CONTACT_EMAIL, SMTP_PASS: 'test-app-password' };
+const env = { SMTP_HOST: 'smtp.example.com', SMTP_USER: CONTACT_EMAIL, SMTP_PASS: 'test-app-password' };
 
 function setup(overrides = {}) {
   const sent = [], archived = [], logs = [];
@@ -127,11 +127,12 @@ test('same-email and same-IP bursts are throttled, including concurrent requests
 });
 
 test('optional archive respects the admin inbox switch and saves only enquiry fields', async () => {
-  for (const enabled of [false, true]) {
+  for (const enabled of [false, true]) for (const config of [
+    { SUPABASE_URL: 'https://example.supabase.co', SUPABASE_PUBLISHABLE_KEY: 'public-test-key' },
+    { NEXT_PUBLIC_SUPABASE_URL: 'https://example.supabase.co', NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: 'public-test-key' },
+  ]) {
     const calls = [];
-    await archiveEnquiry({ name: valid.name, email: valid.email, message: valid.message }, {
-      SUPABASE_URL: 'https://example.supabase.co', SUPABASE_PUBLISHABLE_KEY: 'public-test-key',
-    }, async (url, options) => {
+    await archiveEnquiry({ name: valid.name, email: valid.email, message: valid.message }, config, async (url, options) => {
       calls.push({ url, options });
       return { ok: true, json: async () => [{ accepting_briefs: enabled }] };
     });
