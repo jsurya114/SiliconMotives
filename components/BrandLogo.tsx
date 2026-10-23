@@ -1,12 +1,25 @@
 import Image from 'next/image';
 
 export function BrandLogo({ light = false, className = '' }: { light?: boolean; className?: string }) {
-  return <Image
-    src="/images/brand/logo-horizontal.png"
-    alt="SiliconMotives"
-    width={824}
-    height={160}
-    sizes="(min-width: 640px) 206px, 180px"
-    className={`brand-logo h-auto w-[180px] shrink-0 sm:w-[206px] ${light ? 'brightness-0 invert' : ''} ${className}`}
-  />;
+  const size = { width: 1100, height: 192 };
+  return <span className={`brand-logo-wrap inline-flex shrink-0 ${light ? 'is-light' : ''} ${className}`}>
+    <Image
+      src="/brand/logos/svg/siliconmotives-horizontal-primary.svg"
+      alt=""
+      aria-hidden="true"
+      {...size}
+      unoptimized
+      sizes="(min-width: 640px) 280px, 240px"
+      className="brand-logo brand-logo--primary h-auto w-[240px] sm:w-[280px]"
+    />
+    <Image
+      src="/brand/logos/svg/siliconmotives-horizontal-inverted.svg"
+      alt=""
+      aria-hidden="true"
+      {...size}
+      unoptimized
+      sizes="(min-width: 640px) 280px, 240px"
+      className="brand-logo brand-logo--inverted h-auto w-[240px] sm:w-[280px]"
+    />
+  </span>;
 }

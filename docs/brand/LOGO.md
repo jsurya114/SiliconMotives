@@ -1,22 +1,20 @@
-# SiliconMotives logo assets
+# SiliconMotives brand assets
 
-23 October 2026. The owner supplied `public/images/image.png` as the new brand logo.
+The approved source is `public/brand/`, copied from the SiliconMotives Website Brand Kit.
 
-## Production assets
+## Website usage
 
-- `public/images/brand/logo.png`: transparent stacked logo, 1305 × 761.
-- `public/images/brand/logo-horizontal.png`: horizontal header/footer lockup, 824 × 160.
-- `public/images/brand/mark.png`: square symbol with transparent padding, 512 × 512; used in Organization structured data.
-- `public/favicon-{32,48,96,192}.png`, `public/favicon.ico` and `public/apple-touch-icon.png`: symbol-only browser/search/bookmark assets. The old SVG favicon URL now contains the same mark for compatibility.
+- Header on light surfaces: `logos/svg/siliconmotives-horizontal-primary.svg`.
+- Header/footer on navy surfaces: `logos/svg/siliconmotives-horizontal-inverted.svg`.
+- Header/footer on Sky Cyan: `logos/svg/siliconmotives-horizontal-on-sky.svg`.
+- Browser and app icons: `web/icons/`.
+- Social preview image: `social/siliconmotives-og-navy.png`.
+- Google Organization logo: `logos/png/siliconmotives-stacked-primary.png`.
 
-`components/BrandLogo.tsx` shares the horizontal asset across public navigation and footer components. On navy backgrounds a CSS filter displays a white version without adding a background. The original uploaded file is retained separately and is not used as the displayed logo.
+The site links directly to these kit files. `public/favicon.*` at the web root mirrors the kit favicon files for browser and crawler compatibility. Do not recolor, stretch, or rebuild the supplied logo paths.
 
-The Open Graph/Twitter preview uses the horizontal logo on the site's off-white colour. Page titles remain readable text; icons beside titles are supplied through favicon links. Google controls whether and when the icon and structured-data logo appear.
+## Brand palette
 
-## Background extraction
+Use the exact kit values: Bright Cloud Mint `#58DECE`, Sky Cyan `#269FC7`, Deep Navy `#0B2033`, Warm Off-White `#F6F5ED`, and White `#FFFFFF`. Website body typography remains independent of the outlined Raleway logo lettering.
 
-Used the built-in imagegen tool with transparency enabled. Prompt:
-
-> Use case: background-extraction. Edit target: supplied SiliconMotives logo. Remove ONLY the off-white textured background, including all background between the four rounded lobes and between/inside the letters. Preserve precisely the existing symbol geometry, teal and charcoal colours, and exact wordmark text SILICONMOTIVES, same relative layout and spacing. No redesign, no new text, no shadows, no textures. Output the full existing logo on genuinely transparent alpha, clean crisp edges, with minimal transparent margin. Intended for a website logo. Keep original logo intact.
-
-Production crops, horizontal arrangement and icon sizes derive from that transparent result using Sharp. No new symbol was drawn. Image metadata confirms alpha ranges from 0 to 255. The production webpack build and TypeScript compilation passed; no test suite was run.
+Google-facing references are set in `app/layout.tsx` (Organization structured data and favicon links) and `lib/metadata.ts` (Open Graph and X/Twitter images). Google controls when it refreshes and displays these assets.

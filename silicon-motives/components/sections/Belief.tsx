@@ -18,7 +18,7 @@ export function Belief() {
             id="belief-title"
             lines={belief.statement}
             from="#76848f"
-            to="#0b1a2b"
+            to="#0B2033"
             className="font-display text-[clamp(2.1rem,4.7vw,4.6rem)] leading-[1.02] font-bold tracking-[-0.04em]"
           />
           <Reveal className="mt-10 grid gap-6 md:grid-cols-9 lg:mt-12">

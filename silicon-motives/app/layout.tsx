@@ -13,16 +13,20 @@ export const metadata: Metadata = {
   ),
   icons: {
     icon: [
-      { url: '/favicon-96.png', sizes: '96x96', type: 'image/png' },
+      { url: '/brand/web/icons/icon-512.png', sizes: '512x512', type: 'image/png' },
+      { url: '/brand/web/icons/icon-192.png', sizes: '192x192', type: 'image/png' },
       { url: '/favicon-48.png', sizes: '48x48', type: 'image/png' },
       { url: '/favicon-32.png', sizes: '32x32', type: 'image/png' },
-      { url: '/favicon-192.png', sizes: '192x192', type: 'image/png' },
+      { url: '/favicon-16.png', sizes: '16x16', type: 'image/png' },
+      { url: '/favicon.ico', sizes: '16x16 32x32 48x48', type: 'image/x-icon' },
+      { url: '/brand/web/icons/favicon.svg', type: 'image/svg+xml' },
     ],
     shortcut: '/favicon.ico',
     apple: { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
   },
+  manifest: '/brand/web/icons/site.webmanifest',
 };
-export const viewport: Viewport = { themeColor: '#0b1a2b' };
+export const viewport: Viewport = { themeColor: '#0B2033' };
 
 const organizationSchema = {
   '@context': 'https://schema.org',
@@ -34,10 +38,10 @@ const organizationSchema = {
   logo: {
     '@type': 'ImageObject',
     '@id': `${SITE_URL}/#logo`,
-    url: `${SITE_URL}/images/brand/mark.png`,
-    contentUrl: `${SITE_URL}/images/brand/mark.png`,
-    width: 512,
-    height: 512,
+    url: `${SITE_URL}/brand/logos/png/siliconmotives-stacked-primary.png`,
+    contentUrl: `${SITE_URL}/brand/logos/png/siliconmotives-stacked-primary.png`,
+    width: 1200,
+    height: 750,
     caption: 'SiliconMotives',
   },
   email: 'hello@siliconmotives.com',

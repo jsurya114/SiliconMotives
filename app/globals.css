@@ -5,17 +5,17 @@
 @source "./";
 
 @theme {
-  --color-monsoon: #0b1a2b; /* dark canvas            · 15.3:1 vs cloud */
-  --color-harbour: #132b44; /* dark cards             */
-  --color-tide: #1d3a57; /* lines on dark          */
-  --color-cloud: #ecf0f2; /* light canvas           */
-  --color-cloud-2: #e1e7eb; /* alt light              */
-  --color-ink: #0b1a2b; /* text on light          */
-  --color-slate: #4a5968; /* muted on light         · 6.3:1 */
-  --color-mist: #97a8b8; /* muted on dark          · 7.2:1 */
-  --color-lagoon: #7ee2d1; /* brand accent           · 11.4:1 vs monsoon */
-  --color-lagoon-deep: #5fd0bd;
-  --color-lagoon-ink: #0b6e61; /* small accent text on light · 5.4:1 */
+  --color-monsoon: #0B2033; /* Deep Navy */
+  --color-harbour: color-mix(in srgb, #0B2033 92%, #269FC7); /* Navy + Sky Cyan */
+  --color-tide: #269FC7; /* Sky Cyan */
+  --color-cloud: #F6F5ED; /* Warm Off-White */
+  --color-cloud-2: #FFFFFF; /* White */
+  --color-ink: #0B2033; /* Deep Navy */
+  --color-slate: color-mix(in srgb, #0B2033 72%, #F6F5ED); /* Navy + Warm Off-White */
+  --color-mist: color-mix(in srgb, #F6F5ED 86%, #0B2033); /* Warm Off-White + Navy */
+  --color-lagoon: #58DECE; /* Bright Cloud Mint */
+  --color-lagoon-deep: #269FC7; /* Sky Cyan */
+  --color-lagoon-ink: #0B2033; /* Deep Navy on light accent */
 
   --font-display: 'Schibsted Grotesk', ui-sans-serif, system-ui, sans-serif;
   --font-serif: 'Newsreader', ui-serif, Georgia, serif;

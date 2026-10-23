@@ -146,9 +146,11 @@ html.lenis, html.lenis body { height: auto; }
   --hdr-glass: var(--color-monsoon);
   --hdr-edge: var(--color-cloud);
 }
-.site-header[data-tone="dark"] .brand-logo {
-  filter: brightness(0) invert(1);
-}
+.brand-logo--inverted { display: none; }
+.brand-logo-wrap.is-light .brand-logo--primary,
+.site-header[data-tone="dark"] .brand-logo--primary { display: none; }
+.brand-logo-wrap.is-light .brand-logo--inverted,
+.site-header[data-tone="dark"] .brand-logo--inverted { display: block; }
 .site-header__bar {
   background: color-mix(in oklab, var(--hdr-glass) 22%, transparent);
   backdrop-filter: blur(18px) saturate(170%);
