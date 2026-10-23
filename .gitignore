@@ -14,3 +14,6 @@ build/
 out/
 *.tsbuildinfo
 next-env.d.ts
+
+# Cloud source photographs, downloaded by scripts/sky/build.py
+scripts/sky/.cache/

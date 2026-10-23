@@ -1,12 +1,12 @@
 # Hero image
 
-The hero uses a clear, static photograph-style image of white clouds and blue sky. There are no mountains, land, water, or buildings, and no GIF or hero animation.
+The hero's sky comes from a clear photograph-style image of white clouds and blue sky. There are no mountains, land, water, or buildings.
 
-Current asset: `public/images/cloud-sky-clear.webp`
+Source asset: `public/images/cloud-sky-clear.webp`
 
 - Dimensions: 1672 × 941 pixels, preserving the generated image's full resolution.
 - File size: approximately 191 KiB.
-- The main hero uses responsive Next.js image delivery at quality 90, with an empty decorative alt attribute and an overlay to keep the headline legible.
+- The home hero no longer shows this file directly. `scripts/sky/build.py` splits it into a clean sky plate, far wisps and the mid cumulus (`public/images/sky/`), which the scroll-driven cloud scene layers with keyed photographs; see `docs/sky-hero.md`. The original wash that keeps the headline legible is kept.
 - The phone crop emphasizes the detailed clouds; desktop uses the full central composition.
 
 ## Generation prompt
