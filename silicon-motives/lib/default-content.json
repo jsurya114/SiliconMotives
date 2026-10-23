@@ -59,11 +59,11 @@
     }
   ],
   "clients": [
-    { "id": "client-nasalogistics", "name": "NasaLogistics", "logo_url": "/images/client-logos/nasalogistics.svg", "website_url": "" },
+    { "id": "client-nasalogistics", "name": "NasaLogistics", "logo_url": "/brand/logos/png/nasa.png", "website_url": "" },
     { "id": "client-woobe", "name": "Woobe", "logo_url": "/images/client-logos/woobe.svg", "website_url": "" },
     { "id": "client-dental-buddy", "name": "Dental Buddy", "logo_url": "/images/client-logos/dental-buddy.svg", "website_url": "" },
-    { "id": "client-picbox", "name": "Picbox", "logo_url": "/images/client-logos/picbox.svg", "website_url": "" },
-    { "id": "client-uniwayin", "name": "Uniwayin", "logo_url": "/images/client-logos/uniwayin.svg", "website_url": "" },
+    { "id": "client-picbox", "name": "Picbox", "logo_url": "/brand/logos/png/pickbox.png", "website_url": "" },
+    { "id": "client-uniwayin", "name": "Uniwayin", "logo_url": "/brand/logos/png/Uniway.png", "website_url": "" },
     { "id": "client-jjc-artworks", "name": "JJC Artworks", "logo_url": "/images/client-logos/jjc-artworks.svg", "website_url": "" }
   ],
   "faqs": [

@@ -6,6 +6,12 @@ import { RevealText } from "../motion/RevealText";
 import { SectionLabel } from "../ui/SectionLabel";
 
 export function Clients({ rows }: { rows: ContentRow[] }) {
+  const currentLogos: Record<string, string> = {
+    nasalogistics: "/brand/logos/png/nasa.png",
+    picbox: "/brand/logos/png/pickbox.png",
+    uniwayin: "/brand/logos/png/Uniway.png",
+  };
+
   return <section id="clients" data-header="light" aria-labelledby="clients-title" className="overflow-hidden bg-lagoon py-16 text-monsoon sm:py-20">
     <div className="wrap">
       <SectionLabel className="mb-4">Companies we’ve worked with</SectionLabel>
@@ -14,7 +20,7 @@ export function Clients({ rows }: { rows: ContentRow[] }) {
     <Marquee className="mt-10 sm:mt-14" speed={36}>
       <ul className="client-list flex shrink-0 items-center">
         {rows.map(row => {
-          const logo = safeImage(row.logo_url);
+          const logo = currentLogos[row.name?.trim().toLowerCase()] || safeImage(row.logo_url);
           const url = safeUrl(row.website_url);
           const content = <span className="flex flex-col items-center gap-3">
             {logo && <img src={logo} alt="" loading="lazy" decoding="async" className="h-12 w-auto max-w-[16rem] object-contain sm:h-16 sm:max-w-[20rem]" />}
