@@ -7,8 +7,8 @@ import { site } from '@/content/site';
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   ...pageMetadata(
-    'SiliconMotives — Custom Software, Cloud Infrastructure & DevOps',
-    'SiliconMotives, founded by Jayasoorya Suryadas and Jasil M, delivers custom software, cloud infrastructure and DevOps from Kerala, India.',
+    site.seo.title,
+    site.seo.description,
     '/',
   ),
   icons: {
@@ -41,7 +41,8 @@ const organizationSchema = {
     caption: 'SiliconMotives',
   },
   email: 'hello@siliconmotives.com',
-  description: 'Custom Software, Cloud Infrastructure, and DevOps engineering from Kerala, India.',
+  slogan: site.brand.tagline,
+  description: site.seo.description,
   // Presentation order is independent of the visible founder cards.
   // Search engines determine whether and how founder information is displayed.
   founder: ['Jayasoorya Suryadas', 'Jasil M'].map(name => {

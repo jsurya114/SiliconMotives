@@ -16,7 +16,7 @@ export default async function OpenGraphImage() {
     }}>
       <img src={logoUrl} alt="SiliconMotives" width={515} height={100} />
       <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
-        <div style={{ display: 'flex', fontSize: 52, fontWeight: 700, letterSpacing: -2 }}>Software. Infrastructure. Reliability.</div>
+        <div style={{ display: 'flex', fontSize: 52, fontWeight: 700, letterSpacing: -2 }}>Remote-first. Engineering-focused.</div>
         <div style={{ display: 'flex', fontSize: 30, color: '#40566a' }}>Custom Software · Cloud Infrastructure · DevOps</div>
       </div>
       <div style={{ display: 'flex', color: '#40566a', fontSize: 24, fontWeight: 700, letterSpacing: 2 }}>KERALA, INDIA · REMOTE-FIRST</div>

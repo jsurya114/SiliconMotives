@@ -7,13 +7,13 @@ const whatsappText =
 export const site = {
   brand: {
     name: "SiliconMotives",
-    tagline: "Good software. Clear purpose.",
+    tagline: "Remote-first. Engineering-focused.",
   },
 
   seo: {
-    title: "SiliconMotives — Custom Software, Cloud Infrastructure & DevOps",
+    title: "SiliconMotives — Remote-first Engineering",
     description:
-      "A small remote-first engineering company working from Kerala, India on custom software, cloud infrastructure, and DevOps.",
+      "SiliconMotives is a remote-first engineering company in Kerala, India, building custom software, cloud infrastructure and DevOps for businesses and agencies.",
   },
 
   contact: {
@@ -36,7 +36,7 @@ export const site = {
   hero: {
     eyebrow: "Custom Software · Cloud Infrastructure · DevOps",
     title: ["Engineering for", "businesses & agencies."],
-    lead: "Custom Software Engineering, Cloud Infrastructure, and DevOps for businesses and agencies, delivered remotely from Kerala, India.",
+    lead: "Remote-first engineering from Kerala, India. Custom Software, Cloud Infrastructure and DevOps for businesses and agencies.",
     cta: { label: "Start a project", href: "/contact?type=project" },
     agencyCta: { label: "Agency partnerships", href: "/agency-partners" },
     location: "Kerala, India · Remote-first",

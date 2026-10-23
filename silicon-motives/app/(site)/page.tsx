@@ -15,11 +15,12 @@ import { People } from '@/components/sections/People';
 import { Contact } from '@/components/sections/Contact';
 import { Footer } from '@/components/sections/Footer';
 import { pageMetadata } from '@/lib/metadata';
+import { site } from '@/content/site';
 
 export const dynamic = 'force-dynamic';
 export const metadata = pageMetadata(
-  'SiliconMotives — Custom Software, Cloud Infrastructure & DevOps',
-  'Custom Software Engineering, Cloud Infrastructure, and DevOps for businesses and agencies, delivered remotely from Kerala, India.',
+  site.seo.title,
+  site.seo.description,
   '/',
 );
 

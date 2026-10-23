@@ -3,15 +3,16 @@ import { site } from '@/content/site';
 import { ContentSection, MarketingPage, PageIntro } from '@/components/site/marketing-page';
 import { pageMetadata } from '@/lib/metadata';
 
-export const metadata = pageMetadata('About | SiliconMotives', 'Meet SiliconMotives founders Jayasoorya Suryadas and Jasil M. Custom software, cloud infrastructure and DevOps engineering from Kerala, India.', '/about');
+export const metadata = pageMetadata('About Our Remote-first Engineering Company | SiliconMotives', 'Meet Jayasoorya Suryadas and Jasil M, founders of SiliconMotives: a remote-first software, cloud infrastructure and DevOps engineering company in Kerala, India.', '/about');
 
 const architecture = ['Users', 'ALB', 'Auto Scaling Group', 'EC2 instances', 'Application / backend', 'Database'];
 
 export default function AboutPage() {
   return (
     <MarketingPage>
-      <PageIntro eyebrow="About SiliconMotives" title="A small engineering company, built around real work.">
-        <p>SiliconMotives is an engineering company focused on Custom Software, Cloud Infrastructure, and DevOps. From Kerala, India, we work with Indian businesses and are building relationships with international teams.</p>
+      <PageIntro eyebrow="About SiliconMotives" title={site.brand.tagline}>
+        <p>{site.seo.description}</p>
+        <p className="mt-4">Founded by Jayasoorya Suryadas and Jasil M, SiliconMotives is built around focused engineering work, clear communication and responsibility for what we deliver.</p>
       </PageIntro>
 
       <ContentSection title="What we do">
@@ -39,7 +40,11 @@ export default function AboutPage() {
       </ContentSection>
 
       <ContentSection title="How we work remotely">
-        <p>We work remotely from Kerala and agree communication and review points with each partner.</p>
+        <p>{site.remote.lead}</p>
+        <ul className="grid gap-5 sm:grid-cols-3">
+          {site.remote.principles.map(principle => <li key={principle.name} className="border-t border-ink/15 pt-4"><h3 className="font-display font-semibold text-ink">{principle.name}</h3><p className="mt-2 text-base leading-7">{principle.body}</p></li>)}
+        </ul>
+        <p>Meeting windows, review checkpoints and support arrangements are agreed for each project. Working remotely does not imply round-the-clock availability.</p>
       </ContentSection>
 
       <ContentSection title="Illustrative architecture reference">
