@@ -1,3 +1,5 @@
+import { clientLogos } from '@/lib/client-logos';
+
 export type ProjectStory = {
   need: string;
   approach: string;
@@ -32,6 +34,7 @@ export const projectCases: ProjectCase[] = [
   {
     slug: 'woobe',
     name: 'Woobe',
+    logo: clientLogos.woobe,
     descriptor: 'Weight-based commerce',
     category: 'Commerce',
     summary: 'A commerce storefront designed for products priced by weight.',
@@ -83,7 +86,7 @@ export const projectCases: ProjectCase[] = [
   {
     slug: 'nasalogistics',
     name: 'NasaLogistics',
-    logo: '/brand/logos/png/nasa-transparent.png',
+    logo: clientLogos.nasalogistics,
     descriptor: 'Driver & logistics management',
     category: 'Logistics software',
     summary: 'A logistics platform for driver availability, order workflows, and administration.',
@@ -97,7 +100,7 @@ export const projectCases: ProjectCase[] = [
   {
     slug: 'picbox',
     name: 'Picbox',
-    logo: '/brand/logos/png/pickbox.png',
+    logo: clientLogos.picbox,
     descriptor: 'Event-rental inventory & invoicing',
     category: 'Business software',
     summary: 'An inventory and invoicing system for an event-rental business.',
@@ -121,7 +124,7 @@ export const projectCases: ProjectCase[] = [
   {
     slug: 'uniwayin',
     name: 'Uniwayin',
-    logo: '/brand/logos/png/Uniway.png',
+    logo: clientLogos.uniwayin,
     descriptor: 'Education consultancy CRM',
     category: 'Business software',
     summary: 'A CRM for education consultancy lead and follow-up workflows.',
@@ -145,6 +148,7 @@ export const projectCases: ProjectCase[] = [
   {
     slug: 'dental-buddy',
     name: 'Dental Buddy',
+    logo: clientLogos.dentalbuddy,
     descriptor: 'Dental clinic management software',
     category: 'Healthcare software',
     summary: 'Clinic software bringing patient records, prescriptions, appointments, and billing into one workflow.',
@@ -158,6 +162,7 @@ export const projectCases: ProjectCase[] = [
   {
     slug: 'jjc-artworks',
     name: 'JJC Artworks',
+    logo: clientLogos.jjcartworks,
     descriptor: 'Website for church interior woodwork',
     category: 'Business website',
     summary: 'A website presenting JJC Artworks’ church interior woodwork and completed projects.',

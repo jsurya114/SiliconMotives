@@ -60,7 +60,7 @@
   ],
   "clients": [
     { "id": "client-nasalogistics", "name": "NasaLogistics", "logo_url": "/brand/logos/png/nasa-transparent.png", "website_url": "" },
-    { "id": "client-woobe", "name": "Woobe", "logo_url": "/images/client-logos/woobe.svg", "website_url": "" },
+    { "id": "client-woobe", "name": "Woobe", "logo_url": "/brand/logos/png/Woobe_logo_no_crown.svg", "website_url": "" },
     { "id": "client-dental-buddy", "name": "Dental Buddy", "logo_url": "/images/client-logos/dental-buddy.svg", "website_url": "" },
     { "id": "client-picbox", "name": "Picbox", "logo_url": "/brand/logos/png/pickbox.png", "website_url": "" },
     { "id": "client-uniwayin", "name": "Uniwayin", "logo_url": "/brand/logos/png/Uniway.png", "website_url": "" },

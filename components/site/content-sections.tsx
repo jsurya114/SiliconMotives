@@ -1,4 +1,5 @@
 import type { ContentRow } from '@/lib/content';
+import { clientLogo } from '@/lib/client-logos';
 import { initials, pad, safeImage, safeUrl } from '@/lib/urls';
 import { ChatIcon } from './icons';
 import { Marquee } from './marquee';
@@ -29,7 +30,7 @@ export function Clients({ rows }: { rows: ContentRow[] }) {
   return <section className="clients-section" id="clients" aria-labelledby="clients-title"><div className="site-container">
     <div className="clients-heading"><div><p className="eyebrow">OUR CLIENTS</p><h2 id="clients-title">People we build with.</h2></div></div>
     <Marquee kind="client">{rows.length ? rows.map(row => {
-      const logo = safeImage(row.logo_url); const url = safeUrl(row.website_url);
+      const logo = clientLogo(row.name, row.logo_url); const url = safeUrl(row.website_url);
       const content = logo ? <img src={logo} alt={row.name} loading="lazy" decoding="async" /> : <span>{row.name}</span>;
       return url ? <a className="client-logo" key={row.id} href={url} target="_blank" rel="noopener noreferrer">{content}</a> : <div className="client-logo" key={row.id}>{content}</div>;
     }) : null}</Marquee>
