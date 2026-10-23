@@ -16,8 +16,8 @@ export default function ProjectsPage() {
         {projectCases.map((project, index) => (
           <article key={project.slug} className="flex h-full flex-col border-t border-ink/20 py-6">
             <p className="label text-lagoon-ink">{project.category} <span className="ml-2 text-slate/70">/{String(index + 1).padStart(2, '0')}</span></p>
-            <div className="mt-5 flex min-h-12 items-center">
-              {project.logo ? <Image src={project.logo} alt={`${project.name} logo`} width={180} height={48} className="h-12 w-auto max-w-44 object-contain object-left" /> : <h2 className="display text-3xl font-bold tracking-[-0.04em]">{project.name}</h2>}
+            <div className="mt-5 flex min-h-20 items-center">
+              {project.logo ? <Image src={project.logo} alt={`${project.name} logo`} width={144} height={80} className="h-20 w-36 object-contain object-left" /> : <h2 className="display text-3xl font-bold tracking-[-0.04em]">{project.name}</h2>}
             </div>
             {project.logo ? <h2 className="sr-only">{project.name}</h2> : null}
             <p className="mt-1 font-serif text-xl italic text-slate">{project.descriptor}</p>

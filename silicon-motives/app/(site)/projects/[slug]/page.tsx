@@ -48,7 +48,7 @@ export default async function ProjectDetailPage({ params }: Props) {
         </nav>
       </div>
       <PageIntro eyebrow={`${story?.decisions?.length ? 'Engineering overview' : 'Project overview'} · ${project.category}`} title={story ? project.name : `${project.name} — ${project.descriptor}`}>
-        {project.logo ? <div className="mb-5"><Image src={project.logo} alt={`${project.name} logo`} width={220} height={58} className="h-14 w-auto max-w-56 object-contain object-left" /></div> : null}
+        {project.logo ? <div className="mb-5"><Image src={project.logo} alt={`${project.name} logo`} width={144} height={80} className="h-20 w-36 object-contain object-left" /></div> : null}
         {story && <p className="mb-3 font-display text-sm font-semibold uppercase tracking-wider text-lagoon-ink">{project.descriptor}</p>}
         <p>{project.summary}</p>
         {project.liveUrl && <div className="mt-5"><a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center gap-2 font-display text-base font-semibold text-ink"><span className="link-line">Visit {project.name} live</span><ArrowUpRight size={16} /></a></div>}

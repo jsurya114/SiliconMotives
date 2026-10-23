@@ -83,7 +83,7 @@ export const projectCases: ProjectCase[] = [
   {
     slug: 'nasalogistics',
     name: 'NasaLogistics',
-    logo: '/brand/logos/png/nasa.png',
+    logo: '/brand/logos/png/nasa-transparent.png',
     descriptor: 'Driver & logistics management',
     category: 'Logistics software',
     summary: 'A logistics platform for driver availability, order workflows, and administration.',

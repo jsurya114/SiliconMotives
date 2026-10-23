@@ -7,7 +7,7 @@ import { SectionLabel } from "../ui/SectionLabel";
 
 export function Clients({ rows }: { rows: ContentRow[] }) {
   const currentLogos: Record<string, string> = {
-    nasalogistics: "/brand/logos/png/nasa.png",
+    nasalogistics: "/brand/logos/png/nasa-transparent.png",
     picbox: "/brand/logos/png/pickbox.png",
     uniwayin: "/brand/logos/png/Uniway.png",
   };
@@ -22,8 +22,8 @@ export function Clients({ rows }: { rows: ContentRow[] }) {
         {rows.map(row => {
           const logo = currentLogos[row.name?.trim().toLowerCase()] || safeImage(row.logo_url);
           const url = safeUrl(row.website_url);
-          const content = <span className="flex flex-col items-center gap-3">
-            {logo && <img src={logo} alt="" loading="lazy" decoding="async" className="h-12 w-auto max-w-[16rem] object-contain sm:h-16 sm:max-w-[20rem]" />}
+          const content = <span className="flex w-36 flex-col items-center gap-3">
+            {logo && <img src={logo} alt="" loading="lazy" decoding="async" className="h-20 w-36 object-contain" />}
             <span className="font-display text-sm font-semibold tracking-wide sm:text-base">{row.name}</span>
           </span>;
           return <li key={row.id} className="flex items-center">
