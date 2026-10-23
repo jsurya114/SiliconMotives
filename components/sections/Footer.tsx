@@ -1,6 +1,7 @@
 import { site } from "@/content/site";
 import { RevealText } from "../motion/RevealText";
-import { ArrowIcon } from "../ui/icons";
+import { ArrowIcon, InstagramIcon } from "../ui/icons";
+import { INSTAGRAM_URL } from '@/lib/social-links';
 import { BrandLogo } from '../BrandLogo';
 
 const { footer } = site;
@@ -40,6 +41,7 @@ export function Footer() {
                 <span className="link-line">Start a conversation</span>
                 <ArrowIcon size={14} />
               </a>
+              <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center gap-2 font-display text-sm font-medium text-cloud/85 transition-colors hover:text-lagoon"><InstagramIcon size={16} />Instagram</a>
             </div>
           </div>
         </div>

@@ -1,3 +1,5 @@
+import { INSTAGRAM_URL } from './social-links';
+
 export function safeUrl(value: unknown): string {
   return typeof value === 'string' && /^https?:\/\//i.test(value) ? value : '';
 }
@@ -22,6 +24,6 @@ export function contactDetails(settings: Record<string, unknown>) {
     phoneHref: `tel:${tel}`,
     whatsappHref: whatsappUrl(String(settings.whatsapp_number || digits)),
     linkedin: safeUrl(settings.linkedin_url),
-    instagram: safeUrl(settings.instagram_url),
+    instagram: INSTAGRAM_URL,
   };
 }

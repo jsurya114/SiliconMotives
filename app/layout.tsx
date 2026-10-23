@@ -3,6 +3,7 @@ import './globals.css';
 import { SITE_URL } from '@/lib/site-url';
 import { pageMetadata } from '@/lib/metadata';
 import { site } from '@/content/site';
+import { INSTAGRAM_URL } from '@/lib/social-links';
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -36,6 +37,7 @@ const organizationSchema = {
   alternateName: 'Silicon Motives',
   legalName: 'Millionian LLC',
   url: SITE_URL,
+  sameAs: [INSTAGRAM_URL],
   logo: {
     '@type': 'ImageObject',
     '@id': `${SITE_URL}/#logo`,

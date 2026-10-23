@@ -31,6 +31,7 @@ The Performance report's default three-month view currently reports zero clicks 
 
 - Added one `WebSite` JSON-LD node to the homepage: name `SiliconMotives`, alternate name `Silicon Motives`, canonical site URL, language, description and a reference to the existing Organization node.
 - Added the same alternate spelling to the Organization node. No search-ranking or knowledge-panel guarantee is implied.
+- Added the owner-supplied Instagram profile `https://www.instagram.com/siliconmotives/` as Organization `sameAs`, with a compact homepage section and matching contact/footer links. No follower counts, verification badges or unverified post content were added.
 - Fixed a production server-render failure in the process section by renaming its local `process` variable to `processContent`. Next.js's webpack compilation injects a reference to `process.env.__NEXT_PRIVATE_MINIMIZE_MACRO_FALSE`; shadowing `process` with presentation content caused a TypeError in the production smoke check. No layout, copy or animation was changed.
 - Synchronized the nested app mirror.
 

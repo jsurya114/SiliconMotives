@@ -12,6 +12,7 @@ import { Process } from '@/components/sections/Process';
 import { Testimonials } from '@/components/sections/Testimonials';
 import { Faq } from '@/components/sections/Faq';
 import { People } from '@/components/sections/People';
+import { Instagram } from '@/components/sections/Instagram';
 import { Contact } from '@/components/sections/Contact';
 import { Footer } from '@/components/sections/Footer';
 import { pageMetadata } from '@/lib/metadata';
@@ -53,6 +54,7 @@ export default async function Home() {
       <Testimonials rows={content.testimonials} clients={content.clients} />
       <Faq rows={content.faqs} />
       <People rows={content.team_members} />
+      <Instagram />
       <Contact settings={content.settings} />
     </main>
     <Footer />
