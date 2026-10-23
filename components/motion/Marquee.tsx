@@ -1,7 +1,7 @@
 "use client";
 
-import { useRef, type ReactNode } from "react";
-import { gsap, ScrollTrigger, useGSAP, MQ } from "@/lib/gsap";
+import { useRef, useState, type ReactNode } from "react";
+import { gsap, useGSAP, MQ } from "@/lib/gsap";
 
 type Props = {
   children: ReactNode;
@@ -10,66 +10,74 @@ type Props = {
   speed?: number;
 };
 
-/**
- * Velocity-reactive ticker. The first run is the real content; the second is
- * an aria-hidden duplicate so the loop is seamless.
- */
+/** A continuous ticker with enough hidden copies to fill the viewport. */
 export function Marquee({ children, className = "", speed = 40 }: Props) {
   const ref = useRef<HTMLDivElement>(null);
-  const interaction = useRef(false);
+  const focused = useRef(false);
+  const [copies, setCopies] = useState(2);
 
   useGSAP(
     () => {
       const el = ref.current;
       const track = el?.querySelector<HTMLElement>("[data-track]");
-      if (!el || !track) return;
+      const primary = el?.querySelector<HTMLElement>("[data-primary]");
+      if (!el || !track || !primary) return;
       const mm = gsap.matchMedia();
       mm.add(MQ.motion, () => {
-        const setX = gsap.quickSetter(track, "xPercent");
-        const wrap = gsap.utils.wrap(-50, 0);
+        const setX = gsap.quickSetter(track, "x", "px");
+        let width = 0;
         let x = 0;
-        let dir = -1;
-        let boost = 0;
-        let visible = false;
+        let visible = true;
 
-        const st = ScrollTrigger.create({
-          trigger: el,
-          start: "top bottom",
-          end: "bottom top",
-          onToggle: (self) => (visible = self.isActive),
-          onUpdate: (self) => {
-            const v = self.getVelocity();
-            dir = v < 0 ? 1 : -1;
-            boost = Math.min(Math.abs(v) / 300, 6);
-          },
+        const measure = () => {
+          const nextWidth = primary.getBoundingClientRect().width;
+          if (nextWidth <= 0) return;
+          // Preserve the position within the loop when fonts or layout change.
+          x = width > 0 ? (x / width) * nextWidth : 0;
+          width = nextWidth;
+          setCopies(Math.max(2, Math.ceil(el.clientWidth / width) + 1));
+          setX(x);
+        };
+        const resize = new ResizeObserver(measure);
+        resize.observe(el);
+        resize.observe(primary);
+        measure();
+
+        const intersection = new IntersectionObserver(([entry]) => {
+          visible = entry.isIntersecting;
         });
+        intersection.observe(el);
 
         const tick = (_t: number, dt: number) => {
-          if (!visible || interaction.current || document.hidden) return;
-          const base = (50 / speed) * (dt / 1000);
-          x = wrap(x + dir * base * (1 + boost));
-          boost *= 0.92;
+          if (!visible || focused.current || document.hidden || width <= 0) return;
+          // Wrap by one measured content run, regardless of the number of copies.
+          // Limit delayed frames so resuming a tab never jumps through the list.
+          x = (x - (width / Math.max(speed, 1)) * (Math.min(dt, 64) / 1000)) % width;
           setX(x);
         };
         gsap.ticker.add(tick);
         return () => {
           gsap.ticker.remove(tick);
-          st.kill();
+          resize.disconnect();
+          intersection.disconnect();
         };
       });
+      return () => mm.revert();
     },
-    { scope: ref },
+    { scope: ref, dependencies: [speed], revertOnUpdate: true },
   );
 
   return (
     <div ref={ref} className={`marquee overflow-hidden ${className}`}>
-      <div onPointerEnter={event => { if (event.pointerType === "mouse") interaction.current = true; }} onPointerLeave={() => { interaction.current = false; }} onFocusCapture={() => { interaction.current = true; }} onBlurCapture={event => { if (!event.currentTarget.contains(event.relatedTarget as Node)) interaction.current = false; }}>
-      <div data-track="" className="flex w-max will-change-transform">
-        <div data-primary="" className="flex shrink-0">{children}</div>
-        <div data-duplicate="" className="flex shrink-0" aria-hidden="true" inert>
-          {children}
+      <div onFocusCapture={() => { focused.current = true; }} onBlurCapture={event => { if (!event.currentTarget.contains(event.relatedTarget as Node)) focused.current = false; }}>
+        <div data-track="" className="flex w-max will-change-transform">
+          <div data-primary="" className="flex shrink-0">{children}</div>
+          {Array.from({ length: copies - 1 }, (_, index) => (
+            <div key={index} data-duplicate="" className="flex shrink-0" aria-hidden="true" inert>
+              {children}
+            </div>
+          ))}
         </div>
-      </div>
       </div>
     </div>
   );
