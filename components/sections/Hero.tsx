@@ -100,9 +100,9 @@ export function Hero() {
           </div>
           <div data-fade="0.08,0.28,1,0" data-interactive className="mt-8 grid gap-6 sm:mt-10 md:grid-cols-12 md:items-end">
             <p className="max-w-[34rem] text-[1.0625rem] leading-[1.55] text-ink/85 sm:text-[1.1875rem] md:col-span-6 lg:col-span-5">{hero.lead}</p>
-            <div className="flex flex-wrap gap-3 md:col-span-6 md:justify-self-end lg:col-span-7">
-              <ButtonLink href={hero.cta.href} variant="lagoon">{hero.cta.label}</ButtonLink>
-              <ButtonLink href={hero.agencyCta.href} variant="ghost" className="on-light">{hero.agencyCta.label}</ButtonLink>
+            <div className="grid w-full gap-3 sm:grid-cols-2 md:col-span-6 md:grid-cols-1 lg:col-span-7 lg:max-w-[34rem] lg:grid-cols-2 lg:justify-self-end">
+              <ButtonLink href={hero.cta.href} variant="lagoon" className="w-full justify-between">{hero.cta.label}</ButtonLink>
+              <ButtonLink href={hero.agencyCta.href} variant="ghost" className="on-light w-full justify-between">{hero.agencyCta.label}</ButtonLink>
             </div>
           </div>
           <div data-fade="0.02,0.14,1,0" className="hero-footer-row mt-10 grid grid-cols-2 items-center gap-6 border-t border-ink/15 pt-4 sm:mt-14">
