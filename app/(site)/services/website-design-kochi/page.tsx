@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import { MarketingPage } from '@/components/site/marketing-page';
 import { ButtonLink } from '@/components/ui/Button';
@@ -32,14 +33,16 @@ const schema = {
       '@id': `${pageUrl}#breadcrumb`,
       itemListElement: [
         { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
-        { '@type': 'ListItem', position: 2, name: 'Website design in Kochi', item: pageUrl },
+        { '@type': 'ListItem', position: 2, name: 'Services', item: `${SITE_URL}/services` },
+        { '@type': 'ListItem', position: 3, name: 'Website design in Kochi', item: pageUrl },
       ],
     },
   ],
 };
 
 export default function WebsiteDesignPage() {
-  const projects = ['jjc-artworks', 'woobe'].map(getProjectCase).filter(project => project !== undefined);
+  const projects = ['woobe', 'jjc-artworks'].map(getProjectCase).filter(project => project !== undefined);
+  const storefront = getProjectCase('woobe')?.story?.screenshots?.[0];
 
   return (
     <MarketingPage>
@@ -48,6 +51,8 @@ export default function WebsiteDesignPage() {
       <div className="wrap">
         <nav aria-label="Breadcrumb" className="flex flex-wrap items-center gap-2 text-sm text-slate">
           <Link href="/" className="inline-flex min-h-11 items-center hover:text-ink">Home</Link>
+          <span aria-hidden="true">/</span>
+          <Link href="/services" className="inline-flex min-h-11 items-center hover:text-ink">Services</Link>
           <span aria-hidden="true">/</span>
           <span aria-current="page">Website design in Kochi</span>
         </nav>
@@ -80,20 +85,6 @@ export default function WebsiteDesignPage() {
         </aside>
       </section>
 
-      <section className="wrap border-t border-ink/15 py-10 sm:py-14" aria-labelledby="website-scope-title">
-        <p className="label text-lagoon-ink">What we can build</p>
-        <h2 id="website-scope-title" className="display t-h2 mt-4 max-w-3xl">A website with a clear job to do.</h2>
-        <div className="mt-8 grid gap-6 md:grid-cols-3 md:gap-8">
-          {websiteDesign.offers.map((offer, index) => (
-            <article key={offer.name} className="border-t border-ink/20 pt-5">
-              <p className="label text-lagoon-ink">0{index + 1}</p>
-              <h3 className="display mt-5 text-2xl !leading-tight">{offer.name}</h3>
-              <p className="mt-3 text-base leading-7 text-slate">{offer.description}</p>
-            </article>
-          ))}
-        </div>
-      </section>
-
       <section id="website-work" data-header="dark" className="on-dark bg-monsoon py-10 text-cloud sm:py-14" aria-labelledby="website-work-title">
         <div className="wrap">
           <div className="flex flex-wrap items-end justify-between gap-5">
@@ -113,7 +104,42 @@ export default function WebsiteDesignPage() {
               </article>
             ))}
           </div>
+          {storefront && <figure className="mt-8 grid items-center gap-6 border-t border-cloud/20 pt-8 lg:grid-cols-12 lg:gap-10">
+            <Link href="/projects/woobe" className="block min-w-0 overflow-hidden rounded-xl border border-cloud/20 bg-cloud-2 lg:col-span-8" aria-label="Explore Woobe’s storefront and engineering overview">
+              <Image src={storefront.src} alt={storefront.alt} width={storefront.width} height={storefront.height} sizes="(min-width: 1440px) 54rem, (min-width: 1024px) 60vw, 92vw" className="h-auto w-full" />
+            </Link>
+            <figcaption className="min-w-0 lg:col-span-4">
+              <p className="label text-lagoon">Inside Woobe</p>
+              <p className="mt-3 text-base leading-7 text-cloud/80">{storefront.caption}</p>
+              <p className="mt-3 text-sm leading-6 text-mist">Explore the product pages, weight-based pricing decisions and linked implementation references in the project overview.</p>
+              <Link href="/projects/woobe" className="mt-4 inline-flex min-h-11 items-center gap-2 font-display text-sm font-semibold text-lagoon"><span className="link-line">See the storefront and engineering</span><ArrowUpRight /></Link>
+            </figcaption>
+          </figure>}
         </div>
+      </section>
+
+      <section className="wrap py-10 sm:py-14" aria-labelledby="website-scope-title">
+        <p className="label text-lagoon-ink">What we can build</p>
+        <h2 id="website-scope-title" className="display t-h2 mt-4 max-w-3xl">A website with a clear job to do.</h2>
+        <div className="mt-8 grid gap-6 md:grid-cols-3 md:gap-8">
+          {websiteDesign.offers.map((offer, index) => (
+            <article key={offer.name} className="border-t border-ink/20 pt-5">
+              <p className="label text-lagoon-ink">0{index + 1}</p>
+              <h3 className="display mt-5 text-2xl !leading-tight">{offer.name}</h3>
+              <p className="mt-3 text-base leading-7 text-slate">{offer.description}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="wrap border-y border-ink/15 py-10 sm:py-14" aria-labelledby="website-deliverables-title">
+        <div className="grid gap-5 lg:grid-cols-12 lg:gap-12">
+          <div className="lg:col-span-5"><p className="label text-lagoon-ink">Before you commit</p><h2 id="website-deliverables-title" className="display t-h2 mt-4">Know what’s<br />in the scope.</h2></div>
+          <p className="max-w-2xl self-end text-base leading-7 text-slate lg:col-span-7">A useful proposal should make the deliverables, dependencies and ongoing costs clear. We work through these decisions before agreeing the build.</p>
+        </div>
+        <dl className="mt-8 grid gap-x-10 gap-y-6 md:grid-cols-2">
+          {websiteDesign.scopeItems.map(item => <div key={item.name} className="border-t border-ink/15 pt-5"><dt className="font-display text-xl font-semibold">{item.name}</dt><dd className="mt-3 text-base leading-7 text-slate">{item.description}</dd></div>)}
+        </dl>
       </section>
 
       <section className="wrap py-10 sm:py-14" aria-labelledby="website-process-title">
@@ -132,6 +158,10 @@ export default function WebsiteDesignPage() {
           <p className="text-base leading-7 text-slate">Before work begins, we agree the pages, content responsibilities, editing needs, hosting arrangements, and handover. Updates and ongoing support are defined in the project scope.</p>
           <p className="text-base leading-7 text-slate">Have an existing website? Share what is difficult to manage or what your customers struggle to find. If you are delivering for a client, explore our <Link href="/agency-partners" className="link-line font-semibold text-ink">agency partnership approach</Link>.</p>
         </div>
+        <aside className="mt-6 border-t border-ink/15 pt-6" aria-labelledby="website-software-title">
+          <h3 id="website-software-title" className="font-display text-xl font-semibold">Need more than a website?</h3>
+          <p className="mt-3 max-w-3xl text-base leading-7 text-slate">If the project needs staff workflows, customer accounts or application business rules, explore our <Link href="/services/custom-software-development" className="link-line font-semibold text-ink">custom software engineering</Link>. For APIs, data models and integrations, see <Link href="/services/backend-development" className="link-line font-semibold text-ink">backend development</Link>.</p>
+        </aside>
       </section>
 
       <section className="wrap grid gap-6 border-t border-ink/15 py-10 sm:py-14 lg:grid-cols-12 lg:gap-12" aria-labelledby="website-faq-title">

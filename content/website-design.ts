@@ -17,6 +17,24 @@ export const websiteDesign = {
       description: 'Improve an existing website with clearer content, a more useful page structure, and layouts that work on phones. We start by understanding what needs to improve and what already works.',
     },
   ],
+  scopeItems: [
+    {
+      name: 'Pages and content',
+      description: 'Agree the sitemap, enquiry routes, and who supplies copy, product details, images and approvals. Existing content is reviewed before deciding what to keep.',
+    },
+    {
+      name: 'Features and editing',
+      description: 'Define the forms, product workflows, integrations and content editing you actually need. A brochure website and a custom commerce application require different scopes.',
+    },
+    {
+      name: 'Launch preparation',
+      description: 'Plan mobile layouts, page titles, descriptions, crawlable links, image handling and hosting. For a redesign, review existing URLs and agree redirects for pages that move.',
+    },
+    {
+      name: 'Access and ongoing care',
+      description: 'Agree domain and hosting account responsibilities, handover materials, and the boundaries of any maintenance or support. Recurring services are identified in the proposal.',
+    },
+  ],
   lifecycle: [
     ['Discover', 'Understand your business, audience, existing content, and the purpose of the website.'],
     ['Architect', 'Agree the pages, content structure, features, and technical approach.'],
@@ -44,6 +62,14 @@ export const websiteDesign = {
     {
       question: 'Do you consider search visibility when building a website?',
       answer: 'We consider readable content, mobile layouts, useful page structure, metadata, and crawlable pages. Search rankings also depend on the quality of the content, competition, and reputation of the business. A website launch does not guarantee a particular Google position.',
+    },
+    {
+      question: 'Can you redesign my website without changing every URL?',
+      answer: 'Yes. A redesign does not require changing every page address. We review existing pages and agree which URLs to retain. Where a page moves, redirects and internal links are part of the migration plan. Google still needs time to process changes, so rankings may fluctuate.',
+    },
+    {
+      question: 'What should I send for a website estimate?',
+      answer: 'Share your current website if you have one, what your business does, the pages or features you need, available content, and your preferred launch date. Include a budget range if one is set. We use this to discuss scope and identify questions before preparing a proposal.',
     },
   ],
 } as const;
