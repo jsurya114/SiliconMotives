@@ -50,11 +50,20 @@ export default async function ProjectDetailPage({ params }: Props) {
       <PageIntro eyebrow={`${story?.decisions?.length ? 'Engineering overview' : 'Project overview'} · ${project.category}`} title={story ? project.name : `${project.name} — ${project.descriptor}`}>
         {story && <p className="mb-3 font-display text-sm font-semibold uppercase tracking-wider text-lagoon-ink">{project.descriptor}</p>}
         <p>{project.summary}</p>
+        {project.liveUrl && <div className="mt-5"><a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center gap-2 font-display text-base font-semibold text-ink"><span className="link-line">Visit {project.name} live</span><ArrowUpRight size={16} /></a></div>}
         {story && <div className="mt-6 flex flex-wrap gap-x-6 gap-y-1 font-display text-sm font-semibold text-ink">
+          {story.screenshots?.length ? <a href="#product-screens" className="inline-flex min-h-11 items-center gap-2"><span className="link-line">View product screenshots</span><ArrowUpRight size={16} /></a> : null}
           <a href="#project-workflow" className="inline-flex min-h-11 items-center gap-2"><span className="link-line">Explore the workflow</span><ArrowUpRight size={16} /></a>
           {story.decisions?.length ? <a href="#engineering-decisions" className="inline-flex min-h-11 items-center gap-2"><span className="link-line">Engineering decisions</span><ArrowUpRight size={16} /></a> : null}
         </div>}
       </PageIntro>
+
+      {story?.screenshots?.length ? <section id="product-screens" className="wrap py-10 sm:py-14" aria-labelledby="product-screens-title">
+        <p className="label text-lagoon-ink">Inside the product</p><h2 id="product-screens-title" className="display t-h2 mt-4">The working interface.</h2>
+        <div className="mt-8 grid items-start gap-8 md:grid-cols-2">
+          {story.screenshots.map(screenshot => <figure key={screenshot.src} className="min-w-0"><a href={screenshot.src} target="_blank" rel="noreferrer" className="block overflow-hidden rounded-xl border border-ink/15 bg-cloud-2" aria-label={`Open full-size image: ${screenshot.alt}`}><Image src={screenshot.src} alt={screenshot.alt} width={screenshot.width} height={screenshot.height} sizes="(min-width: 1440px) 40rem, (min-width: 768px) 46vw, 92vw" className="h-auto w-full object-contain" /></a><figcaption className="mt-3 text-sm leading-6 text-slate">{screenshot.caption}</figcaption></figure>)}
+        </div>
+      </section> : null}
 
       {story && <section className="wrap grid gap-8 border-t border-ink/15 py-10 sm:py-14 lg:grid-cols-12 lg:gap-12">
         <div className="lg:col-span-4"><p className="label text-lagoon-ink">The business need</p><h2 className="display t-h3 mt-4">What the application needs to do.</h2></div>
@@ -69,12 +78,7 @@ export default async function ProjectDetailPage({ params }: Props) {
         </div>
       </section>}
 
-      {story?.screenshots?.length ? <section className="wrap py-10 sm:py-14" aria-labelledby="product-screens-title">
-        <p className="label text-lagoon-ink">Inside the product</p><h2 id="product-screens-title" className="display t-h2 mt-4">The working interface.</h2>
-        <div className="mt-8 grid items-start gap-8 md:grid-cols-2">
-          {story.screenshots.map(screenshot => <figure key={screenshot.src} className="min-w-0"><a href={screenshot.src} target="_blank" rel="noreferrer" className="block overflow-hidden rounded-xl border border-ink/15 bg-cloud-2" aria-label={`Open full-size image: ${screenshot.alt}`}><Image src={screenshot.src} alt={screenshot.alt} width={screenshot.width} height={screenshot.height} sizes="(min-width: 1440px) 40rem, (min-width: 768px) 46vw, 92vw" className="h-auto w-full object-contain" /></a><figcaption className="mt-3 text-sm leading-6 text-slate">{screenshot.caption}</figcaption></figure>)}
-        </div>
-      </section> : null}
+
 
       {story?.decisions?.length ? <section id="engineering-decisions" className="wrap grid gap-8 border-t border-ink/15 py-10 sm:py-14 lg:grid-cols-12 lg:gap-12">
         <div className="lg:col-span-4"><p className="label text-lagoon-ink">Engineering decisions</p><h2 className="display t-h3 mt-4">Make the rules explicit.</h2></div>

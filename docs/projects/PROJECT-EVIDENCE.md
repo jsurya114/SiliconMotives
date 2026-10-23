@@ -1,12 +1,21 @@
 # Project evidence and remaining inputs
 
-Updated 22 October 2026. This is an internal editorial record, not public page copy.
+Updated 23 October 2026. This is an internal editorial record, not public page copy.
 
 ## Published scope
 
 The Woobe, Picbox and Uniwayin pages have business-need and workflow sections. Woobe also has implementation decisions, a stack and public source references. Other existing projects remain accessible. Relevant service pages already link to these project URLs, and project pages link back to related services.
 
-No product screenshots, contributor assignments, delivery dates or measured results have been invented. Those sections render only after reviewed data is added to `content/project-cases.ts`. Existing editorial covers are not used as product captures.
+Woobe now includes two actual public storefront captures and a live-site link, following Jayasoorya's supplied `woobe.in` URL. Contributor assignments, delivery dates and measured results remain absent pending confirmation. Existing editorial covers are not used as product captures.
+
+## Public storefront captures, 23 October 2026
+
+- Canonical storefront observed: `https://www.woobe.in/` (the supplied apex domain redirects there).
+- Product observed: `https://www.woobe.in/products/maroon-printed-relaxed-shirt`.
+- Images: `public/images/projects/woobe/storefront-2026-10-23.webp` and `product-detail-2026-10-23.webp`.
+- Both are unaltered browser viewport captures, 2880 × 1432 pixels, taken without signing in or submitting a form. No cart, checkout or account actions were performed.
+- Public navigation, promotional content, product options and weight-based pricing are visible. No private customer or staff records are included.
+- Captions identify the capture date and note that product prices and availability can change. The screenshots establish the public interface at that time, not launch history, contributor roles or measured business outcomes.
 
 ## Woobe source evidence
 
@@ -30,7 +39,7 @@ Picbox and Uniwayin workflow copy uses existing website scope records. Earlier c
 
 For Woobe and Picbox or Uniwayin, supply:
 
-- Approved screenshots: ideally a key workflow and an administration view, with client permission and personal/business-sensitive records removed. Use demo records where possible.
+- Picbox or Uniwayin screenshots, and any additional Woobe administration view: with client permission and personal/business-sensitive records removed. Use demo records where possible.
 - Who built which parts: Jasil, Jayasoorya and any other contributors, with actual responsibilities.
 - Delivery period, plus whether work predates Millionian LLC. Attribute earlier work to the people who performed it, with an accurate description of the company relationship.
 - Any publishable outcome: metric, measurement period/date, context and supporting evidence, or an approved named client quote. A feature list alone is not a measured result.

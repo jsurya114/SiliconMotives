@@ -20,6 +20,7 @@ export type ProjectCase = {
   summary: string;
   scope: string[];
   technicalNotes: string[];
+  liveUrl?: string;
   story?: ProjectStory;
 };
 
@@ -39,6 +40,7 @@ export const projectCases: ProjectCase[] = [
       'Checkout options include Razorpay and cash on delivery.',
     ],
     technicalNotes: ['Cloud infrastructure: AWS.'],
+    liveUrl: 'https://www.woobe.in/',
     story: {
       need: 'Woobe’s clothing storefront needs to explain a pricing model based on weight. Customers need to understand the rate per kilogram, the weight of a product, and how that translates into a payable amount.',
       approach: 'The application separates customer shopping, staff administration and backend business rules. The storefront and staff admin are Next.js applications; both communicate with an Express API rather than accessing the database directly.',
@@ -54,6 +56,22 @@ export const projectCases: ProjectCase[] = [
         { title: 'Share definitions between applications', explanation: 'The repository contains shared packages for TypeScript types, Zod validation, UI primitives and pure utility functions. The two interfaces can use the same definitions for inputs and pricing displays.' },
       ],
       stack: ['Next.js', 'React', 'TypeScript', 'Node.js', 'Express', 'PostgreSQL', 'Prisma', 'Redis', 'Zod', 'Razorpay'],
+      screenshots: [
+        {
+          src: '/images/projects/woobe/storefront-2026-10-23.webp',
+          alt: 'Woobe storefront with the navigation, promotional banner and clothing category links.',
+          caption: 'Public storefront and category navigation. Captured from woobe.in on 23 October 2026.',
+          width: 2880,
+          height: 1432,
+        },
+        {
+          src: '/images/projects/woobe/product-detail-2026-10-23.webp',
+          alt: 'Woobe product page showing a maroon shirt, its price, weight in grams, rate per kilogram and size selection.',
+          caption: 'Product detail showing weight-based pricing and product options. Captured on 23 October 2026; prices and availability may change.',
+          width: 2880,
+          height: 1432,
+        },
+      ],
       references: [
         { label: 'Application structure', href: 'https://github.com/jsurya114/Wobee-ecommerce/blob/c6cac10926e95697991bb7c7a5c7e83af7b23f0d/Readme.md' },
         { label: 'Weight-based pricing implementation', href: 'https://github.com/jsurya114/Wobee-ecommerce/blob/c6cac10926e95697991bb7c7a5c7e83af7b23f0d/packages/utils/src/weight.ts' },
