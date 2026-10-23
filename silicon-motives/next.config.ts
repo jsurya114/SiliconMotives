@@ -20,6 +20,11 @@ const config: NextConfig = {
   },
   async redirects() {
     return [
+      // Retain the old domain while search engines migrate to SiliconMotives.
+      ...['devaxistechnologies\\.in', 'www\\.devaxistechnologies\\.in'].map(host => ({
+        source: '/:path*', has: [{ type: 'host' as const, value: host }],
+        destination: 'https://www.siliconmotives.com/:path*', permanent: true,
+      })),
       { source: '/admin/index.html', destination: '/admin', permanent: true },
       { source: '/admin/:path*', has: ownerHost, destination: '/:path*', permanent: false },
       ...['siliconmotives\\.com', 'www\\.siliconmotives\\.com', 'silicon-motives\\.vercel\\.app'].map(host => ({
