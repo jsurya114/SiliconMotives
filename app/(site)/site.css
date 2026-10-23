@@ -146,6 +146,9 @@ html.lenis, html.lenis body { height: auto; }
   --hdr-glass: var(--color-monsoon);
   --hdr-edge: var(--color-cloud);
 }
+.site-header[data-tone="dark"] .brand-logo {
+  filter: brightness(0) invert(1);
+}
 .site-header__bar {
   background: color-mix(in oklab, var(--hdr-glass) 22%, transparent);
   backdrop-filter: blur(18px) saturate(170%);

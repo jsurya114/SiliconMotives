@@ -7,6 +7,7 @@ import { useSmoothScroll } from "./motion/SmoothScroll";
 import { ArrowIcon, CloseIcon, MenuIcon } from "./ui/icons";
 import { contactDetails } from "@/lib/urls";
 import type { ContentRow } from "@/lib/content";
+import { BrandLogo } from './BrandLogo';
 
 export function Header({ settings }: { settings: ContentRow }) {
   const ref = useRef<HTMLElement>(null);
@@ -70,7 +71,7 @@ export function Header({ settings }: { settings: ContentRow }) {
               aria-label={site.ui.homeLabel}
               className="font-display text-[1.125rem] font-extrabold tracking-[-0.04em]"
             >
-              {site.brand.name}
+              <BrandLogo />
             </a>
             <nav aria-label={site.ui.mainNav} className="hidden items-center gap-1 lg:flex">
               {site.nav.map((item) => (
@@ -179,7 +180,7 @@ function MobileMenu({ onClose, settings }: { onClose: () => void; settings: Cont
     >
       <div className="wrap flex min-h-full flex-col pb-8">
         <div className="flex h-16 shrink-0 items-center justify-between">
-          <span className="font-display text-[1.125rem] font-extrabold tracking-[-0.04em]">{site.brand.name}</span>
+          <a href="/" aria-label={site.ui.homeLabel}><BrandLogo light /></a>
           <button
             type="button"
             onClick={() => close()}

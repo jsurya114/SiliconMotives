@@ -1,6 +1,7 @@
 import { site } from "@/content/site";
 import { RevealText } from "../motion/RevealText";
 import { ArrowIcon } from "../ui/icons";
+import { BrandLogo } from '../BrandLogo';
 
 const { footer } = site;
 
@@ -10,7 +11,7 @@ export function Footer() {
       <div className="wrap">
         <div className="relative z-[2] grid grid-cols-2 items-start gap-x-8 gap-y-12 md:gap-x-10 lg:grid-cols-12 lg:gap-x-8 lg:gap-y-16">
           <div className="col-span-2 min-w-0 lg:col-span-4">
-            <p className="font-display text-[1.25rem] font-extrabold tracking-[-0.04em]">{site.brand.name}</p>
+            <a href="/" aria-label={site.ui.homeLabel} className="inline-flex min-h-11 items-center"><BrandLogo light /></a>
             <p className="mt-4 font-serif text-[1.375rem] leading-[1.3] text-cloud/85">{site.brand.tagline}</p>
             <p className="mt-5 max-w-sm text-sm leading-6 text-mist">Custom Software · Cloud Infrastructure · DevOps</p>
           </div>

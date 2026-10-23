@@ -1,3 +1,5 @@
+import { BrandLogo } from '../BrandLogo';
+
 export function Hero() { return (<section className="hero" id="home">
       <img className="hero-background" src="/images/cloud-sky-clear.webp" width="1672" height="941" alt="" fetchPriority="high" decoding="async" />
       <div className="site-container hero-inner">
@@ -47,7 +49,7 @@ export function Footer() { return (<footer className="footer">
     <div className="site-container footer-wrap">
       <div className="footer-cta"><div><p className="eyebrow">HAVE A PROJECT IN MIND?</p><h2>Let’s build something<br /> <span className="serif">that matters.</span></h2></div><a className="footer-cta-button" href="#contact">Tell us what you’re planning <span aria-hidden="true"><svg className="action-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.4 8.4 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8v.5Z"></path><path d="M8 10h8m-8 4h5"></path></svg></span></a></div>
       <div className="footer-main">
-        <div className="footer-brand-block"><a className="brand-text" href="#home" aria-label="Silicon Motives home">Silicon Motives</a><p>Independent minds.<br /> Thoughtful software.<br /> One shared purpose.</p><span className="footer-presence"><i></i> REMOTE FIRST · KOCHI, KERALA</span></div>
+        <div className="footer-brand-block"><a className="brand-text" href="/" aria-label="SiliconMotives home"><BrandLogo light /></a><p>Independent minds.<br /> Thoughtful software.<br /> One shared purpose.</p><span className="footer-presence"><i></i> REMOTE FIRST · KOCHI, KERALA</span></div>
         <nav className="footer-links" aria-label="Explore Silicon Motives"><h3>EXPLORE</h3><a href="#services">Services</a><a href="#solutions">Solutions</a><a href="#portfolio">Projects</a></nav>
         <nav className="footer-links" aria-label="Company information"><h3>COMPANY</h3><a href="#about">About us</a><a href="#clients">Clients</a><a href="#testimonials">Testimonials</a><a href="#faq">Frequently asked questions</a></nav>
         <div className="footer-location"><h3>BASED IN KERALA</h3><p>Kochi, Kerala<br /> India</p><p>Working remotely<br /> with teams everywhere.</p><a href="#contact">Start a conversation <span aria-hidden="true"><svg className="action-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.4 8.4 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8v.5Z"></path><path d="M8 10h8m-8 4h5"></path></svg></span></a></div>

@@ -11,7 +11,16 @@ export const metadata: Metadata = {
     'SiliconMotives, founded by Jayasoorya Suryadas and Jasil M, delivers custom software, cloud infrastructure and DevOps from Kerala, India.',
     '/',
   ),
-  icons: { icon: '/favicon.svg' },
+  icons: {
+    icon: [
+      { url: '/favicon-96.png', sizes: '96x96', type: 'image/png' },
+      { url: '/favicon-48.png', sizes: '48x48', type: 'image/png' },
+      { url: '/favicon-32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/favicon-192.png', sizes: '192x192', type: 'image/png' },
+    ],
+    shortcut: '/favicon.ico',
+    apple: { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
+  },
 };
 export const viewport: Viewport = { themeColor: '#0b1a2b' };
 
@@ -22,6 +31,15 @@ const organizationSchema = {
   name: 'SiliconMotives',
   legalName: 'Millionian LLC',
   url: SITE_URL,
+  logo: {
+    '@type': 'ImageObject',
+    '@id': `${SITE_URL}/#logo`,
+    url: `${SITE_URL}/images/brand/mark.png`,
+    contentUrl: `${SITE_URL}/images/brand/mark.png`,
+    width: 512,
+    height: 512,
+    caption: 'SiliconMotives',
+  },
   email: 'hello@siliconmotives.com',
   description: 'Custom Software, Cloud Infrastructure, and DevOps engineering from Kerala, India.',
   // Presentation order is independent of the visible founder cards.

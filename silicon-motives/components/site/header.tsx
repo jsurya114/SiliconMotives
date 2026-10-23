@@ -1,6 +1,7 @@
 'use client';
 import { useEffect, useState } from 'react';
 import { ChatIcon } from './icons';
+import { BrandLogo } from '../BrandLogo';
 export function Header() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -14,7 +15,7 @@ export function Header() {
     return () => { window.removeEventListener('scroll', scroll); document.removeEventListener('keydown', escape); media.removeEventListener('change', resize); };
   }, []);
   return <header className={`header${scrolled ? ' is-scrolled' : ''}`}><div className="site-container header-inner flex items-center justify-between">
-    <a className="brand-text" href="#home" aria-label="Silicon Motives home">Silicon Motives</a>
+    <a className="brand-text" href="/" aria-label="SiliconMotives home"><BrandLogo /></a>
     <button className="menu-toggle" aria-label={open ? 'Close navigation' : 'Open navigation'} aria-expanded={open} aria-controls="navigation" onClick={() => setOpen(!open)}><span className="menu-icon" aria-hidden="true"><i></i><i></i><i></i></span></button>
     <nav id="navigation" className={open ? 'is-open' : ''} aria-label="Main navigation" onClick={() => setOpen(false)}>
       {[['home', 'Home'], ['about', 'About'], ['services', 'Services'], ['solutions', 'Solutions'], ['testimonials', 'Testimonials'], ['portfolio', 'Portfolio']].map(([id, text]) => <a key={id} href={`#${id}`}>{text}</a>)}
