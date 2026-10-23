@@ -15,6 +15,7 @@ export type ProjectStory = {
 export type ProjectCase = {
   slug: string;
   name: string;
+  logo?: string;
   descriptor: string;
   category: string;
   summary: string;
@@ -82,6 +83,7 @@ export const projectCases: ProjectCase[] = [
   {
     slug: 'nasalogistics',
     name: 'NasaLogistics',
+    logo: '/images/client-logos/nasalogistics.svg',
     descriptor: 'Driver & logistics management',
     category: 'Logistics software',
     summary: 'A logistics platform for driver availability, order workflows, and administration.',
@@ -95,6 +97,7 @@ export const projectCases: ProjectCase[] = [
   {
     slug: 'picbox',
     name: 'Picbox',
+    logo: '/images/client-logos/picbox.svg',
     descriptor: 'Event-rental inventory & invoicing',
     category: 'Business software',
     summary: 'An inventory and invoicing system for an event-rental business.',
@@ -118,6 +121,7 @@ export const projectCases: ProjectCase[] = [
   {
     slug: 'uniwayin',
     name: 'Uniwayin',
+    logo: '/images/client-logos/uniwayin.svg',
     descriptor: 'Education consultancy CRM',
     category: 'Business software',
     summary: 'A CRM for education consultancy lead and follow-up workflows.',
