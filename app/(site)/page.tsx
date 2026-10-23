@@ -16,6 +16,7 @@ import { Contact } from '@/components/sections/Contact';
 import { Footer } from '@/components/sections/Footer';
 import { pageMetadata } from '@/lib/metadata';
 import { site } from '@/content/site';
+import { SITE_URL } from '@/lib/site-url';
 
 export const dynamic = 'force-dynamic';
 export const metadata = pageMetadata(
@@ -24,9 +25,22 @@ export const metadata = pageMetadata(
   '/',
 );
 
+const websiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  '@id': `${SITE_URL}/#website`,
+  url: `${SITE_URL}/`,
+  name: site.brand.name,
+  alternateName: 'Silicon Motives',
+  description: site.seo.description,
+  inLanguage: 'en',
+  publisher: { '@id': `${SITE_URL}/#organization` },
+};
+
 export default async function Home() {
   const content = await loadContent();
   return <div className="public-site"><SmoothScroll>
+    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema).replace(/</g, '\\u003c') }} />
     <Header settings={content.settings} />
     <main id="main">
       <Hero />

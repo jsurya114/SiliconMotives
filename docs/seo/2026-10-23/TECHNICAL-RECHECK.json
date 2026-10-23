@@ -1,0 +1,651 @@
+{
+  "date": "2026-10-23",
+  "site": "https://www.siliconmotives.com",
+  "page_count": 20,
+  "pages": [
+    {
+      "url": "https://www.siliconmotives.com/",
+      "status": 200,
+      "final_url": "https://www.siliconmotives.com/",
+      "title": "SiliconMotives \u2014 Remote-first Engineering",
+      "description": [
+        "SiliconMotives is a remote-first engineering company in Kerala, India, building custom software, cloud infrastructure and DevOps for businesses and agencies."
+      ],
+      "canonical": [
+        "https://www.siliconmotives.com"
+      ],
+      "h1_count": 1,
+      "robots": [],
+      "x_robots_tag": null,
+      "schema_count": 1,
+      "og_image": "https://www.siliconmotives.com/brand/social/siliconmotives-og-navy.png",
+      "internal_links": [
+        "/",
+        "/about",
+        "/agency-partners",
+        "/contact",
+        "/privacy",
+        "/projects",
+        "/services",
+        "/services/website-design-kochi",
+        "/terms"
+      ],
+      "issues": []
+    },
+    {
+      "url": "https://www.siliconmotives.com/about",
+      "status": 200,
+      "final_url": "https://www.siliconmotives.com/about",
+      "title": "About Our Remote-first Engineering Company | SiliconMotives",
+      "description": [
+        "Meet Jayasoorya Suryadas and Jasil M, founders of SiliconMotives: a remote-first software, cloud infrastructure and DevOps engineering company in Kerala, India."
+      ],
+      "canonical": [
+        "https://www.siliconmotives.com/about"
+      ],
+      "h1_count": 1,
+      "robots": [],
+      "x_robots_tag": null,
+      "schema_count": 1,
+      "og_image": "https://www.siliconmotives.com/brand/social/siliconmotives-og-navy.png",
+      "internal_links": [
+        "/",
+        "/about",
+        "/agency-partners",
+        "/contact",
+        "/privacy",
+        "/projects",
+        "/services",
+        "/services/website-design-kochi",
+        "/terms"
+      ],
+      "issues": []
+    },
+    {
+      "url": "https://www.siliconmotives.com/projects",
+      "status": 200,
+      "final_url": "https://www.siliconmotives.com/projects",
+      "title": "Projects | SiliconMotives",
+      "description": [
+        "Selected software projects across commerce, logistics, business operations, healthcare, and business websites."
+      ],
+      "canonical": [
+        "https://www.siliconmotives.com/projects"
+      ],
+      "h1_count": 1,
+      "robots": [],
+      "x_robots_tag": null,
+      "schema_count": 1,
+      "og_image": "https://www.siliconmotives.com/brand/social/siliconmotives-og-navy.png",
+      "internal_links": [
+        "/",
+        "/about",
+        "/agency-partners",
+        "/contact",
+        "/privacy",
+        "/projects",
+        "/projects/dental-buddy",
+        "/projects/jjc-artworks",
+        "/projects/nasalogistics",
+        "/projects/picbox",
+        "/projects/uniwayin",
+        "/projects/woobe",
+        "/services",
+        "/services/website-design-kochi",
+        "/terms"
+      ],
+      "issues": []
+    },
+    {
+      "url": "https://www.siliconmotives.com/services",
+      "status": 200,
+      "final_url": "https://www.siliconmotives.com/services",
+      "title": "Software, Cloud & DevOps Services | SiliconMotives",
+      "description": [
+        "Explore custom software, backend development, cloud infrastructure, AWS DevOps and DevOps consulting for businesses and agencies."
+      ],
+      "canonical": [
+        "https://www.siliconmotives.com/services"
+      ],
+      "h1_count": 1,
+      "robots": [],
+      "x_robots_tag": null,
+      "schema_count": 1,
+      "og_image": "https://www.siliconmotives.com/brand/social/siliconmotives-og-navy.png",
+      "internal_links": [
+        "/",
+        "/about",
+        "/agency-partners",
+        "/contact",
+        "/privacy",
+        "/projects",
+        "/services",
+        "/services/aws-devops",
+        "/services/backend-development",
+        "/services/cloud-infrastructure",
+        "/services/custom-software-development",
+        "/services/devops-consulting",
+        "/services/website-design-kochi",
+        "/terms"
+      ],
+      "issues": []
+    },
+    {
+      "url": "https://www.siliconmotives.com/agency-partners",
+      "status": 200,
+      "final_url": "https://www.siliconmotives.com/agency-partners",
+      "title": "White-Label Software Development Partner for Agencies | SiliconMotives",
+      "description": [
+        "White-label software, backend, AWS and DevOps engineering for U.S. agencies. Keep your client relationship; start with a scoped delivery milestone."
+      ],
+      "canonical": [
+        "https://www.siliconmotives.com/agency-partners"
+      ],
+      "h1_count": 1,
+      "robots": [],
+      "x_robots_tag": null,
+      "schema_count": 2,
+      "og_image": "https://www.siliconmotives.com/brand/social/siliconmotives-og-navy.png",
+      "internal_links": [
+        "/",
+        "/about",
+        "/agency-partners",
+        "/contact",
+        "/privacy",
+        "/projects",
+        "/projects/picbox",
+        "/projects/uniwayin",
+        "/projects/woobe",
+        "/services",
+        "/services/aws-devops",
+        "/services/backend-development",
+        "/services/cloud-infrastructure",
+        "/services/custom-software-development",
+        "/services/devops-consulting",
+        "/services/website-design-kochi",
+        "/terms"
+      ],
+      "issues": []
+    },
+    {
+      "url": "https://www.siliconmotives.com/contact",
+      "status": 200,
+      "final_url": "https://www.siliconmotives.com/contact",
+      "title": "Contact SiliconMotives",
+      "description": [
+        "Send a project enquiry or discuss an agency partnership."
+      ],
+      "canonical": [
+        "https://www.siliconmotives.com/contact"
+      ],
+      "h1_count": 1,
+      "robots": [],
+      "x_robots_tag": null,
+      "schema_count": 1,
+      "og_image": "https://www.siliconmotives.com/brand/social/siliconmotives-og-navy.png",
+      "internal_links": [
+        "/",
+        "/about",
+        "/agency-partners",
+        "/contact",
+        "/privacy",
+        "/projects",
+        "/services",
+        "/services/website-design-kochi",
+        "/terms"
+      ],
+      "issues": []
+    },
+    {
+      "url": "https://www.siliconmotives.com/privacy",
+      "status": 200,
+      "final_url": "https://www.siliconmotives.com/privacy",
+      "title": "Privacy Policy | SiliconMotives",
+      "description": [
+        "How SiliconMotives handles information submitted through this website."
+      ],
+      "canonical": [
+        "https://www.siliconmotives.com/privacy"
+      ],
+      "h1_count": 1,
+      "robots": [],
+      "x_robots_tag": null,
+      "schema_count": 1,
+      "og_image": "https://www.siliconmotives.com/brand/social/siliconmotives-og-navy.png",
+      "internal_links": [
+        "/",
+        "/about",
+        "/agency-partners",
+        "/contact",
+        "/privacy",
+        "/projects",
+        "/services",
+        "/services/website-design-kochi",
+        "/terms"
+      ],
+      "issues": []
+    },
+    {
+      "url": "https://www.siliconmotives.com/terms",
+      "status": 200,
+      "final_url": "https://www.siliconmotives.com/terms",
+      "title": "Website Terms | SiliconMotives",
+      "description": [
+        "Terms for using the SiliconMotives website."
+      ],
+      "canonical": [
+        "https://www.siliconmotives.com/terms"
+      ],
+      "h1_count": 1,
+      "robots": [],
+      "x_robots_tag": null,
+      "schema_count": 1,
+      "og_image": "https://www.siliconmotives.com/brand/social/siliconmotives-og-navy.png",
+      "internal_links": [
+        "/",
+        "/about",
+        "/agency-partners",
+        "/contact",
+        "/privacy",
+        "/projects",
+        "/services",
+        "/services/website-design-kochi",
+        "/terms"
+      ],
+      "issues": []
+    },
+    {
+      "url": "https://www.siliconmotives.com/services/website-design-kochi",
+      "status": 200,
+      "final_url": "https://www.siliconmotives.com/services/website-design-kochi",
+      "title": "Website Design & Development in Kochi | SiliconMotives",
+      "description": [
+        "Website design and development from Kochi, Kerala. Business websites, commerce storefronts, and redesigns with remote delivery across India."
+      ],
+      "canonical": [
+        "https://www.siliconmotives.com/services/website-design-kochi"
+      ],
+      "h1_count": 1,
+      "robots": [],
+      "x_robots_tag": null,
+      "schema_count": 2,
+      "og_image": "https://www.siliconmotives.com/brand/social/siliconmotives-og-navy.png",
+      "internal_links": [
+        "/",
+        "/about",
+        "/agency-partners",
+        "/contact",
+        "/privacy",
+        "/projects",
+        "/projects/jjc-artworks",
+        "/projects/woobe",
+        "/services",
+        "/services/backend-development",
+        "/services/custom-software-development",
+        "/services/website-design-kochi",
+        "/terms"
+      ],
+      "issues": []
+    },
+    {
+      "url": "https://www.siliconmotives.com/projects/woobe",
+      "status": 200,
+      "final_url": "https://www.siliconmotives.com/projects/woobe",
+      "title": "Woobe \u2014 Weight-based commerce | SiliconMotives",
+      "description": [
+        "A commerce storefront designed for products priced by weight."
+      ],
+      "canonical": [
+        "https://www.siliconmotives.com/projects/woobe"
+      ],
+      "h1_count": 1,
+      "robots": [],
+      "x_robots_tag": null,
+      "schema_count": 2,
+      "og_image": "https://www.siliconmotives.com/brand/social/siliconmotives-og-navy.png",
+      "internal_links": [
+        "/",
+        "/about",
+        "/agency-partners",
+        "/contact",
+        "/images/projects/woobe/product-detail-2026-10-23.webp",
+        "/images/projects/woobe/storefront-2026-10-23.webp",
+        "/privacy",
+        "/projects",
+        "/services",
+        "/services/aws-devops",
+        "/services/backend-development",
+        "/services/cloud-infrastructure",
+        "/services/devops-consulting",
+        "/services/website-design-kochi",
+        "/terms"
+      ],
+      "issues": []
+    },
+    {
+      "url": "https://www.siliconmotives.com/projects/nasalogistics",
+      "status": 200,
+      "final_url": "https://www.siliconmotives.com/projects/nasalogistics",
+      "title": "NasaLogistics \u2014 Driver & logistics management | SiliconMotives",
+      "description": [
+        "A logistics platform for driver availability, order workflows, and administration."
+      ],
+      "canonical": [
+        "https://www.siliconmotives.com/projects/nasalogistics"
+      ],
+      "h1_count": 1,
+      "robots": [],
+      "x_robots_tag": null,
+      "schema_count": 2,
+      "og_image": "https://www.siliconmotives.com/brand/social/siliconmotives-og-navy.png",
+      "internal_links": [
+        "/",
+        "/about",
+        "/agency-partners",
+        "/contact",
+        "/privacy",
+        "/projects",
+        "/services",
+        "/services/backend-development",
+        "/services/website-design-kochi",
+        "/terms"
+      ],
+      "issues": []
+    },
+    {
+      "url": "https://www.siliconmotives.com/projects/picbox",
+      "status": 200,
+      "final_url": "https://www.siliconmotives.com/projects/picbox",
+      "title": "Picbox \u2014 Event-rental inventory & invoicing | SiliconMotives",
+      "description": [
+        "An inventory and invoicing system for an event-rental business."
+      ],
+      "canonical": [
+        "https://www.siliconmotives.com/projects/picbox"
+      ],
+      "h1_count": 1,
+      "robots": [],
+      "x_robots_tag": null,
+      "schema_count": 2,
+      "og_image": "https://www.siliconmotives.com/brand/social/siliconmotives-og-navy.png",
+      "internal_links": [
+        "/",
+        "/about",
+        "/agency-partners",
+        "/contact",
+        "/privacy",
+        "/projects",
+        "/services",
+        "/services/custom-software-development",
+        "/services/website-design-kochi",
+        "/terms"
+      ],
+      "issues": []
+    },
+    {
+      "url": "https://www.siliconmotives.com/projects/uniwayin",
+      "status": 200,
+      "final_url": "https://www.siliconmotives.com/projects/uniwayin",
+      "title": "Uniwayin \u2014 Education consultancy CRM | SiliconMotives",
+      "description": [
+        "A CRM for education consultancy lead and follow-up workflows."
+      ],
+      "canonical": [
+        "https://www.siliconmotives.com/projects/uniwayin"
+      ],
+      "h1_count": 1,
+      "robots": [],
+      "x_robots_tag": null,
+      "schema_count": 2,
+      "og_image": "https://www.siliconmotives.com/brand/social/siliconmotives-og-navy.png",
+      "internal_links": [
+        "/",
+        "/about",
+        "/agency-partners",
+        "/contact",
+        "/privacy",
+        "/projects",
+        "/services",
+        "/services/backend-development",
+        "/services/custom-software-development",
+        "/services/website-design-kochi",
+        "/terms"
+      ],
+      "issues": []
+    },
+    {
+      "url": "https://www.siliconmotives.com/projects/dental-buddy",
+      "status": 200,
+      "final_url": "https://www.siliconmotives.com/projects/dental-buddy",
+      "title": "Dental Buddy \u2014 Dental clinic management software | SiliconMotives",
+      "description": [
+        "Clinic software bringing patient records, prescriptions, appointments, and billing into one workflow."
+      ],
+      "canonical": [
+        "https://www.siliconmotives.com/projects/dental-buddy"
+      ],
+      "h1_count": 1,
+      "robots": [],
+      "x_robots_tag": null,
+      "schema_count": 2,
+      "og_image": "https://www.siliconmotives.com/brand/social/siliconmotives-og-navy.png",
+      "internal_links": [
+        "/",
+        "/about",
+        "/agency-partners",
+        "/contact",
+        "/privacy",
+        "/projects",
+        "/services",
+        "/services/custom-software-development",
+        "/services/website-design-kochi",
+        "/terms"
+      ],
+      "issues": []
+    },
+    {
+      "url": "https://www.siliconmotives.com/projects/jjc-artworks",
+      "status": 200,
+      "final_url": "https://www.siliconmotives.com/projects/jjc-artworks",
+      "title": "JJC Artworks \u2014 Website for church interior woodwork | SiliconMotives",
+      "description": [
+        "A website presenting JJC Artworks\u2019 church interior woodwork and completed projects."
+      ],
+      "canonical": [
+        "https://www.siliconmotives.com/projects/jjc-artworks"
+      ],
+      "h1_count": 1,
+      "robots": [],
+      "x_robots_tag": null,
+      "schema_count": 2,
+      "og_image": "https://www.siliconmotives.com/brand/social/siliconmotives-og-navy.png",
+      "internal_links": [
+        "/",
+        "/about",
+        "/agency-partners",
+        "/contact",
+        "/privacy",
+        "/projects",
+        "/services",
+        "/services/website-design-kochi",
+        "/terms"
+      ],
+      "issues": []
+    },
+    {
+      "url": "https://www.siliconmotives.com/services/custom-software-development",
+      "status": 200,
+      "final_url": "https://www.siliconmotives.com/services/custom-software-development",
+      "title": "Custom Software Development | SiliconMotives",
+      "description": [
+        "Custom business applications, CRMs and operational tools for businesses and agencies. Founder-led engineering from Kerala, India, with remote delivery."
+      ],
+      "canonical": [
+        "https://www.siliconmotives.com/services/custom-software-development"
+      ],
+      "h1_count": 1,
+      "robots": [],
+      "x_robots_tag": null,
+      "schema_count": 2,
+      "og_image": "https://www.siliconmotives.com/brand/social/siliconmotives-og-navy.png",
+      "internal_links": [
+        "/",
+        "/about",
+        "/agency-partners",
+        "/contact",
+        "/privacy",
+        "/projects",
+        "/projects/dental-buddy",
+        "/projects/picbox",
+        "/projects/uniwayin",
+        "/services",
+        "/services/aws-devops",
+        "/services/backend-development",
+        "/services/cloud-infrastructure",
+        "/services/devops-consulting",
+        "/services/website-design-kochi",
+        "/terms"
+      ],
+      "issues": []
+    },
+    {
+      "url": "https://www.siliconmotives.com/services/backend-development",
+      "status": 200,
+      "final_url": "https://www.siliconmotives.com/services/backend-development",
+      "title": "Backend Development Services | SiliconMotives",
+      "description": [
+        "Backend engineering for business applications, commerce and agency projects: APIs, data workflows, integrations and role-based access."
+      ],
+      "canonical": [
+        "https://www.siliconmotives.com/services/backend-development"
+      ],
+      "h1_count": 1,
+      "robots": [],
+      "x_robots_tag": null,
+      "schema_count": 2,
+      "og_image": "https://www.siliconmotives.com/brand/social/siliconmotives-og-navy.png",
+      "internal_links": [
+        "/",
+        "/about",
+        "/agency-partners",
+        "/contact",
+        "/privacy",
+        "/projects",
+        "/projects/nasalogistics",
+        "/projects/uniwayin",
+        "/projects/woobe",
+        "/services",
+        "/services/aws-devops",
+        "/services/cloud-infrastructure",
+        "/services/custom-software-development",
+        "/services/devops-consulting",
+        "/services/website-design-kochi",
+        "/terms"
+      ],
+      "issues": []
+    },
+    {
+      "url": "https://www.siliconmotives.com/services/cloud-infrastructure",
+      "status": 200,
+      "final_url": "https://www.siliconmotives.com/services/cloud-infrastructure",
+      "title": "Cloud Infrastructure Engineering | SiliconMotives",
+      "description": [
+        "Cloud infrastructure planning and implementation for application teams: architecture, environments, deployment and operational handover."
+      ],
+      "canonical": [
+        "https://www.siliconmotives.com/services/cloud-infrastructure"
+      ],
+      "h1_count": 1,
+      "robots": [],
+      "x_robots_tag": null,
+      "schema_count": 2,
+      "og_image": "https://www.siliconmotives.com/brand/social/siliconmotives-og-navy.png",
+      "internal_links": [
+        "/",
+        "/about",
+        "/agency-partners",
+        "/contact",
+        "/privacy",
+        "/projects",
+        "/projects/woobe",
+        "/services",
+        "/services/aws-devops",
+        "/services/backend-development",
+        "/services/custom-software-development",
+        "/services/devops-consulting",
+        "/services/website-design-kochi",
+        "/terms"
+      ],
+      "issues": []
+    },
+    {
+      "url": "https://www.siliconmotives.com/services/aws-devops",
+      "status": 200,
+      "final_url": "https://www.siliconmotives.com/services/aws-devops",
+      "title": "AWS DevOps Engineering Services | SiliconMotives",
+      "description": [
+        "AWS-focused deployment and infrastructure engineering for application teams: release pipelines, environment configuration and operational handover."
+      ],
+      "canonical": [
+        "https://www.siliconmotives.com/services/aws-devops"
+      ],
+      "h1_count": 1,
+      "robots": [],
+      "x_robots_tag": null,
+      "schema_count": 2,
+      "og_image": "https://www.siliconmotives.com/brand/social/siliconmotives-og-navy.png",
+      "internal_links": [
+        "/",
+        "/about",
+        "/agency-partners",
+        "/contact",
+        "/privacy",
+        "/projects",
+        "/projects/woobe",
+        "/services",
+        "/services/backend-development",
+        "/services/cloud-infrastructure",
+        "/services/custom-software-development",
+        "/services/devops-consulting",
+        "/services/website-design-kochi",
+        "/terms"
+      ],
+      "issues": []
+    },
+    {
+      "url": "https://www.siliconmotives.com/services/devops-consulting",
+      "status": 200,
+      "final_url": "https://www.siliconmotives.com/services/devops-consulting",
+      "title": "DevOps Consulting Services | SiliconMotives",
+      "description": [
+        "Practical DevOps consulting for release workflows, CI/CD, environment consistency and operational ownership. Start with a scoped engineering review."
+      ],
+      "canonical": [
+        "https://www.siliconmotives.com/services/devops-consulting"
+      ],
+      "h1_count": 1,
+      "robots": [],
+      "x_robots_tag": null,
+      "schema_count": 2,
+      "og_image": "https://www.siliconmotives.com/brand/social/siliconmotives-og-navy.png",
+      "internal_links": [
+        "/",
+        "/about",
+        "/agency-partners",
+        "/contact",
+        "/privacy",
+        "/projects",
+        "/projects/woobe",
+        "/services",
+        "/services/aws-devops",
+        "/services/backend-development",
+        "/services/cloud-infrastructure",
+        "/services/custom-software-development",
+        "/services/website-design-kochi",
+        "/terms"
+      ],
+      "issues": []
+    }
+  ],
+  "validation_note": "The root URLs with and without a trailing slash are equivalent. Canonical comparisons normalize that equivalent root representation."
+}

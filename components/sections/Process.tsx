@@ -7,8 +7,8 @@ import { RevealText } from "../motion/RevealText";
 import { Reveal } from "../motion/Reveal";
 import { SectionLabel } from "../ui/SectionLabel";
 
-const { process } = site;
-const N = process.steps.length;
+const processContent = site.process;
+const N = processContent.steps.length;
 
 /** A wave that passes through each node at mid-height, built at real pixel size. */
 function routePath(w: number, h: number) {
@@ -115,11 +115,11 @@ export function Process() {
       >
         <div className="grid gap-y-8 lg:grid-cols-12 lg:gap-x-8">
           <Reveal className="lg:col-span-12">
-            <SectionLabel index={process.index}>{process.eyebrow}</SectionLabel>
+            <SectionLabel index={processContent.index}>{processContent.eyebrow}</SectionLabel>
           </Reveal>
-          <RevealText as="h2" id="process-title" lines={process.title} className="display t-h2 lg:col-span-8" />
+          <RevealText as="h2" id="process-title" lines={processContent.title} className="display t-h2 lg:col-span-8" />
           <Reveal className="self-end lg:col-span-4">
-            <p className="text-[1.1875rem] leading-[1.55] text-slate">{process.lead}</p>
+            <p className="text-[1.1875rem] leading-[1.55] text-slate">{processContent.lead}</p>
           </Reveal>
         </div>
 
@@ -144,7 +144,7 @@ export function Process() {
             aria-hidden="true"
             className="absolute top-2 bottom-2 left-[11px] w-0.5 origin-top bg-lagoon-ink lg:hidden"
           />
-          {process.steps.map((step, i) => (
+          {processContent.steps.map((step, i) => (
             <li key={step.name} data-step="" className="group relative lg:text-center">
               <span
                 aria-hidden="true"

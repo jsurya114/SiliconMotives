@@ -33,6 +33,7 @@ const organizationSchema = {
   '@type': 'Organization',
   '@id': `${SITE_URL}/#organization`,
   name: 'SiliconMotives',
+  alternateName: 'Silicon Motives',
   legalName: 'Millionian LLC',
   url: SITE_URL,
   logo: {
