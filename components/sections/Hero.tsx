@@ -94,8 +94,8 @@ export function Hero() {
         <div data-sky-copy data-depth="7" data-near="0,0" data-origin="0% 62%" className="sky-hero__copy wrap">
           <div data-fade="0.24,0.54,1,0">
             <p className="label mb-6 flex min-w-0 items-center gap-3 sm:mb-8"><span aria-hidden="true" className="h-px w-8 shrink-0 bg-current opacity-40" />{hero.eyebrow}</p>
-            <h1 className="hero-title display max-w-full text-[clamp(2.5rem,7.6vw,8rem)] !leading-[1.02] [overflow-wrap:break-word]">
-              {hero.title.map((line, i) => <span key={line} className="block">{line}{i === 0 ? ' ' : null}</span>)}
+            <h1 className="hero-title display max-w-full text-[clamp(1.25rem,6.6vw,6.5rem)] !leading-[1.06]">
+              {hero.title.map((line, i) => <span key={line} className="block whitespace-nowrap">{line}{i === 0 ? ' ' : null}</span>)}
             </h1>
           </div>
           <div data-fade="0.08,0.28,1,0" data-interactive className="mt-8 grid gap-6 sm:mt-10 md:grid-cols-12 md:items-end">

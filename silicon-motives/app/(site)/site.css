@@ -362,7 +362,8 @@ html.lenis, html.lenis body { height: auto; }
 .public-site .sky-hero__ahead { z-index: 2; }
 .public-site .sky-hero__copy {
   position: relative;
-  z-index: 1;
+  /* Keep the copy readable above the foreground clouds; their motion is unchanged. */
+  z-index: 3;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
