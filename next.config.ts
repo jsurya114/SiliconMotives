@@ -14,6 +14,7 @@ const config: NextConfig = {
   images: { qualities: [75, 90] },
   async headers() {
     return [
+      { source: '/fonts/:path*', headers: [{ key: 'Cache-Control', value: 'public, max-age=31536000, immutable' }] },
       { source: '/admin/:path*', headers: adminHeaders },
       { source: '/:path*', has: ownerHost, headers: adminHeaders },
     ];

@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import './globals.css';
+import './fonts.css';
 import { SITE_URL } from '@/lib/site-url';
 import { pageMetadata } from '@/lib/metadata';
 import { site } from '@/content/site';
@@ -69,8 +70,7 @@ const organizationSchema = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return <html lang="en"><head>
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema).replace(/</g, '\\u003c') }} />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400..600;1,6..72,400..600&family=Schibsted+Grotesk:wght@400..900&display=swap" rel="stylesheet" />
+    <link rel="preload" href="/fonts/schibsted-grotesk-v7-latin.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+    <link rel="preload" href="/fonts/newsreader-v26-normal-latin.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
   </head><body>{children}</body></html>;
 }

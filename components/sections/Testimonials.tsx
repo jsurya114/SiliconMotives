@@ -1,4 +1,5 @@
 import { site } from "@/content/site";
+import Image from "next/image";
 import type { ContentRow } from "@/lib/content";
 import { initials, safeImage } from "@/lib/urls";
 import { clientLogo } from "@/lib/client-logos";
@@ -25,7 +26,7 @@ export function Testimonials({ rows, clients = [] }: { rows: ContentRow[]; clien
           <figcaption className="mt-auto flex items-center gap-3 pt-8">
             {safeImage(row.avatar_url) ? <img src={safeImage(row.avatar_url)} alt="" loading="lazy" decoding="async" className="size-11 rounded-full object-cover" /> : <span aria-hidden="true" className="label grid size-11 shrink-0 place-items-center rounded-full bg-monsoon text-lagoon">{initials(row.author_name)}</span>}
             <span><span className="block font-display text-[0.9375rem] font-semibold">{row.author_name}</span><span className="block text-[1rem] text-slate">{[row.author_role, company].filter(Boolean).join(', ')}</span></span>
-            {client && clientLogo(client.name, client.logo_url) && <img src={clientLogo(client.name, client.logo_url)} alt={`${client.name} logo`} loading="lazy" decoding="async" className="ml-auto h-8 w-24 object-contain" />}
+            {client && clientLogo(client.name, client.logo_url) && <Image src={clientLogo(client.name, client.logo_url)} alt={`${client.name} logo`} width={96} height={32} sizes="96px" unoptimized={!clientLogo(client.name, client.logo_url).startsWith('/')} loading="lazy" className="ml-auto h-8 w-24 object-contain" />}
           </figcaption>
         </figure>; })}
       </div>

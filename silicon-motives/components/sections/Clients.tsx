@@ -1,4 +1,5 @@
 import { site } from "@/content/site";
+import Image from "next/image";
 import type { ContentRow } from "@/lib/content";
 import { safeUrl } from "@/lib/urls";
 import { clientLogo } from "@/lib/client-logos";
@@ -18,7 +19,7 @@ export function Clients({ rows }: { rows: ContentRow[] }) {
           const logo = clientLogo(row.name, row.logo_url);
           const url = safeUrl(row.website_url);
           const content = <span className="flex w-36 flex-col items-center gap-3">
-            {logo && <img src={logo} alt="" loading="lazy" decoding="async" className="h-20 w-36 object-contain" />}
+            {logo && <Image src={logo} alt="" width={144} height={80} sizes="144px" unoptimized={!logo.startsWith('/')} loading="lazy" className="h-20 w-36 object-contain" />}
             <span className="font-display text-sm font-semibold tracking-wide sm:text-base">{row.name}</span>
           </span>;
           return <li key={row.id} className="flex items-center">
