@@ -11,14 +11,16 @@ export type EngineeringService = {
   projects: string[];
   evidenceNote: string;
   faqs: [string, string][];
+  deliveryContext?: { heading: string; paragraphs: string[] };
+  regions?: { type: 'City' | 'State' | 'Country'; name: string }[];
 };
 
 export const engineeringServices: EngineeringService[] = [
   {
     slug: 'custom-software-development', name: 'Custom software development',
-    title: 'Custom Software Development | SiliconMotives',
-    description: 'Custom business applications, CRMs and operational tools for businesses and agencies. Founder-led engineering from Kerala, India, with remote delivery.',
-    headline: 'Custom software shaped around your work.',
+    title: 'Custom Software Development in Kochi, Kerala | SiliconMotives',
+    description: 'Custom software development from Kochi, Kerala: CRMs, inventory, invoicing and business applications. Founder-led engineering with remote delivery across India.',
+    headline: 'Custom software development in Kochi.',
     intro: 'When spreadsheets and disconnected tools make everyday work harder, a focused application can bring the workflow together. We build custom software around your users, responsibilities and business rules.',
     audience: 'For businesses replacing manual operations, founders defining a first release, and agencies delivering a custom application for a client.',
     scope: [
@@ -29,7 +31,17 @@ export const engineeringServices: EngineeringService[] = [
     deliverables: ['Agreed workflows and acceptance criteria', 'Application source and implementation notes', 'Deployment and handover arrangements'],
     projects: ['picbox', 'uniwayin', 'dental-buddy'],
     evidenceNote: 'These project overviews describe the documented product scope: rental inventory and invoicing, education consultancy workflows, and clinic administration.',
+    deliveryContext: {
+      heading: 'Engineering from Kerala. A clear delivery plan.',
+      paragraphs: [
+        'SiliconMotives has engineering operations in Kochi, Kerala, and works remotely with businesses and agencies. We agree who will review the work, how decisions will be recorded, and when to meet before starting. The delivery plan sets milestones and approval steps so your team can see what is ready and what happens next.',
+        'Start with the records and decisions your team handles today: a lead that needs a follow-up, equipment assigned to a rental job, or an invoice prepared for a customer. We map the workflow, the people allowed to change each record, and the connections to existing systems before choosing the implementation.',
+        'The first milestone should have a defined workflow, agreed acceptance criteria and a handover plan. Source ownership, account access, hosting responsibilities and ongoing support are documented in the proposal and contract.',
+      ],
+    },
+    regions: [{ type: 'City', name: 'Kochi' }, { type: 'State', name: 'Kerala' }, { type: 'Country', name: 'India' }],
     faqs: [
+      ['Do you work with businesses in Kochi and across Kerala?', 'Yes. Our engineering operations are in Kochi, Kerala, with remote delivery. We agree meeting windows, written updates and review checkpoints around the project. Tell us the business workflow you need to improve and who will use the software.'],
       ['Can we start with one workflow?', 'Yes. We can define a first milestone around the most useful workflow, agree acceptance criteria, and plan further work after reviewing that release.'],
       ['Who owns the source code?', 'Source ownership, third-party dependencies, repository access and handover are documented in the proposal and contract before delivery begins.'],
       ['Do you work with U.S. businesses?', 'We offer remote delivery from Kerala, India. For U.S. teams, we agree meeting overlap, written updates and review checkpoints before starting.'],
