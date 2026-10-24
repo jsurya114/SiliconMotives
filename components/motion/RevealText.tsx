@@ -2,6 +2,7 @@
 
 import { useRef, type ReactNode } from "react";
 import { gsap, SplitText, useGSAP, MQ } from "@/lib/gsap";
+import { whenNearViewport } from './whenNearViewport';
 
 type Props = {
   as?: "h1" | "h2" | "h3" | "h4" | "p" | "div" | "span";
@@ -48,35 +49,41 @@ export function RevealText({
       if (!el) return;
       const mm = gsap.matchMedia();
       mm.add(MQ.motion, () => {
-        const target = isHeading ? el : (el.querySelector("[data-split]") as HTMLElement);
-        let done = false;
-        const st = SplitText.create(target, {
-          type: split === "chars" ? "lines,words,chars" : "lines",
-          mask: "lines",
-          linesClass: "split-line",
-          autoSplit: true,
-          aria: isHeading ? "auto" : "none",
-          onSplit(self) {
-            gsap.set(el, { opacity: 1 });
-            if (done) return;
-            return gsap.from(split === "chars" ? self.chars : self.lines, {
-              yPercent: 115,
-              duration: split === "chars" ? 1.1 : 1.2,
-              ease: "expo.out",
-              stagger: split === "chars" ? 0.03 : 0.09,
-              delay,
-              scrollTrigger: immediate ? undefined : { trigger: el, start, once: true },
-              onComplete: () => {
-                if (revertOnComplete) {
-                  done = true;
-                  self.revert();
-                }
+        const setup = () => {
+          const animation = gsap.context(() => {
+            const target = isHeading ? el : (el.querySelector("[data-split]") as HTMLElement);
+            let done = false;
+            SplitText.create(target, {
+              type: split === "chars" ? "lines,words,chars" : "lines",
+              mask: "lines",
+              linesClass: "split-line",
+              autoSplit: true,
+              aria: isHeading ? "auto" : "none",
+              onSplit(self) {
+                gsap.set(el, { opacity: 1 });
+                if (done) return;
+                return gsap.from(split === "chars" ? self.chars : self.lines, {
+                  yPercent: 115,
+                  duration: split === "chars" ? 1.1 : 1.2,
+                  ease: "expo.out",
+                  stagger: split === "chars" ? 0.03 : 0.09,
+                  delay,
+                  scrollTrigger: immediate ? undefined : { trigger: el, start, once: true },
+                  onComplete: () => {
+                    if (revertOnComplete) {
+                      done = true;
+                      self.revert();
+                    }
+                  },
+                });
               },
             });
-          },
-        });
-        return () => st.revert();
+          }, el);
+          return () => animation.revert();
+        };
+        return immediate ? setup() : whenNearViewport(el, setup);
       });
+      return () => mm.revert();
     },
     { scope: ref },
   );

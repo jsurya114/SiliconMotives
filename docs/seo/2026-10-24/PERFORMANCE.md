@@ -63,3 +63,33 @@ These small early totals do not establish a top-10 position for Kochi commercial
 - https://github.com/GoogleChrome/lighthouse
 - https://react.dev/reference/react-dom/components/link
 - https://support.google.com/webmasters/answer/7576553
+
+## First live verification and follow-up
+
+The first deployed font/image pass was checked at 2026-10-24T17:12:58.037Z on the same public URL and mobile Lighthouse settings:
+
+| Metric | Original live baseline | Font/image pass live |
+| --- | --- | --- |
+| Performance | 68 | 72 |
+| Basic SEO | 100 | 100 |
+| FCP | 3.9 s | 1.4 s |
+| LCP | 5.0 s | 3.7 s |
+| TBT | 0 ms | 460 ms |
+| CLS | 0 | 0 |
+| Speed Index | 6.5 s | 6.4 s |
+
+The result improved content rendering but exposed startup work after the earlier first paint. The higher TBT is recorded rather than presented as an across-the-board improvement. No causal claim about TBT is made from one run; its measurement window depends on FCP and results vary with machine conditions.
+
+The below-the-fold Reveal/RevealText components prepared every GSAP tween and SplitText instance during mount. They now initialize 300px before entering view, while immediate effects still initialize immediately. Plain server-rendered text remains available before animation initialization. Intersection observers and GSAP contexts are reverted when the component unmounts or motion preference changes.
+
+- Helper lifecycle checks passed for delayed setup, one-time initialization, cancellation before visibility, one-time cleanup, immediate near-view setup and lack of IntersectionObserver support.
+- Production build passed.
+- Local mobile comparison using the same production server: Performance 74 → 85; TBT 390 → 160 ms; LCP 4.5 → 4.0 s; FCP 1.1 → 1.1 s; CLS 0 → 0. These remain local laboratory observations.
+- Browser checks verified near-view headings were split and visible while the distant footer remained unsplit. Mobile menu navigation closed the dialog and restored scroll lock. The hero heading, equal-width buttons and cloud presentation were retained.
+- A final live audit of the follow-up will be recorded after deployment.
+
+## Owner-supplied client portraits
+
+The owner supplied Gokul/Woobe, Navas/Picbox and NM Jaseem/Uniwayin photos while this performance work was underway. Added a compact, named portrait row beneath the client logos and used exact name-plus-company matching for published testimonial avatars. Gokul's existing Woobe quote uses his photo. No Navas/Jaseem quotes or unconfirmed job titles were created.
+
+Portraits use lazy, responsive Next.js image delivery, fixed circular layout boxes, and CSS framing; original photos are preserved. Name/company matching and rejection of wrong authors passed. All three portraits loaded at phone width with no horizontal overflow. Preview captures: `client-portraits-mobile.jpg` and `mobile-hero.jpg`.

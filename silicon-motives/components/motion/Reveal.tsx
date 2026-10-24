@@ -2,6 +2,7 @@
 
 import { useRef, type ReactNode } from "react";
 import { gsap, useGSAP, MQ } from "@/lib/gsap";
+import { whenNearViewport } from './whenNearViewport';
 
 type Props = {
   as?: "div" | "ul" | "ol" | "section" | "p";
@@ -26,22 +27,28 @@ export function Reveal({ as: Tag = "div", children, className, stagger, y = 48, 
       if (!el) return;
       const mm = gsap.matchMedia();
       mm.add(MQ.motion, () => {
-        const targets = stagger ? Array.from(el.children) : [el];
-        if (stagger) gsap.set(el, { opacity: 1 });
-        gsap.fromTo(
-          targets,
-          { y, opacity: 0 },
-          {
-            y: 0,
-            opacity: 1,
-            duration: 1.2,
-            ease: "expo.out",
-            stagger: stagger ?? 0,
-            delay,
-            scrollTrigger: { trigger: el, start, once: true },
-          },
-        );
+        return whenNearViewport(el, () => {
+          const animation = gsap.context(() => {
+            const targets = stagger ? Array.from(el.children) : [el];
+            if (stagger) gsap.set(el, { opacity: 1 });
+            gsap.fromTo(
+              targets,
+              { y, opacity: 0 },
+              {
+                y: 0,
+                opacity: 1,
+                duration: 1.2,
+                ease: "expo.out",
+                stagger: stagger ?? 0,
+                delay,
+                scrollTrigger: { trigger: el, start, once: true },
+              },
+            );
+          }, el);
+          return () => animation.revert();
+        });
       });
+      return () => mm.revert();
     },
     { scope: ref },
   );
