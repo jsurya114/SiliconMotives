@@ -93,3 +93,25 @@ The below-the-fold Reveal/RevealText components prepared every GSAP tween and Sp
 The owner supplied Gokul/Woobe, Navas/Picbox and NM Jaseem/Uniwayin photos while this performance work was underway. Added a compact, named portrait row beneath the client logos and used exact name-plus-company matching for published testimonial avatars. Gokul's existing Woobe quote uses his photo. No Navas/Jaseem quotes or unconfirmed job titles were created.
 
 Portraits use lazy, responsive Next.js image delivery, fixed circular layout boxes, and CSS framing; original photos are preserved. Name/company matching and rejection of wrong authors passed. All three portraits loaded at phone width with no horizontal overflow. Preview captures: `client-portraits-mobile.jpg` and `mobile-hero.jpg`.
+
+## Final deployed result
+
+Source commit: `c5b6223`. The live homepage returned HTTP 200, included the client portraits, and no longer referenced external Google Fonts CSS. Final matching mobile Lighthouse run: **2026-10-24T17:43:09.207Z**, version 13.5.0, no run warnings. Machine-readable results: `mobile-performance-summary.json`.
+
+| Metric | Original live baseline | Final live result |
+| --- | --- | --- |
+| Performance | 68/100 | 91/100 |
+| Basic Lighthouse SEO checks | 100/100 | 100/100 |
+| First Contentful Paint | 3.9 s | 1.3 s |
+| Largest Contentful Paint | 5.0 s | 3.2 s |
+| Total Blocking Time | 0 ms | 70 ms |
+| Cumulative Layout Shift | 0 | 0 |
+| Speed Index | 6.5 s | 3.6 s |
+
+All three portrait responses in the mobile test were responsive 256px images, about 7.5–8 KB each, rather than the original full-resolution PNGs. The final run made zero Google Fonts network requests.
+
+The final result improves rendering speed and overall lab performance while retaining the cloud presentation and adding the owner-supplied portraits. TBT is higher than the original baseline and substantially lower than the intermediate live pass; do not describe it as an improvement over the original 0 ms value. Real-user INP is not established by this navigation audit.
+
+LCP at 3.2 seconds still exceeds the 2.5-second good target. Further work should use field data and targeted network/script analysis; the remaining hero image findings were not used as a reason to change the requested cloud assets or animation. A score of 91 is a lab result, and the SEO score covers basic automated checks. Neither is a guarantee of rankings or a field Core Web Vitals pass.
+
+Final checks: production build/TypeScript passed; portrait matching and deferred-setup lifecycle checks passed; mobile browser checks passed for loaded portraits, no horizontal overflow, near-view text initialization, untouched distant footer text, the original hero text/button layout, and menu close/scroll-unlock behavior. Test viewport was reset and temporary local servers were stopped. No enquiries, reviews or outreach messages were sent.
