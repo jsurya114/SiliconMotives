@@ -90,13 +90,13 @@ The below-the-fold Reveal/RevealText components prepared every GSAP tween and Sp
 
 ## Owner-supplied client portraits
 
-The owner supplied Gokul/Woobe, Navas/Picbox and NM Jaseem/Uniwayin photos while this performance work was underway. Added a compact, named portrait row beneath the client logos and used exact name-plus-company matching for published testimonial avatars. Gokul's existing Woobe quote uses his photo. No Navas/Jaseem quotes or unconfirmed job titles were created.
+The owner supplied Gokul/Woobe, Navas/Picbox and NM Jaseem/Uniwayin photos while this performance work was underway. Used exact name-plus-company matching for published testimonial avatars. Following the owner’s placement correction, the company section contains company logos only; the temporary portrait row was removed. Gokul's existing Woobe quote uses his photo. No Navas/Jaseem quotes or unconfirmed job titles were created.
 
-Portraits use lazy, responsive Next.js image delivery, fixed circular layout boxes, and CSS framing; original photos are preserved. Name/company matching and rejection of wrong authors passed. All three portraits loaded at phone width with no horizontal overflow. Preview captures: `client-portraits-mobile.jpg` and `mobile-hero.jpg`.
+Portraits use lazy, responsive Next.js image delivery, fixed circular layout boxes, and CSS framing; original photos are preserved. Name/company matching and rejection of wrong authors passed. The earlier three-portrait layout loaded at phone width with no horizontal overflow, but that placement has since been removed. The hero preview is `mobile-hero.jpg`.
 
 ## Final deployed result
 
-Source commit: `c5b6223`. The live homepage returned HTTP 200, included the client portraits, and no longer referenced external Google Fonts CSS. Final matching mobile Lighthouse run: **2026-10-24T17:43:09.207Z**, version 13.5.0, no run warnings. Machine-readable results: `mobile-performance-summary.json`.
+Source commit: `c5b6223`. Before the subsequent portrait-placement correction, the live homepage returned HTTP 200, included the temporary client portrait row, and no longer referenced external Google Fonts CSS. Final matching mobile Lighthouse run: **2026-10-24T17:43:09.207Z**, version 13.5.0, no run warnings. Machine-readable results: `mobile-performance-summary.json`.
 
 | Metric | Original live baseline | Final live result |
 | --- | --- | --- |
