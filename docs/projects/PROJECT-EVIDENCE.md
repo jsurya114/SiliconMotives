@@ -53,3 +53,14 @@ Optional story fields support screenshot dimensions/captions, contributors, deli
 - Built Woobe page inspected in the browser; the local development preview had stale content, so the production build was used for inspection.
 - `git diff --check` passed.
 - No contact enquiries or client messages were sent.
+
+## JJC Artworks public website captures, 24 October 2026
+
+- Owner supplied `https://www.jjcartwork.in/` as the JJC website and authorized screenshot capture for the portfolio.
+- Captured the homepage and `https://www.jjcartwork.in/services#chapel-pews` through the browser. The site's visible presentation uses “JJC Chapel Interiors”; the SiliconMotives project record retains the owner's existing “JJC Artworks” name.
+- Published assets: `public/images/projects/jjc-artworks/homepage-2026-10-24.webp` and `services-2026-10-24.webp`, both 1905 × 951. Browser viewport captures were encoded as WebP without changing the visible content or composition.
+- The homepage shows the public navigation, introduction, chapel image and work/enquiry links. The second capture shows service descriptions, seating imagery and an enquiry link.
+- These are evidence of the public website interface on the capture date. Images, testimonials, project locations, experience figures and other claims made by JJC's own website were not independently verified and are not adopted as SiliconMotives outcomes.
+- Public portfolio/gallery routes were inspected, but no collection items were visible during that check. The project copy describes their navigation; it does not assert that those routes contained a populated collection at capture time.
+- Added the live URL and a factual business-need/workflow overview to `/projects/jjc-artworks`. Delivery dates, implementation stack, contributor assignments and measured outcomes remain absent until confirmed.
+- No contact form, WhatsApp conversation, enquiry or authenticated account was submitted or accessed.

@@ -172,6 +172,33 @@ export const projectCases: ProjectCase[] = [
       'Contact information for prospective clients.',
     ],
     technicalNotes: [],
+    liveUrl: 'https://www.jjcartwork.in/',
+    story: {
+      need: 'A chapel-interior and woodwork business needs a clear way to explain its services and help prospective customers begin an enquiry. The website brings service information, company background and contact routes into one public experience.',
+      approach: 'The homepage introduces the business and links visitors to its work and enquiry routes. The services page breaks the offering into seating, altar furniture, custom woodwork and other service categories, with contextual links to the contact page. Portfolio and gallery navigation provide separate places to explore the presentation of work.',
+      workflow: [
+        ['Discover', 'Understand the business through its homepage, imagery and company information.'],
+        ['Explore services', 'Read individual service descriptions and review the accompanying imagery.'],
+        ['Browse', 'Use the portfolio and gallery navigation to explore the website further.'],
+        ['Enquire', 'Continue to the public contact page or WhatsApp link to discuss a requirement.'],
+      ],
+      screenshots: [
+        {
+          src: '/images/projects/jjc-artworks/homepage-2026-10-24.webp',
+          alt: 'JJC website homepage showing its navigation, chapel interior image and links to view work or start an enquiry.',
+          caption: 'Public homepage at jjcartwork.in. Captured on 24 October 2026.',
+          width: 1905,
+          height: 951,
+        },
+        {
+          src: '/images/projects/jjc-artworks/services-2026-10-24.webp',
+          alt: 'JJC services page showing chapel seating information, a pew image and an enquiry link, followed by altar furniture content.',
+          caption: 'Public services page, framed at the chapel-seating section. Captured on 24 October 2026.',
+          width: 1905,
+          height: 951,
+        },
+      ],
+    },
   },
 ];
 
