@@ -64,3 +64,12 @@ Optional story fields support screenshot dimensions/captions, contributors, deli
 - Public portfolio/gallery routes were inspected, but no collection items were visible during that check. The project copy describes their navigation; it does not assert that those routes contained a populated collection at capture time.
 - Added the live URL and a factual business-need/workflow overview to `/projects/jjc-artworks`. Delivery dates, implementation stack, contributor assignments and measured outcomes remain absent until confirmed.
 - No contact form, WhatsApp conversation, enquiry or authenticated account was submitted or accessed.
+
+## Uniwayin public sign-in capture, 24 October 2026
+
+- Owner supplied `https://ums.theuniway.co.in/` as the Uniwayin application URL.
+- The public root redirected to `/login?from=%2F`. The screen displayed The Uniway In branding, “Welcome back”, and “Sign in to manage leads and follow-ups”.
+- Added `public/images/projects/uniwayin/sign-in-2026-10-24.webp`, a 1920 × 958 browser viewport capture encoded as WebP. The public fields were empty; the example email and password dots are placeholders. No credentials were entered or submitted.
+- Added the owner-provided live application URL and the dated public sign-in capture to `/projects/uniwayin`.
+- This capture establishes the public branded sign-in interface. It does not verify the authenticated lead, follow-up, analytics or staff-access workflows described in the existing project scope.
+- Additional CRM screenshots still require owner/client-approved demo records or redacted captures. No private lead, customer or staff records were accessed or published.

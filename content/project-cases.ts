@@ -134,6 +134,7 @@ export const projectCases: ProjectCase[] = [
       'Role-based access for staff.',
     ],
     technicalNotes: [],
+    liveUrl: 'https://ums.theuniway.co.in/',
     story: {
       need: 'Education consultancy work depends on keeping lead details, conversation notes and follow-ups together. Uniwayin organizes those activities in a CRM for consultancy staff.',
       approach: 'The CRM combines lead records, follow-up tracking, notes and analytics. Role-based access distinguishes what staff can access within the application.',
@@ -142,6 +143,15 @@ export const projectCases: ProjectCase[] = [
         ['Follow up', 'Track follow-up activity and retain notes for context.'],
         ['Review', 'Use analytics to review consultancy workflows.'],
         ['Control access', 'Apply staff access according to their role.'],
+      ],
+      screenshots: [
+        {
+          src: '/images/projects/uniwayin/sign-in-2026-10-24.webp',
+          alt: 'The Uniwayin public sign-in screen with its brand logo, email and password fields, and sign-in button.',
+          caption: 'Public sign-in screen at ums.theuniway.co.in, captured on 24 October 2026. Authenticated CRM screens are not shown.',
+          width: 1920,
+          height: 958,
+        },
       ],
     },
   },
