@@ -41,8 +41,10 @@ const schema = {
 };
 
 export default function WebsiteDesignPage() {
-  const projects = ['woobe', 'jjc-artworks'].map(getProjectCase).filter(project => project !== undefined);
-  const storefront = getProjectCase('woobe')?.story?.screenshots?.[0];
+  const projects = websiteDesign.projectEvidence.flatMap(evidence => {
+    const project = getProjectCase(evidence.slug);
+    return project ? [{ project, evidence }] : [];
+  });
 
   return (
     <MarketingPage>
@@ -92,29 +94,29 @@ export default function WebsiteDesignPage() {
             <Link href="/projects" className="inline-flex min-h-11 items-center gap-2 font-display text-sm font-semibold text-lagoon"><span className="link-line">All six projects</span><ArrowUpRight /></Link>
           </div>
           <div className="mt-8 grid gap-6 md:grid-cols-2 md:gap-10">
-            {projects.map(project => (
-              <article key={project.slug} className="border-t border-cloud/20 pt-6">
+            {projects.map(({ project, evidence }) => (
+              <article key={project.slug} className="min-w-0 border-t border-cloud/20 pt-6">
                 <p className="label text-lagoon">{project.category}</p>
                 <h3 className="display mt-4 text-3xl !leading-tight">{project.name}</h3>
                 <p className="mt-3 max-w-xl text-base leading-7 text-cloud/80">{project.summary}</p>
-                <ul className="mt-4 space-y-2 text-sm leading-6 text-mist">
-                  {project.scope.map(detail => <li key={detail} className="flex gap-3"><span aria-hidden="true" className="text-lagoon">—</span><span>{detail}</span></li>)}
-                </ul>
-                <Link href={`/projects/${project.slug}`} className="mt-5 inline-flex min-h-11 items-center gap-2 font-display text-sm font-semibold text-lagoon"><span className="link-line">Read the {project.name} overview</span><ArrowUpRight /></Link>
+                {project.story?.screenshots?.[0] && <figure className="mt-5">
+                  <Link href={`/projects/${project.slug}`} className="block overflow-hidden rounded-xl border border-cloud/20 bg-cloud-2" aria-label={`View ${project.name} screenshots and project overview`}>
+                    <Image src={project.story.screenshots[0].src} alt={project.story.screenshots[0].alt} width={project.story.screenshots[0].width} height={project.story.screenshots[0].height} sizes="(min-width: 1440px) 40rem, (min-width: 768px) 46vw, 92vw" loading="lazy" className="h-auto w-full" />
+                  </Link>
+                  <figcaption className="mt-3 text-sm leading-6 text-mist">{project.story.screenshots[0].caption}</figcaption>
+                </figure>}
+                <dl className="mt-5 space-y-4 text-base leading-7">
+                  <div><dt className="font-display font-semibold text-cloud">The business need</dt><dd className="mt-1 ml-0 text-cloud/80">{evidence.need}</dd></div>
+                  <div><dt className="font-display font-semibold text-cloud">The implementation</dt><dd className="mt-1 ml-0 text-cloud/80">{evidence.approach}</dd></div>
+                </dl>
+                <p className="mt-4 text-sm leading-6 text-mist">{evidence.evidence}</p>
+                <div className="mt-4 flex flex-wrap gap-x-6 gap-y-1">
+                  <Link href={`/projects/${project.slug}`} className="inline-flex min-h-11 items-center gap-2 font-display text-sm font-semibold text-lagoon"><span className="link-line">Explore {project.name}</span><ArrowUpRight /></Link>
+                  {project.liveUrl && <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center gap-2 font-display text-sm font-semibold text-lagoon"><span className="link-line">Visit live website</span><ArrowUpRight /></a>}
+                </div>
               </article>
             ))}
           </div>
-          {storefront && <figure className="mt-8 grid items-center gap-6 border-t border-cloud/20 pt-8 lg:grid-cols-12 lg:gap-10">
-            <Link href="/projects/woobe" className="block min-w-0 overflow-hidden rounded-xl border border-cloud/20 bg-cloud-2 lg:col-span-8" aria-label="Explore Woobe’s storefront and engineering overview">
-              <Image src={storefront.src} alt={storefront.alt} width={storefront.width} height={storefront.height} sizes="(min-width: 1440px) 54rem, (min-width: 1024px) 60vw, 92vw" className="h-auto w-full" />
-            </Link>
-            <figcaption className="min-w-0 lg:col-span-4">
-              <p className="label text-lagoon">Inside Woobe</p>
-              <p className="mt-3 text-base leading-7 text-cloud/80">{storefront.caption}</p>
-              <p className="mt-3 text-sm leading-6 text-mist">Explore the product pages, weight-based pricing decisions and linked implementation references in the project overview.</p>
-              <Link href="/projects/woobe" className="mt-4 inline-flex min-h-11 items-center gap-2 font-display text-sm font-semibold text-lagoon"><span className="link-line">See the storefront and engineering</span><ArrowUpRight /></Link>
-            </figcaption>
-          </figure>}
         </div>
       </section>
 
@@ -155,7 +157,7 @@ export default function WebsiteDesignPage() {
           ))}
         </ol>
         <div className="mt-8 grid gap-4 border-t border-ink/15 pt-6 md:grid-cols-2 md:gap-10">
-          <p className="text-base leading-7 text-slate">Before work begins, we agree the pages, content responsibilities, editing needs, hosting arrangements, and handover. Updates and ongoing support are defined in the project scope.</p>
+          <p className="text-base leading-7 text-slate">Work directly with the founders: <Link href="/about#jasil-m" className="link-line font-semibold text-ink">Jasil M</Link> focuses on systems, cloud and architecture; <Link href="/about#jayasoorya-suryadas" className="link-line font-semibold text-ink">Jayasoorya Suryadas</Link> focuses on systems and software engineering. We agree review checkpoints, content responsibilities and support boundaries before work begins.</p>
           <p className="text-base leading-7 text-slate">Have an existing website? Share what is difficult to manage or what your customers struggle to find. If you are delivering for a client, explore our <Link href="/agency-partners" className="link-line font-semibold text-ink">agency partnership approach</Link>.</p>
         </div>
         <aside className="mt-6 border-t border-ink/15 pt-6" aria-labelledby="website-software-title">

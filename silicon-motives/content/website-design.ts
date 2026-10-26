@@ -3,6 +3,20 @@ export const websiteDesign = {
   enquiryHref: '/contact?type=project&service=website-design',
   title: 'Website Design & Development in Kochi | SiliconMotives',
   description: 'Website design and development from Kochi, Kerala. Business websites, commerce storefronts, and redesigns with remote delivery across India.',
+  projectEvidence: [
+    {
+      slug: 'woobe',
+      need: 'Help shoppers understand clothing sold by weight, rather than a fixed price per item.',
+      approach: 'Product pages show the garment weight and rate per kilogram. Shared pricing logic calculates the amount in grams and paise, while a separate API handles application business rules.',
+      evidence: 'See the public storefront, product-page captures and linked pricing implementation in the engineering overview.',
+    },
+    {
+      slug: 'jjc-artworks',
+      need: 'Help prospective customers understand a chapel-interior and woodwork business before making an enquiry.',
+      approach: 'The website presents service categories with relevant imagery and contextual enquiry links. Visitors can move from the business introduction to a specific service and contact route.',
+      evidence: 'See the public homepage and services-page captures. The live website presents the business as JJC Chapel Interiors.',
+    },
+  ],
   offers: [
     {
       name: 'Business websites',
@@ -58,6 +72,14 @@ export const websiteDesign = {
     {
       question: 'Can I update the website after launch?',
       answer: 'We discuss who will manage content and which parts need to be editable when planning the website. The editing setup, access, documentation, and any ongoing support are part of the agreed scope.',
+    },
+    {
+      question: 'Can you build an ecommerce website with custom pricing?',
+      answer: 'We can discuss a commerce build around your product and pricing rules. Woobe is an example of weight-based pricing with product selection and Razorpay or cash-on-delivery checkout options. Your catalogue, payment requirements and order workflow determine the scope; a standard storefront and a custom commerce application are different projects.',
+    },
+    {
+      question: 'Who will I work with, and what happens after I enquire?',
+      answer: 'Jasil M focuses on systems, cloud and architecture; Jayasoorya Suryadas focuses on systems and software engineering. We review your brief, clarify content and functionality, and agree scope, review checkpoints and responsibilities before work begins. Communication and any support after launch are agreed for your project.',
     },
     {
       question: 'Do you consider search visibility when building a website?',
