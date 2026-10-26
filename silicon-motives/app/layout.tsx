@@ -15,13 +15,10 @@ export const metadata: Metadata = {
   ),
   icons: {
     icon: [
-      { url: '/brand/web/icons/icon-512.png', sizes: '512x512', type: 'image/png' },
-      { url: '/brand/web/icons/icon-192.png', sizes: '192x192', type: 'image/png' },
-      { url: '/favicon-48.png', sizes: '48x48', type: 'image/png' },
+      { url: '/favicon-96.png', sizes: '96x96', type: 'image/png' },
       { url: '/favicon-32.png', sizes: '32x32', type: 'image/png' },
-      { url: '/favicon-16.png', sizes: '16x16', type: 'image/png' },
       { url: '/favicon.ico', sizes: '16x16 32x32 48x48', type: 'image/x-icon' },
-      { url: '/brand/web/icons/favicon.svg', type: 'image/svg+xml' },
+      { url: '/favicon.svg', sizes: 'any', type: 'image/svg+xml' },
     ],
     shortcut: '/favicon.ico',
     apple: { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
