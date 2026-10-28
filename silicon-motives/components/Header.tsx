@@ -219,10 +219,9 @@ function MobileMenu({ onClose, settings }: { onClose: () => void; settings: Cont
             </a>
           ))}
         </nav>
-        <p className="label mt-auto pt-10 text-mist">
-          <a href={`mailto:${contact.email}`}>{contact.email}</a>
-          <br />
-          <a href={contact.phoneHref}>{contact.phone}</a>
+        <p className="label mt-auto flex flex-col items-start pt-8 text-mist">
+          <a href={`mailto:${contact.email}`} className="inline-flex min-h-9 items-center">{contact.email}</a>
+          <a href={contact.phoneHref} className="inline-flex min-h-9 items-center">{contact.phone}</a>
         </p>
       </div>
     </div>

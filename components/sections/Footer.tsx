@@ -20,10 +20,11 @@ export function Footer() {
           {footer.columns.map((col) => (
             <nav key={col.title} aria-label={col.title} className="min-w-0 lg:col-span-2">
               <p className="label text-mist">{col.title}</p>
-              <ul className="mt-5 space-y-2.5 font-display text-[1rem] font-medium">
+              {/* Below desktop each link fills a full-height row, so it is easy to tap. */}
+              <ul className="mt-5 space-y-2.5 font-display text-[1rem] font-medium max-lg:mt-3 max-lg:space-y-0">
                 {col.links.map((link) => (
                   <li key={link.label}>
-                    <a href={link.href} className="opacity-85 transition-opacity hover:opacity-100">{link.label}</a>
+                    <a href={link.href} className="opacity-85 transition-opacity hover:opacity-100 max-lg:flex max-lg:min-h-10 max-lg:items-center">{link.label}</a>
                   </li>
                 ))}
               </ul>
@@ -35,9 +36,9 @@ export function Footer() {
             <div className="mt-5 border-t border-cloud/15 pt-4 text-sm leading-6 text-mist">
               <p>SiliconMotives is operated by Millionian LLC, a Wyoming limited liability company.</p>
             </div>
-            <div className="mt-5 flex flex-col items-start gap-3">
-              <a className="font-display text-sm font-semibold text-lagoon" href="mailto:hello@siliconmotives.com">hello@siliconmotives.com</a>
-              <a href="/contact" className="inline-flex items-center gap-2 font-display text-[0.9375rem] font-semibold text-lagoon">
+            <div className="mt-5 flex flex-col items-start gap-3 max-lg:mt-3 max-lg:gap-1">
+              <a className="font-display text-sm font-semibold text-lagoon max-lg:flex max-lg:min-h-10 max-lg:items-center" href="mailto:hello@siliconmotives.com">hello@siliconmotives.com</a>
+              <a href="/contact" className="inline-flex items-center gap-2 font-display text-[0.9375rem] font-semibold text-lagoon max-lg:min-h-10">
                 <span className="link-line">Start a conversation</span>
                 <ArrowIcon size={14} />
               </a>
@@ -61,7 +62,7 @@ export function Footer() {
       <div className="wrap mt-8 grid grid-cols-1 gap-4 border-t border-cloud/15 py-6 text-[0.9375rem] text-mist sm:grid-cols-3 sm:items-center sm:gap-6">
         <p>{footer.copyright}</p>
         <p className="sm:text-center">{site.brand.tagline}</p>
-        <a href="#main" className="label inline-flex items-center gap-2 text-cloud sm:justify-self-end">
+        <a href="#main" className="label inline-flex items-center gap-2 justify-self-start text-cloud max-sm:min-h-11 sm:justify-self-end">
           {footer.backToTop}
           <span className="-rotate-90"><ArrowIcon size={14} /></span>
         </a>

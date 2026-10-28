@@ -11,7 +11,7 @@
     font-optical-sizing: auto;
     overflow-x: clip;
     &, *, *::before, *::after { box-sizing: border-box; border: 0 solid; }
-    h1, h2, h3, h4, p, ul, ol, figure, blockquote { margin: 0; }
+    h1, h2, h3, h4, p, ul, ol, dd, figure, blockquote { margin: 0; }
     h1, h2, h3, h4 { font-family: var(--font-display); font-size: inherit; font-weight: inherit; text-wrap: balance; }
     p { text-wrap: pretty; }
     a { color: inherit; text-decoration: inherit; }
@@ -321,13 +321,23 @@ html.lenis, html.lenis body { height: auto; }
   .public-site .contact-address { overflow-wrap: anywhere; }
 }
 
-@layer components {
-  html:not(.motion-ready) .public-site .marquee [data-track] { width: 100%; overflow-x: auto; }
-  html:not(.motion-ready) .public-site .marquee [data-duplicate] { display: none; }
-  html:not(.motion-ready) .public-site .marquee [data-primary] { width: 100%; }
-  html:not(.motion-ready) .public-site .marquee .client-list,
-  html:not(.motion-ready) .public-site .marquee .review-list { flex-wrap: wrap; justify-content: center; width: 100%; gap: 1.5rem; padding-inline: 1rem; }
-  html:not(.motion-ready) .public-site .marquee .client-list li > span { display: none; }
+/* ── Without motion ── a marquee holds still as one row you scroll yourself, so it
+   works for any number of logos or reviews (a few centre; more scroll), and the
+   services rail shows its scrollbar too. Scrollbars are thin and only take space where
+   the system shows them. Unlayered so it outranks the components' own utilities. */
+@media (prefers-reduced-motion: reduce) {
+  .public-site .marquee [data-track], .public-site .rail {
+    scrollbar-width: thin;
+    scrollbar-color: color-mix(in oklab, currentColor 35%, transparent) transparent;
+  }
+  .public-site .marquee [data-track] { width: 100%; overflow-x: auto; overscroll-behavior-x: contain; padding-bottom: 0.75rem; }
+  .public-site .marquee [data-duplicate] { display: none; }
+  .public-site .marquee [data-primary] { margin-inline: auto; }
+  .public-site #testimonials .marquee [data-track] { scroll-snap-type: x mandatory; scroll-padding-inline: clamp(1rem, 4vw, 3rem); }
+  .public-site #testimonials .review-list { padding-inline: clamp(1rem, 4vw, 3rem); }
+  .public-site #testimonials .review-list > * { scroll-snap-align: start; }
+  .public-site .rail { padding-bottom: 0.75rem; }
+  .public-site .rail::-webkit-scrollbar { display: revert; }
 }
 
 /* ── Mobile menu ── A fixed overlay; links show even if animation never runs. */
@@ -375,6 +385,12 @@ html.lenis, html.lenis body { height: auto; }
   will-change: transform;
 }
 @media (min-width: 640px) { .public-site .sky-hero__copy { padding-bottom: 5rem; } }
+/* Phones: the copy still sits at the bottom, but an auto margin (not flex-end) does it,
+   so on short screens it starts just below the 4rem header instead of rising under it. */
+@media (max-width: 639.98px) {
+  .public-site .sky-hero__copy { justify-content: flex-start; padding-top: 5.5rem; }
+  .public-site .sky-hero__copy > :first-child { margin-top: auto; }
+}
 
 .public-site .sky-cloud {
   position: absolute;
@@ -478,7 +494,10 @@ html.lenis, html.lenis body { height: auto; }
   }
 }
 @media (prefers-reduced-motion: no-preference) and (min-height: 540px) and (max-width: 767.98px) {
-  .public-site .sky-hero { height: 215lvh; }
+  /* On phones the closing fog fills the whole screen, so the next section rises through
+     its last stretch instead of after it, its top fading in over the cloud. */
+  .public-site .sky-hero { height: 215lvh; margin-bottom: -30lvh; }
+  .public-site .sky-hero + section { position: relative; background: linear-gradient(transparent, var(--color-cloud) 30lvh); }
   .public-site .sky-hero__stage { --vp-x: 0.62; --vp-y: 0.46; --cam-d: 2.05; --cam-y: 0.3; --cam-x: 0.03; }
 }
 

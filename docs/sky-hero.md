@@ -45,7 +45,10 @@ never shifts layout.
 
 **Hand-off.** From 60% the haze builds; from 72% a floor in the page colour rises from
 the bottom. When the pin releases, the stage's lower half already matches the next
-section's background, so the cloud ceiling scrolls away above it with no seam.
+section's background, so the cloud ceiling scrolls away above it with no seam. On
+phones the closing fog fills the whole screen, so the next section overlaps the last
+30lvh of the flight (negative margin) and its top fades in over the cloud; the camera
+timing is unchanged.
 
 **Fallbacks.** Under `prefers-reduced-motion`, or on screens shorter than 540px, the
 hero is a still, single-screen layered scene (`--flight` is unset and `SkyFlight` does
@@ -54,7 +57,10 @@ bottom. Keyboard focus inside the hero copy scrolls back to the opening frame. A
 layers are `aria-hidden`, `alt=""` and `pointer-events: none`; the copy is real HTML.
 
 **Phones** get fewer planes (sky, far, mid, headline cloud, deck); the other layers have
-a `media` source pointing at a 1×1 GIF, so they are never downloaded.
+a `media` source pointing at a 1×1 GIF, so they are never downloaded. Below 640px the
+headline is sized to the longest line (`min(8.2vw, 2.25rem)`, never wrapping), and the
+copy is bottom-aligned with an auto margin rather than `flex-end`, so on short screens
+it starts below the header instead of rising under it.
 
 ## Tuning
 

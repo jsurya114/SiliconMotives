@@ -94,7 +94,8 @@ export function Hero() {
         <div data-sky-copy data-depth="7" data-near="0,0" data-origin="0% 62%" className="sky-hero__copy wrap">
           <div data-fade="0.24,0.54,1,0">
             <p className="label mb-6 flex min-w-0 items-center gap-3 sm:mb-8"><span aria-hidden="true" className="h-px w-8 shrink-0 bg-current opacity-40" />{hero.eyebrow}</p>
-            <h1 className="hero-title display max-w-full text-[clamp(1.25rem,6.6vw,6.5rem)] !leading-[1.06]">
+            {/* Phones: as large as the longest line allows (it never wraps), so the title outranks the section headings. */}
+            <h1 className="hero-title display max-w-full text-[min(8.2vw,2.25rem)] !leading-[1.06] sm:text-[clamp(1.25rem,6.6vw,6.5rem)]">
               {hero.title.map((line, i) => <span key={line} className="block whitespace-nowrap">{line}{i === 0 ? ' ' : null}</span>)}
             </h1>
           </div>

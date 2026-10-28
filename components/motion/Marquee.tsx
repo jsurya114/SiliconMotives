@@ -6,14 +6,17 @@ import { gsap, useGSAP, MQ } from "@/lib/gsap";
 type Props = {
   children: ReactNode;
   className?: string;
-  /** Seconds for one full loop at rest. */
+  /** Seconds for one item to pass at rest. The pace is per item, so a longer list
+   *  takes longer to loop instead of moving faster. */
   speed?: number;
 };
 
-/** A continuous ticker with enough hidden copies to fill the viewport. */
-export function Marquee({ children, className = "", speed = 40 }: Props) {
+/** A continuous ticker with enough hidden copies to fill the viewport. It eases to a
+ *  stop while a mouse is over it or something inside has focus. */
+export function Marquee({ children, className = "", speed = 6 }: Props) {
   const ref = useRef<HTMLDivElement>(null);
   const focused = useRef(false);
+  const hovered = useRef(false);
   const [copies, setCopies] = useState(2);
 
   useGSAP(
@@ -25,8 +28,11 @@ export function Marquee({ children, className = "", speed = 40 }: Props) {
       const mm = gsap.matchMedia();
       mm.add(MQ.motion, () => {
         const setX = gsap.quickSetter(track, "x", "px");
+        // The children's items: a single list's entries, or the children themselves.
+        const list = primary.childElementCount === 1 ? primary.firstElementChild! : primary;
         let width = 0;
         let x = 0;
+        let rate = 1;
         let visible = true;
 
         const measure = () => {
@@ -49,10 +55,16 @@ export function Marquee({ children, className = "", speed = 40 }: Props) {
         intersection.observe(el);
 
         const tick = (_t: number, dt: number) => {
-          if (!visible || focused.current || document.hidden || width <= 0) return;
-          // Wrap by one measured content run, regardless of the number of copies.
+          if (!visible || document.hidden || width <= 0) return;
           // Limit delayed frames so resuming a tab never jumps through the list.
-          x = (x - (width / Math.max(speed, 1)) * (Math.min(dt, 64) / 1000)) % width;
+          const step = Math.min(dt, 64);
+          const target = focused.current || hovered.current ? 0 : 1;
+          rate += (target - rate) * (1 - Math.exp(-step / 180));
+          if (target === 0 && rate < 0.002) rate = 0;
+          if (!rate) return;
+          // Wrap by one measured content run, regardless of the number of copies.
+          const items = Math.max(list.childElementCount, 1);
+          x = (x - (width / (Math.max(speed, 0.1) * items)) * rate * (step / 1000)) % width;
           setX(x);
         };
         gsap.ticker.add(tick);
@@ -68,7 +80,12 @@ export function Marquee({ children, className = "", speed = 40 }: Props) {
   );
 
   return (
-    <div ref={ref} className={`marquee overflow-hidden ${className}`}>
+    <div
+      ref={ref}
+      className={`marquee overflow-hidden ${className}`}
+      onPointerEnter={event => { if (event.pointerType === "mouse") hovered.current = true; }}
+      onPointerLeave={() => { hovered.current = false; }}
+    >
       <div onFocusCapture={() => { focused.current = true; }} onBlurCapture={event => { if (!event.currentTarget.contains(event.relatedTarget as Node)) focused.current = false; }}>
         <div data-track="" className="flex w-max will-change-transform">
           <div data-primary="" className="flex shrink-0">{children}</div>
