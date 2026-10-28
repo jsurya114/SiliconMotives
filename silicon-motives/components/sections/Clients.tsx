@@ -2,7 +2,7 @@ import { site } from "@/content/site";
 import Image from "next/image";
 import type { ContentRow } from "@/lib/content";
 import { initials, safeUrl } from "@/lib/urls";
-import { clientLogo } from "@/lib/client-logos";
+import { clientLocation, clientLogo } from "@/lib/client-logos";
 import { Marquee } from "../motion/Marquee";
 import { RevealText } from "../motion/RevealText";
 import { SectionLabel } from "../ui/SectionLabel";
@@ -19,10 +19,14 @@ export function Clients({ rows }: { rows: ContentRow[] }) {
         {rows.map(row => {
           const logo = clientLogo(row.name, row.logo_url);
           const url = safeUrl(row.website_url);
+          const location = clientLocation(row.name, row.location);
           const content = <span className="flex w-24 flex-col items-center gap-2 sm:w-36 sm:gap-3">
             {/* A client without a logo keeps the same slot, so every name lines up. */}
             {logo ? <Image src={logo} alt="" width={144} height={80} sizes="(min-width: 640px) 144px, 96px" unoptimized={!logo.startsWith('/')} loading="lazy" className="h-12 w-24 object-contain sm:h-20 sm:w-36" /> : <span aria-hidden="true" className="display grid h-12 w-24 place-items-center text-[1.75rem] opacity-80 sm:h-20 sm:w-36 sm:text-[2.5rem]">{initials(row.name)}</span>}
-            <span className="font-display text-xs font-semibold tracking-wide sm:text-base">{row.name}</span>
+            <span className="flex flex-col items-center gap-0.5 text-center">
+              <span className="font-display text-xs font-semibold tracking-wide sm:text-base">{row.name}</span>
+              {location && <span className="whitespace-nowrap text-[0.6875rem] leading-tight opacity-70 sm:text-[0.8125rem]">{location}</span>}
+            </span>
           </span>;
           return <li key={row.id} className="flex items-center">
             {url ? <a href={url} target="_blank" rel="noopener noreferrer" className="mx-4 flex min-h-16 items-center sm:mx-12 sm:min-h-24">{content}</a> : <div className="mx-4 flex min-h-16 items-center sm:mx-12 sm:min-h-24">{content}</div>}

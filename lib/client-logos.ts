@@ -10,7 +10,25 @@ export const clientLogos: Record<string, string> = {
   jjcartworks: '/images/client-logos/jjc-artworks.svg',
 };
 
-export function clientLogo(name: unknown, fallback?: unknown): string {
+/** Where each client is based, as supplied by the site owner. A CMS `location` value is the fallback. */
+export const clientLocations: Record<string, string> = {
+  nasalogistics: 'Dallas, USA',
+  jjcartworks: 'Kottayam, Kerala',
+  uniwayin: 'Bangalore, Karnataka',
+  picbox: 'Malappuram, Kerala',
+  woobe: 'Malappuram, Kerala',
+  dentalbuddy: 'Trivandrum, Kerala',
+};
+
+const clientKey = (name: unknown) => {
   const key = String(name || '').toLowerCase().replace(/[^a-z0-9]/g, '');
-  return clientLogos[key === 'nasalogistic' ? 'nasalogistics' : key] || safeImage(fallback);
+  return ({ nasalogistic: 'nasalogistics', pickbox: 'picbox', jjc: 'jjcartworks' } as Record<string, string>)[key] || key;
+};
+
+export function clientLogo(name: unknown, fallback?: unknown): string {
+  return clientLogos[clientKey(name)] || safeImage(fallback);
+}
+
+export function clientLocation(name: unknown, fallback?: unknown): string {
+  return clientLocations[clientKey(name)] || String(fallback || '').trim();
 }
