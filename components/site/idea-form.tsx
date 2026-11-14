@@ -2,6 +2,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { submitIdea } from '@/lib/submit-idea.mjs';
+import { trackEvent } from '@/lib/analytics';
 import { ChatIcon } from '../ui/icons';
 import { Button } from '../ui/Button';
 import { useSmoothScroll } from '../motion/SmoothScroll';
@@ -33,6 +34,7 @@ export function IdeaForm({ label, mode = 'project', service }: { label?: string;
         pending.current = true; setSending(true); setStatus('Sending your idea…');
         try {
           await submitIdea({ name: String(data.get('name')).trim(), email: String(data.get('email')).trim(), message: String(data.get('project')).trim(), type: mode, ...(websiteDesign ? { service: 'website-design' } : {}), website: String(data.get('website') || '') });
+          trackEvent('generate_lead', { enquiry_type: mode, ...(websiteDesign ? { service: 'website-design' } : {}), page_path: location.pathname });
           form.reset(); setStatus(agency ? 'Thank you. Your agency enquiry has been sent. We’ll reply by email.' : 'Thank you! Your idea has been sent to our team. We’ll reply by email.');
         } catch (error) { setStatus(`Your idea could not be sent. ${(error as Error).message}`); }
         finally { pending.current = false; setSending(false); }

@@ -3,7 +3,7 @@ import { pageMetadata } from '@/lib/metadata';
 import { MarketingPage, PageIntro } from '@/components/site/marketing-page';
 import { Contact } from '@/components/sections/Contact';
 
-export const metadata = pageMetadata('Contact SiliconMotives', 'Send a project enquiry or discuss an agency partnership.', '/contact');
+export const metadata = pageMetadata('Contact SiliconMotives | Software & Web Projects, Kochi', 'Tell us about your website, software or AWS project, or discuss white-label delivery for your agency. Based in Kochi, Kerala. Reach us by email, phone or WhatsApp.', '/contact');
 
 type Props = { searchParams: Promise<{ type?: string | string[]; service?: string | string[] }> };
 

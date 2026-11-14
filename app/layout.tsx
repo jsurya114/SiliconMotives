@@ -5,6 +5,7 @@ import { SITE_URL } from '@/lib/site-url';
 import { pageMetadata } from '@/lib/metadata';
 import { site } from '@/content/site';
 import { INSTAGRAM_URL } from '@/lib/social-links';
+import { Analytics } from '@/components/Analytics';
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -69,5 +70,5 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema).replace(/</g, '\\u003c') }} />
     <link rel="preload" href="/fonts/schibsted-grotesk-v7-latin.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
     <link rel="preload" href="/fonts/newsreader-v26-normal-latin.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
-  </head><body>{children}</body></html>;
+  </head><body>{children}<Analytics /></body></html>;
 }

@@ -232,6 +232,7 @@ export const site = {
           { label: "Services", href: "/services" },
           { label: "Website design", href: websiteDesign.path },
           { label: "Projects", href: "/projects" },
+          { label: "Blog", href: "/blog" },
           { label: "Agency Partners", href: "/agency-partners" },
         ],
       },

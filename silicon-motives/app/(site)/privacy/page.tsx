@@ -1,5 +1,6 @@
 import { MarketingPage, PageIntro, ContentSection } from '@/components/site/marketing-page';
 import { pageMetadata } from '@/lib/metadata';
+import { GA_ID } from '@/lib/analytics';
 
 export const metadata = pageMetadata('Privacy Policy | SiliconMotives', 'How SiliconMotives handles information submitted through this website.', '/privacy');
 
@@ -20,7 +21,7 @@ export default function PrivacyPage() {
         <p>Email delivery is handled by the configured SMTP provider. Site content and optional enquiry inbox copies are hosted with Supabase. Pages load typefaces from Google Fonts, which receives the visitor’s browser request when font stylesheets and font files load. We retain enquiries as long as needed to respond, manage a potential or active business relationship, and meet applicable recordkeeping needs, then delete or anonymize them where practical.</p>
       </ContentSection>
       <ContentSection title="Cookies, analytics, and security">
-        <p>The public website does not intentionally use advertising cookies or analytics tracking. The /admin area uses Supabase authentication for authorized administrators; authentication may use browser storage or cookies required for that session. We use reasonable technical safeguards, but no internet transmission or storage system can be guaranteed completely secure.</p>
+        <p>{GA_ID ? 'The public website uses Google Analytics 4 to measure page views and enquiry actions (form submissions and clicks on phone, email and WhatsApp links). Google Analytics sets cookies in your browser and sends usage data to Google. We do not use advertising cookies. You can block analytics with your browser settings or a content blocker.' : 'The public website does not intentionally use advertising cookies or analytics tracking.'} The /admin area uses Supabase authentication for authorized administrators; authentication may use browser storage or cookies required for that session. We use reasonable technical safeguards, but no internet transmission or storage system can be guaranteed completely secure.</p>
       </ContentSection>
       <ContentSection title="Your choices and contact">
         <p>You may request access, correction, or deletion of an enquiry by emailing <a className="link-line" href="mailto:hello@siliconmotives.com">hello@siliconmotives.com</a>. We may retain information where required for legitimate business or legal purposes. SiliconMotives is operated by Millionian LLC, a Wyoming limited liability company; engineering operations are in Kerala, India.</p>
