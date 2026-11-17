@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { MarketingPage } from '@/components/site/marketing-page';
 import { ButtonLink } from '@/components/ui/Button';
 import { ArrowUpRight, PlusIcon } from '@/components/ui/icons';
+import { blogPath, getBlogPost } from '@/content/blog-posts';
 import { getProjectCase } from '@/content/project-cases';
 import { websiteDesign } from '@/content/website-design';
 import { pageMetadata } from '@/lib/metadata';
@@ -39,6 +40,8 @@ const schema = {
     },
   ],
 };
+
+const costGuide = getBlogPost('website-design-cost-kerala');
 
 export default function WebsiteDesignPage() {
   const projects = websiteDesign.projectEvidence.flatMap(evidence => {
@@ -179,6 +182,12 @@ export default function WebsiteDesignPage() {
           ))}
         </div>
       </section>
+
+      {costGuide && <section className="wrap border-t border-ink/15 py-10 sm:py-14" aria-labelledby="website-reading-title">
+        <p className="label text-lagoon-ink">Related reading</p>
+        <h2 id="website-reading-title" className="display t-h3 mt-4">Planning a website budget?</h2>
+        <Link href={blogPath(costGuide.slug)} className="mt-5 inline-flex min-h-11 items-center gap-2 text-sm font-semibold"><span className="link-line">{costGuide.headline}</span><ArrowUpRight /></Link>
+      </section>}
 
       <section data-header="light" className="bg-lagoon py-10 sm:py-14" aria-labelledby="website-contact-title">
         <div className="wrap flex flex-col items-start justify-between gap-6 lg:flex-row lg:items-center lg:gap-12">

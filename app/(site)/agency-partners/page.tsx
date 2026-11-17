@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { ButtonLink } from '@/components/ui/Button';
 import { ArrowUpRight } from '@/components/ui/icons';
 import { engineeringServices, servicePath } from '@/content/engineering-services';
+import { blogPath, getBlogPost } from '@/content/blog-posts';
 import { getProjectCase } from '@/content/project-cases';
 import { SITE_URL } from '@/lib/site-url';
 import { MarketingPage } from '@/components/site/marketing-page';
@@ -15,6 +16,8 @@ const capabilities = [
   ['03', 'Cloud infrastructure', 'AWS architecture and environment implementation, with clear access and handover.'],
   ['04', 'DevOps & reliability', 'Delivery pipelines, deployment workflows, and operational improvements.'],
 ];
+
+const partnerGuide = getBlogPost('choosing-white-label-development-partner-agencies');
 
 export default function AgencyPartnersPage() {
   return (
@@ -120,6 +123,7 @@ export default function AgencyPartnersPage() {
         </div>
       </section>
       <section className="wrap border-t border-ink/15 py-10 sm:py-14"><p className="label text-lagoon-ink">Explore the scope</p><h2 className="display t-h3 mt-4">Engineering services for your next delivery.</h2><div className="mt-5 flex flex-wrap gap-x-6 gap-y-1">{engineeringServices.map(service => <Link key={service.slug} href={servicePath(service.slug)} className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold"><span className="link-line">{service.name}</span><ArrowUpRight /></Link>)}</div></section>
+      {partnerGuide && <section className="wrap border-t border-ink/15 py-10 sm:py-14"><p className="label text-lagoon-ink">Related reading</p><h2 className="display t-h3 mt-4">Choosing a delivery partner?</h2><Link href={blogPath(partnerGuide.slug)} className="mt-5 inline-flex min-h-11 items-center gap-2 text-sm font-semibold"><span className="link-line">{partnerGuide.headline}</span><ArrowUpRight /></Link></section>}
       <section data-header="light" className="bg-lagoon py-10 sm:py-14"><div className="wrap flex flex-col items-start justify-between gap-6 lg:flex-row lg:items-center"><div><p className="label">Start with one milestone</p><h2 className="display t-h2 mt-4">Bring us the engineering brief.</h2><p className="mt-4 max-w-2xl text-base leading-7">Tell us about your agency, the client context, the delivery gap and your timeline. We’ll discuss scope, working rhythm and the first useful milestone.</p></div><ButtonLink href="/contact?type=agency">Discuss agency delivery</ButtonLink></div></section>
     </MarketingPage>
   );
