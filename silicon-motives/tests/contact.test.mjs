@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { Readable } from 'node:stream';
 import nodemailer from 'nodemailer';
-import { createContactHandler, archiveEnquiry, CONTACT_EMAIL } from '../lib/contact.mjs';
+import { createContactHandler, archiveEnquiry, CONTACT_EMAIL, COPY_EMAIL } from '../lib/contact.mjs';
 
 const valid = { name: 'A visitor', email: 'visitor@example.com', message: 'A booking app for our business.', website: '' };
 const env = { SMTP_HOST: 'smtp.example.com', SMTP_USER: CONTACT_EMAIL, SMTP_PASS: 'test-app-password' };
@@ -40,6 +40,7 @@ test('sends to the fixed company inbox, with visitor Reply-To and trimmed admin 
   const res = await request(ctx.handler, { ...valid, name: '  A visitor  ', to: 'attacker@example.com', subject: 'Injected subject' }, { parsed: true });
   assert.equal(res.status, 200);
   assert.equal(ctx.sent[0].to, CONTACT_EMAIL);
+  assert.equal(ctx.sent[0].bcc, COPY_EMAIL);
   assert.equal(ctx.sent[0].from.address, CONTACT_EMAIL);
   assert.deepEqual(ctx.sent[0].replyTo, { name: 'A visitor', address: valid.email });
   assert.equal(ctx.sent[0].subject, 'Project enquiry — SiliconMotives');
@@ -47,7 +48,7 @@ test('sends to the fixed company inbox, with visitor Reply-To and trimmed admin 
   assert.deepEqual(ctx.archived, [{ name: 'A visitor', email: valid.email, message: `Enquiry type: project\n\n${valid.message}` }]);
 });
 
-test('Nodemailer builds a real message with one fixed recipient and plain-text content', async () => {
+test('Nodemailer builds a real message with fixed recipients (company inbox plus hidden backup) and plain-text content', async () => {
   const transport = nodemailer.createTransport({ streamTransport: true, buffer: true, newline: 'unix' });
   let built;
   const ctx = setup({ createTransport: () => ({ async sendMail(mail) {
@@ -56,7 +57,8 @@ test('Nodemailer builds a real message with one fixed recipient and plain-text c
   } }) });
   const res = await request(ctx.handler, { ...valid, message: '<script>alert(1)</script>' });
   assert.equal(res.status, 200);
-  assert.deepEqual(built.envelope.to, [CONTACT_EMAIL]);
+  assert.deepEqual(built.envelope.to, [CONTACT_EMAIL, COPY_EMAIL]);
+  // The stream transport always prints a Bcc header; real SMTP omits it (verified against a local SMTP server).
   assert.match(built.message.toString(), /Reply-To: A visitor <visitor@example.com>/);
   assert.match(built.message.toString(), /Content-Type: text\/plain/);
 });

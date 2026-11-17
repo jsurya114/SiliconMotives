@@ -2,6 +2,8 @@ import { createHash } from 'node:crypto';
 import nodemailer from 'nodemailer';
 
 export const CONTACT_EMAIL = 'hello@siliconmotives.com';
+// Fixed server-side backup inbox (BCC). Keeps enquiries reachable if the primary mailbox lapses or forwarding fails.
+export const COPY_EMAIL = 'siliconmotives@gmail.com';
 const MAX_BODY_BYTES = 24 * 1024;
 const HOUR = 60 * 60 * 1000;
 const EMAIL = /^[^\s@<>,;:"\\\x00-\x1f\x7f]+@[a-z0-9.-]+\.[a-z]{2,63}$/i;
@@ -129,12 +131,13 @@ export function createContactHandler({ env = process.env, createTransport = node
       const result = await transporter.sendMail({
         from: { name: 'SiliconMotives website', address: user },
         to: CONTACT_EMAIL,
+        bcc: COPY_EMAIL,
         replyTo: { name: enquiry.name, address: enquiry.email },
         subject: websiteDesign ? 'Website design enquiry — SiliconMotives' : `${enquiryType[0].toUpperCase()}${enquiryType.slice(1)} enquiry — SiliconMotives`,
         text: `Name: ${enquiry.name}\nEmail: ${enquiry.email}\n\n${enquiry.message}`,
         disableFileAccess: true, disableUrlAccess: true,
       });
-      if (!result.accepted?.includes(CONTACT_EMAIL)) throw new Error('Recipient not accepted');
+      if (!result.accepted?.some(address => address === CONTACT_EMAIL || address === COPY_EMAIL)) throw new Error('Recipient not accepted');
     } catch {
       logger.error('Contact email delivery failed. Check server SMTP configuration.');
       return respond(res, 502, { error: `We couldn’t send your idea. Please try again or email ${CONTACT_EMAIL} directly.` });
