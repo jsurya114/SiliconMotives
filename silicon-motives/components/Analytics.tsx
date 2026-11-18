@@ -2,7 +2,7 @@ import Script from 'next/script';
 import { GA_ID } from '@/lib/analytics';
 import { ClickTracking } from './ClickTracking';
 
-/** Renders nothing unless NEXT_PUBLIC_GA_ID is configured. */
+/** Renders nothing when GA_ID is empty (see lib/analytics.ts). */
 export function Analytics() {
   if (!GA_ID) return null;
   return <>

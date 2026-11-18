@@ -24,7 +24,7 @@ Gaps that limit lead generation:
 
 ## Needs the owners
 
-- Create the GA4 property and set `NEXT_PUBLIC_GA_ID` in Vercel. Decide whether to add a cookie-consent banner before enabling it for EU/UK visitors.
+- GA4 property created (18 November). Measurement ID `G-NZF61Y4YB0` is the default in `lib/analytics.ts`; `NEXT_PUBLIC_GA_ID` overrides it (empty value disables). Still to decide: a cookie-consent banner for EU/UK visitors.
 - Provide real price ranges for website projects. A cost post with honest ranges would rank and convert better than one with none.
 - Create a company LinkedIn page, then add it to `sameAs`.
 - Confirm the Search Console property is owned by a business account and the sitemap is submitted.

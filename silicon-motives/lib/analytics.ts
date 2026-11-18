@@ -1,5 +1,7 @@
-// GA4 is optional. Nothing loads unless NEXT_PUBLIC_GA_ID is set to a valid "G-XXXXXXXX" measurement ID.
-const rawId = process.env.NEXT_PUBLIC_GA_ID ?? '';
+// GA4 measurement ID (public by design; it is visible in page source). Override with NEXT_PUBLIC_GA_ID,
+// or set NEXT_PUBLIC_GA_ID to an empty value to turn analytics off. Invalid values disable it.
+const DEFAULT_GA_ID = 'G-NZF61Y4YB0';
+const rawId = process.env.NEXT_PUBLIC_GA_ID ?? DEFAULT_GA_ID;
 export const GA_ID = /^G-[A-Z0-9]{4,}$/.test(rawId) ? rawId : '';
 
 type GtagWindow = Window & { gtag?: (...args: unknown[]) => void };
